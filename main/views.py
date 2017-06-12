@@ -14,7 +14,7 @@ import requests
 # Create your views here.
 
 VERIFY_TOKEN = 'musicBot'
-# PAGE_ACCESS_TOKEN = 'EAAM8v1250nEBABou4eci5uSPM0mvZAAdIqgJ04CuA2YZAvQ0krxE4O9MEfvZB7yQmeeCb2pZCTyONfrZAPMJeavwHMc0o7buV3DWuuu5Mg6edhGDgS1WpVXdRAZC37eJP5lkfUdqAKRYAGlSlJKd9sIQYdR9BgF1tZAoOpoB0MtXQZDZD'
+PAGE_ACCESS_TOKEN = 'EAACCN4djHpkBAN7pazyZCHYSv14UPPYdUPCjmmbIFonmOR5we3mDrMTqYLJaByMjnD4LVjU0ZCZBCHgzsoeIGBgeldj3xULWYvoVAXHtufHoQaq4v0hN3GOxl4kvwmDgbkl7yqZCyCj74ZCbEiYMrpTpJM0AiAm0jJhZCnRTuqLwZDZD'
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
