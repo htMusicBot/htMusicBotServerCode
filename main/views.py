@@ -85,25 +85,30 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
 
                     else:
+                        print "entered in else"
                         item = message_text.split(' ')
                         for x in item :
-                            if '#' in item :
+                            print "entered in for loop"
+
+                            if '#' in x :
+                                print "entered #"
+
                                 SongName = x.split('#')[1]
                                 post_facebook_message(sender_id,SongName)
                                 # matches  = matching_algo(SongName , SongNameData)
 
-                            elif '*' in item :
+                            elif '*' in x :
                                 SongCast = x.split('*')[1]
                                 post_facebook_message(sender_id,SongCast)
                                 # matches  = matching_algo(SongCast , CastData)
                                 
-                            elif '$' in item :
+                            elif '$' in x :
                                 Actors = x.split('$')[1]
                                 post_facebook_message(sender_id,Actors)
                                 # matches  = matching_algo(Actors , ActorsData)
                                 
-                            elif '!' in item :
-                                Mood = Mood.split('!')[1]
+                            elif '!' in x :
+                                Mood = x.split('!')[1]
                                 post_facebook_message(sender_id,Mood)
                                 # matches  = matching_algo(Mood , MoodData)    
 
