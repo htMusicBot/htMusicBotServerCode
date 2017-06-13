@@ -16,9 +16,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Category',
@@ -26,9 +23,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Lyricist',
@@ -36,9 +30,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MovieName',
@@ -46,9 +37,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MusicDirector',
@@ -56,9 +44,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Singer',
@@ -66,9 +51,6 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Song',
@@ -83,9 +65,6 @@ class Migration(migrations.Migration):
                 ('MusicDirector', models.ManyToManyField(to='main.MusicDirector', null=True)),
                 ('Singer', models.ManyToManyField(to='main.Singer', null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Year',
@@ -93,14 +72,10 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('Year', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='song',
             name='year',
             field=models.ForeignKey(to='main.Year', null=True),
-            preserve_default=True,
         ),
     ]
