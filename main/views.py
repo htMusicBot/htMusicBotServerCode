@@ -109,7 +109,7 @@ class MyChatBotView(generic.View):
 
                     
                     #message text is sent to the user
-                    post_facebook_message(sender_id,message_text) 
+                    
                 except Exception as e:
                     print e
                     pass
