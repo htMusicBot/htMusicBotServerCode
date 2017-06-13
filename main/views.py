@@ -16,6 +16,7 @@ import urllib,urllib2,csv,requests,os,xlrd,string,re
 from bs4 import BeautifulSoup
 from requests import get
 from io import open
+import difflib
 
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
@@ -30,6 +31,15 @@ song_count=1
 
 VERIFY_TOKEN = 'musicBot'
 PAGE_ACCESS_TOKEN = 'EAACCN4djHpkBAN7pazyZCHYSv14UPPYdUPCjmmbIFonmOR5we3mDrMTqYLJaByMjnD4LVjU0ZCZBCHgzsoeIGBgeldj3xULWYvoVAXHtufHoQaq4v0hN3GOxl4kvwmDgbkl7yqZCyCj74ZCbEiYMrpTpJM0AiAm0jJhZCnRTuqLwZDZD'
+
+
+#function to extraxt data of the person who sens a message
+def userdeatils(fbid):
+    url = 'https://graph.facebook.com/v2.6/' + fbid + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=' + PAGE_ACCESS_TOKEN
+    resp = requests.get(url=url)
+    data =json.loads(resp.text)
+    return data
+
 
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
@@ -64,6 +74,40 @@ class MyChatBotView(generic.View):
                 try:
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
+                    DataInstance = userdeatils(sender_id)
+                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])  
+
+                    if message_text.lower() in "hey,hi,supp,hello".split(','):
+                        #messages sent when any user sends the first message
+                        post_facebook_message(sender_id,'Hey! '+name + "this is your one stop solution for all your music cravings ")
+                        post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
+                        post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
+                        post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+
+                    else:
+                        x = message_text.split(' ')
+                        for item in x :
+                            if '#' in item :
+                                SongName = x.split('#')[1]
+                                post_facebook_message(sender_id,SongName)
+                                # matches  = matching_algo(SongName , SongNameData)
+
+                            elif '*' in item :
+                                SongCast = x.split('*')[1]
+                                post_facebook_message(sender_id,SongCast)
+                                # matches  = matching_algo(SongCast , CastData)
+                                
+                            elif '$' in item :
+                                Actors = x.split('$')[1]
+                                post_facebook_message(sender_id,Actors)
+                                # matches  = matching_algo(Actors , ActorsData)
+                                
+                            elif '!' in item :
+                                Mood = Mood.split('!')[1]
+                                post_facebook_message(sender_id,Mood)
+                                # matches  = matching_algo(Mood , MoodData)    
+
+                    
                     #message text is sent to the user
                     post_facebook_message(sender_id,message_text) 
                 except Exception as e:
@@ -265,6 +309,22 @@ def GetNextURL(url):
     return next_url
 
 
+def matching_algo(input_string , data) :
+    for item in data:
+
+        a = []
+        s = difflib.SequenceMatcher(None, item, input_string).ratio()
+        a.append(s)
+
+
+    for i in range(3):
+        match = data[a.index(max(a))]
+        matches = []
+        matches.append(match)
+
+        a.remove(max(a))
+
+    return matches
 
 
 
