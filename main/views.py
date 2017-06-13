@@ -85,8 +85,8 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
 
                     else:
-                        x = message_text.split(' ')
-                        for item in x :
+                        item = message_text.split(' ')
+                        for x in item :
                             if '#' in item :
                                 SongName = x.split('#')[1]
                                 post_facebook_message(sender_id,SongName)
