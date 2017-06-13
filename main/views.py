@@ -9,7 +9,8 @@ from django.utils.decorators import method_decorator
 import json
 import requests
 import csv
-from main.models import Songs
+from main.models import Singer , MusicDirector , Lyricist , MovieName , Actor , Category , Year ,Song
+
 
 import urllib,urllib2,csv,requests,os,xlrd,string,re
 from bs4 import BeautifulSoup
@@ -40,42 +41,52 @@ def post_facebook_message(fbid,message_text):
 
 class MyChatBotView(generic.View):
 
-	def get(self, request, *args, **kwargs):
-		#verifying the token set
-		if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
-			return HttpResponse(self.request.GET['hub.challenge'])
-		else:
-			return HttpResponse('Oops invalid token')
+    def get(self, request, *args, **kwargs):
+        #verifying the token set
+        if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
+            return HttpResponse(self.request.GET['hub.challenge'])
+        else:
+            return HttpResponse('Oops invalid token')
 
-	@method_decorator(csrf_exempt)
-	def dispatch(self, request, *args, **kwargs):
-		return generic.View.dispatch(self, request, *args, **kwargs)
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return generic.View.dispatch(self, request, *args, **kwargs)
 
     
     #incomng message is decoded and various action are performed
-	def post(self, request, *args, **kwargs):
-		incoming_message= json.loads(self.request.body.decode('utf-8'))
-		print incoming_message
+    def post(self, request, *args, **kwargs):
+        incoming_message= json.loads(self.request.body.decode('utf-8'))
+        print incoming_message
 
-		for entry in incoming_message['entry']:
-			for message in entry['messaging']:
-				print message
-				try:
-					sender_id = message['sender']['id']
-					message_text = message['message']['text']
-					#message text is sent to the user
-					post_facebook_message(sender_id,message_text) 
-				except Exception as e:
-					print e
-					pass
+        for entry in incoming_message['entry']:
+            for message in entry['messaging']:
+                print message
+                try:
+                    sender_id = message['sender']['id']
+                    message_text = message['message']['text']
+                    #message text is sent to the user
+                    post_facebook_message(sender_id,message_text) 
+                except Exception as e:
+                    print e
+                    pass
 
-		return HttpResponse()  
+        return HttpResponse()  
 
 
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    return HttpResponse('Hello world')
+    url_start="http://www.hindigeetmala.net//movie/2015.php?page=1"
+    url_next=""
+    url_curr=url_start
+    while(url_start!=url_next):
+        print "Scrapping for :"+url_curr
+        GetMoviePageURL(url_curr)
+        url_next=GetNextURL(url_curr)
+        url_curr=url_next
+        
+    print "Completed Scrapping"
+    return HttpResponse('Completed Scrapping')
 
 
 
@@ -89,45 +100,83 @@ def GetSongData(url):
     #This one is for getting the song details
     table_songs_detail=soup.find("table",{"class": "b1 w760 pad2 allef"})
     row=[]
-    for item in table_songs_detail.findAll("td"):
-        row.append(item.text)
+
+    # for item in table_songs_detail.findAll("td"):
+    #     row.append(item.text)
+
+    tableRow = table_songs_detail.findAll("td")
+
+    
+    singer = Singer.objects.get_or_create(Name =tableRow[1].text)[0]
+    musicDirector = MusicDirector.objects.get_or_create(Name =tableRow[2].text)[0]
+    lyricist = Lyricist.objects.get_or_create(Name =tableRow[3].text)[0]
+    movieName = MovieName.objects.get_or_create(Name =tableRow[4].text)[0]
+    actor = Actor.objects.get_or_create(Name =tableRow[5].text)[0]
+    category = Category.objects.get_or_create(Name =tableRow[6].text)[0]
+
+    song = Song.objects.get_or_create(SongName =tableRow[0].text)[0]
+    song.Singer.add(singer)
+    song.MusicDirector.add(musicDirector)
+    song.Lyricist.add(lyricist)
+    # song.MovieName.add(movieName)
+    u = movieName.song_set.get_or_create()[0]
+    u.save()
+    song.Cast.add(actor)
+    # song.Category.add(category)
+
+
+
+    
+
     #This one helps us in getting the embed url
     if(soup.find("iframe")):
         song_youtube_link=soup.find("iframe").get('src')
 
-        row.append(song_youtube_link)
-        
+        # row.append(song_youtube_link)
+        song.YoutubeLink = song_youtube_link        
     else:
-        row.append(" ")
+        # row.append(" ")
+        song.YoutubeLink = 'NULL'
     #This one is to get the lyrics
-    if(soup.find("pre")):
-        song_lyrics=soup.find("pre").text.encode('utf8')
-        song_lyrics=re.sub('[^a-zA-Z0-9-_*.\r\n ]', '', song_lyrics)
-        row.append(song_lyrics)
-    else:
-        row.append(" ")
+    # if(soup.find("pre")):
+    #     song_lyrics=soup.find("pre").text.encode('utf8')
+    #     song_lyrics=re.sub('[^a-zA-Z0-9-_*.\r\n ]', '', song_lyrics)
+    #     row.append(song_lyrics)
+    # else:
+    #     row.append(" ")
     # checking for other table
-    if(soup.find("table",{"class","b1 allef w100p"})):
-        table_meta=soup.find("table",{"class":"b1 allef w100p"})
-        # checking for cast
-        if(table_meta.find("td",{"itemprop":"actor"})):
-            row.append(table_meta.find("td",{"itemprop":"actor"}).text)
-        else:
-            row.append(" ")
-        #checking for director
-        if(table_meta.find("td",{"itemprop":"director"})):
-            row.append(table_meta.find("td",{"itemprop":"director"}).text)
-        else:
-            row.append(" ")
-        #checking for producer
-        if(table_meta.find("td",{"itemprop":"producer"})):
-            row.append(table_meta.find("td",{"itemprop":"producer"}).text)
-        else:
-            row.append(" ")
-    else:
-        row.append(" ")#empty for cast
-        row.append(" ")#empty for director
-        row.append(" ")#empty for producer      
+    # if(soup.find("table",{"class","b1 allef w100p"})):
+    #     table_meta=soup.find("table",{"class":"b1 allef w100p"})
+    #     # checking for cast
+    #     if(table_meta.find("td",{"itemprop":"actor"})):
+    #         row.append(table_meta.find("td",{"itemprop":"actor"}).text)
+    #     else:
+    #         row.append(" ")
+    #     #checking for director
+    #     if(table_meta.find("td",{"itemprop":"director"})):
+    #         row.append(table_meta.find("td",{"itemprop":"director"}).text)
+    #     else:
+    #         row.append(" ")
+    #     #checking for producer
+    #     if(table_meta.find("td",{"itemprop":"producer"})):
+    #         row.append(table_meta.find("td",{"itemprop":"producer"}).text)
+    #     else:
+    #         row.append(" ")
+    # else:
+    #     row.append(" ")#empty for cast
+    #     row.append(" ")#empty for director
+    #     row.append(" ")#empty for producer  
+
+
+
+    song.save()
+    singer.save()
+    musicDirector.save()    
+    lyricist.save()
+    movieName.save()
+    actor.save()
+    category.save()
+
     return row
     
 
@@ -145,7 +194,9 @@ def GetSongPageURL(url,year):
                 song_data=GetSongData(song_url)
                 #Adding an ID for each song
                 song_data.append(song_count)
-                song_data.append(year)
+                # song_data.append(year)
+                year1 = Year.objects.get_or_create(Year = year)[0]
+                year1.save()
                 print "Songs Written :"+str(song_count)
                 song_count=song_count+1
                 #print song_data[8][:10]
@@ -153,10 +204,10 @@ def GetSongPageURL(url,year):
                 #print len(song_data[8])
 
                 # code to write into a csv file
-                with open('data.csv','ab') as f:
-                    writer = csv.writer(f)
-                    writer.writerows([song_data])
-                    f.close()
+                # with open('data.csv','ab') as f:
+                #     writer = csv.writer(f)
+                #     writer.writerows([song_data])
+                #     f.close()
     return 0
 
 def GetMoviePageURL(url):
@@ -185,6 +236,33 @@ def GetNextURL(url):
     next_link = table_arr.find('a').get('href')
     next_url=base_url+'/movie/'+next_link
     return next_url
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
