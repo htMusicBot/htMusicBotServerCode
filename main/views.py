@@ -102,9 +102,9 @@ class MyChatBotView(generic.View):
                                 SongCast = x.split('*')[1]
                                 singer = Singer.objects.exclude(Name = SongCast)
                                 a = Song.objects.filter(Singer__in=singer)
-                                print a.SongName
+                                print a[0].SongName
 
-                                post_facebook_message(sender_id,a.SongName)
+                                post_facebook_message(sender_id,a[0].SongName)
                                 # matches  = matching_algo(SongCast , CastData)
                                 
                             elif '$' in x :
