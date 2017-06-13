@@ -76,7 +76,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2015.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/2016.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
@@ -91,7 +91,7 @@ def index(request):
 
 
 
-def GetSongData(url):
+def GetSongData(url,year):
     #print url
     url=url.replace(" ","%20")
     response = urllib2.urlopen(url)
@@ -106,23 +106,50 @@ def GetSongData(url):
 
     tableRow = table_songs_detail.findAll("td")
 
-    
-    singer = Singer.objects.get_or_create(Name =tableRow[1].text)[0]
-    musicDirector = MusicDirector.objects.get_or_create(Name =tableRow[2].text)[0]
-    lyricist = Lyricist.objects.get_or_create(Name =tableRow[3].text)[0]
-    movieName = MovieName.objects.get_or_create(Name =tableRow[4].text)[0]
-    actor = Actor.objects.get_or_create(Name =tableRow[5].text)[0]
-    category = Category.objects.get_or_create(Name =tableRow[6].text)[0]
-
     song = Song.objects.get_or_create(SongName =tableRow[0].text)[0]
-    song.Singer.add(singer)
-    song.MusicDirector.add(musicDirector)
-    song.Lyricist.add(lyricist)
-    # song.MovieName.add(movieName)
-    u = movieName.song_set.get_or_create()[0]
-    u.save()
-    song.Cast.add(actor)
-    # song.Category.add(category)
+
+    allSinger = tableRow[1].text
+    singerArray = allSinger.split(',')
+    for item in singerArray:
+        singer = Singer.objects.get_or_create(Name = item)[0]
+        song.Singer.add(singer)
+
+
+    allMusicDirector = tableRow[2].text
+    musicDirectorArray = allMusicDirector.split(',')
+    for item in musicDirectorArray:
+        musicDirector = MusicDirector.objects.get_or_create(Name = item)[0]
+        song.MusicDirector.add(musicDirector)
+
+
+
+    allLyricist = tableRow[3].text
+    lyricistArray = allLyricist.split(',')
+    for item in lyricistArray:
+        lyricist = Lyricist.objects.get_or_create(Name = item)[0]
+        song.Lyricist.add(lyricist)
+
+
+    allActor = tableRow[5].text
+    musicActorArray = allActor.split(',')
+    for item in musicActorArray:
+        actor = Actor.objects.get_or_create(Name = item)[0]
+        song.Cast.add(actor)
+
+
+    allCategory = tableRow[6].text
+    categoryArray = allCategory.split(',')
+    for item in categoryArray:
+        category = Category.objects.get_or_create(Name = item)[0]
+        song.Category.add(category)
+
+
+    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text)[0]
+    song.MovieName = movieName
+
+    year11 = Year.objects.get_or_create(Year = year)[0]
+    song.year = year11
+    
 
 
 
@@ -176,6 +203,7 @@ def GetSongData(url):
     movieName.save()
     actor.save()
     category.save()
+    year11.save()
 
     return row
     
@@ -191,12 +219,10 @@ def GetSongPageURL(url,year):
         for song in table_songs_list.findAll("td",{"class":"w185"}):
                 song_link = song.find('a').get('href')
                 song_url=base_url+song_link
-                song_data=GetSongData(song_url)
+                song_data=GetSongData(song_url,year)
                 #Adding an ID for each song
                 song_data.append(song_count)
                 # song_data.append(year)
-                year1 = Year.objects.get_or_create(Year = year)[0]
-                year1.save()
                 print "Songs Written :"+str(song_count)
                 song_count=song_count+1
                 #print song_data[8][:10]
@@ -224,6 +250,7 @@ def GetMoviePageURL(url):
             movie_link = movie.find('a').get('href')
             movie_url=base_url+movie_link
             GetSongPageURL(movie_url,year)
+
     return 0
 
 

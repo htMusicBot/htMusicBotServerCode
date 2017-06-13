@@ -74,7 +74,8 @@ class Song(models.Model):
     MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE, null = True)
     Cast  = models.ManyToManyField(Actor, null = True)
     YoutubeLink = models.CharField(max_length = 250 , default = 'NULL', null = True)
-    Category  = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
+    Category = models.ManyToManyField(Category, null = True)
+    # Category  = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     # lyrics  = models.CharField(max_length = 250 , default = 'NULL')
     year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
 

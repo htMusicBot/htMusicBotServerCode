@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='Actor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             name='Category',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
             name='Lyricist',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
             name='MovieName',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
             name='MusicDirector',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Name', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Name', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -74,14 +74,14 @@ class Migration(migrations.Migration):
             name='Song',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('SongName', models.CharField(default=b'NULL', max_length=250)),
-                ('YoutubeLink', models.CharField(default=b'NULL', max_length=250)),
-                ('Cast', models.ManyToManyField(to='main.Actor')),
-                ('Category', models.ForeignKey(to='main.Category')),
-                ('Lyricist', models.ManyToManyField(to='main.Lyricist')),
-                ('MovieName', models.ForeignKey(to='main.MovieName')),
-                ('MusicDirector', models.ManyToManyField(to='main.MusicDirector')),
-                ('Singer', models.ManyToManyField(to='main.Singer')),
+                ('SongName', models.CharField(default=b'NULL', max_length=250, null=True)),
+                ('YoutubeLink', models.CharField(default=b'NULL', max_length=250, null=True)),
+                ('Cast', models.ManyToManyField(to='main.Actor', null=True)),
+                ('Category', models.ManyToManyField(to='main.Category', null=True)),
+                ('Lyricist', models.ManyToManyField(to='main.Lyricist', null=True)),
+                ('MovieName', models.ForeignKey(to='main.MovieName', null=True)),
+                ('MusicDirector', models.ManyToManyField(to='main.MusicDirector', null=True)),
+                ('Singer', models.ManyToManyField(to='main.Singer', null=True)),
             ],
             options={
             },
@@ -91,7 +91,7 @@ class Migration(migrations.Migration):
             name='Year',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('Year', models.CharField(default=b'NULL', unique=True, max_length=250)),
+                ('Year', models.CharField(default=b'NULL', max_length=250, unique=True, null=True)),
             ],
             options={
             },
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='song',
             name='year',
-            field=models.ForeignKey(to='main.Year'),
+            field=models.ForeignKey(to='main.Year', null=True),
             preserve_default=True,
         ),
     ]
