@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Singer(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL')
   
 
     def __str__(self):
@@ -14,45 +14,44 @@ class Singer(models.Model):
 
 
 class MusicDirector(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
   
 
     def __str__(self):
         return self.Name
 
 
+class Actor(models.Model):
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL' , null = True)
+  
+
+    def __str__(self):
+        return self.Name  
+
 
 
 class Lyricist(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
   
 
     def __str__(self):
         return self.Name
 
 class MovieName(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
-    Cast = models.CharField(max_length = 250 , default = 'NULL')
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    # MovieCast  = models.ManyToManyField(Actor)
 
   
 
     def __str__(self):
         return self.Name
-
-
-
-class Actor(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
-  
-
-    def __str__(self):
-        return self.Name   
+ 
 
 
 
 
 class Category(models.Model):
-    Name = models.CharField(max_length = 250 , default = 'NULL')
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
   
 
     def __str__(self):
@@ -61,23 +60,30 @@ class Category(models.Model):
 
 
 class Year(models.Model):
-    Year = models.CharField(max_length = 250 , default = 'NULL')
+    Year = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
   
 
     def __str__(self):
         return self.Year        
 
 class Song(models.Model):
-    SongName = models.CharField(max_length = 250 , default = 'NULL')
-    Singer = models.ManyToManyField(Singer)
-    MusicDirector = models.ManyToManyField(MusicDirector)
-    Lyricist = models.ManyToManyField(Lyricist)
-    MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE)
-    Cast  = models.ManyToManyField(Actor)
-    YoutubeLink = models.CharField(max_length = 250 , default = 'NULL')
-    Category  = models.ForeignKey(Category, on_delete=models.CASCADE)
+    SongName = models.CharField(max_length = 250 , default = 'NULL', null = True)
+    Singer = models.ManyToManyField(Singer, null = True)
+    MusicDirector = models.ManyToManyField(MusicDirector, null = True)
+    Lyricist = models.ManyToManyField(Lyricist, null = True)
+    MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE, null = True)
+    Cast  = models.ManyToManyField(Actor, null = True)
+    YoutubeLink = models.CharField(max_length = 250 , default = 'NULL', null = True)
+    Category = models.ManyToManyField(Category, null = True)
+    # Category  = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     # lyrics  = models.CharField(max_length = 250 , default = 'NULL')
-    year  = models.ForeignKey(Year, on_delete=models.CASCADE)
+    year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
 
     def __str__(self):
         return self.SongName
+
+
+
+
+
+
