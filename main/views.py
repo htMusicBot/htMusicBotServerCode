@@ -94,8 +94,11 @@ class MyChatBotView(generic.View):
                                 print "entered #"
 
                                 SongName = x.split('#')[1]
+                                # singer = Singer.objects.exclude(Name = SongName)
+                                a = Song.objects.filter(Singer__in=SongName)
+                                print a[0].SongName
 
-                                post_facebook_message(sender_id,SongName)
+                                post_facebook_message(sender_id,a[0].SongName)
                                 # matches  = matching_algo(SongName , SongNameData)
 
                             elif '*' in x :
@@ -109,12 +112,16 @@ class MyChatBotView(generic.View):
                                 
                             elif '$' in x :
                                 Actors = x.split('$')[1]
-                                post_facebook_message(sender_id,Actors)
+                                actor = Actor.objects.exclude(Name = Actors)
+                                a = Song.objects.filter(Singer__in=actor)
+                                post_facebook_message(sender_id,a[0].SongName)
                                 # matches  = matching_algo(Actors , ActorsData)
                                 
                             elif '!' in x :
                                 Mood = x.split('!')[1]
-                                post_facebook_message(sender_id,Mood)
+                                mood = Category.objects.exclude(Name = Mood)
+                                a = Song.objects.filter(Singer__in=mood)
+                                post_facebook_message(sender_id,a[0].SongName)
                                 # matches  = matching_algo(Mood , MoodData)    
 
                     
@@ -165,14 +172,14 @@ def GetSongData(url,year):
     allSinger = tableRow[1].text
     singerArray = allSinger.split(',')
     for item in singerArray:
-        singer = Singer.objects.get_or_create(Name = item)[0]
+        singer = Singer.objects.get_or_create(Name = item.strip())[0]
         song.Singer.add(singer)
 
 
     allMusicDirector = tableRow[2].text
     musicDirectorArray = allMusicDirector.split(',')
     for item in musicDirectorArray:
-        musicDirector = MusicDirector.objects.get_or_create(Name = item)[0]
+        musicDirector = MusicDirector.objects.get_or_create(Name = item.strip())[0]
         song.MusicDirector.add(musicDirector)
 
 
@@ -180,28 +187,28 @@ def GetSongData(url,year):
     allLyricist = tableRow[3].text
     lyricistArray = allLyricist.split(',')
     for item in lyricistArray:
-        lyricist = Lyricist.objects.get_or_create(Name = item)[0]
+        lyricist = Lyricist.objects.get_or_create(Name = item.strip())[0]
         song.Lyricist.add(lyricist)
 
 
     allActor = tableRow[5].text
     musicActorArray = allActor.split(',')
     for item in musicActorArray:
-        actor = Actor.objects.get_or_create(Name = item)[0]
+        actor = Actor.objects.get_or_create(Name = item.strip())[0]
         song.Cast.add(actor)
 
 
     allCategory = tableRow[6].text
     categoryArray = allCategory.split(',')
     for item in categoryArray:
-        category = Category.objects.get_or_create(Name = item)[0]
+        category = Category.objects.get_or_create(Name = item.strip())[0]
         song.Category.add(category)
 
 
-    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text)[0]
+    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text.strip())[0]
     song.MovieName = movieName
 
-    year11 = Year.objects.get_or_create(Year = year)[0]
+    year11 = Year.objects.get_or_create(Year = year.strip())[0]
     song.year = year11
     
 

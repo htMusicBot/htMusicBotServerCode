@@ -14,7 +14,7 @@ class Singer(models.Model):
 
 
 class MusicDirector(models.Model):
-    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL')
   
 
     def __str__(self):
@@ -22,7 +22,7 @@ class MusicDirector(models.Model):
 
 
 class Actor(models.Model):
-    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL' , null = True)
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL' )
   
 
     def __str__(self):
@@ -31,14 +31,14 @@ class Actor(models.Model):
 
 
 class Lyricist(models.Model):
-    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL')
   
 
     def __str__(self):
         return self.Name
 
 class MovieName(models.Model):
-    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL')
     # MovieCast  = models.ManyToManyField(Actor)
 
   
@@ -51,7 +51,7 @@ class MovieName(models.Model):
 
 
 class Category(models.Model):
-    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    Name = models.CharField(unique=True , max_length = 250 , default = 'NULL')
   
 
     def __str__(self):
@@ -60,14 +60,14 @@ class Category(models.Model):
 
 
 class Year(models.Model):
-    Year = models.CharField(unique=True , max_length = 250 , default = 'NULL', null = True)
+    Year = models.CharField(unique=True , max_length = 250 , default = 'NULL')
   
 
     def __str__(self):
         return self.Year        
 
 class Song(models.Model):
-    SongName = models.CharField(max_length = 250 , default = 'NULL', null = True)
+    SongName = models.CharField(max_length = 250 , default = 'NULL')
     Singer = models.ManyToManyField(Singer, null = True)
     MusicDirector = models.ManyToManyField(MusicDirector, null = True)
     Lyricist = models.ManyToManyField(Lyricist, null = True)
