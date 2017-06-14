@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import Singer , MusicDirector , Lyricist , MovieName , Actor , Category , Year ,Song
+from main.models import Singer , MusicDirector , Lyricist , MovieName , Actor , Category , Year ,Song , UserData
 
 
 
@@ -13,3 +13,4 @@ admin.site.register(Actor)
 admin.site.register(Category)
 admin.site.register(Year)
 admin.site.register(Song)
+admin.site.register(USerData)
