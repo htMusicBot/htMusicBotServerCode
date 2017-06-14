@@ -76,7 +76,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2016.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/2010.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
@@ -265,6 +265,15 @@ def GetNextURL(url):
     return next_url
 
 
+
+
+def doubleParameterQuery(requests):
+    # a = Song.objects.get(YoutubeLink = 'http://www.youtube.com/embed/b8t9TinNumE')
+    singer = Singer.objects.exclude(Name = 'Krishna')
+    category = Category.objects.exclude(Name = 'Rock Songs')
+    a = Song.objects.exclude(Singer__in=singer).exclude(Category__in=category)
+    print a
+    return HttpResponse("hi")
 
 
 
