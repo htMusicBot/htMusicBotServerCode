@@ -89,7 +89,7 @@ class MyChatBotView(generic.View):
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
                     name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
-                    userInstance = UserData.objects.get_or_create(fbid =sender_id)[0]
+                    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
@@ -393,7 +393,7 @@ def handle_quickreply(fbid,payload):
         return post_facebook_message(fbid,'Enter song name')
 
     elif payload == 'singer':
-        p = UserData.objects.get_or_create(fbid =fbid)[0]
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'singer'
         p.save()
         return post_facebook_message(sender_id,'Enter singer name')
