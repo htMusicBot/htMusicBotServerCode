@@ -18,6 +18,10 @@ from requests import get
 from io import open
 import difflib
 
+
+
+
+
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
 
@@ -44,9 +48,16 @@ def userdeatils(fbid):
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-    print status.json()
+
+    if message_text == 'singerQuickreply':
+        response_msg = singerQuickreply(fbid)
+
+    else:
+        response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
+
+    requests.post(post_message_url, 
+                    headers={"Content-Type": "application/json"},
+                    data=response_msg)
 
 
 class MyChatBotView(generic.View):
@@ -80,9 +91,10 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+name + "this is your one stop solution for all your music cravings ")
-                        post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
-                        post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
-                        post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+                        # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
+                        # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
+                        # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     else:
                         print "entered in else"
@@ -148,8 +160,6 @@ def index(request):
         
     print "Completed Scrapping"
     return HttpResponse('Completed Scrapping')
-
-
 
 
 def GetSongData(url,year):
@@ -269,7 +279,6 @@ def GetSongData(url,year):
     return row
     
 
-
 def GetSongPageURL(url,year):
     global song_count
     response = urllib2.urlopen(url)
@@ -297,6 +306,7 @@ def GetSongPageURL(url,year):
                 #     f.close()
     return 0
 
+
 def GetMoviePageURL(url):
     response = urllib2.urlopen(url)
     html_content = response.read()
@@ -313,7 +323,6 @@ def GetMoviePageURL(url):
             GetSongPageURL(movie_url,year)
 
     return 0
-
 
 
 def GetNextURL(url):
@@ -352,8 +361,81 @@ def doubleParameterQuery(requests):
     print a
     return HttpResponse("hi")
 
+def handle_quickreply(fbid,payload):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+    output_text = 'Payload Recieved: ' + payload
+
+    if payload == 'songName':
+        return post_facebook_message(fbid,'hi')
+
+    elif payload == 'singer':
+        return post_facebook_message(sender_id,'hi')
+
+    elif payload == 'director':
+        return post_facebook_message(sender_id,'hi')
+        
+    elif payload == 'lyricist':
+        return post_facebook_message(sender_id,'hi')
+                
+    elif payload == 'movieName':
+        return post_facebook_message(sender_id,'hi')
+
+    elif payload == 'cast':
+        return post_facebook_message(sender_id,'hi')
+
+     elif payload == 'category':
+        return post_facebook_message(sender_id,'hi')  
 
 
+
+def singerQuickreply(fbid):
+    response_object = {
+     "recipient":{
+    "id":fbid
+     },
+     "message":{
+    "text":"Please add upto four best works by clicking buttons below : ",
+    "quick_replies":[
+      
+      {
+        "content_type":"text",
+        "title":"📽 Song Name",
+        "payload":"songName"
+      },
+      {
+        "content_type":"text",
+        "title":"🎤 Singer",
+        "payload":"singer"
+      },
+      {
+        "content_type":"text",
+        "title":"🎭 Director",
+        "payload":"director"
+      },
+      {
+        "content_type":"text",
+        "title":"🎼 Lyricist",
+        "payload":"lyricist"
+      }, 
+      {
+        "content_type":"text",
+        "title":"🎞 Movie Name",
+        "payload":"movieName"
+      }, 
+      {
+        "content_type":"text",
+        "title":"🕴 Cast",
+        "payload":"cast"
+      }, 
+      {
+        "content_type":"text",
+        "title":"🌀 Mood/Category",
+        "payload":"category"
+      }, 
+                  ]
+        }
+    }
+    return json.dumps(response_object)
 
 
 
