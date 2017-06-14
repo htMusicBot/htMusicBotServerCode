@@ -21,6 +21,7 @@ class MusicDirector(models.Model):
         return self.Name
 
 
+
 class Actor(models.Model):
     Name = models.CharField(unique=True , max_length = 250 , default = 'NULL' )
   
@@ -81,6 +82,19 @@ class Song(models.Model):
 
     def __str__(self):
         return self.SongName
+
+class UserData(models.Model):
+    Fbid = models.CharField(max_length = 250)
+    State = models.CharField(max_length = 250 , default = 'NULL')
+
+    Singer = models.ManyToManyField(Singer, null = True)
+
+    Lyricist = models.ManyToManyField(Lyricist, null = True)
+    MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE, null = True)
+    Category = models.ManyToManyField(Category, null = True)
+    # issue = models.CharField(max_length = 1000, default = 'NULL')
+    year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
+
 
 
 

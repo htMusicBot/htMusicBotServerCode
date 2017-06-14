@@ -3,7 +3,7 @@ import difflib
 
 def bot():
 
-	x = ['#' , '*' , '$' , '!']
+	# x = ['#' , '*' , '$' , '!']
 
 	x = message_text.split(' ')
 	for item in x :

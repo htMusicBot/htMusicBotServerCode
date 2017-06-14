@@ -95,7 +95,9 @@ class MyChatBotView(generic.View):
 
                                 SongName = x.split('#')[1]
                                 # singer = Singer.objects.exclude(Name = SongName)
-                                a = Song.objects.filter(Singer__in=SongName)
+                                print Songname
+                                a = Song.objects.filter(SongName__contains =Songname)
+
                                 print a[0].SongName
 
                                 post_facebook_message(sender_id,a[0].SongName)
@@ -103,25 +105,28 @@ class MyChatBotView(generic.View):
 
                             elif '*' in x :
                                 SongCast = x.split('*')[1]
-                                singer = Singer.objects.exclude(Name = SongCast)
-                                a = Song.objects.filter(Singer__in=singer)
-                                print a[0].SongName
+                                a = Singer.objects.filter(Name_contains=SongCast)
 
-                                post_facebook_message(sender_id,a[0].SongName)
+                                b = Song.objects.filter(Singer=a)
+                                print b[0].SongName
+
+                                post_facebook_message(sender_id,b[0].SongName)
                                 # matches  = matching_algo(SongCast , CastData)
                                 
                             elif '$' in x :
                                 Actors = x.split('$')[1]
-                                actor = Actor.objects.exclude(Name = Actors)
-                                a = Song.objects.filter(Singer__in=actor)
-                                post_facebook_message(sender_id,a[0].SongName)
+                                a = Actor.objects.filter(Name_contains=Actors)
+
+                                b = Song.objects.filter(Cast=a)                             
+                                post_facebook_message(sender_id,b[0].SongName)
                                 # matches  = matching_algo(Actors , ActorsData)
                                 
                             elif '!' in x :
-                                Mood = x.split('!')[1]
-                                mood = Category.objects.exclude(Name = Mood)
-                                a = Song.objects.filter(Singer__in=mood)
-                                post_facebook_message(sender_id,a[0].SongName)
+                                category = x.split('!')[1]
+                                a = Category.objects.filter(Name_contains=category)
+
+                                b = Song.objects.filter(Category=a) 
+                                post_facebook_message(sender_id,b[0].SongName)
                                 # matches  = matching_algo(Mood , MoodData)    
 
                     
