@@ -88,7 +88,8 @@ class MyChatBotView(generic.View):
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
-                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])  
+                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
+                    print singerCount  
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
