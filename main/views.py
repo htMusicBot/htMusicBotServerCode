@@ -99,9 +99,9 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif singer == 1:
-                        singer = Singer.objects.exclude(Name = 'Krishna')
-                        a = Song.objects.exclude(Singer__in=singer)
-                        post_facebook_message(sender_id,a)
+                        singerName = Singer.objects.exclude(Name = message_text)
+                        aa = Song.objects.exclude(Singer__in=singerName)
+                        post_facebook_message(sender_id,aa)
 
                     else:
                         print "entered in else"
