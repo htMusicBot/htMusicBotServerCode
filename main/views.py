@@ -89,7 +89,7 @@ class MyChatBotView(generic.View):
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
                     name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
-                    print singerCount  
+
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
@@ -99,10 +99,10 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
-                    elif singerCount == 1:
+                    elif singerCount == 0:
                         # singerName = Singer.objects.exclude(Name = message_text)
                         # aa = Song.objects.exclude(Singer__in=singerName)
-                        post_facebook_message(sender_id,message_text)
+                        post_facebook_message(sender_id,'fuck hogya')
 
                     else:
                         print "entered in else"
