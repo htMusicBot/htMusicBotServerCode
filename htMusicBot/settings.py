@@ -66,8 +66,8 @@ GRAPH_MODELS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ht',
-        'USER': 'musicbot',
+        'NAME': 'htbot',
+        'USER': 'hindustantimesbot',
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '',
