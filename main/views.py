@@ -143,6 +143,19 @@ class MyChatBotView(generic.View):
                     print e
                     pass
 
+
+
+                try:
+                    if 'quick_reply' in message['message']:
+                        handle_quickreply(message['sender']['id'],
+                        message['message']['quick_reply']['payload'])
+                        return HttpResponse()
+                    else:
+                        pass
+                except Exception as e:
+                    print e
+                    pass  
+
         return HttpResponse()  
 
 
