@@ -31,7 +31,7 @@ base_url='http://www.hindigeetmala.net/'
 
 song_count=1
 # Create your views here.
-singer = 0
+singerCount = 0
 
 
 VERIFY_TOKEN = 'musicBot'
@@ -98,7 +98,7 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
-                    elif singer == 1:
+                    elif singerCount == 1:
                         singerName = Singer.objects.exclude(Name = message_text)
                         aa = Song.objects.exclude(Singer__in=singerName)
                         post_facebook_message(sender_id,aa)
@@ -386,7 +386,7 @@ def handle_quickreply(fbid,payload):
     output_text = 'Payload Recieved: ' + payload
 
     if payload == 'songName':
-        singer = 1
+        singerCount = 1
         return post_facebook_message(fbid,'Enter song name')
 
     elif payload == 'singer':
