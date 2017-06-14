@@ -22,6 +22,7 @@ import difflib
 
 
 
+
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
 
@@ -31,7 +32,6 @@ base_url='http://www.hindigeetmala.net/'
 
 song_count=1
 # Create your views here.
-singerCount = 0
 
 
 VERIFY_TOKEN = 'musicBot'
@@ -89,6 +89,7 @@ class MyChatBotView(generic.View):
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
                     name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
+                    userInstance = UserData.objects.get_or_create(fbid =sender_id)[0]
 
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
@@ -99,10 +100,12 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
-                    elif singerCount == 0:
-                        # singerName = Singer.objects.exclude(Name = message_text)
-                        # aa = Song.objects.exclude(Singer__in=singerName)
-                        post_facebook_message(sender_id,'fuck hogya')
+                    elif p.State=='singer':
+                        a = Singer.objects.filter(Name_contains=category)
+                        b = Song.objects.filter(Category=a) 
+                        userInstance.Singer.add(a)
+                        userInstance.save()
+                        post_facebook_message(sender_id,b[0].SongName)
 
                     else:
                         print "entered in else"
@@ -247,11 +250,6 @@ def GetSongData(url,year):
     year11 = Year.objects.get_or_create(Year = year.strip())[0]
     song.year = year11
     
-
-
-
-    
-
     #This one helps us in getting the embed url
     if(soup.find("iframe")):
         song_youtube_link=soup.find("iframe").get('src')
@@ -395,7 +393,9 @@ def handle_quickreply(fbid,payload):
         return post_facebook_message(fbid,'Enter song name')
 
     elif payload == 'singer':
-        singerCount = 1
+        p = UserData.objects.get_or_create(fbid =fbid)[0]
+        p.State = 'singer'
+        p.save()
         return post_facebook_message(sender_id,'Enter singer name')
 
     elif payload == 'director':
