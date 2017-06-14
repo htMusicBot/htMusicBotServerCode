@@ -16,6 +16,7 @@ import urllib,urllib2,csv,requests,os,xlrd,string,re
 from bs4 import BeautifulSoup
 from requests import get
 from io import open
+import difflib
 
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
@@ -30,6 +31,15 @@ song_count=1
 
 VERIFY_TOKEN = 'musicBot'
 PAGE_ACCESS_TOKEN = 'EAACCN4djHpkBAN7pazyZCHYSv14UPPYdUPCjmmbIFonmOR5we3mDrMTqYLJaByMjnD4LVjU0ZCZBCHgzsoeIGBgeldj3xULWYvoVAXHtufHoQaq4v0hN3GOxl4kvwmDgbkl7yqZCyCj74ZCbEiYMrpTpJM0AiAm0jJhZCnRTuqLwZDZD'
+
+
+#function to extraxt data of the person who sens a message
+def userdeatils(fbid):
+    url = 'https://graph.facebook.com/v2.6/' + fbid + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=' + PAGE_ACCESS_TOKEN
+    resp = requests.get(url=url)
+    data =json.loads(resp.text)
+    return data
+
 
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
@@ -64,8 +74,59 @@ class MyChatBotView(generic.View):
                 try:
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
+                    DataInstance = userdeatils(sender_id)
+                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])  
+
+                    if message_text.lower() in "hey,hi,supp,hello".split(','):
+                        #messages sent when any user sends the first message
+                        post_facebook_message(sender_id,'Hey! '+name + "this is your one stop solution for all your music cravings ")
+                        post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
+                        post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
+                        post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+
+                    else:
+                        print "entered in else"
+                        item = message_text.split(' ')
+                        for x in item :
+                            print "entered in for loop"
+
+                            if '#' in x :
+                                print "entered #"
+
+                                SongName = x.split('#')[1]
+                                # singer = Singer.objects.exclude(Name = SongName)
+                                a = Song.objects.filter(Singer__in=SongName)
+                                print a[0].SongName
+
+                                post_facebook_message(sender_id,a[0].SongName)
+                                # matches  = matching_algo(SongName , SongNameData)
+
+                            elif '*' in x :
+                                SongCast = x.split('*')[1]
+                                singer = Singer.objects.exclude(Name = SongCast)
+                                a = Song.objects.filter(Singer__in=singer)
+                                print a[0].SongName
+
+                                post_facebook_message(sender_id,a[0].SongName)
+                                # matches  = matching_algo(SongCast , CastData)
+                                
+                            elif '$' in x :
+                                Actors = x.split('$')[1]
+                                actor = Actor.objects.exclude(Name = Actors)
+                                a = Song.objects.filter(Singer__in=actor)
+                                post_facebook_message(sender_id,a[0].SongName)
+                                # matches  = matching_algo(Actors , ActorsData)
+                                
+                            elif '!' in x :
+                                Mood = x.split('!')[1]
+                                mood = Category.objects.exclude(Name = Mood)
+                                a = Song.objects.filter(Singer__in=mood)
+                                post_facebook_message(sender_id,a[0].SongName)
+                                # matches  = matching_algo(Mood , MoodData)    
+
+                    
                     #message text is sent to the user
-                    post_facebook_message(sender_id,message_text) 
+                    
                 except Exception as e:
                     print e
                     pass
@@ -111,14 +172,14 @@ def GetSongData(url,year):
     allSinger = tableRow[1].text
     singerArray = allSinger.split(',')
     for item in singerArray:
-        singer = Singer.objects.get_or_create(Name = item)[0]
+        singer = Singer.objects.get_or_create(Name = item.strip())[0]
         song.Singer.add(singer)
 
 
     allMusicDirector = tableRow[2].text
     musicDirectorArray = allMusicDirector.split(',')
     for item in musicDirectorArray:
-        musicDirector = MusicDirector.objects.get_or_create(Name = item)[0]
+        musicDirector = MusicDirector.objects.get_or_create(Name = item.strip())[0]
         song.MusicDirector.add(musicDirector)
 
 
@@ -126,28 +187,28 @@ def GetSongData(url,year):
     allLyricist = tableRow[3].text
     lyricistArray = allLyricist.split(',')
     for item in lyricistArray:
-        lyricist = Lyricist.objects.get_or_create(Name = item)[0]
+        lyricist = Lyricist.objects.get_or_create(Name = item.strip())[0]
         song.Lyricist.add(lyricist)
 
 
     allActor = tableRow[5].text
     musicActorArray = allActor.split(',')
     for item in musicActorArray:
-        actor = Actor.objects.get_or_create(Name = item)[0]
+        actor = Actor.objects.get_or_create(Name = item.strip())[0]
         song.Cast.add(actor)
 
 
     allCategory = tableRow[6].text
     categoryArray = allCategory.split(',')
     for item in categoryArray:
-        category = Category.objects.get_or_create(Name = item)[0]
+        category = Category.objects.get_or_create(Name = item.strip())[0]
         song.Category.add(category)
 
 
-    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text)[0]
+    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text.strip())[0]
     song.MovieName = movieName
 
-    year11 = Year.objects.get_or_create(Year = year)[0]
+    year11 = Year.objects.get_or_create(Year = year.strip())[0]
     song.year = year11
     
 
@@ -265,6 +326,22 @@ def GetNextURL(url):
     return next_url
 
 
+def matching_algo(input_string , data) :
+    for item in data:
+
+        a = []
+        s = difflib.SequenceMatcher(None, item, input_string).ratio()
+        a.append(s)
+
+
+    for i in range(3):
+        match = data[a.index(max(a))]
+        matches = []
+        matches.append(match)
+
+        a.remove(max(a))
+
+    return matches
 
 
 def doubleParameterQuery(requests):
