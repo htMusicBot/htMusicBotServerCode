@@ -146,6 +146,8 @@ class MyChatBotView(generic.View):
 
 
                 try:
+                    sender_id = message['sender']['id']
+                    message_text = message['message']['text']
                     if 'quick_reply' in message['message']:
                         handle_quickreply(message['sender']['id'],
                         message['message']['quick_reply']['payload'])
