@@ -101,6 +101,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='singer':
+                        print "hihihi" + message_text
                         a = Singer.objects.filter(Name__contains=message_text)
                         b = Song.objects.filter(Singer=a) 
                         userInstance.Singer.add(a)
