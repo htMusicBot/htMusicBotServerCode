@@ -102,11 +102,13 @@ class MyChatBotView(generic.View):
 
                     elif userInstance.State=='singer':
                         print "hihihi" + message_text
-                        a = Singer.objects.filter(Name__contains=message_text)
+                        a = Singer.objects.filter(Name__contains = message_text)
                         print a 
                         b = Song.objects.filter(Singer=a) 
                         print b 
-                        userInstance.Singer.add(a)
+                        for item in a:
+                            userInstance.Singer.add(item)
+                        # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'hi')
