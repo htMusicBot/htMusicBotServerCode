@@ -31,6 +31,7 @@ base_url='http://www.hindigeetmala.net/'
 
 song_count=1
 # Create your views here.
+singer = 0
 
 
 VERIFY_TOKEN = 'musicBot'
@@ -96,6 +97,11 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
+
+                    elif singer == 1:
+                        singer = Singer.objects.exclude(Name = 'Krishna')
+                        a = Song.objects.exclude(Singer__in=singer)
+                        post_facebook_message(sender_id,a)
 
                     else:
                         print "entered in else"
@@ -380,25 +386,26 @@ def handle_quickreply(fbid,payload):
     output_text = 'Payload Recieved: ' + payload
 
     if payload == 'songName':
-        return post_facebook_message(fbid,'hi')
+        singer = 1
+        return post_facebook_message(fbid,'Enter song name')
 
     elif payload == 'singer':
-        return post_facebook_message(sender_id,'hi')
+        return post_facebook_message(sender_id,'Enter singer name')
 
     elif payload == 'director':
-        return post_facebook_message(sender_id,'hi')
+        return post_facebook_message(sender_id,'Enter director name')
         
     elif payload == 'lyricist':
-        return post_facebook_message(sender_id,'hi')
+        return post_facebook_message(sender_id,'Enter lyricist')
                 
     elif payload == 'movieName':
-        return post_facebook_message(sender_id,'hi')
+        return post_facebook_message(sender_id,'Enter movie name')
 
     elif payload == 'cast':
-        return post_facebook_message(sender_id,'hi')
+        return post_facebook_message(sender_id,'Enter actor/actress name')
 
     elif payload == 'category':
-        return post_facebook_message(sender_id,'hi')  
+        return post_facebook_message(sender_id,'Enter category')  
 
 
 
@@ -423,11 +430,6 @@ def singerQuickreply(fbid):
                                 "content_type":"text",
                                 "title":"🎤 Singer",
                                 "payload":"singer"
-                              },
-                              {
-                                "content_type":"text",
-                                "title":"🎭 Director",
-                                "payload":"director"
                               },
                               {
                                 "content_type":"text",
