@@ -96,8 +96,6 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
-
-
                     else:
                         print "entered in else"
                         item = message_text.split(' ')
@@ -390,61 +388,57 @@ def handle_quickreply(fbid,payload):
 
 
 
+
+
+
 def singerQuickreply(fbid):
-    response_object = {
-     "recipient":{
-    "id":fbid
-     },
-     "message":{
-    "text":"Please add upto four best works by clicking buttons below : ",
-    "quick_replies":[
-      
-      {
-        "content_type":"text",
-        "title":"📽 Song Name",
-        "payload":"songName"
-      },
-      {
-        "content_type":"text",
-        "title":"🎤 Singer",
-        "payload":"singer"
-      },
-      {
-        "content_type":"text",
-        "title":"🎭 Director",
-        "payload":"director"
-      },
-      {
-        "content_type":"text",
-        "title":"🎼 Lyricist",
-        "payload":"lyricist"
-      }, 
-      {
-        "content_type":"text",
-        "title":"🎞 Movie Name",
-        "payload":"movieName"
-      }, 
-      {
-        "content_type":"text",
-        "title":"🕴 Cast",
-        "payload":"cast"
-      }, 
-      {
-        "content_type":"text",
-        "title":"🌀 Mood/Category",
-        "payload":"category"
-      }, 
-                  ]
-        }
-    }
+    
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":"Select your coloumn:",
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"📽 Song Name",
+                                "payload":"songName"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎤 Singer",
+                                "payload":"singer"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎭 Director",
+                                "payload":"director"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎼 Lyricist",
+                                "payload":"lyricist"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🎞 Movie Name",
+                                "payload":"movieName"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🕴 Cast",
+                                "payload":"cast"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🌀 Mood/Category",
+                                "payload":"category"
+                              }
+                            ]
+                          }
+                        }
     return json.dumps(response_object)
-
-
-
-
-
-
-
 
 
 
