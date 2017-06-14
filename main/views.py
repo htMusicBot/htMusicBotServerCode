@@ -96,6 +96,8 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
+
+
                     else:
                         print "entered in else"
                         item = message_text.split(' ')
