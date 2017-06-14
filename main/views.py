@@ -100,7 +100,7 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
-                    elif p.State=='singer':
+                    elif userInstance.State=='singer':
                         a = Singer.objects.filter(Name_contains=category)
                         b = Song.objects.filter(Category=a) 
                         userInstance.Singer.add(a)
