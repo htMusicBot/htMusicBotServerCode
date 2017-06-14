@@ -18,6 +18,10 @@ from requests import get
 from io import open
 import difflib
 
+
+
+
+
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
 
@@ -27,6 +31,7 @@ base_url='http://www.hindigeetmala.net/'
 
 song_count=1
 # Create your views here.
+singerCount = 0
 
 
 VERIFY_TOKEN = 'musicBot'
@@ -44,9 +49,16 @@ def userdeatils(fbid):
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
-    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-    print status.json()
+
+    if message_text == 'singerQuickreply':
+        response_msg = singerQuickreply(fbid)
+
+    else:
+        response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
+
+    requests.post(post_message_url, 
+                    headers={"Content-Type": "application/json"},
+                    data=response_msg)
 
 
 class MyChatBotView(generic.View):
@@ -65,6 +77,7 @@ class MyChatBotView(generic.View):
     
     #incomng message is decoded and various action are performed
     def post(self, request, *args, **kwargs):
+        global sender_id
         incoming_message= json.loads(self.request.body.decode('utf-8'))
         print incoming_message
 
@@ -75,14 +88,21 @@ class MyChatBotView(generic.View):
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
-                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])  
+                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
+
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+name + "this is your one stop solution for all your music cravings ")
-                        post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
-                        post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
-                        post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+                        # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
+                        # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
+                        # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
+                        post_facebook_message(sender_id,'singerQuickreply')
+
+                    elif singerCount == 0:
+                        # singerName = Singer.objects.exclude(Name = message_text)
+                        # aa = Song.objects.exclude(Singer__in=singerName)
+                        post_facebook_message(sender_id,'fuck hogya')
 
                     else:
                         print "entered in else"
@@ -136,13 +156,26 @@ class MyChatBotView(generic.View):
                     print e
                     pass
 
+
+
+                try:
+                    if 'quick_reply' in message['message']:
+                        handle_quickreply(message['sender']['id'],
+                        message['message']['quick_reply']['payload'])
+                        return HttpResponse()
+                    else:
+                        pass
+                except Exception as e:
+                    print e
+                    pass  
+
         return HttpResponse()  
 
 
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2016.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/2010.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
@@ -153,8 +186,6 @@ def index(request):
         
     print "Completed Scrapping"
     return HttpResponse('Completed Scrapping')
-
-
 
 
 def GetSongData(url,year):
@@ -274,7 +305,6 @@ def GetSongData(url,year):
     return row
     
 
-
 def GetSongPageURL(url,year):
     global song_count
     response = urllib2.urlopen(url)
@@ -302,6 +332,7 @@ def GetSongPageURL(url,year):
                 #     f.close()
     return 0
 
+
 def GetMoviePageURL(url):
     response = urllib2.urlopen(url)
     html_content = response.read()
@@ -318,7 +349,6 @@ def GetMoviePageURL(url):
             GetSongPageURL(movie_url,year)
 
     return 0
-
 
 
 def GetNextURL(url):
@@ -349,14 +379,88 @@ def matching_algo(input_string , data) :
     return matches
 
 
+def doubleParameterQuery(requests):
+    # a = Song.objects.get(YoutubeLink = 'http://www.youtube.com/embed/b8t9TinNumE')
+    singer = Singer.objects.exclude(Name = 'Krishna')
+    category = Category.objects.exclude(Name = 'Rock Songs')
+    a = Song.objects.exclude(Singer__in=singer).exclude(Category__in=category)
+    print a
+    return HttpResponse("hi")
+
+def handle_quickreply(fbid,payload):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+    output_text = 'Payload Recieved: ' + payload
+
+    if payload == 'songName':
+        return post_facebook_message(fbid,'Enter song name')
+
+    elif payload == 'singer':
+        singerCount = 1
+        return post_facebook_message(sender_id,'Enter singer name')
+
+    elif payload == 'director':
+        return post_facebook_message(sender_id,'Enter director name')
+        
+    elif payload == 'lyricist':
+        return post_facebook_message(sender_id,'Enter lyricist')
+                
+    elif payload == 'movieName':
+        return post_facebook_message(sender_id,'Enter movie name')
+
+    elif payload == 'cast':
+        return post_facebook_message(sender_id,'Enter actor/actress name')
+
+    elif payload == 'category':
+        return post_facebook_message(sender_id,'Enter category')  
 
 
 
 
 
 
-
-
+def singerQuickreply(fbid):
+    
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":"Select your coloumn:",
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"📽 Song Name",
+                                "payload":"songName"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎤 Singer",
+                                "payload":"singer"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎼 Lyricist",
+                                "payload":"lyricist"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🎞 Movie Name",
+                                "payload":"movieName"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🕴 Cast",
+                                "payload":"cast"
+                              }, 
+                              {
+                                "content_type":"text",
+                                "title":"🌀 Mood/Category",
+                                "payload":"category"
+                              }
+                            ]
+                          }
+                        }
+    return json.dumps(response_object)
 
 
 
