@@ -76,6 +76,7 @@ class MyChatBotView(generic.View):
     
     #incomng message is decoded and various action are performed
     def post(self, request, *args, **kwargs):
+        global sender_id
         incoming_message= json.loads(self.request.body.decode('utf-8'))
         print incoming_message
 
@@ -146,8 +147,6 @@ class MyChatBotView(generic.View):
 
 
                 try:
-                    sender_id = message['sender']['id']
-                    message_text = message['message']['text']
                     if 'quick_reply' in message['message']:
                         handle_quickreply(message['sender']['id'],
                         message['message']['quick_reply']['payload'])
