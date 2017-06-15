@@ -143,8 +143,9 @@ class MyChatBotView(generic.View):
                             userInstance.MovieName = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
+                        c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,c[0].SongName)
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
