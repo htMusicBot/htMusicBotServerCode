@@ -145,7 +145,7 @@ class MyChatBotView(generic.View):
 
                         q = Singer.objects.filter(Name__in = arraySinger)
                         print "entered singer "
-                        print haha + str(q)
+                        print "haha" + str(q)
                         w = Year.objects.filter(Year = userInstance)
                         print w
                         print "entered year "
