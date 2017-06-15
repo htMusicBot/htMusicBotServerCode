@@ -102,6 +102,8 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='songName':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         b = Song.objects.filter(SongName__contains = message_text) 
                         for item in b:
 
@@ -109,6 +111,8 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='singer':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -118,119 +122,37 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         print "singer name saved to user data"
 
-                        arraySinger =[]
-                        arrayYear =[]
-                        arrayCategory =[]
-                        arrayActor =[]
-                        arrayLyricist =[]
-
-                        for item in userInstance.Singer.all():
-                            arraySinger.append(item.Name)
-
-                        # for item in userInstance.year.all():
-                        #     arrayYear.append(item.Name)
-                            
-                        for item in userInstance.Category.all():
-                            arrayCategory.append(item.Name)
-                            
-                        for item in userInstance.Cast.all():
-                            arrayActor.append(item.Name)
-                            
-                        for item in userInstance.Lyricist.all():
-                            arrayLyricist.append(item.Name)                  
-
-                        print "arrays of all parameters made"
-    
-
-
-                        q = Singer.objects.filter(Name__in = arraySinger)
-
-                        print "entered singer "
-                        print "haha" + str(q)
-                        w = Year.objects.filter(Year = userInstance)
-                        print w
-                        print "entered year "
-                        e = Category.objects.filter(Name__in = arrayCategory)
-                        print e
-                        print "entered category "
-                        r = Actor.objects.filter(Name__in = arrayActor)
-                        print r
-                        print "entered actor "
-                        t = Lyricist.objects.filter(Name__in = arrayLyricist)
-                        print t
-                        print "entered lyricist "
-
-                        if arraySinger:
-
-                            b = Song.objects.filter(Singer=q) 
-
-
-                        else :
-                            b =  Song.objects.exclude(Singer=q) 
-
-                        if arrayYear:
-
-                            z = b.filter(year=w) 
-
-
-                        else :
-                            z =  b.exclude(Singer=w)
-
-                        if arrayCategory:
-
-                            h = z.filter(Category=e) 
-
-
-                        else :
-                            h =  z.exclude(Category=e)
-
-                        if arrayActor :
-
-                            i = h.filter(Cast=r) 
-
-
-                        else :
-                            i =  h.exclude(Cast=r)
-
-                        if arrayLyricist :
-
-                            l = i.filter(Lyricist=t) 
-
-
-                        else :
-                            l =  i.exclude(Lyricist=t)    
-    
-
-
-
-                        print "best best " + str(l)
-                        # post_facebook_message(sender_id,b[0].SongName)
-                        for item in l:
-
-                            post_facebook_message(sender_id,item.SongName)
+                        SongSearcher(sender_id)
 
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
 
+
+
+
                     elif userInstance.State=='lyricist':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Lyricist=a) 
+                        
                         # print b 
                         for item in a:
                             userInstance.Lyricist.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        SongSearcher(sender_id)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     
                     elif userInstance.State=='movieName':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = MovieName.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(MovieName=a) 
+                        
                         # print b 
                         for item in a:
                             userInstance.MovieName = item
@@ -238,27 +160,31 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        SongSearcher(sender_id)
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
                     elif userInstance.State=='cast':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Cast=a) 
+                        
                         # print b 
                         for item in a:
                             userInstance.Cast.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        SongSearcher(sender_id)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='category':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Category=a) 
+                       
                         # print b 
                         for item in a:
                             userInstance.Category.add(item)
@@ -266,20 +192,22 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        SongSearcher(sender_id)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
+                        userInstance.State=='NULL'
+                        userInstance.save()
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(year=a) 
+                       
                         # print b
                         for item in a: 
                             userInstance.year = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        SongSearcher(sender_id)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     else:
@@ -667,9 +595,101 @@ def singerQuickreply(fbid):
 
 
 
+def SongSearcher:
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
+    arraySinger =[]
+    arrayYear =[]
+    arrayCategory =[]
+    arrayActor =[]
+    arrayLyricist =[]
+
+    for item in userInstance.Singer.all():
+        arraySinger.append(item.Name)
+
+    # for item in userInstance.year.all():
+    #     arrayYear.append(item.Name)
+        
+    for item in userInstance.Category.all():
+        arrayCategory.append(item.Name)
+        
+    for item in userInstance.Cast.all():
+        arrayActor.append(item.Name)
+        
+    for item in userInstance.Lyricist.all():
+        arrayLyricist.append(item.Name)                  
+
+    print "arrays of all parameters made"
 
 
 
+    q = Singer.objects.filter(Name__in = arraySinger)
+
+    print "entered singer "
+    print "haha" + str(q)
+    w = Year.objects.filter(Year = userInstance)
+    print w
+    print "entered year "
+    e = Category.objects.filter(Name__in = arrayCategory)
+    print e
+    print "entered category "
+    r = Actor.objects.filter(Name__in = arrayActor)
+    print r
+    print "entered actor "
+    t = Lyricist.objects.filter(Name__in = arrayLyricist)
+    print t
+    print "entered lyricist "
+
+    if arraySinger:
+
+        b = Song.objects.filter(Singer=q) 
+
+
+    else :
+        b =  Song.objects.exclude(Singer=q) 
+
+    if arrayYear:
+
+        z = b.filter(year=w) 
+
+
+    else :
+        z =  b.exclude(Singer=w)
+
+    if arrayCategory:
+
+        h = z.filter(Category=e) 
+
+
+    else :
+        h =  z.exclude(Category=e)
+
+    if arrayActor :
+
+        i = h.filter(Cast=r) 
+
+
+    else :
+        i =  h.exclude(Cast=r)
+
+    if arrayLyricist :
+
+        l = i.filter(Lyricist=t) 
+
+
+    else :
+        l =  i.exclude(Lyricist=t)    
+
+
+
+
+    print "best best " + str(l)
+    # post_facebook_message(sender_id,b[0].SongName)
+    for item in l:
+
+        post_facebook_message(sender_id,item.SongName)
+
+   
 
 
 
