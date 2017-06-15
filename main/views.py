@@ -595,7 +595,7 @@ def singerQuickreply(fbid):
 
 
 
-def SongSearcher:
+def SongSearcher(sender_id):
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
     arraySinger =[]
