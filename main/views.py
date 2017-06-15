@@ -110,13 +110,13 @@ class MyChatBotView(generic.View):
 
                     elif userInstance.State=='singer':
                         a = Singer.objects.filter(Name__contains = message_text)
-                        # print a 
+                        print "singer name searched"
                         
                         # print b 
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
-
+                        print "singer name saved to user data"
 
                         arraySinger =[]
                         arrayYear =[]
@@ -139,7 +139,7 @@ class MyChatBotView(generic.View):
                         for item in userInstance.Lyricist.all():
                             arrayLyricist.append(item.Name)                  
 
-                     
+                        print "arrays of all parameters made"
     
 
 
@@ -161,10 +161,11 @@ class MyChatBotView(generic.View):
 
                         b = Song.objects.filter(Singer=a  , Lyricist = t ,  Cast = r , Category = e , year =w ) 
 
-
+                        print "best best " + str(b)
                         # post_facebook_message(sender_id,b[0].SongName)
                         for item in b:
                             post_facebook_message(sender_id,item.SongName)
+
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
