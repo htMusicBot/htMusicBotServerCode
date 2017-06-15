@@ -147,8 +147,8 @@ class MyChatBotView(generic.View):
 
                         print "entered singer "
                         print "haha" + str(q)
-                        # w = Year.objects.filter(Year = userInstance)
-                        # print w
+                        w = Year.objects.filter(Year = userInstance)
+                        print w
                         print "entered year "
                         e = Category.objects.filter(Name__in = arrayCategory)
                         print e
@@ -160,11 +160,53 @@ class MyChatBotView(generic.View):
                         print t
                         print "entered lyricist "
 
-                        b = Song.objects.filter(Singer=q  , Lyricist = t ,  Cast = r , Category = e ) 
+                        if arraySinger:
 
-                        print "best best " + str(b)
+                            b = Song.objects.filter(Singer=q) 
+
+
+                        else :
+                            b =  Song.objects.exclude(Singer=q) 
+
+                        if arrayYear:
+
+                            z = b.objects.filter(year=w) 
+
+
+                        else :
+                            z =  b.objects.exclude(Singer=w)
+
+                        if arrayCategory:
+
+                            h = z.objects.filter(Category=e) 
+
+
+                        else :
+                            h =  z.objects.exclude(Category=e)
+
+                        if arrayActor :
+
+                            i = h.objects.filter(Cast=r) 
+
+
+                        else :
+                            i =  h.objects.exclude(Cast=r)
+
+                        if arrayLyricist :
+
+                            l = i.objects.filter(Lyricist=t) 
+
+
+                        else :
+                            l =  i.objects.exclude(Lyricist=t)    
+    
+
+
+
+                        print "best best " + str(l)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        for item in b:
+                        for item in l:
+
                             post_facebook_message(sender_id,item.SongName)
 
                         post_facebook_message(sender_id,'singerQuickreply')
