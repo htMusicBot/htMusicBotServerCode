@@ -42,6 +42,19 @@ def matching_algo(input_string , data) :
 	return matches
 
 
+def query():
+	q = Singer.objects.filter(Name__contains = userInstance.Singer)
+	w = Year.objects.filter(year__contains = userInstance.year)
+	e = Category.objects.filter(Name__contains = userInstance.Category)
+	r = Actor.objects.filter(Name__contains = userInstance.Cast)
+	t = Lyricist.objects.filter(Name__contains = userInstance.Lyricist)
+	# y = Song.objects.filter(SongName__contains = )
+
+
+	print a 
+	b = Song.objects.filter(Singer=a  , Lyricist = t ,  Actor = r , Category = e , year = ) 
+	print b 
+
 
 
 
