@@ -125,7 +125,7 @@ class MyChatBotView(generic.View):
                         arrayLyricist =[]
 
                         for item in userInstance.Singer.all():
-                            array.append(item.Name)
+                            arraySinger.append(item.Name)
 
                         for item in userInstance.Year.all():
                             arrayYear.append(item.Name)
