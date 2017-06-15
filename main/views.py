@@ -123,7 +123,7 @@ class MyChatBotView(generic.View):
                         for item in arrayf:
                             array.append(item.Name)
 
-                        print "hihihihi" + array
+                        print "hihihihi" + str(array)
 
 
 
