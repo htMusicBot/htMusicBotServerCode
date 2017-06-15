@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 from requests import get
 from io import open
 import difflib
+import random
 
 
 
@@ -162,15 +163,16 @@ class MyChatBotView(generic.View):
 
                     elif userInstance.State=='category':
                         a = Category.objects.filter(Name__contains = message_text)
-                        print a 
+                        # print a 
                         b = Song.objects.filter(Category=a) 
-                        print b 
+                        # print b 
                         for item in a:
                             userInstance.Category.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
+                        c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,c[0].SongName)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
