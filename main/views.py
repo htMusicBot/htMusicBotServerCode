@@ -113,7 +113,7 @@ class MyChatBotView(generic.View):
                             userInstance.Singer.add(item)
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
 
 
 
