@@ -127,7 +127,7 @@ class MyChatBotView(generic.View):
                         for item in userInstance.Singer.all():
                             arraySinger.append(item.Name)
 
-                        for item in userInstance.Year.all():
+                        for item in userInstance.year.all():
                             arrayYear.append(item.Name)
                             
                         for item in userInstance.Category.all():
