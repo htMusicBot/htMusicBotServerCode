@@ -94,24 +94,78 @@ class MyChatBotView(generic.View):
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
-                        post_facebook_message(sender_id,'Hey! '+name + "this is your one stop solution for all your music cravings ")
+                        post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
+                    elif userInstance.State=='songName':
+                        b = Song.objects.filter(SongName__contains = message_text) 
+                        post_facebook_message(sender_id,b)
+
                     elif userInstance.State=='singer':
-                        print "hihihi" + message_text
                         a = Singer.objects.filter(Name__contains = message_text)
-                        print a 
+                        # print a 
                         b = Song.objects.filter(Singer=a) 
-                        print b 
+                        # print b 
+                        for item in a:
+                            userInstance.Singer.add(item)
+                        userInstance.save()
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,b)
+
+
+
+                    elif userInstance.State=='lyricist':
+                        a = Lyricist.objects.filter(Name__contains = message_text)
+                        # print a 
+                        b = Song.objects.filter(Lyricist=a) 
+                        # print b 
+                        for item in a:
+                            userInstance.Lyricist.add(item)
+                        # userInstance.Singer.add(a[0])
+                        userInstance.save()
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,b)
+
+                    
+                    elif userInstance.State=='movieName':
+                        a = MovieName.objects.filter(Name__contains = message_text)
+                        # print a 
+                        b = Song.objects.filter(MovieName=a) 
+                        # print b 
+                        for item in a:
+                            userInstance.MovieName.add(item)
+                        # userInstance.Singer.add(a[0])
+                        userInstance.save()
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,b)
+
+
+                    elif userInstance.State=='cast':
+                        a = Actor.objects.filter(Name__contains = message_text)
+                        # print a 
+                        b = Song.objects.filter(Singer=a) 
+                        # print b 
                         for item in a:
                             userInstance.Singer.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'hi')
+
+                    elif userInstance.State=='category':
+                        a = Category.objects.filter(Name__contains = message_text)
+                        print a 
+                        b = Song.objects.filter(Category=a) 
+                        print b 
+                        for item in a:
+                            userInstance.Category.add(item)
+                        # userInstance.Singer.add(a[0])
+                        userInstance.save()
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,b)
 
                     else:
                         print "entered in else"
@@ -396,6 +450,9 @@ def handle_quickreply(fbid,payload):
     output_text = 'Payload Recieved: ' + payload
 
     if payload == 'songName':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'songName'
+        p.save()
         return post_facebook_message(fbid,'Enter song name')
 
     elif payload == 'singer':
@@ -404,19 +461,29 @@ def handle_quickreply(fbid,payload):
         p.save()
         return post_facebook_message(sender_id,'Enter singer name')
 
-    elif payload == 'director':
-        return post_facebook_message(sender_id,'Enter director name')
         
     elif payload == 'lyricist':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'lyricist'
+        p.save()
         return post_facebook_message(sender_id,'Enter lyricist')
                 
     elif payload == 'movieName':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'movieName'
+        p.save()
         return post_facebook_message(sender_id,'Enter movie name')
 
     elif payload == 'cast':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'cast'
+        p.save()
         return post_facebook_message(sender_id,'Enter actor/actress name')
 
     elif payload == 'category':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'category'
+        p.save()
         return post_facebook_message(sender_id,'Enter category')  
 
 
@@ -462,6 +529,11 @@ def singerQuickreply(fbid):
                                 "content_type":"text",
                                 "title":"🌀 Mood/Category",
                                 "payload":"category"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"⏳ Year",
+                                "payload":"year"
                               }
                             ]
                           }
