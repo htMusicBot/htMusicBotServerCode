@@ -143,19 +143,19 @@ class MyChatBotView(generic.View):
     
 
 
-                        q = Singer.objects.filter(Name__contains = str(arraySinger[0]))
+                        q = Singer.objects.filter(Name__in = arraySinger)
                         print "entered singer "
-                        print q
-                        w = Year.objects.filter(Year__contains = userInstance)
+                        print haha + str(q)
+                        w = Year.objects.filter(Year = userInstance)
                         print w
                         print "entered year "
-                        e = Category.objects.filter(Name__contains = str(arrayCategory[0]))
+                        e = Category.objects.filter(Name__in = arrayCategory)
                         print e
                         print "entered category "
-                        r = Actor.objects.filter(Name__contains = str(arrayActor[0]))
+                        r = Actor.objects.filter(Name__in = arrayActor)
                         print r
                         print "entered actor "
-                        t = Lyricist.objects.filter(Name__contains = str(arrayLyricist[0]))
+                        t = Lyricist.objects.filter(Name__in = arrayLyricist)
                         print t
                         print "entered lyricist "
 
