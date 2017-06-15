@@ -144,10 +144,11 @@ class MyChatBotView(generic.View):
 
 
                         q = Singer.objects.filter(Name__in = arraySinger)
+
                         print "entered singer "
                         print "haha" + str(q)
-                        w = Year.objects.filter(Year = userInstance)
-                        print w
+                        # w = Year.objects.filter(Year = userInstance)
+                        # print w
                         print "entered year "
                         e = Category.objects.filter(Name__in = arrayCategory)
                         print e
@@ -159,7 +160,7 @@ class MyChatBotView(generic.View):
                         print t
                         print "entered lyricist "
 
-                        b = Song.objects.filter(Singer=a  , Lyricist = t ,  Cast = r , Category = e , year =w ) 
+                        b = Song.objects.filter(Singer=a  , Lyricist = t ,  Cast = r , Category = e ) 
 
                         print "best best " + str(b)
                         # post_facebook_message(sender_id,b[0].SongName)
