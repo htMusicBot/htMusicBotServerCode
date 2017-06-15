@@ -137,25 +137,27 @@ class MyChatBotView(generic.View):
                             arrayActor.append(item.Name)
                             
                         for item in userInstance.Lyricist.all():
-                            arrayLyricist.append(item.Name)                    
+                            arrayLyricist.append(item.Name)                  
 
-                        print "hihihihi" + str(array)
-
-                        print array[0]
-                        print str(array[0])
+                     
+    
 
 
                         q = Singer.objects.filter(Name__contains = str(arraySinger[0]))
-                        print "blah blah "
+                        print "entered singer "
                         print q
                         w = Year.objects.filter(Year__contains = str(arrayYear[0]))
                         print w
+                        print "entered year "
                         e = Category.objects.filter(Name__contains = str(arrayCategory[0]))
                         print e
+                        print "entered category "
                         r = Actor.objects.filter(Name__contains = str(arrayActor[0]))
                         print r
+                        print "entered actor "
                         t = Lyricist.objects.filter(Name__contains = str(arrayLyricist[0]))
                         print t
+                        print "entered lyricist "
 
                         b = Song.objects.filter(Singer=a  , Lyricist = t ,  Actor = r , Category = e , year =w ) 
 
