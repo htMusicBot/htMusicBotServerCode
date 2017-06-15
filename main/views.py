@@ -125,6 +125,9 @@ class MyChatBotView(generic.View):
 
                         print "hihihihi" + str(array)
 
+                        print array[0]
+                        print str(array[0])
+
 
 
 
