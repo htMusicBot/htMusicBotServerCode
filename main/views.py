@@ -160,7 +160,7 @@ class MyChatBotView(generic.View):
                         print t
                         print "entered lyricist "
 
-                        b = Song.objects.filter(Singer=a  , Lyricist = t ,  Cast = r , Category = e ) 
+                        b = Song.objects.filter(Singer=q  , Lyricist = t ,  Cast = r , Category = e ) 
 
                         print "best best " + str(b)
                         # post_facebook_message(sender_id,b[0].SongName)
