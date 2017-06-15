@@ -123,10 +123,13 @@ class MyChatBotView(generic.View):
                         for item in arrayf:
                             array.append(item.Name)
 
-                        print array
+                        print "hihihihi" + array
 
 
-                        q = Singer.objects.filter(Name__contains = array[0].name)
+
+
+
+                        q = Singer.objects.filter(Name__contains = array[0])
                         print q
                         w = Year.objects.filter(Year__contains = userInstance.year)
                         print w
