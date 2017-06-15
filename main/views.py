@@ -135,8 +135,7 @@ class MyChatBotView(generic.View):
                         # print a 
                         b = Song.objects.filter(MovieName=a) 
                         # print b 
-                        for item in a:
-                            userInstance.MovieName.add(item)
+                        userInstance.MovieName = a
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
@@ -146,14 +145,14 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='cast':
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Singer=a) 
+                        b = Song.objects.filter(Cast=a) 
                         # print b 
                         for item in a:
-                            userInstance.Singer.add(item)
+                            userInstance.Cast.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'hi')
+                        post_facebook_message(sender_id,b)
 
                     elif userInstance.State=='category':
                         a = Category.objects.filter(Name__contains = message_text)
@@ -162,6 +161,17 @@ class MyChatBotView(generic.View):
                         print b 
                         for item in a:
                             userInstance.Category.add(item)
+                        # userInstance.Singer.add(a[0])
+                        userInstance.save()
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,b)
+
+                    elif userInstance.State=='year':
+                        a = Year.objects.filter(Year__contains = message_text)
+                        # print a 
+                        b = Song.objects.filter(year=a) 
+                        # print b 
+                        userInstance.year = a
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
@@ -484,7 +494,13 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'category'
         p.save()
-        return post_facebook_message(sender_id,'Enter category')  
+        return post_facebook_message(sender_id,'Enter category') 
+
+    elif payload == 'year':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'year'
+        p.save()
+        return post_facebook_message(sender_id,'Enter year')  
 
 
 
