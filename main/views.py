@@ -133,7 +133,7 @@ class MyChatBotView(generic.View):
                         for item in userInstance.Category.all():
                             arrayCategory.append(item.Name)
                             
-                        for item in userInstance.Actor.all():
+                        for item in userInstance.Cast.all():
                             arrayActor.append(item.Name)
                             
                         for item in userInstance.Lyricist.all():
