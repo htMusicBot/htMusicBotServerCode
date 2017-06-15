@@ -117,11 +117,18 @@ class MyChatBotView(generic.View):
                             userInstance.Singer.add(item)
                         userInstance.save()
 
+                        print userInstance.singer
+
                         q = Singer.objects.filter(Name__contains = userInstance.Singer)
+                        print q
                         w = Year.objects.filter(year__contains = userInstance.year)
+                        print w
                         e = Category.objects.filter(Name__contains = userInstance.Category)
+                        print e
                         r = Actor.objects.filter(Name__contains = userInstance.Cast)
+                        print r
                         t = Lyricist.objects.filter(Name__contains = userInstance.Lyricist)
+                        print t
 
                         b = Song.objects.filter(Singer=a  , Lyricist = t ,  Actor = r , Category = e , year =w ) 
 
