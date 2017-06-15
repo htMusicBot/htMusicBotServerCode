@@ -117,11 +117,27 @@ class MyChatBotView(generic.View):
                             userInstance.Singer.add(item)
                         userInstance.save()
 
-                        arrayf = userInstance.Singer.all()
 
-                        array =[]
-                        for item in arrayf:
+                        arraySinger =[]
+                        arrayYear =[]
+                        arrayCategory =[]
+                        arrayActor =[]
+                        arrayLyricist =[]
+
+                        for item in userInstance.Singer.all():
                             array.append(item.Name)
+
+                        for item in userInstance.Year.all():
+                            arrayYear.append(item.Name)
+                            
+                        for item in userInstance.Category.all():
+                            arrayCategory.append(item.Name)
+                            
+                        for item in userInstance.Actor.all():
+                            arrayActor.append(item.Name)
+                            
+                        for item in userInstance.Lyricist.all():
+                            arrayLyricist.append(item.Name)                    
 
                         print "hihihihi" + str(array)
 
@@ -129,16 +145,16 @@ class MyChatBotView(generic.View):
                         print str(array[0])
 
 
-                        q = Singer.objects.filter(Name__contains = str(array[0]))
+                        q = Singer.objects.filter(Name__contains = str(arraySinger[0]))
                         print "blah blah "
                         print q
-                        w = Year.objects.filter(Year__contains = userInstance.year)
+                        w = Year.objects.filter(Year__contains = str(arrayYear[0]))
                         print w
-                        e = Category.objects.filter(Name__contains = userInstance.Category)
+                        e = Category.objects.filter(Name__contains = str(arrayCategory[0]))
                         print e
-                        r = Actor.objects.filter(Name__contains = userInstance.Cast)
+                        r = Actor.objects.filter(Name__contains = str(arrayActor[0]))
                         print r
-                        t = Lyricist.objects.filter(Name__contains = userInstance.Lyricist)
+                        t = Lyricist.objects.filter(Name__contains = str(arrayLyricist[0]))
                         print t
 
                         b = Song.objects.filter(Singer=a  , Lyricist = t ,  Actor = r , Category = e , year =w ) 
