@@ -138,7 +138,8 @@ class MyChatBotView(generic.View):
                         # print a 
                         b = Song.objects.filter(MovieName=a) 
                         # print b 
-                        userInstance.MovieName = a
+                        for item in a:
+                            userInstance.MovieName = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
@@ -176,8 +177,9 @@ class MyChatBotView(generic.View):
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
                         b = Song.objects.filter(year=a) 
-                        # print b 
-                        userInstance.year = a
+                        # print b
+                        for item in a: 
+                            userInstance.year = a
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
