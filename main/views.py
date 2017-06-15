@@ -120,7 +120,8 @@ class MyChatBotView(generic.View):
                         arrayf = userInstance.Singer.all()
 
                         array =[]
-                        array.append(arrayf.Singer)
+                        for item in arrayf:
+                            array.append(item.Name)
 
                         print array
 
