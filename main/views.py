@@ -102,7 +102,8 @@ class MyChatBotView(generic.View):
 
                     elif userInstance.State=='songName':
                         b = Song.objects.filter(SongName__contains = message_text) 
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='singer':
                         a = Singer.objects.filter(Name__contains = message_text)
@@ -114,6 +115,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
 
 
@@ -127,7 +129,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     
                     elif userInstance.State=='movieName':
@@ -139,7 +142,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
 
                     elif userInstance.State=='cast':
@@ -152,7 +156,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='category':
                         a = Category.objects.filter(Name__contains = message_text)
@@ -164,7 +169,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
                         a = Year.objects.filter(Year__contains = message_text)
@@ -175,7 +181,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b)
+                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     else:
                         print "entered in else"
