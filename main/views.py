@@ -122,7 +122,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         print "singer name saved to user data"
 
-                        SongSearcher(sender_id)
+                        # SongSearcher(sender_id)
 
                         post_facebook_message(sender_id,'singerQuickreply')
 
