@@ -127,8 +127,8 @@ class MyChatBotView(generic.View):
                         for item in userInstance.Singer.all():
                             arraySinger.append(item.Name)
 
-                        for item in userInstance.year.all():
-                            arrayYear.append(item.Name)
+                        # for item in userInstance.year.all():
+                        #     arrayYear.append(item.Name)
                             
                         for item in userInstance.Category.all():
                             arrayCategory.append(item.Name)
@@ -146,7 +146,7 @@ class MyChatBotView(generic.View):
                         q = Singer.objects.filter(Name__contains = str(arraySinger[0]))
                         print "entered singer "
                         print q
-                        w = Year.objects.filter(Year__contains = str(arrayYear[0]))
+                        w = Year.objects.filter(Year__contains = userInstance)
                         print w
                         print "entered year "
                         e = Category.objects.filter(Name__contains = str(arrayCategory[0]))
