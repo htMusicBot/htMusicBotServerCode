@@ -170,35 +170,35 @@ class MyChatBotView(generic.View):
 
                         if arrayYear:
 
-                            z = b.objects.filter(year=w) 
+                            z = b.filter(year=w) 
 
 
                         else :
-                            z =  b.objects.exclude(Singer=w)
+                            z =  b.exclude(Singer=w)
 
                         if arrayCategory:
 
-                            h = z.objects.filter(Category=e) 
+                            h = z.filter(Category=e) 
 
 
                         else :
-                            h =  z.objects.exclude(Category=e)
+                            h =  z.exclude(Category=e)
 
                         if arrayActor :
 
-                            i = h.objects.filter(Cast=r) 
+                            i = h.filter(Cast=r) 
 
 
                         else :
-                            i =  h.objects.exclude(Cast=r)
+                            i =  h.exclude(Cast=r)
 
                         if arrayLyricist :
 
-                            l = i.objects.filter(Lyricist=t) 
+                            l = i.filter(Lyricist=t) 
 
 
                         else :
-                            l =  i.objects.exclude(Lyricist=t)    
+                            l =  i.exclude(Lyricist=t)    
     
 
 
