@@ -179,7 +179,7 @@ class MyChatBotView(generic.View):
                         b = Song.objects.filter(year=a) 
                         # print b
                         for item in a: 
-                            userInstance.year = a
+                            userInstance.year = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
