@@ -117,9 +117,9 @@ class MyChatBotView(generic.View):
                             userInstance.Singer.add(item)
                         userInstance.save()
 
-                        print userInstance.Singer.all()
+                        array = userInstance.Singer.all()
 
-                        q = Singer.objects.filter(Name__contains = userInstance.Singer.all())
+                        q = Singer.objects.filter(Name__contains = array)
                         print q
                         w = Year.objects.filter(Year__contains = userInstance.year)
                         print w
