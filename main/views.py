@@ -117,11 +117,15 @@ class MyChatBotView(generic.View):
                             userInstance.Singer.add(item)
                         userInstance.save()
 
-                        array = userInstance.Singer.all()
+                        arrayf = userInstance.Singer.all()
+
+                        array =[]
+                        array.append(arrayf.Singer)
+
                         print array
 
 
-                        q = Singer.objects.filter(Name__contains = array)
+                        q = Singer.objects.filter(Name__contains = array[0].name)
                         print q
                         w = Year.objects.filter(Year__contains = userInstance.year)
                         print w
