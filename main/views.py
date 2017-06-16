@@ -148,7 +148,7 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     
@@ -165,7 +165,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
@@ -181,7 +181,7 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='category':
@@ -197,7 +197,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
@@ -212,7 +212,7 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     else:
