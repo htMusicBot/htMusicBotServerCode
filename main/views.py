@@ -669,7 +669,10 @@ def SongSearcher(sender_id):
 
 
     else :
-        b =  Song.objects.exclude(Singer=q) 
+        b =  Song.objects.exclude(Singer=q)
+
+    print "After sorting singers" 
+    print b  
 
     if arrayYear:
 
@@ -679,6 +682,9 @@ def SongSearcher(sender_id):
     else :
         z =  b.exclude(year=w)
 
+    print "After sorting years"     
+    print z    
+
     if arrayCategory:
 
         h = z.filter(Category=e) 
@@ -686,6 +692,9 @@ def SongSearcher(sender_id):
 
     else :
         h =  z.exclude(Category=e)
+
+    print "After sorting category" 
+    print h     
 
     if arrayActor :
 
@@ -695,6 +704,11 @@ def SongSearcher(sender_id):
     else :
         i =  h.exclude(Cast=r)
 
+
+    print "After sorting actor"    
+
+    print i     
+
     if arrayLyricist :
 
         a = i.filter(Lyricist=t) 
@@ -703,18 +717,26 @@ def SongSearcher(sender_id):
     else :
         a =  i.exclude(Lyricist=t) 
 
+    print "After sorting Lyricist"     
+
+    print a    
+
     if arrayMovie :
 
-        c = i.filter(MovieName=y) 
+        c = a.filter(MovieName=y) 
 
 
     else :
-        c =  i.exclude(MovieName=y)       
+        c =  a.exclude(MovieName=y)  
+
+    print "After sorting Movie"      
+
+    print c         
 
 
 
 
-    print "best best " + str(a)
+    print "best best " + str(c)
 
     card_data2 = []
     print a 
