@@ -716,7 +716,7 @@ def SongSearcher(sender_id):
                     "payload":"Ss" ,  
                     "title": "Play song"
                   },
-                 /
+                 
                   {
                     "type": "element_share"
                    }
