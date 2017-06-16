@@ -745,6 +745,7 @@ def SongSearcher(sender_id):
     for i in a:
 
         number = number + 1
+        print number
         print "entered loop"
         y = i.YoutubeLink
         # arraySinger = []
@@ -779,7 +780,7 @@ def SongSearcher(sender_id):
         card_data2.append(card_data) 
         print "cards appended"   
         if number == 5:
-            break;       
+            break       
 
                     
     response_object = {
