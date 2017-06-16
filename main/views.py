@@ -741,7 +741,10 @@ def SongSearcher(sender_id):
 
     card_data2 = []
     print a 
+    number = 0
     for i in a:
+
+        number = number + 1
         print "entered loop"
         y = i.YoutubeLink
         # arraySinger = []
@@ -774,7 +777,9 @@ def SongSearcher(sender_id):
                    }
 
         card_data2.append(card_data) 
-        print "cards appended"          
+        print "cards appended"   
+        if number == 5:
+            break;       
 
                     
     response_object = {
@@ -803,69 +808,69 @@ def SongSearcher(sender_id):
 
    
 
-def cards(fbid, a ):
+# def cards(fbid, a ):
 
 
 
-    card_data2 = []
-    print a 
-    for i in a:
-        song_url = i.YoutubeLink
-        # arraySinger = []
-        x = song_url.split("https://www.youtube.com/embed/")
-        song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
-        singerNames = ''
-        for item in a.Singer.all():
-            singerNames = singerNames + item + ' , '
+#     card_data2 = []
+#     print a 
+#     for i in a:
+#         song_url = i.YoutubeLink
+#         # arraySinger = []
+#         x = song_url.split("https://www.youtube.com/embed/")
+#         song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
+#         singerNames = ''
+#         for item in a.Singer.all():
+#             singerNames = singerNames + item + ' , '
 
 
         
         
-        card_data = {
-                  "title": i.SongName,
-                  "subtitle": singerNames,
-                  "image_url": song_img,
+#         card_data = {
+#                   "title": i.SongName,
+#                   "subtitle": singerNames,
+#                   "image_url": song_img,
                   
-                  "buttons": [
-                  {
-                    "type": "postback",
-                    "payload":"ss" ,  
-                    "title": "play song"
-                  },
-                  # {
-                  #   "type": "web_url",
-                  #   "url": i.menu_url,  
-                  #   "title": "See Menu"
-                  # },
-                  {
-                    "type": "element_share"
-                   }
-                   ]
-                   }
+#                   "buttons": [
+#                   {
+#                     "type": "postback",
+#                     "payload":"ss" ,  
+#                     "title": "play song"
+#                   },
+#                   # {
+#                   #   "type": "web_url",
+#                   #   "url": i.menu_url,  
+#                   #   "title": "See Menu"
+#                   # },
+#                   {
+#                     "type": "element_share"
+#                    }
+#                    ]
+#                    }
 
-        card_data2.append(card_data)           
+#         card_data2.append(card_data)           
 
                     
-    response_object = {
-      "recipient": {
-        "id": fbid
-      },
-      "message": {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": card_data2
-                }
-            }
-        }
-    }
+#     response_object = {
+#       "recipient": {
+#         "id": fbid
+#       },
+#       "message": {
+#         "attachment": {
+#           "type": "template",
+#           "payload": {
+#             "template_type": "generic",
+#             "elements": card_data2
+#                 }
+#             }
+#         }
+#     }
 
-    print json.dumps(response_object)
+#     print json.dumps(response_object)
 
-    # print response_object
+#     # print response_object
 
-    return json.dumps(response_object)
+#     return json.dumps(response_object)
 
 
 
