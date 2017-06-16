@@ -686,7 +686,7 @@ def SongSearcher(sender_id):
 
 
 
-    print "best best " + str(l)
+    print "best best " + str(a)
 
     card_data2 = []
     print a 
