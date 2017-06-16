@@ -124,7 +124,7 @@ class MyChatBotView(generic.View):
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
-                        
+
                         print "singer name saved to user data"
 
                         # SongSearcher(sender_id)
@@ -768,7 +768,9 @@ def SongSearcher(sender_id):
                   "buttons": [
                   {
                     "type":"web_url",
-                    "url":i.YoutubeLink,
+                    # "url":i.YoutubeLink
+
+                    "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19369562_1220354754740487_813152105_n.jpg?oh=514786917903a8a4bd156c3e8033f302&oe=5946A986",
                     "title":"Play song",
                     "webview_height_ratio": "full"
                   } ,
