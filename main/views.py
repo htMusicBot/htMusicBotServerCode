@@ -54,6 +54,9 @@ def post_facebook_message(fbid,message_text):
     if message_text == 'singerQuickreply':
         response_msg = singerQuickreply(fbid)
 
+    elif message_text == 'cards':
+        response_msg = SongSearcher(fbid)     
+
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
 
@@ -96,76 +99,97 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
+                        userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='songName':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         b = Song.objects.filter(SongName__contains = message_text) 
-                        post_facebook_message(sender_id,b[0].SongName)
+                        for item in b:
+
+                            post_facebook_message(sender_id, item.SongName)
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='singer':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = Singer.objects.filter(Name__contains = message_text)
-                        # print a 
-                        b = Song.objects.filter(Singer=a) 
+                        print "singer name searched"
+                        
                         # print b 
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
-                        # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        print "singer name saved to user data"
+
+                        # SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
+
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
 
+
+
+
                     elif userInstance.State=='lyricist':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Lyricist=a) 
+                        
                         # print b 
                         for item in a:
                             userInstance.Lyricist.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     
                     elif userInstance.State=='movieName':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = MovieName.objects.filter(Name__contains = message_text)
-                        # print a 
-                        b = Song.objects.filter(MovieName=a) 
-                        # print b 
+                        print a
                         for item in a:
+                            print "in movie loop "
+                            print item
                             userInstance.MovieName = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
 
                     elif userInstance.State=='cast':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Cast=a) 
+                        
                         # print b 
                         for item in a:
                             userInstance.Cast.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='category':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(Category=a) 
+                       
                         # print b 
                         for item in a:
                             userInstance.Category.add(item)
@@ -173,20 +197,22 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
+                        userInstance.State='NULL'
+                        userInstance.save()
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
-                        b = Song.objects.filter(year=a) 
+                       
                         # print b
                         for item in a: 
                             userInstance.year = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,b[0].SongName)
+                        post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     else:
@@ -574,11 +600,279 @@ def singerQuickreply(fbid):
 
 
 
+def SongSearcher(sender_id):
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
+    arraySinger =[]
+    arrayYear =[]
+    arrayCategory =[]
+    arrayActor =[]
+    arrayLyricist =[]
+    arrayMovie =[]
+
+    for item in userInstance.Singer.all():
+        arraySinger.append(item.Name)
+
+    # for item in userInstance.year.all():
+    #     arrayYear.append(item.Name)
+        
+    for item in userInstance.Category.all():
+        arrayCategory.append(item.Name)
+        
+    for item in userInstance.Cast.all():
+        arrayActor.append(item.Name)
+        
+    for item in userInstance.Lyricist.all():
+        arrayLyricist.append(item.Name)                  
+
+    if userInstance.year:
+        arrayYear.append(userInstance.year)
+    else:
+        pass    
+
+    if userInstance.MovieName:
+        arrayMovie.append(userInstance.MovieName)
+        print  "Im if loop  = " + str(arrayMovie)
+
+
+    else:
+        pass          
+
+    print "arrays of all parameters made"
+
+
+
+    q = Singer.objects.filter(Name__in = arraySinger)
+
+    print "entered singer "
+    print "haha" + str(q)
+    w = Year.objects.filter(Year = userInstance.year)
+    print w
+    print "entered year "
+    y = MovieName.objects.filter(Name = userInstance.MovieName)
+    print y
+    print "entered movie "
+    e = Category.objects.filter(Name__in = arrayCategory)
+    print e
+    print "entered category "
+
+    r = Actor.objects.filter(Name__in = arrayActor)
+    print r
+    print "entered actor "
+    t = Lyricist.objects.filter(Name__in = arrayLyricist)
+    print t
+    print "entered lyricist "
+
+    if arraySinger:
+
+        b = Song.objects.filter(Singer=q) 
+
+
+    else :
+        b =  Song.objects.exclude(Singer=q)
+
+    print "After sorting singers" 
+    print b  
+
+    if arrayYear:
+        print "yes in array year"
+
+        z = b.filter(year=w) 
+
+
+    else :
+        z =  b.exclude(year=w)
+
+    print "After sorting years"     
+    print z    
+
+    if arrayCategory:
+
+        h = z.filter(Category=e) 
+
+
+    else :
+        h =  z.exclude(Category=e)
+
+    print "After sorting category" 
+    print h     
+
+    if arrayActor :
+
+        i = h.filter(Cast=r) 
+
+
+    else :
+        i =  h.exclude(Cast=r)
+
+
+    print "After sorting actor"    
+
+    print i     
+
+    if arrayLyricist :
+
+        a = i.filter(Lyricist=t) 
+
+
+    else :
+        a =  i.exclude(Lyricist=t) 
+
+    print "After sorting Lyricist"     
+
+    print a    
+
+    if arrayMovie :
+
+        c = a.filter(MovieName=y) 
+
+
+    else :
+        c =  a.exclude(MovieName=y)  
+
+    print "After sorting Movie"      
+
+    print c         
 
 
 
 
+    print "best best " + str(c)
 
+    card_data2 = []
+    print a 
+    number = 0
+    for i in a:
+
+        number = number + 1
+        print number
+        print "entered loop"
+        y = i.YoutubeLink
+        # arraySinger = []
+        x = y.split("/")
+        print "x = " + str(x)
+        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+        singerNames = ''
+        for item in i.Singer.all():
+            singerNames = singerNames + str(item) + ' , '
+
+
+        
+        
+        card_data = {
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  } ,
+                 
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+        card_data2.append(card_data) 
+        print "cards appended"   
+        if number == 5:
+            break       
+
+                    
+    response_object = {
+      "recipient": {
+        "id": sender_id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    # print response_object
+
+    return json.dumps(response_object)
+
+
+   
+
+# def cards(fbid, a ):
+
+
+
+#     card_data2 = []
+#     print a 
+#     for i in a:
+#         song_url = i.YoutubeLink
+#         # arraySinger = []
+#         x = song_url.split("https://www.youtube.com/embed/")
+#         song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
+#         singerNames = ''
+#         for item in a.Singer.all():
+#             singerNames = singerNames + item + ' , '
+
+
+        
+        
+#         card_data = {
+#                   "title": i.SongName,
+#                   "subtitle": singerNames,
+#                   "image_url": song_img,
+                  
+#                   "buttons": [
+#                   {
+#                     "type": "postback",
+#                     "payload":"ss" ,  
+#                     "title": "play song"
+#                   },
+#                   # {
+#                   #   "type": "web_url",
+#                   #   "url": i.menu_url,  
+#                   #   "title": "See Menu"
+#                   # },
+#                   {
+#                     "type": "element_share"
+#                    }
+#                    ]
+#                    }
+
+#         card_data2.append(card_data)           
+
+                    
+#     response_object = {
+#       "recipient": {
+#         "id": fbid
+#       },
+#       "message": {
+#         "attachment": {
+#           "type": "template",
+#           "payload": {
+#             "template_type": "generic",
+#             "elements": card_data2
+#                 }
+#             }
+#         }
+#     }
+
+#     print json.dumps(response_object)
+
+#     # print response_object
+
+#     return json.dumps(response_object)
 
 
 

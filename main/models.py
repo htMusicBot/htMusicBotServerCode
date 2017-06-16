@@ -87,7 +87,6 @@ class UserData(models.Model):
     Fbid = models.CharField(max_length = 250)
     State = models.CharField(max_length = 250 , default = 'NULL')
     Cast  = models.ManyToManyField(Actor, null = True)
-
     Singer = models.ManyToManyField(Singer, null = True)
 
     Lyricist = models.ManyToManyField(Lyricist, null = True)
