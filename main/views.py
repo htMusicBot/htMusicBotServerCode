@@ -124,6 +124,7 @@ class MyChatBotView(generic.View):
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
+                        
                         print "singer name saved to user data"
 
                         # SongSearcher(sender_id)
