@@ -54,6 +54,9 @@ def post_facebook_message(fbid,message_text):
     if message_text == 'singerQuickreply':
         response_msg = singerQuickreply(fbid)
 
+    elif message_text == 'menu_cards':
+        response_msg = SongSearcher(fbid)     
+
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
 
@@ -674,22 +677,77 @@ def SongSearcher(sender_id):
 
     if arrayLyricist :
 
-        l = i.filter(Lyricist=t) 
+        a = i.filter(Lyricist=t) 
 
 
     else :
-        l =  i.exclude(Lyricist=t)    
+        a =  i.exclude(Lyricist=t)    
 
 
 
 
     print "best best " + str(l)
 
-    cards(sender_id , l)
-    # post_facebook_message(sender_id,b[0].SongName)
-    # for item in l:
+    card_data2 = []
+    print a 
+    for i in a:
+        song_url = i.YoutubeLink
+        # arraySinger = []
+        x = song_url.split("https://www.youtube.com/embed/")
+        song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
+        singerNames = ''
+        for item in a.Singer.all():
+            singerNames = singerNames + item + ' , '
 
-    #     post_facebook_message(sender_id,item.YoutubeLink)
+
+        
+        
+        card_data = {
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type": "postback",
+                    "payload":i.payload ,  
+                    "title": "Book a Table"
+                  },
+                  {
+                    "type": "web_url",
+                    "url": i.menu_url,  
+                    "title": "See Menu"
+                  },
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+        card_data2.append(card_data)           
+
+                    
+    response_object = {
+      "recipient": {
+        "id": fbid
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+    print json.dumps(response_object)
+
+    # print response_object
+
+    return json.dumps(response_object)
+
 
    
 
