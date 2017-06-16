@@ -684,10 +684,12 @@ def SongSearcher(sender_id):
 
 
     print "best best " + str(l)
-    # post_facebook_message(sender_id,b[0].SongName)
-    for item in l:
 
-        post_facebook_message(sender_id,item.YoutubeLink)
+    cards(sender_id , l)
+    # post_facebook_message(sender_id,b[0].SongName)
+    # for item in l:
+
+    #     post_facebook_message(sender_id,item.YoutubeLink)
 
    
 
@@ -697,12 +699,21 @@ def cards(fbid, a ):
 
     card_data2 = []
     for i in a:
+        song_url = i.YoutubeLink
+        # arraySinger = []
+        x = song_url.split("https://www.youtube.com/embed/")
+        song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
+        singerNames = ''
+        for item in a.Singer.all():
+            singerNames = singerNames + item + ' , '
+
+
         
         
         card_data = {
                   "title": i.SongName,
-                  "subtitle": i.description,
-                  "image_url": i.image_url,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
                   
                   "buttons": [
                   {
