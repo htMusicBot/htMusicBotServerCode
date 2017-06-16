@@ -675,6 +675,7 @@ def SongSearcher(sender_id):
     print b  
 
     if arrayYear:
+        print "yes in array year"
 
         z = b.filter(year=w) 
 
