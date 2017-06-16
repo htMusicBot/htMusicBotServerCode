@@ -698,7 +698,7 @@ def SongSearcher(sender_id):
         print "x = " + str(x)
         song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
         singerNames = ''
-        for item in a.Singer.all():
+        for item in i.Singer.all():
             singerNames = singerNames + item + ' , '
 
 
