@@ -54,7 +54,7 @@ def post_facebook_message(fbid,message_text):
     if message_text == 'singerQuickreply':
         response_msg = singerQuickreply(fbid)
 
-    elif message_text == 'menu_cards':
+    elif message_text == 'cards':
         response_msg = SongSearcher(fbid)     
 
     else:
@@ -125,7 +125,8 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         print "singer name saved to user data"
 
-                        SongSearcher(sender_id)
+                        # SongSearcher(sender_id)
+                        post_facebook_message(sender_id,'cards')
 
                         post_facebook_message(sender_id,'singerQuickreply')
 
@@ -699,7 +700,7 @@ def SongSearcher(sender_id):
         song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
         singerNames = ''
         for item in i.Singer.all():
-            singerNames = singerNames + item + ' , '
+            singerNames = singerNames + str(item) + ' , '
 
 
         
@@ -726,7 +727,8 @@ def SongSearcher(sender_id):
                    ]
                    }
 
-        card_data2.append(card_data)           
+        card_data2.append(card_data) 
+        print "cards appended"          
 
                     
     response_object = {
@@ -743,6 +745,8 @@ def SongSearcher(sender_id):
             }
         }
     }
+
+    print "response dumped"
 
     print json.dumps(response_object)
 
