@@ -607,6 +607,7 @@ def SongSearcher(sender_id):
     arrayCategory =[]
     arrayActor =[]
     arrayLyricist =[]
+    arrayMovie =[]
 
     for item in userInstance.Singer.all():
         arraySinger.append(item.Name)
@@ -623,6 +624,16 @@ def SongSearcher(sender_id):
     for item in userInstance.Lyricist.all():
         arrayLyricist.append(item.Name)                  
 
+    if userInstance.year:
+        arrayYear.append(userInstance.year)
+    else:
+        pass    
+
+    if userInstance.MovieName:
+        arrayMovie.append(userInstance.MovieName) 
+    else:
+        pass          
+
     print "arrays of all parameters made"
 
 
@@ -634,9 +645,13 @@ def SongSearcher(sender_id):
     w = Year.objects.filter(Year = userInstance)
     print w
     print "entered year "
+    y = MovieName.objects.filter(Name__in = userInstance)
+    print y
+    print "entered movie "
     e = Category.objects.filter(Name__in = arrayCategory)
     print e
     print "entered category "
+
     r = Actor.objects.filter(Name__in = arrayActor)
     print r
     print "entered actor "
@@ -682,7 +697,15 @@ def SongSearcher(sender_id):
 
 
     else :
-        a =  i.exclude(Lyricist=t)    
+        a =  i.exclude(Lyricist=t) 
+
+    if arrayMovie :
+
+        c = i.filter(MovieName=y) 
+
+
+    else :
+        c =  i.exclude(MovieName=y)       
 
 
 
