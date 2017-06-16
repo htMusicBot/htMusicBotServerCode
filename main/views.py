@@ -645,7 +645,7 @@ def SongSearcher(sender_id):
     w = Year.objects.filter(Year = userInstance)
     print w
     print "entered year "
-    y = MovieName.objects.filter(Name__in = userInstance)
+    y = MovieName.objects.filter(Name = userInstance)
     print y
     print "entered movie "
     e = Category.objects.filter(Name__in = arrayCategory)
