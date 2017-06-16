@@ -691,9 +691,11 @@ def SongSearcher(sender_id):
     card_data2 = []
     print a 
     for i in a:
+        print "entered loop"
         song_url = i.YoutubeLink
         # arraySinger = []
         x = song_url.split("https://www.youtube.com/embed/")
+        print "x = " + str(x)
         song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
         singerNames = ''
         for item in a.Singer.all():
