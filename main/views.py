@@ -713,14 +713,10 @@ def SongSearcher(sender_id):
                   "buttons": [
                   {
                     "type": "postback",
-                    "payload":i.payload ,  
-                    "title": "Book a Table"
+                    "payload":"Ss" ,  
+                    "title": "Play song"
                   },
-                  {
-                    "type": "web_url",
-                    "url": i.menu_url,  
-                    "title": "See Menu"
-                  },
+                 /
                   {
                     "type": "element_share"
                    }
