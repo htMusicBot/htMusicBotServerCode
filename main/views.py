@@ -99,6 +99,7 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
+                        userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
                         # post_facebook_message(sender_id,'You can send all 4 or any one of them its up to you ')
