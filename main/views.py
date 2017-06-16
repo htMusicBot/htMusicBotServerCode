@@ -630,7 +630,10 @@ def SongSearcher(sender_id):
         pass    
 
     if userInstance.MovieName:
-        arrayMovie.append(userInstance.MovieName) 
+        arrayMovie.append(userInstance.MovieName)
+        print  "Im if loop  = " + str(arrayMovie)
+
+
     else:
         pass          
 
@@ -642,10 +645,10 @@ def SongSearcher(sender_id):
 
     print "entered singer "
     print "haha" + str(q)
-    w = Year.objects.filter(Year = userInstance)
+    w = Year.objects.filter(Year = userInstance.year)
     print w
     print "entered year "
-    y = MovieName.objects.filter(Name = userInstance)
+    y = MovieName.objects.filter(Name = userInstance.)
     print y
     print "entered movie "
     e = Category.objects.filter(Name__in = arrayCategory)
