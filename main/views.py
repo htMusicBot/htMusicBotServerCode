@@ -766,10 +766,11 @@ def SongSearcher(sender_id):
                   
                   "buttons": [
                   {
-                    "type": "postback",
-                    "payload":"Ss" ,  
-                    "title": "Play song"
-                  },
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  }
                  
                   {
                     "type": "element_share"
