@@ -102,7 +102,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='songName':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         b = Song.objects.filter(SongName__contains = message_text) 
                         for item in b:
@@ -111,7 +111,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='singer':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
@@ -132,7 +132,7 @@ class MyChatBotView(generic.View):
 
 
                     elif userInstance.State=='lyricist':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
@@ -148,7 +148,7 @@ class MyChatBotView(generic.View):
 
                     
                     elif userInstance.State=='movieName':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = MovieName.objects.filter(Name__contains = message_text)
                         # print a 
@@ -165,7 +165,7 @@ class MyChatBotView(generic.View):
 
 
                     elif userInstance.State=='cast':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
@@ -180,7 +180,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='category':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
@@ -196,7 +196,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'singerQuickreply')
 
                     elif userInstance.State=='year':
-                        userInstance.State=='NULL'
+                        userInstance.State='NULL'
                         userInstance.save()
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
@@ -654,7 +654,7 @@ def SongSearcher(sender_id):
 
 
     else :
-        z =  b.exclude(Singer=w)
+        z =  b.exclude(year=w)
 
     if arrayCategory:
 
