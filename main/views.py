@@ -783,14 +783,14 @@ def cards(fbid, a ):
                   "buttons": [
                   {
                     "type": "postback",
-                    "payload":i.payload ,  
-                    "title": "Book a Table"
+                    "payload":"ss" ,  
+                    "title": "play song"
                   },
-                  {
-                    "type": "web_url",
-                    "url": i.menu_url,  
-                    "title": "See Menu"
-                  },
+                  # {
+                  #   "type": "web_url",
+                  #   "url": i.menu_url,  
+                  #   "title": "See Menu"
+                  # },
                   {
                     "type": "element_share"
                    }
