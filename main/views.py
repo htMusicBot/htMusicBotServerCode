@@ -155,10 +155,10 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         a = MovieName.objects.filter(Name__contains = message_text)
-                        # print a 
-                        
-                        # print b 
+                        print a
                         for item in a:
+                            print "in movie loop "
+                            print item
                             userInstance.MovieName = item
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
