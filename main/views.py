@@ -687,11 +687,63 @@ def SongSearcher(sender_id):
     # post_facebook_message(sender_id,b[0].SongName)
     for item in l:
 
-        post_facebook_message(sender_id,item.SongName)
+        post_facebook_message(sender_id,item.YoutubeLink)
 
    
 
+def cards(fbid, a ):
 
+
+
+    card_data2 = []
+    for i in a:
+        
+        
+        card_data = {
+                  "title": i.SongName,
+                  "subtitle": i.description,
+                  "image_url": i.image_url,
+                  
+                  "buttons": [
+                  {
+                    "type": "postback",
+                    "payload":i.payload ,  
+                    "title": "Book a Table"
+                  },
+                  {
+                    "type": "web_url",
+                    "url": i.menu_url,  
+                    "title": "See Menu"
+                  },
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+        card_data2.append(card_data)           
+
+                    
+    response_object = {
+      "recipient": {
+        "id": fbid
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+    print json.dumps(response_object)
+
+    # print response_object
+
+    return json.dumps(response_object)
 
 
 
