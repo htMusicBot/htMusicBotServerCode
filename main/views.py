@@ -698,6 +698,7 @@ def cards(fbid, a ):
 
 
     card_data2 = []
+    print a 
     for i in a:
         song_url = i.YoutubeLink
         # arraySinger = []
