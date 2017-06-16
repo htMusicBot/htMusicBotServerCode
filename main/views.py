@@ -770,7 +770,7 @@ def SongSearcher(sender_id):
                     "type":"web_url",
                     "url":i.YoutubeLink,
                     "title":"Play song",
-                    "webview_height_ratio": "compact"
+                    "webview_height_ratio": "full"
                   } ,
                  
                   {
