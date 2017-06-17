@@ -770,7 +770,7 @@ def SongSearcher(sender_id):
                     "type":"web_url",
                     # "url":i.YoutubeLink
 
-                    "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19369562_1220354754740487_813152105_n.jpg?oh=514786917903a8a4bd156c3e8033f302&oe=5946A986",
+                    "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t35.0-12/19349215_1536638879699681_736107868_o.png?oh=e22619671e01c373e188b58a1c7da2f3&oe=59478E3A",
                     "title":"Play song",
                     "webview_height_ratio": "full"
                   } ,
