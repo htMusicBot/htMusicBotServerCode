@@ -60,8 +60,7 @@ def post_facebook_message(fbid,message_text):
     elif message_text == 'ACards':
         response_msg = afterSongQuickreply(fbid)
 
-    elif message_text == 'matching_quickreplies':
-        response_msg = matching_quickreplies(fbid)         
+        
 
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
