@@ -925,26 +925,31 @@ def matching_quickreplies(input_string , data , sender_id) :
                                 "payload":match
                               }
 
-
-
             quickreply_array.append(quickreply_data)
-            response_object =   {
-                          "recipient":{
-                            "id":fbid
-                          },
-                          "message":{
-                            "text":"Did you mean?",
-                            "quick_replies":quickreply_array
-                          }
-                        }
-            x = json.dumps(response_object)
-            post_facebook_message(sender_id,match)
+
+            print "this is array " + str(quickreply_array)
+
+
+
+    
+            # post_facebook_message(sender_id,match)
             a = a+1
 
         elif a==0 :
             print "no match found" 
             post_facebook_message(sender_id,"No  matches found")    
-            break   
+            break 
+
+        response_object =   {
+                  "recipient":{
+                    "id":fbid
+                  },
+                  "message":{
+                    "text":"Did you mean?",
+                    "quick_replies":quickreply_array
+                  }
+                }
+    x = json.dumps(response_object)      
 
     return x
 
