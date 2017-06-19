@@ -950,7 +950,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                   }
                 }
 
-    print "response object"           
+    print response_object         
     x = json.dumps(response_object)      
 
     return x
