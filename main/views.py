@@ -168,6 +168,8 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='lyricist':
                         userInstance.State='NULL'
                         userInstance.save()
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Lyricist.objects.all() , message_text)
+
                         message_text = message_text.title()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
@@ -178,8 +180,8 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
 
                     
                     elif userInstance.State=='movieName':
@@ -204,6 +206,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Actor.objects.all() , message_text)
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
                         
@@ -220,6 +223,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        # post_matching_quickreplies(sender_id , "matching_quickreplies" , Category.objects.all() , message_text)
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
                        
