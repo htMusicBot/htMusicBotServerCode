@@ -79,7 +79,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
         print "above" + str(response_msg)    
 
     if message_text == 'songs_cards':
-        response_msg = songs_cards(fbid ,data)
+        response_msg = songs_cards(fbid ,data,input_string)
 
 
 
@@ -141,7 +141,7 @@ class MyChatBotView(generic.View):
                         b = Song.objects.filter(SongName__contains = message_text) 
                         
 
-                        post_matching_quickreplies(sender_id, "songs_cards" ,b , "null string")
+                        post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
                         # post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='singer':
