@@ -186,7 +186,6 @@ class MyChatBotView(generic.View):
                     
                     elif userInstance.State=='movieName':
                         userInstance.State='matchMovie'
-                        userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
@@ -194,7 +193,7 @@ class MyChatBotView(generic.View):
 
                     elif userInstance.State=='matchMovie':
                         userInstance.State='NULL'
-                        print "entered movies"
+                        print "entered matched movies"
                         print message_text
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
