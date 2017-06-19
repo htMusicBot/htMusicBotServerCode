@@ -828,7 +828,8 @@ def matching_algo(input_string , data , sender_id) :
 
     matches = []
     for i in range(3):
-        a.index(max(a))>0.5:
+
+        if a.index(max(a))>0.5:
 
             match = data[a.index(max(a))].Name
             
@@ -840,8 +841,10 @@ def matching_algo(input_string , data , sender_id) :
             print match
             post_facebook_message(sender_id,match)
 
-    else:
-        print "no match found"        
+        else:
+        print "no match found" 
+        post_facebook_message(sender_id,"No match found")    
+        break   
 
     return matches
 
