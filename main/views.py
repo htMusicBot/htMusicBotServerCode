@@ -69,6 +69,7 @@ def post_facebook_message(fbid,message_text):
     requests.post(post_message_url, 
                     headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
                     data=response_msg)
+    
 def post_matching_quickreplies(fbid,message_text , data , input_string):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
@@ -138,7 +139,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
+                        # post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
                         # matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
