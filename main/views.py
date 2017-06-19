@@ -979,7 +979,8 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 def songs_cards(sender_id , data , input_string):
     a = []
-    for i in data:
+    for i in Song.objects.all():
+
         print "i am data" + str(i.SongName)
         s = difflib.SequenceMatcher(None, i.SongName, input_string).ratio()
         a.append(s)
