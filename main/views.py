@@ -139,7 +139,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        # post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
                         # matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
@@ -152,9 +152,9 @@ class MyChatBotView(generic.View):
                         print "singer name saved to user data"
 
                         # SongSearcher(sender_id)
-                        post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'cards')
 
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'ACards')
 
 
 
