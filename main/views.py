@@ -204,8 +204,8 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'cards')
                         # post_facebook_message(sender_id,'ACards')
 
-                    elif userInstance.State=='movieName':
-                        userInstance.State='matchMovie'
+                    elif userInstance.State=='matchMovie':
+                        userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
