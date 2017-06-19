@@ -815,11 +815,12 @@ def SongSearcher(sender_id):
    
 
 def matching_algo(input_string , data , sender_id) :
+
     for item in data:
-        print item
+        print "i am data" + str(item.Name)
 
         a = []
-        s = difflib.SequenceMatcher(None, item, input_string).ratio()
+        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
         a.append(s)
 
 
