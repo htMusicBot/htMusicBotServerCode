@@ -940,7 +940,7 @@ def matching_algo(input_string , data , sender_id) :
             post_facebook_message(sender_id,match)
             a = a+1
 
-        else if a==0 :
+        elif a==0 :
             print "no match found" 
             post_facebook_message(sender_id,"No  matches found")    
             break   
