@@ -927,7 +927,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             quickreply_array.append(quickreply_data)
 
-            print "this is array " + str(quickreply_array)
+            
 
 
 
@@ -939,14 +939,14 @@ def matching_quickreplies(input_string , data , sender_id) :
         #     print "no match found" 
         #     # post_facebook_message(sender_id,"No  matches found")    
         #     break 
-
+    print "this is array " + str(quickreply_array)
     response_object =   {
                   "recipient":{
                     "id":sender_id
                   },
                   "message":{
                     "text":"Did you mean?",
-                    "quick_replies":"quickreply_array"
+                    "quick_replies":quickreply_array
                   }
                 }
     x = json.dumps(response_object)      
