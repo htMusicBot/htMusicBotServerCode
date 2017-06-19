@@ -891,7 +891,7 @@ def SongSearcher(sender_id):
 
    
 
-def matching_algo(input_string , data , sender_id) :
+def matching_quickreplies(input_string , data , sender_id) :
     a = []
     for item in data:
         print "i am data" + str(item.Name)
