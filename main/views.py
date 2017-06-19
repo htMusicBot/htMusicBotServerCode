@@ -139,6 +139,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         message_text = message_text.title()
                         b = Song.objects.all() 
+                        print b 
                         
 
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
@@ -1001,7 +1002,7 @@ def songs_cards(sender_id , data , input_string):
 
                 a.remove(max(a))
 
-                print match
+                # print match
                 
 
                 y = i.YoutubeLink
