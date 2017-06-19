@@ -79,7 +79,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
         print "above" + str(response_msg)    
 
     if message_text == 'songs_cards':
-        response_msg = songs_cards(fbid ,data,input_string)
+        response_msg = songs_cards(fbid ,data)
 
 
 
@@ -978,77 +978,60 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 def songs_cards(sender_id , data):
     a = []
-    for item in data:
-        print "i am data" + str(item.SongName)
+    for i in data:
+        print "i am data" + str(i.SongName)
 
       
-        s = difflib.SequenceMatcher(None, item.SongName, input_string).ratio()
-        a.append(s)
-        print s 
 
-    print a     
-
-    card_data2 = []
-    w =0
-    for i in range(3):
-
-        if max(a)>0.3:
-            print "this is max ratio" + str(a.index(max(a)))
-
-            match = data[a.index(max(a))].Name
-            
-
-            matches.append(match)
-
-            a.remove(max(a))
-
-            print match
-
-            y = i.YoutubeLink
-        # arraySinger = []
-            x = y.split("/")
-            print "x = " + str(x)
-            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-            singerNames = ''
-            for item in i.Singer.all():
-                singerNames = singerNames + str(item) + ' , '
-
-                card_data = {
-                      "title": i.SongName,
-                      "subtitle": singerNames,
-                      "image_url": song_img,
-                      
-                      "buttons": [
-                      {
-                        "type":"web_url",
-                        "url":i.YoutubeLink,
-
-                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                        "title":"Play song",
-                        "webview_height_ratio": "compact"
-                      } ,
-                     
-                      {
-                        "type": "element_share"
-                       }
-                       ]
-                       }
-
-                card_data2.append(card_data) 
+        card_data2 = []
+        # print "this is max ratio" + str(a.index(max(a)))
 
 
-                w = w+1
+        y = i.YoutubeLink
+    # arraySinger = []
+        x = y.split("/")
+        print "x = " + str(x)
+        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+        singerNames = ''
+        for item in i.Singer.all():
+            singerNames = singerNames + str(item) + ' , '
 
-   
-        
+            card_data = {
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
+
+                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  } ,
+                 
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+            card_data2.append(card_data) 
 
 
-        
-        
-        
-                print "cards appended"   
-                if w == 3:
-                    break       
+            w = w+1
+
+
+    
+
+
+    
+    
+    
+            print "cards appended"   
+            if w == 3:
+                break       
 
                         
     response_object = {
