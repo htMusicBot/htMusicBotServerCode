@@ -80,7 +80,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
     
 
     requests.post(post_message_url, 
-                    headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
+                    headers={"Content-Type": "application /json"},
                     data=response_msg)
 
 
