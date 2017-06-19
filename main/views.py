@@ -839,7 +839,7 @@ def matching_algo(input_string , data , sender_id) :
             print match
             post_facebook_message(sender_id,match)
 
-    if not a:
+    else:
         post_facebook_message(sender_id,"sorry no match found")
                 
 
