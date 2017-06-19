@@ -145,25 +145,22 @@ class MyChatBotView(generic.View):
                         # post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='singer':
-                        userInstance.State='NULL'
+                        userInstance.State='matchSinger'
                         userInstance.save()
                         message_text = message_text.title()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
-                        # matching_algo(message_text , Singer.objects.all() , sender_id)
+
+                    elif userInstance.State=='matchSinger':
+                        userInstance.State='NULL'
+                        userInstance.save()
+                        message_text = message['message']['quick_reply']['payload']
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
-                        
-                        # print b 
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
-
-                        print "singer name saved to user data"
-
-                        # SongSearcher(sender_id)
-                        # post_facebook_message(sender_id,'cards')
-
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
 
 
@@ -171,61 +168,64 @@ class MyChatBotView(generic.View):
 
 
                     elif userInstance.State=='lyricist':
-                        userInstance.State='NULL'
+                        userInstance.State='matchLyricist'
                         userInstance.save()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Lyricist.objects.all() , message_text)
+                        userInstance.save()
 
-                        message_text = message_text.title()
+                    elif userInstance.State=='matchLyricist':
+                        userInstance.State='NULL'
+                        userInstance.save()
+                        message_text = message['message']['quick_reply']['payload']
                         a = Lyricist.objects.filter(Name__contains = message_text)
-                        # print a 
-                        
-                        # print b 
                         for item in a:
                             userInstance.Lyricist.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     
                     elif userInstance.State=='movieName':
-                        userInstance.State='NULL'
-                        userInstance.save()
+                        userInstance.State='matchMovie'
                         message_text = message_text.title()
                         print "entered movies"
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
+                        userInstance.save()
+
+                    elif userInstance.State=='matchMovie':
+                        userInstance.State='NULL'
+                        print "entered matched movies"
                         print message_text
+                        message_text = message['message']['quick_reply']['payload']
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
                         for item in a:
                             print "in movie loop "
                             print item
                             userInstance.MovieName = item
-                        # userInstance.Singer.add(a[0])
                         userInstance.save()
-                        # c = random.shuffle(b)
-                        # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
-
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='cast':
-                        userInstance.State='NULL'
+                        userInstance.State='matchCast'
                         userInstance.save()
                         message_text = message_text.title()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Actor.objects.all() , message_text)
-                        a = Actor.objects.filter(Name__contains = message_text)
-                        # print a 
                         
-                        # print b 
+
+                    elif userInstance.State=='matchCast':
+                        userInstance.State='NULL'
+                        message_text = message['message']['quick_reply']['payload']
+                        a = Actor.objects.filter(Name__contains = message_text)
                         for item in a:
                             userInstance.Cast.add(item)
-                        # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='category':
                         userInstance.State='NULL'
@@ -619,9 +619,6 @@ def handle_quickreply(fbid,payload):
         return post_facebook_message(sender_id,'singerQuickreply')
 
 
-
-
-
 def singerQuickreply(fbid):
     
     response_object =   {
@@ -672,7 +669,6 @@ def singerQuickreply(fbid):
     return json.dumps(response_object)
 
 
-
 def afterSongQuickreply(fbid):
     
     response_object =   {
@@ -689,7 +685,7 @@ def afterSongQuickreply(fbid):
                               },
                               {
                                 "content_type":"text",
-                                "title":"🎬 Filer More",
+                                "title":"🎬 Filter More",
                                 "payload":"filter"
                               },
                               {
@@ -701,10 +697,6 @@ def afterSongQuickreply(fbid):
                           }
                         }
     return json.dumps(response_object)
-
-
-
-
 
 
 def SongSearcher(sender_id):
@@ -915,9 +907,7 @@ def SongSearcher(sender_id):
     # print response_object
 
     return json.dumps(response_object)
-
-
-   
+ 
 
 def matching_quickreplies(input_string , data , sender_id) :
     a = []
@@ -1095,10 +1085,99 @@ def songs_cards(sender_id , data):
 
 
 
+def setMenu():
+    response_object = {
+                        "persistent_menu":[
+                        {
+                          "locale":"default",
+                          # "composer_input_disabled":False,
+                          "call_to_actions":[
+                            {
+                              "title":"EZYCV",
+                              "type":"nested",
+                              "call_to_actions":[
+                                                {
+                                                  "type":"postback",
+                                                  "title":"Reset everything",
+                                                  "payload":"RESET"
+                                                },
+                                                
+                                                
+                                                {
+                                                  "type":"postback",
+                                                  "title":"Personal Details ",
+                                                  "payload":"DETAILS"
+                                                },
+                                                {
+                                                  "type":"postback",
+                                                  "title":"Work",
+                                                  "payload":"WORK"
+                                                },
+                                                {
+                                                  "type":"postback",
+                                                  "title": "See Templates",
+                                                  "payload":"TEMPLATES"
+                                                },
+                                                {
+                                                  "type":"postback",
+                                                  "title":"Feedback",
+                                                  "payload":"FEEDBACK"
+                                                },
+                              ]
+                            },
+                            {
+                              "type":"web_url",
+                              "title":"Our Website",
+                              "url":"http://ezycv.github.io",
+                              "webview_height_ratio":"full"
+                            }
+                          ]
+                        },
+                        
+                      ]
+                    }                    
+
+    
+
+    menu_object = json.dumps(response_object)
+    status = requests.post(post_message_url,
+          headers = {"Content-Type": "application/json"},
+          data = menu_object)
 
 
+def greetingText():
+    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=%s'%PAGE_ACCESS_TOKEN
+   
+    response_object =   {
+         "setting_type":"greeting",
+             "greeting":{
+             "text":"Hey Welcome to music bot "
+                }
+            }
+
+    menu_object = json.dumps(response_object)
+    status = requests.post(post_message_url,
+          headers = {"Content-Type": "application/json"},
+          data = menu_object)
 
 
+def greetingButton():
+    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=%s'%PAGE_ACCESS_TOKEN
+    
+    response_object =   {
+        "setting_type":"call_to_actions",
+        "thread_state":"new_thread",
+        "call_to_actions":[
+        {
+            "payload":"STARTING"
+            }
+        ]
+        }
+
+    menu_object = json.dumps(response_object)
+    status = requests.post(post_message_url,
+          headers = {"Content-Type": "application/json"},
+          data = menu_object)
 
 
 
