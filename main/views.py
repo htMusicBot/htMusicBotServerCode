@@ -189,6 +189,7 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
                         print message_text
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
@@ -200,8 +201,8 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
 
 
                     elif userInstance.State=='cast':
@@ -915,7 +916,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     matches = []
     quickreply_array = []
-    # a =0
+    a =0
     for i in range(3):
 
         if max(a)>0.3:
@@ -943,12 +944,12 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     
             # post_facebook_message(sender_id,match)
-            # a = a+1
+            a = a+1
 
-        # elif a==0 :
-        #     print "no match found" 
-        #     # post_facebook_message(sender_id,"No  matches found")    
-        #     break 
+        elif a==0 :
+            print "no match found" 
+            post_facebook_message(sender_id,"No  matches found")    
+            break 
     print "this is array " + str(quickreply_array)
     response_object =   {
                   "recipient":{
