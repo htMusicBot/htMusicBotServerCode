@@ -58,13 +58,29 @@ def post_facebook_message(fbid,message_text):
         response_msg = SongSearcher(fbid)
 
     elif message_text == 'ACards':
-        response_msg = afterSongQuickreply(fbid)     
+        response_msg = afterSongQuickreply(fbid)
+
+    elif message_text == 'matching_quickreplies':
+        response_msg = matching_quickreplies(fbid)         
 
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
 
     requests.post(post_message_url, 
-                    headers={"Content-Type": "application/json"},
+                    headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
+                    data=response_msg)
+def post_matching_quickreplies(fbid,message_text , data , input_string):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+
+   
+
+    if message_text == 'matching_quickreplies':
+        response_msg = matching_quickreplies(input_string, data ,fbid)         
+
+    
+
+    requests.post(post_message_url, 
+                    headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
                     data=response_msg)
 
 
@@ -122,7 +138,8 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        matching_algo(message_text , Singer.objects.all() , sender_id)
+                        post_matching_quickreplies(message_text , Singer.objects.all() , sender_id)
+                        # matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -480,22 +497,22 @@ def GetNextURL(url):
     return next_url
 
 
-def matching_algo(input_string , data) :
-    for item in data:
+# def matching_algo(input_string , data) :
+#     for item in data:
 
-        a = []
-        s = difflib.SequenceMatcher(None, item, input_string).ratio()
-        a.append(s)
+#         a = []
+#         s = difflib.SequenceMatcher(None, item, input_string).ratio()
+#         a.append(s)
 
 
-    for i in range(3):
-        match = data[a.index(max(a))]
-        matches = []
-        matches.append(match)
+#     for i in range(3):
+#         match = data[a.index(max(a))]
+#         matches = []
+#         matches.append(match)
 
-        a.remove(max(a))
+#         a.remove(max(a))
 
-    return matches
+#     return matches
 
 
 def doubleParameterQuery(requests):
@@ -886,6 +903,8 @@ def matching_algo(input_string , data , sender_id) :
     print a     
 
     matches = []
+    quickreply_array = []
+    a =0
     for i in range(3):
 
         if max(a)>0.5:
@@ -899,14 +918,37 @@ def matching_algo(input_string , data , sender_id) :
             a.remove(max(a))
 
             print match
-            post_facebook_message(sender_id,match)
+            quickreply_data = {
+                                "content_type":"text",
+                                "title":match,
+                                "payload":match
+                              }
 
-        else:
+
+
+            quickreply_array.append(quickreply_data)
+            response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":"Did you mean?",
+                            "quick_replies":quickreply_array
+                          }
+                        }
+            x = json.dumps(response_object)
+            post_facebook_message(sender_id,match)
+            a = a+1
+
+        else if a==0 :
             print "no match found" 
-            post_facebook_message(sender_id,"No match found")    
+            post_facebook_message(sender_id,"No  matches found")    
             break   
 
-    return matches
+    return x
+
+
+
 
 
 
