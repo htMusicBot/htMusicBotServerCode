@@ -69,19 +69,19 @@ def post_facebook_message(fbid,message_text):
                     headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
                     data=response_msg)
 
-def post_matching_quickreplies(fbid,message_text , data , input_string):
-    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+# def post_matching_quickreplies(fbid,message_text , data , input_string):
+#     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
    
 
-    if message_text == 'matching_quickreplies':
-        response_msg = matching_quickreplies(input_string, data ,fbid)         
+#     if message_text == 'matching_quickreplies':
+#         response_msg = matching_quickreplies(input_string, data ,fbid)         
 
     
 
-    requests.post(post_message_url, 
-                    headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
-                    data=response_msg)
+#     requests.post(post_message_url, 
+#                     headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
+#                     data=response_msg)
 
 
 class MyChatBotView(generic.View):
