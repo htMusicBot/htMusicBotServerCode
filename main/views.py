@@ -117,6 +117,7 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='singer':
                         userInstance.State='NULL'
                         userInstance.save()
+                        matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -813,72 +814,26 @@ def SongSearcher(sender_id):
 
    
 
-# def cards(fbid, a ):
+def matching_algo(input_string , data , sender_id) :
+    for item in data:
+        print item
+
+        a = []
+        s = difflib.SequenceMatcher(None, item, input_string).ratio()
+        a.append(s)
 
 
+    for i in range(3):
+        match = data[a.index(max(a))]
+        matches = []
+        matches.append(match)
 
-#     card_data2 = []
-#     print a 
-#     for i in a:
-#         song_url = i.YoutubeLink
-#         # arraySinger = []
-#         x = song_url.split("https://www.youtube.com/embed/")
-#         song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
-#         singerNames = ''
-#         for item in a.Singer.all():
-#             singerNames = singerNames + item + ' , '
+        a.remove(max(a))
 
+        print match
+        post_facebook_message(sender_id,match)
 
-        
-        
-#         card_data = {
-#                   "title": i.SongName,
-#                   "subtitle": singerNames,
-#                   "image_url": song_img,
-                  
-#                   "buttons": [
-#                   {
-#                     "type": "postback",
-#                     "payload":"ss" ,  
-#                     "title": "play song"
-#                   },
-#                   # {
-#                   #   "type": "web_url",
-#                   #   "url": i.menu_url,  
-#                   #   "title": "See Menu"
-#                   # },
-#                   {
-#                     "type": "element_share"
-#                    }
-#                    ]
-#                    }
-
-#         card_data2.append(card_data)           
-
-                    
-#     response_object = {
-#       "recipient": {
-#         "id": fbid
-#       },
-#       "message": {
-#         "attachment": {
-#           "type": "template",
-#           "payload": {
-#             "template_type": "generic",
-#             "elements": card_data2
-#                 }
-#             }
-#         }
-#     }
-
-#     print json.dumps(response_object)
-
-#     # print response_object
-
-#     return json.dumps(response_object)
-
-
-
+    return matches
 
 
 
