@@ -58,7 +58,9 @@ def post_facebook_message(fbid,message_text):
         response_msg = SongSearcher(fbid)
 
     elif message_text == 'ACards':
-        response_msg = afterSongQuickreply(fbid)     
+        response_msg = afterSongQuickreply(fbid)
+
+        
 
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
@@ -66,6 +68,24 @@ def post_facebook_message(fbid,message_text):
     requests.post(post_message_url, 
                     headers={"Content-Type": "application/json"},
                     data=response_msg)
+
+def post_matching_quickreplies(fbid,message_text , data , input_string):
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+
+   
+
+    if message_text == 'matching_quickreplies':
+        response_msg = matching_quickreplies(input_string, data ,fbid)
+        print "above" + str(response_msg)    
+
+
+    requests.post(post_message_url, 
+                    headers={"Content-Type": "application/json"},
+                    data=response_msg)         
+
+    
+
+
 
 
 class MyChatBotView(generic.View):
@@ -100,6 +120,7 @@ class MyChatBotView(generic.View):
 
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
+                        print "entered in hi "
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
                         userInstance.delete()
@@ -122,7 +143,8 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        matching_algo(message_text , Singer.objects.all() , sender_id)
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
+                        # matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -134,9 +156,9 @@ class MyChatBotView(generic.View):
                         print "singer name saved to user data"
 
                         # SongSearcher(sender_id)
-                        post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'cards')
 
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'ACards')
 
 
 
@@ -146,6 +168,8 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='lyricist':
                         userInstance.State='NULL'
                         userInstance.save()
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Lyricist.objects.all() , message_text)
+
                         message_text = message_text.title()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
@@ -156,14 +180,17 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
 
                     
                     elif userInstance.State=='movieName':
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        print "entered movies"
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
+                        print message_text
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
                         for item in a:
@@ -174,14 +201,15 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
 
 
                     elif userInstance.State=='cast':
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Actor.objects.all() , message_text)
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
                         
@@ -191,13 +219,14 @@ class MyChatBotView(generic.View):
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'ACards')
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='category':
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        # post_matching_quickreplies(sender_id , "matching_quickreplies" , Category.objects.all() , message_text)
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
                        
@@ -480,22 +509,22 @@ def GetNextURL(url):
     return next_url
 
 
-def matching_algo(input_string , data) :
-    for item in data:
+# def matching_algo(input_string , data) :
+#     for item in data:
 
-        a = []
-        s = difflib.SequenceMatcher(None, item, input_string).ratio()
-        a.append(s)
+#         a = []
+#         s = difflib.SequenceMatcher(None, item, input_string).ratio()
+#         a.append(s)
 
 
-    for i in range(3):
-        match = data[a.index(max(a))]
-        matches = []
-        matches.append(match)
+#     for i in range(3):
+#         match = data[a.index(max(a))]
+#         matches = []
+#         matches.append(match)
 
-        a.remove(max(a))
+#         a.remove(max(a))
 
-    return matches
+#     return matches
 
 
 def doubleParameterQuery(requests):
@@ -793,9 +822,9 @@ def SongSearcher(sender_id):
     print "best best " + str(c)
 
     card_data2 = []
-    print a 
+    print c 
     number = 0
-    for i in a:
+    for i in c:
 
         number = number + 1
         print number
@@ -863,7 +892,7 @@ def SongSearcher(sender_id):
     return json.dumps(response_object)
  
 
-def matching_algo(input_string , data , sender_id) :
+def matching_quickreplies(input_string , data , sender_id) :
     a = []
     for item in data:
         print "i am data" + str(item.Name)
@@ -876,9 +905,12 @@ def matching_algo(input_string , data , sender_id) :
     print a     
 
     matches = []
+    quickreply_array = []
+    w =0
     for i in range(3):
 
-        if a.index(max(a))>0.5:
+        if max(a)>0.3:
+            print "this is max ratio" + str(a.index(max(a)))
 
             match = data[a.index(max(a))].Name
             
@@ -888,14 +920,46 @@ def matching_algo(input_string , data , sender_id) :
             a.remove(max(a))
 
             print match
-            post_facebook_message(sender_id,match)
+            quickreply_data = {
+                                "content_type":"text",
+                                "title":match,
+                                "payload":match
+                              }
 
-        else:
+            quickreply_array.append(quickreply_data)
+
+            
+
+
+
+    
+            # post_facebook_message(sender_id,match)
+            w = w+1
+
+        elif w==0 :
             print "no match found" 
-            post_facebook_message(sender_id,"No match found")    
-            break   
+            post_facebook_message(sender_id,"No  matches found")    
+            break 
+    print "this is array " + str(quickreply_array)
+    response_object =   {
+                  "recipient":{
+                    "id":sender_id
+                  },
+                  "message":{
+                    "text":"Did you mean?",
+                    "quick_replies":quickreply_array
+                  }
+                }
 
-    return matches
+
+    x = json.dumps(response_object)    
+
+    print x   
+
+    return x
+
+
+
 
 
 def setMenu():
