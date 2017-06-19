@@ -55,7 +55,10 @@ def post_facebook_message(fbid,message_text):
         response_msg = singerQuickreply(fbid)
 
     elif message_text == 'cards':
-        response_msg = SongSearcher(fbid)     
+        response_msg = SongSearcher(fbid)
+
+    elif message_text == 'ACards':
+        response_msg = afterSongQuickreply(fbid)     
 
     else:
         response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
@@ -108,15 +111,17 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='songName':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         b = Song.objects.filter(SongName__contains = message_text) 
                         for item in b:
 
                             post_facebook_message(sender_id, item.SongName)
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='singer':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -130,7 +135,7 @@ class MyChatBotView(generic.View):
                         # SongSearcher(sender_id)
                         post_facebook_message(sender_id,'cards')
 
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
 
 
@@ -140,6 +145,7 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='lyricist':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = Lyricist.objects.filter(Name__contains = message_text)
                         # print a 
                         
@@ -150,12 +156,13 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
                     
                     elif userInstance.State=='movieName':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
                         for item in a:
@@ -167,12 +174,13 @@ class MyChatBotView(generic.View):
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
 
                     elif userInstance.State=='cast':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = Actor.objects.filter(Name__contains = message_text)
                         # print a 
                         
@@ -183,11 +191,12 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='category':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = Category.objects.filter(Name__contains = message_text)
                         # print a 
                        
@@ -199,11 +208,12 @@ class MyChatBotView(generic.View):
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
+                        message_text = message_text.title()
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
                        
@@ -214,8 +224,9 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
-                        post_facebook_message(sender_id,'singerQuickreply')
+                        post_facebook_message(sender_id,'ACards')
 
+                    
                     else:
                         print "entered in else"
                         item = message_text.split(' ')
@@ -494,6 +505,7 @@ def doubleParameterQuery(requests):
     print a
     return HttpResponse("hi")
 
+
 def handle_quickreply(fbid,payload):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
     output_text = 'Payload Recieved: ' + payload
@@ -541,6 +553,23 @@ def handle_quickreply(fbid,payload):
         p.save()
         return post_facebook_message(sender_id,'Enter year')  
 
+    elif payload == 'moreSongs':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'NULL'
+        p.save()
+        post_facebook_message(sender_id,'cards')
+        return post_facebook_message(sender_id,'ACards')
+
+    elif payload == 'filter':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.State = 'NULL'
+        p.save()
+        return post_facebook_message(sender_id,'singerQuickreply') 
+
+    elif payload == 'reset':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.delete()
+        return post_facebook_message(sender_id,'singerQuickreply')
 
 
 
@@ -595,6 +624,36 @@ def singerQuickreply(fbid):
                         }
     return json.dumps(response_object)
 
+
+
+def afterSongQuickreply(fbid):
+    
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":"Select your coloumn:",
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"🎧 More Songs",
+                                "payload":"moreSongs"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🎬 Filer More",
+                                "payload":"filter"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🔰 Start Over",
+                                "payload":"reset"
+                              }
+                            ]
+                          }
+                        }
+    return json.dumps(response_object)
 
 
 
