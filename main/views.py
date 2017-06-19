@@ -185,7 +185,27 @@ class MyChatBotView(generic.View):
 
                     
                     elif userInstance.State=='movieName':
-                        userInstance.State='NULL'
+                        userInstance.State='matchMovie'
+                        userInstance.save()
+                        message_text = message_text.title()
+                        print "entered movies"
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
+                        # print message_text
+                        # a = MovieName.objects.filter(Name__contains = message_text)
+                        # print a
+                        # for item in a:
+                        #     print "in movie loop "
+                        #     print item
+                        #     userInstance.MovieName = item
+                        # userInstance.Singer.add(a[0])
+                        # userInstance.save()
+                        # c = random.shuffle(b)
+                        # post_facebook_message(sender_id,b[0].SongName)
+                        # post_facebook_message(sender_id,'cards')
+                        # post_facebook_message(sender_id,'ACards')
+
+                    elif userInstance.State=='movieName':
+                        userInstance.State='matchMovie'
                         userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
@@ -201,9 +221,8 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         # c = random.shuffle(b)
                         # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
-
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='cast':
                         userInstance.State='NULL'
