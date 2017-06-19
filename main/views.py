@@ -916,7 +916,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     matches = []
     quickreply_array = []
-    a =0
+    w =0
     for i in range(3):
 
         if max(a)>0.3:
@@ -944,9 +944,9 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     
             # post_facebook_message(sender_id,match)
-            a = a+1
+            w = w+1
 
-        elif a==0 :
+        elif w==0 :
             print "no match found" 
             post_facebook_message(sender_id,"No  matches found")    
             break 
