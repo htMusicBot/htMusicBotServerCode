@@ -78,6 +78,11 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
         response_msg = matching_quickreplies(input_string, data ,fbid)
         print "above" + str(response_msg)    
 
+    if message_text == 'songs_cards':
+        response_msg = songs_cards(fbid ,data)
+
+
+
 
     requests.post(post_message_url, 
                     headers={"Content-Type": "application/json"},
@@ -134,10 +139,10 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         message_text = message_text.title()
                         b = Song.objects.filter(SongName__contains = message_text) 
-                        for item in b:
+                        
 
-                            post_facebook_message(sender_id, item.SongName)
-                        post_facebook_message(sender_id,'ACards')
+                        post_matching_quickreplies(sender_id, "songs_cards" ,b , "null string")
+                        # post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='singer':
                         userInstance.State='NULL'
@@ -320,7 +325,19 @@ class MyChatBotView(generic.View):
                         pass
                 except Exception as e:
                     print e
-                    pass  
+                    pass 
+
+                try:
+                    if 'quick_reply' in message['message']:
+                        
+                        handle_quickreply(message['sender']['id'],
+                        message['message']['quick_reply']['payload'])
+                        return HttpResponse()
+                    else:
+                        pass
+                except Exception as e:
+                    print e
+                    pass      
 
         return HttpResponse()  
 
@@ -967,6 +984,112 @@ def matching_quickreplies(input_string , data , sender_id) :
     print x   
 
     return x
+
+
+def songs_cards(sender_id , data):
+    a = []
+    for item in data:
+        print "i am data" + str(item.Name)
+
+      
+        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        a.append(s)
+        print s 
+
+    print a     
+
+    card_data2 = []
+    w =0
+    for i in range(3):
+
+        if max(a)>0.3:
+            print "this is max ratio" + str(a.index(max(a)))
+
+            match = data[a.index(max(a))].Name
+            
+
+            matches.append(match)
+
+            a.remove(max(a))
+
+            print match
+
+            y = i.YoutubeLink
+        # arraySinger = []
+            x = y.split("/")
+            print "x = " + str(x)
+            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+            singerNames = ''
+            for item in i.Singer.all():
+            singerNames = singerNames + str(item) + ' , '
+
+            card_data = {
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
+
+                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  } ,
+                 
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+            card_data2.append(card_data) 
+
+
+            w = w+1
+
+   
+        
+
+
+        
+        
+        
+            print "cards appended"   
+            if number == 3:
+                break       
+
+                        
+    response_object = {
+      "recipient": {
+        "id": sender_id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    # print response_object
+
+    return json.dumps(response_object)
+        
+        
+
+
+
+    
+    
 
 
 
