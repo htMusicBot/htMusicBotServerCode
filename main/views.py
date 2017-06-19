@@ -79,7 +79,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
         print "above" + str(response_msg)    
 
     if message_text == 'songs_cards':
-        response_msg = songs_cards(fbid ,data)
+        response_msg = songs_cards(fbid ,data ,input_string )
 
 
 
@@ -138,7 +138,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        b = Song.objects.filter(SongName__contains = message_text) 
+                        b = Song.objects.all() 
                         
 
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
@@ -957,8 +957,8 @@ def matching_quickreplies(input_string , data , sender_id) :
             print "no match found" 
             post_facebook_message(sender_id,"No  matches found")    
             break 
-    print "this is array " + str(quickreply_array)
-    response_object =   {
+            print "this is array " + str(quickreply_array)
+            response_object =   {
                   "recipient":{
                     "id":sender_id
                   },
@@ -976,48 +976,65 @@ def matching_quickreplies(input_string , data , sender_id) :
     return x
 
 
-def songs_cards(sender_id , data):
+def songs_cards(sender_id , data , input_string):
     a = []
     for i in data:
         print "i am data" + str(i.SongName)
+        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        a.append(s)
+        print s 
+
+    print a  
 
       
         w = 0
         card_data2 = []
         # print "this is max ratio" + str(a.index(max(a)))
 
+        for item in range(3):
+            if max(a)>0.3:
+            print "this is max ratio" + str(a.index(max(a)))
 
-        y = i.YoutubeLink
-    # arraySinger = []
-        x = y.split("/")
-        print "x = " + str(x)
-        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-        singerNames = ''
-        for item in i.Singer.all():
-            singerNames = singerNames + str(item) + ' , '
+            i = data[a.index(max(a))]
+            
 
-            card_data = {
-                  "title": i.SongName,
-                  "subtitle": singerNames,
-                  "image_url": song_img,
-                  
-                  "buttons": [
-                  {
-                    "type":"web_url",
-                    "url":i.YoutubeLink,
 
-                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                    "title":"Play song",
-                    "webview_height_ratio": "compact"
-                  } ,
-                 
-                  {
-                    "type": "element_share"
-                   }
-                   ]
-                   }
+            a.remove(max(a))
 
-            card_data2.append(card_data) 
+            print match
+            
+
+            y = i.YoutubeLink
+        # arraySinger = []
+            x = y.split("/")
+            print "x = " + str(x)
+            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+            singerNames = ''
+            for item in i.Singer.all():
+                singerNames = singerNames + str(item) + ' , '
+
+                card_data = {
+                      "title": i.SongName,
+                      "subtitle": singerNames,
+                      "image_url": song_img,
+                      
+                      "buttons": [
+                      {
+                        "type":"web_url",
+                        "url":i.YoutubeLink,
+
+                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                        "title":"Play song",
+                        "webview_height_ratio": "compact"
+                      } ,
+                     
+                      {
+                        "type": "element_share"
+                       }
+                       ]
+                       }
+
+                card_data2.append(card_data) 
 
 
             w = w+1
@@ -1030,7 +1047,7 @@ def songs_cards(sender_id , data):
     
     
             print "cards appended"   
-            if w == 3:
+            elif w == 3:
                 break       
 
                         
