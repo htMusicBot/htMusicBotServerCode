@@ -76,13 +76,16 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 
     if message_text == 'matching_quickreplies':
         response_msg = matching_quickreplies(input_string, data ,fbid)
-        print response_msg         
+        print "above" + str(response_msg)    
+
+
+    requests.post(post_message_url, 
+                    headers={"Content-Type": "application/json"},
+                    data=response_msg)         
 
     
 
-    requests.post(post_message_url, 
-                    headers={"Content-Type": "application /json"},
-                    data=response_msg)
+
 
 
 class MyChatBotView(generic.View):
