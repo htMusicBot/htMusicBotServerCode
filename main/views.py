@@ -821,7 +821,7 @@ def matching_algo(input_string , data , sender_id) :
 
       
         s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
-        if s>0.5
+        if s>0.5:
             a.append(s)
             print s 
 
