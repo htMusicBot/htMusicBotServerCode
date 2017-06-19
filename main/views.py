@@ -188,6 +188,8 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        print "entered movies"
+                        print message_text
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
                         for item in a:
