@@ -822,9 +822,13 @@ def matching_algo(input_string , data , sender_id) :
         a = []
         s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
         a.append(s)
+        print s 
+
+    print a     
 
 
     for i in range(3):
+
         match = data[a.index(max(a))]
         matches = []
         matches.append(match)
