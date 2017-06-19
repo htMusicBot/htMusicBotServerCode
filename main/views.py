@@ -69,7 +69,7 @@ def post_facebook_message(fbid,message_text):
     requests.post(post_message_url, 
                     headers={"Content-Type": "application        response_msg = afterSongQuickreply(fbid)  /json"},
                     data=response_msg)
-    
+
 def post_matching_quickreplies(fbid,message_text , data , input_string):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
@@ -117,6 +117,7 @@ class MyChatBotView(generic.View):
 
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
+                        print "entered in hi "
                         #messages sent when any user sends the first message
                         post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
                         userInstance.delete()
