@@ -984,7 +984,7 @@ def songs_cards(sender_id , data , input_string):
         a.append(s)
         print s 
 
-    print a  
+        print a  
 
       
         w = 0
