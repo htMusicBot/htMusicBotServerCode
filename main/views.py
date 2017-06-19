@@ -122,6 +122,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
+                        matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
                         
@@ -872,72 +873,39 @@ def SongSearcher(sender_id):
 
    
 
-# def cards(fbid, a ):
+def matching_algo(input_string , data , sender_id) :
+    a = []
+    for item in data:
+        print "i am data" + str(item.Name)
 
+      
+        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        a.append(s)
+        print s 
 
+    print a     
 
-#     card_data2 = []
-#     print a 
-#     for i in a:
-#         song_url = i.YoutubeLink
-#         # arraySinger = []
-#         x = song_url.split("https://www.youtube.com/embed/")
-#         song_img = "https://img.youtube.com/vi/" + x[1] + "/hqdefault.jpg"
-#         singerNames = ''
-#         for item in a.Singer.all():
-#             singerNames = singerNames + item + ' , '
+    matches = []
+    for i in range(3):
 
+        if a.index(max(a))>0.5:
 
-        
-        
-#         card_data = {
-#                   "title": i.SongName,
-#                   "subtitle": singerNames,
-#                   "image_url": song_img,
-                  
-#                   "buttons": [
-#                   {
-#                     "type": "postback",
-#                     "payload":"ss" ,  
-#                     "title": "play song"
-#                   },
-#                   # {
-#                   #   "type": "web_url",
-#                   #   "url": i.menu_url,  
-#                   #   "title": "See Menu"
-#                   # },
-#                   {
-#                     "type": "element_share"
-#                    }
-#                    ]
-#                    }
+            match = data[a.index(max(a))].Name
+            
 
-#         card_data2.append(card_data)           
+            matches.append(match)
 
-                    
-#     response_object = {
-#       "recipient": {
-#         "id": fbid
-#       },
-#       "message": {
-#         "attachment": {
-#           "type": "template",
-#           "payload": {
-#             "template_type": "generic",
-#             "elements": card_data2
-#                 }
-#             }
-#         }
-#     }
+            a.remove(max(a))
 
-#     print json.dumps(response_object)
+            print match
+            post_facebook_message(sender_id,match)
 
-#     # print response_object
+        else:
+            print "no match found" 
+            post_facebook_message(sender_id,"No match found")    
+            break   
 
-#     return json.dumps(response_object)
-
-
-
+    return matches
 
 
 
