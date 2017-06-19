@@ -829,7 +829,8 @@ def matching_algo(input_string , data , sender_id) :
     matches = []
     for i in range(3):
 
-        if a.index(max(a))>0.5:
+        if max(a)>0.5:
+            print "this is max ratio" + str(a.index(max(a)))
 
             match = data[a.index(max(a))].Name
             
