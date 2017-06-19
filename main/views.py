@@ -209,7 +209,6 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
-                        post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
                         print message_text
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
