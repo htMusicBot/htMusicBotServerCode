@@ -982,7 +982,7 @@ def songs_cards(sender_id , data):
         print "i am data" + str(i.SongName)
 
       
-
+        w = 0
         card_data2 = []
         # print "this is max ratio" + str(a.index(max(a)))
 
