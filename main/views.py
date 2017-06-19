@@ -140,25 +140,22 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='singer':
-                        userInstance.State='NULL'
+                        userInstance.State='matchSinger'
                         userInstance.save()
                         message_text = message_text.title()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
-                        # matching_algo(message_text , Singer.objects.all() , sender_id)
+
+                    elif userInstance.State=='matchSinger':
+                        userInstance.State='NULL'
+                        userInstance.save()
+                        message_text = message['message']['quick_reply']['payload']
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
-                        
-                        # print b 
                         for item in a:
                             userInstance.Singer.add(item)
                         userInstance.save()
-
-                        print "singer name saved to user data"
-
-                        # SongSearcher(sender_id)
-                        # post_facebook_message(sender_id,'cards')
-
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
 
 
@@ -166,22 +163,23 @@ class MyChatBotView(generic.View):
 
 
                     elif userInstance.State=='lyricist':
-                        userInstance.State='NULL'
+                        userInstance.State='matchLyricist'
                         userInstance.save()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Lyricist.objects.all() , message_text)
+                        userInstance.save()
 
-                        message_text = message_text.title()
+                    elif userInstance.State=='matchLyricist':
+                        userInstance.State='NULL'
+                        userInstance.save()
+                        message_text = message['message']['quick_reply']['payload']
                         a = Lyricist.objects.filter(Name__contains = message_text)
-                        # print a 
-                        
-                        # print b 
                         for item in a:
                             userInstance.Lyricist.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     
                     elif userInstance.State=='movieName':
@@ -202,29 +200,27 @@ class MyChatBotView(generic.View):
                             print "in movie loop "
                             print item
                             userInstance.MovieName = item
-                        # userInstance.Singer.add(a[0])
                         userInstance.save()
-                        # c = random.shuffle(b)
-                        # post_facebook_message(sender_id,b[0].SongName)
                         post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='cast':
-                        userInstance.State='NULL'
+                        userInstance.State='matchCast'
                         userInstance.save()
                         message_text = message_text.title()
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Actor.objects.all() , message_text)
-                        a = Actor.objects.filter(Name__contains = message_text)
-                        # print a 
                         
-                        # print b 
+
+                    elif userInstance.State=='matchCast':
+                        userInstance.State='NULL'
+                        message_text = message['message']['quick_reply']['payload']
+                        a = Actor.objects.filter(Name__contains = message_text)
                         for item in a:
                             userInstance.Cast.add(item)
-                        # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'cards')
+                        post_facebook_message(sender_id,'ACards')
 
                     elif userInstance.State=='category':
                         userInstance.State='NULL'
