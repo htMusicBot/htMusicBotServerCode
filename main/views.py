@@ -949,6 +949,8 @@ def matching_quickreplies(input_string , data , sender_id) :
                     "quick_replies":quickreply_array
                   }
                 }
+
+    print "response object"           
     x = json.dumps(response_object)      
 
     return x
