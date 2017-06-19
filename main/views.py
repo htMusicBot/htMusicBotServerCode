@@ -820,19 +820,19 @@ def matching_algo(input_string , data , sender_id) :
         print "i am data" + str(item.Name)
 
       
-        s = difflib.SequenceMatcher(None, input_string, item.Name).ratio()
-        if s>0.5:
-            a.append(s)
-            print s 
+        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        a.append(s)
+        print s 
 
     print a     
 
-    if a:
-        for i in a:
+    matches = []
+    for i in range(3):
+        a.index(max(a))>0.5:
 
+            match = data[a.index(max(a))].Name
+            
 
-            match = data[a.index(i)].Name
-            matches = []
             matches.append(match)
 
             a.remove(max(a))
@@ -840,9 +840,7 @@ def matching_algo(input_string , data , sender_id) :
             print match
             post_facebook_message(sender_id,match)
 
-    else:
-        post_facebook_message(sender_id,"sorry no match found")
-                
+    else "no match found"        
 
     return matches
 
