@@ -840,7 +840,8 @@ def matching_algo(input_string , data , sender_id) :
             print match
             post_facebook_message(sender_id,match)
 
-    else "no match found"        
+    else:
+        print "no match found"        
 
     return matches
 
