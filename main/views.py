@@ -830,7 +830,8 @@ def matching_algo(input_string , data , sender_id) :
     if a:
         for i in a:
 
-            match = data[a.index(max(a))].Name
+
+            match = data[a.index(i)].Name
             matches = []
             matches.append(match)
 
