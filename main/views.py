@@ -905,7 +905,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     matches = []
     quickreply_array = []
-    a =0
+    # a =0
     for i in range(3):
 
         if max(a)>0.5:
@@ -935,12 +935,12 @@ def matching_quickreplies(input_string , data , sender_id) :
             # post_facebook_message(sender_id,match)
             a = a+1
 
-        elif a==0 :
-            print "no match found" 
-            post_facebook_message(sender_id,"No  matches found")    
-            break 
+        # elif a==0 :
+        #     print "no match found" 
+        #     # post_facebook_message(sender_id,"No  matches found")    
+        #     break 
 
-        response_object =   {
+    response_object =   {
                   "recipient":{
                     "id":fbid
                   },
