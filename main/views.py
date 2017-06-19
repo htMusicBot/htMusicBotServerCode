@@ -829,9 +829,9 @@ def SongSearcher(sender_id):
     print "best best " + str(c)
 
     card_data2 = []
-    print a 
+    print c 
     number = 0
-    for i in a:
+    for i in c:
 
         number = number + 1
         print number
