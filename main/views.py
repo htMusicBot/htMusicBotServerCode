@@ -933,7 +933,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     
             # post_facebook_message(sender_id,match)
-            a = a+1
+            # a = a+1
 
         # elif a==0 :
         #     print "no match found" 
@@ -942,11 +942,11 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     response_object =   {
                   "recipient":{
-                    "id":fbid
+                    "id":sender_id
                   },
                   "message":{
                     "text":"Did you mean?",
-                    "quick_replies":quickreply_array
+                    "quick_replies":"quickreply_array"
                   }
                 }
     x = json.dumps(response_object)      
