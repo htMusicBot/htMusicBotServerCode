@@ -980,7 +980,7 @@ def songs_cards(sender_id , data , input_string):
     a = []
     for i in data:
         print "i am data" + str(i.SongName)
-        s = difflib.SequenceMatcher(None, i.Name, input_string).ratio()
+        s = difflib.SequenceMatcher(None, i.SongName, input_string).ratio()
         a.append(s)
         print s 
 
