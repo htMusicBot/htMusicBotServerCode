@@ -195,6 +195,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         print "entered matched movies"
                         print message_text
+                        print message['message']['quick_reply']['payload']
                         a = MovieName.objects.filter(Name__contains = message_text)
                         print a
                         for item in a:
