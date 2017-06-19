@@ -138,7 +138,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        post_matching_quickreplies(message_text , Singer.objects.all() , sender_id)
+                        post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
                         # matching_algo(message_text , Singer.objects.all() , sender_id)
                         a = Singer.objects.filter(Name__contains = message_text)
                         print "singer name searched"
