@@ -914,8 +914,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     for item in data:
         print "i am data" + str(item.Name)
 
-        s = fuzz.ratio(item.Name, input_string)
-        # s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        # s = fuzz.ratio(item.Name, input_string)
+        s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
         a.append(s)
         print s 
 
@@ -924,9 +924,9 @@ def matching_quickreplies(input_string , data , sender_id) :
     matches = []
     quickreply_array = []
     w =0
-    for i in range(10):
+    for i in range(11):
 
-        if max(a)>50:
+        if max(a)>0.50:
             print "this is max ratio" + str(max(a))
 
             match = data[a.index(max(a))].Name
