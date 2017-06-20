@@ -58,6 +58,11 @@ def post_facebook_message(fbid,message_text):
     elif message_text == 'cards':
         response_msg = SongSearcher(fbid)
 
+        
+
+    elif message_text == 'Category_quickreplies':
+        response_msg = Category_quickreplies(fbid)    
+
     elif message_text == 'ACards':
         response_msg = afterSongQuickreply(fbid)
 
@@ -592,7 +597,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'category'
         p.save()
-        return post_facebook_message(sender_id,'Enter category') 
+        return post_facebook_message(sender_id,'Category_quickreplies') 
 
     elif payload == 'year':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
