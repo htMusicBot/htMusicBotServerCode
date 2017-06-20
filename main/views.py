@@ -19,6 +19,7 @@ from io import open
 import difflib
 import random
 from fuzzywuzzy import fuzz
+import random
 
 
 
@@ -1336,10 +1337,10 @@ def Category_quickreplies(sender_id):
 
         print categoryArray
 
-        # x = list(set(categoryArray))
+        print list(set(categoryArray))
 
 
-    for item in list(set(categoryArray)):
+    for item in random.shuffle(list(set(categoryArray))):
         number = number + 1
         print number
             
