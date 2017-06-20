@@ -130,7 +130,7 @@ class MyChatBotView(generic.View):
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
                     DataInstance = userdeatils(sender_id)
-                    name = '%s %s'%(DataInstance['first_name'],DataInstance['last_name'])
+                    name = '%s'%(DataInstance['first_name'])
                     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
 
@@ -313,48 +313,49 @@ class MyChatBotView(generic.View):
 
                     
                     else:
-                        print "entered in else"
-                        item = message_text.split(' ')
-                        for x in item :
-                            print "entered in for loop"
+                        post_facebook_message(sender_id,'Looks like i lost you  please say hi and start a new conversation')
+                        # print "entered in else"
+                        # item = message_text.split(' ')
+                        # for x in item :
+                        #     print "entered in for loop"
 
-                            if '#' in x :
-                                print "entered #"
+                        #     if '#' in x :
+                        #         print "entered #"
 
-                                SongName = x.split('#')[1]
-                                # singer = Singer.objects.exclude(Name = SongName)
-                                print Songname
-                                a = Song.objects.filter(SongName__contains =Songname)
+                        #         SongName = x.split('#')[1]
+                        #         # singer = Singer.objects.exclude(Name = SongName)
+                        #         print Songname
+                        #         a = Song.objects.filter(SongName__contains =Songname)
 
-                                print a[0].SongName
+                        #         print a[0].SongName
 
-                                post_facebook_message(sender_id,a[0].SongName)
-                                # matches  = matching_algo(SongName , SongNameData)
+                        #         post_facebook_message(sender_id,a[0].SongName)
+                        #         # matches  = matching_algo(SongName , SongNameData)
 
-                            elif '*' in x :
-                                SongCast = x.split('*')[1]
-                                a = Singer.objects.filter(Name_contains=SongCast)
+                        #     elif '*' in x :
+                        #         SongCast = x.split('*')[1]
+                        #         a = Singer.objects.filter(Name_contains=SongCast)
 
-                                b = Song.objects.filter(Singer=a)
-                                print b[0].SongName
+                        #         b = Song.objects.filter(Singer=a)
+                        #         print b[0].SongName
 
-                                post_facebook_message(sender_id,b[0].SongName)
-                                # matches  = matching_algo(SongCast , CastData)
+                        #         post_facebook_message(sender_id,b[0].SongName)
+                        #         # matches  = matching_algo(SongCast , CastData)
                                 
-                            elif '$' in x :
-                                Actors = x.split('$')[1]
-                                a = Actor.objects.filter(Name_contains=Actors)
+                        #     elif '$' in x :
+                        #         Actors = x.split('$')[1]
+                        #         a = Actor.objects.filter(Name_contains=Actors)
 
-                                b = Song.objects.filter(Cast=a)                             
-                                post_facebook_message(sender_id,b[0].SongName)
-                                # matches  = matching_algo(Actors , ActorsData)
+                        #         b = Song.objects.filter(Cast=a)                             
+                        #         post_facebook_message(sender_id,b[0].SongName)
+                        #         # matches  = matching_algo(Actors , ActorsData)
                                 
-                            elif '!' in x :
-                                category = x.split('!')[1]
-                                a = Category.objects.filter(Name_contains=category)
+                        #     elif '!' in x :
+                        #         category = x.split('!')[1]
+                        #         a = Category.objects.filter(Name_contains=category)
 
-                                b = Song.objects.filter(Category=a) 
-                                post_facebook_message(sender_id,b[0].SongName)
+                        #         b = Song.objects.filter(Category=a) 
+                        #         post_facebook_message(sender_id,b[0].SongName)
                                 # matches  = matching_algo(Mood , MoodData)    
 
                     
@@ -676,7 +677,7 @@ def singerQuickreply(fbid):
                             "id":fbid
                           },
                           "message":{
-                            "text":"Select your coloumn:",
+                            "text":"How should i serve you with my delicious filters :",
                             "quick_replies":[
                               {
                                 "content_type":"text",
@@ -726,7 +727,7 @@ def afterSongQuickreply(fbid):
                             "id":fbid
                           },
                           "message":{
-                            "text":"Select your coloumn:",
+                            "text":"What would you like to do ?:",
                             "quick_replies":[
                               # {
                               #   "content_type":"text",
@@ -958,6 +959,7 @@ def SongSearcher(sender_id):
     print json.dumps(response_object)
 
     # print response_object
+    post_facebook_message(sender_id,"Here you go with our closest matches ")  
 
     return json.dumps(response_object)
  
@@ -1131,6 +1133,7 @@ def songs_cards(sender_id , data , input_string):
     print json.dumps(response_object)
 
     # print response_object
+    post_facebook_message(sender_id,"Here you fo with our closest matches ")  
 
     return json.dumps(response_object)
         
@@ -1423,7 +1426,7 @@ def Category_quickreplies(sender_id):
                               "id":sender_id
                           },
                           "message":{
-                            "text":"you can choose any one of these categories?",
+                            "text":"you can choose any one of these Categories/Moods?",
                             "quick_replies":card_data2
                           }
                         }
@@ -1453,7 +1456,7 @@ def yearQuickreply(fbid):
                             "id":fbid
                           },
                           "message":{
-                            "text":"Select your coloumn:",
+                            "text":"Enter your Era:",
                             "quick_replies":card_data2
                           }
                         }
