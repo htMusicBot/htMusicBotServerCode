@@ -1342,8 +1342,8 @@ def Category_quickreplies(sender_id):
 
     x = list(set(categoryArray))
 
-    y = random.shuffle(y)
-    print y 
+    y = random.shuffle(x)
+    print "hihihi" + str(y) 
 
     for item in y:
         number = number + 1
