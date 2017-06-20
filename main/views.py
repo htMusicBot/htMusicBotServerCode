@@ -677,11 +677,11 @@ def afterSongQuickreply(fbid):
                           "message":{
                             "text":"Select your coloumn:",
                             "quick_replies":[
-                              {
-                                "content_type":"text",
-                                "title":"🎧 More Songs",
-                                "payload":"moreSongs"
-                              },
+                              # {
+                              #   "content_type":"text",
+                              #   "title":"🎧 More Songs",
+                              #   "payload":"moreSongs"
+                              # },
                               {
                                 "content_type":"text",
                                 "title":"🎬 Filter More",
