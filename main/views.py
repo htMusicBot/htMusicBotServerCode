@@ -1189,7 +1189,7 @@ def Category_quickreplies(sender_id):
 
     arraySinger =[]
     arrayYear =[]
-    # arrayCategory =[]
+    arrayCategory =[]
     arrayActor =[]
     arrayLyricist =[]
     arrayMovie =[]
