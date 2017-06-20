@@ -1343,13 +1343,13 @@ def Category_quickreplies(sender_id):
 
         
         
-            card_data ={
+            quickreply_array ={
                                     "content_type":"text",
                                     "title":item.Name,
                                     "payload":item.Name
                                   }
 
-        card_data2.append(card_data) 
+        card_data2.append(quickreply_array) 
         print "cards appended"   
         if number == 10:
             break       
