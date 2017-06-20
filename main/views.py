@@ -254,24 +254,24 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'ACards')
 
-                    elif userInstance.State=='year':
-                        userInstance.State='searchYear'
-                        userInstance.save()
-                        # message_text = message_text.title()
-                        # a = Year.objects.filter(Year__contains = message_text)
-                        # # print a 
+                    # elif userInstance.State=='year':
+                    #     userInstance.State='searchYear'
+                    #     userInstance.save()
+                    #     # message_text = message_text.title()
+                    #     # a = Year.objects.filter(Year__contains = message_text)
+                    #     # # print a 
                        
-                        # # print b
-                        # for item in a: 
-                        #     userInstance.year = item
-                        # # userInstance.Singer.add(a[0])
-                        # userInstance.save()
-                        # # post_facebook_message(sender_id,b[0].SongName)
-                        post_facebook_message(sender_id,'yearQuickReply')
-                        # post_facebook_message(sender_id,'cards')
-                        # post_facebook_message(sender_id,'ACards')
+                    #     # # print b
+                    #     # for item in a: 
+                    #     #     userInstance.year = item
+                    #     # # userInstance.Singer.add(a[0])
+                    #     # userInstance.save()
+                    #     # # post_facebook_message(sender_id,b[0].SongName)
+                    #     post_facebook_message(sender_id,'yearQuickReply')
+                    #     # post_facebook_message(sender_id,'cards')
+                    #     # post_facebook_message(sender_id,'ACards')
 
-                    elif userInstance.State=='searchYear':
+                    elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
                         payload = message['message']['quick_reply']['payload']
@@ -646,7 +646,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'year'
         p.save()
-        return post_facebook_message(sender_id,'Enter year')  
+        return post_facebook_message(sender_id,'yearQuickReply')  
 
     elif payload == 'moreSongs':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
