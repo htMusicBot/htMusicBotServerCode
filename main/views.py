@@ -1335,14 +1335,15 @@ def Category_quickreplies(sender_id):
         for item in i.Category.all():
             categoryArray.append(item.Name)
 
-        print categoryArray
+        # print categoryArray
 
-        print list(set(categoryArray))
+        # print list(set(categoryArray))
 
 
     x = list(set(categoryArray))
 
     y = random.shuffle(y)
+    print y 
 
     for item in y:
         number = number + 1
