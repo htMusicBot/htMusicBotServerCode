@@ -287,17 +287,17 @@ class MyChatBotView(generic.View):
                         elif payload=='2000s':
                             message_text = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010']
                         elif payload=='2011':
-                            message_text = '2011'
+                            message_text = ['2011']
                         elif payload=='2012':
-                            message_text = '2012'
+                            message_text = ['2012']
                         elif payload=='2013':
-                            message_text = '2013'
+                            message_text = ['2013']
                         elif payload=='2014':
-                            message_text = '2014'
+                            message_text = ['2014']
                         elif payload=='2015':
-                            message_text = '2015'
+                            message_text = ['2015']
                         elif payload=='2016':
-                            message_text = '2016'
+                            message_text = ['2016']
 
                         a = Year.objects.filter(Year__in = message_text)
                         print a 
