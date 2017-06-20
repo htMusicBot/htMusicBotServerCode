@@ -139,11 +139,9 @@ class MyChatBotView(generic.View):
                         userInstance.save()
                         message_text = message_text.title()
                         b = Song.objects.all() 
-                        print b 
-                        
-
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
-                        # post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'ACards')
+
 
                     elif userInstance.State=='singer':
                         userInstance.State='matchSinger'
@@ -1187,6 +1185,20 @@ def greetingButton():
     status = requests.post(post_message_url,
           headers = {"Content-Type": "application/json"},
           data = menu_object)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
