@@ -298,7 +298,9 @@ class MyChatBotView(generic.View):
                             message_text = '2015'
                         elif payload=='2016':
                             message_text = '2016'
-                        a = Year.objects.filter(Year__contains = message_text)
+
+
+                        a = Year.objects.filter(Year__in = message_text)
                         # print a 
                        
                         # print b
