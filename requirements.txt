@@ -6,3 +6,4 @@ bs4
 dj-database-url
 psycopg2==2.6.1
 django_extensions
+fuzzywuzzy

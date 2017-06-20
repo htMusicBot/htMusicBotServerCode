@@ -18,6 +18,7 @@ from requests import get
 from io import open
 import difflib
 import random
+from fuzzywuzzy import fuzz
 
 
 
@@ -913,8 +914,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     for item in data:
         print "i am data" + str(item.Name)
 
-      
-        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        s = fuzz.ratio(item.Name, input_string)
+        # s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
         a.append(s)
         print s 
 
@@ -923,10 +924,10 @@ def matching_quickreplies(input_string , data , sender_id) :
     matches = []
     quickreply_array = []
     w =0
-    for i in range(3):
+    for i in range(10):
 
-        if max(a)>0.3:
-            print "this is max ratio" + str(a.index(max(a)))
+        if max(a)>50:
+            print "this is max ratio" + str(max(a))
 
             match = data[a.index(max(a))].Name
             
@@ -944,9 +945,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             quickreply_array.append(quickreply_data)
 
-            
-
-
+    
 
     
             # post_facebook_message(sender_id,match)
@@ -959,6 +958,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             post_facebook_message(sender_id,"No  matches found")    
             break 
             print "this is array " + str(quickreply_array)
+            break
 
     response_object =   {
                             "recipient":{
@@ -1081,16 +1081,6 @@ def songs_cards(sender_id , data , input_string):
 
     return json.dumps(response_object)
         
-        
-
-
-
-    
-    
-
-
-
-
 
 def setMenu():
     response_object = {
