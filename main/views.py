@@ -1189,7 +1189,7 @@ def Category_quickreplies(sender_id):
 
     arraySinger =[]
     arrayYear =[]
-    arrayCategory =[]
+    # arrayCategory =[]
     arrayActor =[]
     arrayLyricist =[]
     arrayMovie =[]
@@ -1326,12 +1326,19 @@ def Category_quickreplies(sender_id):
     card_data2 = []
     print c 
     number = 0
+    categoryArray = []
     for i in c:
 
         number = number + 1
         print number
         
         for item in i.Category.all():
+            categoryArray.append(item.Name)
+
+
+        for item in list(set(categoryArray)):
+                
+
             
 
 
@@ -1339,9 +1346,11 @@ def Category_quickreplies(sender_id):
         
             quickreply_array ={
                                     "content_type":"text",
-                                    "title":item.Name,
-                                    "payload":item.Name
+                                    "title":item,
+                                    "payload":item
                                   }
+
+
 
         card_data2.append(quickreply_array) 
         print "cards appended"   
