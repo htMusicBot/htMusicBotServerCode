@@ -1335,6 +1335,10 @@ def Category_quickreplies(sender_id):
         for item in i.Category.all():
             categoryArray.append(item.Name)
 
+        print categoryArray
+        
+        print list(set(categoryArray))
+
 
         for item in list(set(categoryArray)):
                 
