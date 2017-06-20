@@ -913,8 +913,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     for item in data:
         print "i am data" + str(item.Name)
 
-      
-        s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        s = fuzz.ratio("this is a test", "this is a test!")
+        # s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
         a.append(s)
         print s 
 
@@ -1081,16 +1081,6 @@ def songs_cards(sender_id , data , input_string):
 
     return json.dumps(response_object)
         
-        
-
-
-
-    
-    
-
-
-
-
 
 def setMenu():
     response_object = {
