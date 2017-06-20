@@ -1345,6 +1345,7 @@ def Category_quickreplies(sender_id):
 
     random.shuffle(x)
     print "hihihi" + str(x) 
+    x = filter(None, x)
 
     for item in x:
         number = number + 1
