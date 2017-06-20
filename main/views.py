@@ -275,6 +275,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         payload = message['message']['quick_reply']['payload']
+                        print payload
                         if payload=='1930s':
                             message_text = ['1930', '1931', '1932', '1933', '1934', '1935', '1936', '1937', '1938', '1939', '1940', '1941', '1942', '1943', '1944', '1945', '1946', '1947', '1948', '1949']
                         elif payload=='1950s':
