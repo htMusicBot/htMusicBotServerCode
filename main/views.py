@@ -1433,19 +1433,23 @@ def Category_quickreplies(sender_id):
 
 def yearQuickreply(fbid):
     array = ['1930s','1950s','1970s','1990s','2000s','2011','2012','2013','2014','2015','2016']
+    card_data2 = []
     for item in array:
-        quickReplies = {
+        quickreply_array = {
                         "content_type":"text",
                         "title":item,
                         "payload":item
                        }
+        card_data2.append(quickreply_array) 
+    
+
     response_object =   {
                           "recipient":{
                             "id":fbid
                           },
                           "message":{
                             "text":"Select your coloumn:",
-                            "quick_replies":quickReplies
+                            "quick_replies":card_data2
                           }
                         }
     return json.dumps(response_object)
