@@ -962,17 +962,17 @@ def matching_quickreplies(input_string , data , sender_id) :
             break 
             print "this is array " + str(quickreply_array)
 
-            response_object =   {
-                                    "recipient":{
-                                      "id":sender_id
-                                  },
-                                  "message":{
-                                    "text":"Did you mean?",
-                                    "quick_replies":quickreply_array
-                                  }
-                                }
+    response_object =   {
+                            "recipient":{
+                              "id":sender_id
+                          },
+                          "message":{
+                            "text":"Did you mean?",
+                            "quick_replies":quickreply_array
+                          }
+                        }
 
-            print response_object
+    # print response_object
 
 
     x = json.dumps(response_object)    
