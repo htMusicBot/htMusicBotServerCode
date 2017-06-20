@@ -18,6 +18,7 @@ from requests import get
 from io import open
 import difflib
 import random
+from fuzzywuzzy import fuzz
 
 
 
