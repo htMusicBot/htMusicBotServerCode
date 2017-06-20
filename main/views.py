@@ -1329,34 +1329,35 @@ def Category_quickreplies(sender_id):
     categoryArray = []
     for i in c:
 
-        number = number + 1
-        print number
+        
         
         for item in i.Category.all():
             categoryArray.append(item.Name)
 
         print categoryArray
 
-        x = list(set(categoryArray))
+        # x = list(set(categoryArray))
 
 
-        for item in x:
-                
-
+    for item in list(set(categoryArray)):
+        number = number + 1
+        print number
             
 
-
         
-        
-            quickreply_array ={
-                                    "content_type":"text",
-                                    "title":item,
-                                    "payload":item
-                                  }
+
+
+    
+    
+        quickreply_array ={
+                                "content_type":"text",
+                                "title":item,
+                                "payload":item
+                              }
 
 
 
-            card_data2.append(quickreply_array) 
+        card_data2.append(quickreply_array) 
         print "cards appended"   
         if number == 10:
             break       
