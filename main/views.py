@@ -1341,6 +1341,7 @@ def Category_quickreplies(sender_id):
 
 
     x = list(set(categoryArray))
+    print "jojojoj" + str(x)
 
     y = random.shuffle(x)
     print "hihihi" + str(y) 
