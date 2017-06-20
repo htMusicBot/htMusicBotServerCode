@@ -1013,11 +1013,11 @@ def matching_quickreplies(input_string , data , sender_id) :
 
         elif w==0 :
             print "no match found" 
-            post_facebook_message(sender_id,"No  matches found")    
-            break 
+            post_facebook_message(sender_id,"No  matches found") 
+            post_facebook_message(sender_id,"singerQuickreply")   
             print "this is array " + str(quickreply_array)
             break
-            post_facebook_message(sender_id,"singerQuickreply")
+            
 
     response_object =   {
                             "recipient":{
