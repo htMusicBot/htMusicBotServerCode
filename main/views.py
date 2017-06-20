@@ -1340,7 +1340,11 @@ def Category_quickreplies(sender_id):
         print list(set(categoryArray))
 
 
-    for item in random.shuffle(list(set(categoryArray))):
+    x = list(set(categoryArray))
+
+    y = random.shuffle(y)
+
+    for item in y:
         number = number + 1
         print number
             
