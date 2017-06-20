@@ -1017,40 +1017,40 @@ def songs_cards(sender_id , data , input_string):
             for item in i.Singer.all():
                 singerNames = singerNames + str(item) + ' , '
 
-                card_data = {
-                      "title": i.SongName,
-                      "subtitle": singerNames,
-                      "image_url": song_img,
-                      
-                      "buttons": [
-                      {
-                        "type":"web_url",
-                        "url":i.YoutubeLink,
+            card_data = {
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
 
-                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                        "title":"Play song",
-                        "webview_height_ratio": "compact"
-                      } ,
-                     
-                      {
-                        "type": "element_share"
-                       }
-                       ]
-                       }
+                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  } ,
+                 
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
 
-                card_data2.append(card_data) 
-
-
-                w = w+1
+            card_data2.append(card_data) 
 
 
+            w = w+1
 
 
 
 
 
 
-                print "cards appended"   
+
+
+            print "cards appended"   
         elif w == 3:
             break       
 
