@@ -914,7 +914,7 @@ def matching_quickreplies(input_string , data , sender_id) :
     for item in data:
         print "i am data" + str(item.Name)
 
-        s = fuzz.token_sort_ratio(item.Name, input_string)
+        s = fuzz.ratio(item.Name, input_string)
         # s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
         a.append(s)
         print s 
