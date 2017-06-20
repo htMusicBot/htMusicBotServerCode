@@ -1278,8 +1278,8 @@ def Category_quickreplies(sender_id):
     # else :
     #     h =  z.exclude(Category=e)
 
-    print "After sorting category" 
-    print h     
+    # print "After sorting category" 
+    # print h     
 
     if arrayActor :
 
