@@ -287,19 +287,20 @@ class MyChatBotView(generic.View):
                         elif payload=='2000s':
                             message_text = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010']
                         elif payload=='2011':
-                            message_text = '2011'
+                            message_text = ['2011']
                         elif payload=='2012':
-                            message_text = '2012'
+                            message_text = ['2012']
                         elif payload=='2013':
-                            message_text = '2013'
+                            message_text = ['2013']
                         elif payload=='2014':
-                            message_text = '2014'
+                            message_text = ['2014']
                         elif payload=='2015':
-                            message_text = '2015'
+                            message_text = ['2015']
                         elif payload=='2016':
-                            message_text = '2016'
-                        a = Year.objects.filter(Year__contains = message_text)
-                        # print a 
+                            message_text = ['2016']
+
+                        a = Year.objects.filter(Year__in = message_text)
+                        print a 
                        
                         # print b
                         for item in a: 
@@ -394,7 +395,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2002.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/1997.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
