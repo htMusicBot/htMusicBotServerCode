@@ -19,6 +19,7 @@ from io import open
 import difflib
 import random
 from fuzzywuzzy import fuzz
+import random
 
 
 
@@ -57,6 +58,11 @@ def post_facebook_message(fbid,message_text):
 
     elif message_text == 'cards':
         response_msg = SongSearcher(fbid)
+
+        
+
+    elif message_text == 'Category_quickreplies':
+        response_msg = Category_quickreplies(fbid)    
 
     elif message_text == 'ACards':
         response_msg = afterSongQuickreply(fbid)
@@ -592,7 +598,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'category'
         p.save()
-        return post_facebook_message(sender_id,'Enter category') 
+        return post_facebook_message(sender_id,'Category_quickreplies') 
 
     elif payload == 'year':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -1178,6 +1184,210 @@ def greetingButton():
 
 
 
+def Category_quickreplies(sender_id):
+    print "enetered category loop"
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
+    arraySinger =[]
+    arrayYear =[]
+    arrayCategory =[]
+    arrayActor =[]
+    arrayLyricist =[]
+    arrayMovie =[]
+
+    for item in userInstance.Singer.all():
+        arraySinger.append(item.Name)
+
+    # for item in userInstance.year.all():
+    #     arrayYear.append(item.Name)
+        
+    for item in userInstance.Category.all():
+        arrayCategory.append(item.Name)
+        
+    for item in userInstance.Cast.all():
+        arrayActor.append(item.Name)
+        
+    for item in userInstance.Lyricist.all():
+        arrayLyricist.append(item.Name)                  
+
+    if userInstance.year:
+        arrayYear.append(userInstance.year)
+    else:
+        pass    
+
+    if userInstance.MovieName:
+        arrayMovie.append(userInstance.MovieName)
+        print  "Im if loop  = " + str(arrayMovie)
+
+
+    else:
+        pass          
+
+    print "arrays of all parameters made"
+
+
+
+    q = Singer.objects.filter(Name__in = arraySinger)
+
+    print "entered singer "
+    print "haha" + str(q)
+    w = Year.objects.filter(Year = userInstance.year)
+    print w
+    print "entered year "
+    y = MovieName.objects.filter(Name = userInstance.MovieName)
+    print y
+    print "entered movie "
+    e = Category.objects.filter(Name__in = arrayCategory)
+    print e
+    print "entered category "
+
+    r = Actor.objects.filter(Name__in = arrayActor)
+    print r
+    print "entered actor "
+    t = Lyricist.objects.filter(Name__in = arrayLyricist)
+    print t
+    print "entered lyricist "
+
+    if arraySinger:
+
+        b = Song.objects.filter(Singer=q) 
+
+
+    else :
+        b =  Song.objects.exclude(Singer=q)
+
+    print "After sorting singers" 
+    print b  
+
+    if arrayYear:
+        print "yes in array year"
+
+        z = b.filter(year=w) 
+
+
+    else :
+        z =  b.exclude(year=w)
+
+    print "After sorting years"     
+    print z    
+
+    # if arrayCategory:
+
+    #     h = z.filter(Category=e) 
+
+
+    # else :
+    #     h =  z.exclude(Category=e)
+
+    # print "After sorting category" 
+    # print h     
+
+    if arrayActor :
+
+        i = z.filter(Cast=r) 
+
+
+    else :
+        i =  z.exclude(Cast=r)
+
+
+    print "After sorting actor"    
+
+    print i     
+
+    if arrayLyricist :
+
+        a = i.filter(Lyricist=t) 
+
+
+    else :
+        a =  i.exclude(Lyricist=t) 
+
+    print "After sorting Lyricist"     
+
+    print a    
+
+    if arrayMovie :
+
+        c = a.filter(MovieName=y) 
+
+
+    else :
+        c =  a.exclude(MovieName=y)  
+
+    print "After sorting Movie"      
+
+    print c         
+
+
+
+
+    print "best best " + str(c)
+
+    card_data2 = []
+    print c 
+    number = 0
+    categoryArray = []
+    for i in c:
+
+        
+        
+        for item in i.Category.all():
+            categoryArray.append(item.Name)
+
+        # print categoryArray
+
+        # print list(set(categoryArray))
+
+
+    x = list(set(categoryArray))
+    print "jojojoj" + str(x)
+
+    random.shuffle(x)
+    print "hihihi" + str(x) 
+    x = filter(None, x)
+
+    for item in x:
+        number = number + 1
+        print number
+            
+
+        
+
+
+    
+    
+        quickreply_array ={
+                                "content_type":"text",
+                                "title":item,
+                                "payload":item
+                              }
+
+
+
+        card_data2.append(quickreply_array) 
+        print "cards appended"   
+        if number == 10:
+            break       
+
+                    
+    response_object =  {
+                            "recipient":{
+                              "id":sender_id
+                          },
+                          "message":{
+                            "text":"you can choose any one of these categories?",
+                            "quick_replies":card_data2
+                          }
+                        }
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    # print response_object
+
+    return json.dumps(response_object)
 
 
 
