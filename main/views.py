@@ -299,9 +299,8 @@ class MyChatBotView(generic.View):
                         elif payload=='2016':
                             message_text = '2016'
 
-
                         a = Year.objects.filter(Year__in = message_text)
-                        # print a 
+                        print a 
                        
                         # print b
                         for item in a: 
@@ -396,7 +395,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2002.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/1997.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
