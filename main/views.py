@@ -1336,11 +1336,11 @@ def Category_quickreplies(sender_id):
             categoryArray.append(item.Name)
 
         print categoryArray
-        
-        print list(set(categoryArray))
+
+        x = list(set(categoryArray))
 
 
-        for item in list(set(categoryArray)):
+        for item in x:
                 
 
             
@@ -1356,7 +1356,7 @@ def Category_quickreplies(sender_id):
 
 
 
-        card_data2.append(quickreply_array) 
+            card_data2.append(quickreply_array) 
         print "cards appended"   
         if number == 10:
             break       
