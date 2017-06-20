@@ -351,7 +351,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2011.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/2002.php?page=1"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
