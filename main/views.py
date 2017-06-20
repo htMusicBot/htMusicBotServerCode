@@ -924,7 +924,7 @@ def matching_quickreplies(input_string , data , sender_id) :
     matches = []
     quickreply_array = []
     w =0
-    for i in range(3):
+    for i in range(10):
 
         if max(a)>50:
             print "this is max ratio" + str(max(a))
@@ -945,9 +945,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             quickreply_array.append(quickreply_data)
 
-            
-
-
+    
 
     
             # post_facebook_message(sender_id,match)
@@ -960,6 +958,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             post_facebook_message(sender_id,"No  matches found")    
             break 
             print "this is array " + str(quickreply_array)
+            break
 
     response_object =   {
                             "recipient":{
