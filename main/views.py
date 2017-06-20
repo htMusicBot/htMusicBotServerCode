@@ -889,6 +889,7 @@ def SongSearcher(sender_id):
 
     card_data2 = []
     print c 
+    random.shuffle(c)
     number = 0
     for i in c:
 
