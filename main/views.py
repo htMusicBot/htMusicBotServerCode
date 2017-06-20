@@ -1330,13 +1330,7 @@ def Category_quickreplies(sender_id):
 
         number = number + 1
         print number
-        print "entered loop"
-        y = i.YoutubeLink
-        # arraySinger = []
-        x = y.split("/")
-        print "x = " + str(x)
-        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-        singerNames = ''
+        
         for item in i.Category.all():
             
 
@@ -1361,7 +1355,7 @@ def Category_quickreplies(sender_id):
                           },
                           "message":{
                             "text":"you can choose any one of these categories?",
-                            "quick_replies":quickreply_array
+                            "quick_replies":card_data2
                           }
                         }
 
