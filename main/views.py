@@ -67,6 +67,9 @@ def post_facebook_message(fbid,message_text):
     elif message_text == 'ACards':
         response_msg = afterSongQuickreply(fbid)
 
+    elif message_text == 'yearQuickReply':
+        response_msg = yearQuickreply(fbid)
+
         
 
     else:
@@ -251,10 +254,50 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'ACards')
 
+                    # elif userInstance.State=='year':
+                    #     userInstance.State='searchYear'
+                    #     userInstance.save()
+                    #     # message_text = message_text.title()
+                    #     # a = Year.objects.filter(Year__contains = message_text)
+                    #     # # print a 
+                       
+                    #     # # print b
+                    #     # for item in a: 
+                    #     #     userInstance.year = item
+                    #     # # userInstance.Singer.add(a[0])
+                    #     # userInstance.save()
+                    #     # # post_facebook_message(sender_id,b[0].SongName)
+                    #     post_facebook_message(sender_id,'yearQuickReply')
+                    #     # post_facebook_message(sender_id,'cards')
+                    #     # post_facebook_message(sender_id,'ACards')
+
                     elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
-                        message_text = message_text.title()
+                        payload = message['message']['quick_reply']['payload']
+                        print payload
+                        if payload=='1930s':
+                            message_text = ['1930', '1931', '1932', '1933', '1934', '1935', '1936', '1937', '1938', '1939', '1940', '1941', '1942', '1943', '1944', '1945', '1946', '1947', '1948', '1949']
+                        elif payload=='1950s':
+                            message_text = ['1950', '1951', '1952', '1953', '1954', '1955', '1956', '1957', '1958', '1959', '1960', '1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969']
+                        elif payload=='1970s':
+                            message_text = ['1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989']
+                        elif payload=='1990s':
+                            message_text = ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999']
+                        elif payload=='2000s':
+                            message_text = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010']
+                        elif payload=='2011':
+                            message_text = '2011'
+                        elif payload=='2012':
+                            message_text = '2012'
+                        elif payload=='2013':
+                            message_text = '2013'
+                        elif payload=='2014':
+                            message_text = '2014'
+                        elif payload=='2015':
+                            message_text = '2015'
+                        elif payload=='2016':
+                            message_text = '2016'
                         a = Year.objects.filter(Year__contains = message_text)
                         # print a 
                        
@@ -604,7 +647,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'year'
         p.save()
-        return post_facebook_message(sender_id,'Enter year')  
+        return post_facebook_message(sender_id,'yearQuickReply')  
 
     elif payload == 'moreSongs':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -920,8 +963,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     for item in data:
         print "i am data" + str(item.Name)
 
-        s = fuzz.ratio(item.Name, input_string)
-        # s = difflib.SequenceMatcher(None, item.Name, input_string).ratio()
+        # s = fuzz.ratio(item.Name, input_string)
+        s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
         a.append(s)
         print s 
 
@@ -930,9 +973,9 @@ def matching_quickreplies(input_string , data , sender_id) :
     matches = []
     quickreply_array = []
     w =0
-    for i in range(10):
+    for i in range(11):
 
-        if max(a)>50:
+        if max(a)>0.50:
             print "this is max ratio" + str(max(a))
 
             match = data[a.index(max(a))].Name
@@ -1389,7 +1432,28 @@ def Category_quickreplies(sender_id):
 
     return json.dumps(response_object)
 
+def yearQuickreply(fbid):
+    array = ['1930s','1950s','1970s','1990s','2000s','2011','2012','2013','2014','2015','2016']
+    card_data2 = []
+    for item in array:
+        quickreply_array = {
+                        "content_type":"text",
+                        "title":item,
+                        "payload":item
+                       }
+        card_data2.append(quickreply_array) 
+    
 
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":"Select your coloumn:",
+                            "quick_replies":card_data2
+                          }
+                        }
+    return json.dumps(response_object)
 
 
 
