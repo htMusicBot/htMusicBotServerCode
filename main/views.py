@@ -984,7 +984,7 @@ def matching_quickreplies(input_string , data , sender_id) :
     w =0
     for i in range(11):
 
-        if max(a)>0.10:
+        if max(a)>0.30:
             print "this is max ratio" + str(max(a))
 
             match = data[a.index(max(a))].Name
