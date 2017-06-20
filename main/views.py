@@ -1450,7 +1450,7 @@ def yearQuickreply(fbid):
                             "id":fbid
                           },
                           "message":{
-                            "text":"Select your coloumn:",
+                            "text":"Select an era",
                             "quick_replies":card_data2
                           }
                         }
