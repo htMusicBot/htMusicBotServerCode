@@ -96,10 +96,6 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
                     headers={"Content-Type": "application/json"},
                     data=response_msg)         
 
-    
-
-
-
 
 class MyChatBotView(generic.View):
 
@@ -598,7 +594,7 @@ def handle_quickreply(fbid,payload):
         p.save()
         singerName = Singer.Name.all()
         singerName = sorted(singerName, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter singer name' + singerName[0] + singerName[1])
+        return post_facebook_message(sender_id,'Enter singer name' + singerName[0].Name + singerName[1].Name)
 
         
     elif payload == 'lyricist':
