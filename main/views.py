@@ -24,8 +24,6 @@ import random
 
 
 
-
-
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
 
@@ -41,7 +39,7 @@ VERIFY_TOKEN = 'musicBot'
 PAGE_ACCESS_TOKEN = 'EAACCN4djHpkBAN7pazyZCHYSv14UPPYdUPCjmmbIFonmOR5we3mDrMTqYLJaByMjnD4LVjU0ZCZBCHgzsoeIGBgeldj3xULWYvoVAXHtufHoQaq4v0hN3GOxl4kvwmDgbkl7yqZCyCj74ZCbEiYMrpTpJM0AiAm0jJhZCnRTuqLwZDZD'
 
 
-#function to extraxt data of the person who sens a message
+#function to extraxt data of the person who sends the message
 def userdeatils(fbid):
     url = 'https://graph.facebook.com/v2.6/' + fbid + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=' + PAGE_ACCESS_TOKEN
     resp = requests.get(url=url)
@@ -280,28 +278,23 @@ class MyChatBotView(generic.View):
                         payload = message['message']['quick_reply']['payload']
                         print payload
                         if payload=='1930s':
-                            message_text = ['1930', '1931', '1932', '1933', '1934', '1935', '1936', '1937', '1938', '1939', '1940', '1941', '1942', '1943', '1944', '1945', '1946', '1947', '1948', '1949']
+                            message_text = ['1930', '1931', '1932', '1933', '1934', '1935', '1936', '1937', '1938', '1939']
+                        elif payload=='1940s':
+                            message_text = ['1940', '1941', '1942', '1943', '1944', '1945', '1946', '1947', '1948', '1949']
                         elif payload=='1950s':
-                            message_text = ['1950', '1951', '1952', '1953', '1954', '1955', '1956', '1957', '1958', '1959', '1960', '1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969']
+                            message_text = ['1950', '1951', '1952', '1953', '1954', '1955', '1956', '1957', '1958', '1959']
+                        elif payload=='1960s':
+                            message_text = ['1960', '1961', '1962', '1963', '1964', '1965', '1966', '1967', '1968', '1969']
                         elif payload=='1970s':
-                            message_text = ['1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979', '1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989']
+                            message_text = ['1970', '1971', '1972', '1973', '1974', '1975', '1976', '1977', '1978', '1979']
+                        elif payload=='1980s':
+                            message_text = ['1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989']
                         elif payload=='1990s':
                             message_text = ['1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999']
                         elif payload=='2000s':
-                            message_text = ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010']
-                        elif payload=='2011':
-                            message_text = ['2011']
-                        elif payload=='2012':
-                            message_text = ['2012']
-                        elif payload=='2013':
-                            message_text = ['2013']
-                        elif payload=='2014':
-                            message_text = ['2014']
-                        elif payload=='2015':
-                            message_text = ['2015']
-                        elif payload=='2016':
-                            message_text = ['2016']
-
+                            message_text = ['2000','2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+                        elif payload=='2010':
+                            message_text = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
                         a = Year.objects.filter(Year__in = message_text)
                         print a 
                        
@@ -580,24 +573,6 @@ def GetNextURL(url):
     return next_url
 
 
-# def matching_algo(input_string , data) :
-#     for item in data:
-
-#         a = []
-#         s = difflib.SequenceMatcher(None, item, input_string).ratio()
-#         a.append(s)
-
-
-#     for i in range(3):
-#         match = data[a.index(max(a))]
-#         matches = []
-#         matches.append(match)
-
-#         a.remove(max(a))
-
-#     return matches
-
-
 def doubleParameterQuery(requests):
     # a = Song.objects.get(YoutubeLink = 'http://www.youtube.com/embed/b8t9TinNumE')
     singer = Singer.objects.exclude(Name = 'Krishna')
@@ -621,7 +596,9 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'singer'
         p.save()
-        return post_facebook_message(sender_id,'Enter singer name like Krishna , Mika')
+        singerName = Singer.Name.all()
+        singerName = sorted(singerName, key=lambda x: random.random())
+        return post_facebook_message(sender_id,'Enter singer name' + singerName[0] + singerName[1])
 
         
     elif payload == 'lyricist':
@@ -704,12 +681,12 @@ def singerQuickreply(fbid):
                               }, 
                               {
                                 "content_type":"text",
-                                "title":"🕴 Cast",
+                                "title":"🕴 Actor/Actress",
                                 "payload":"cast"
                               }, 
                               {
                                 "content_type":"text",
-                                "title":"🌀 Mood/Category",
+                                "title":"🌀 Mood",
                                 "payload":"category"
                               },
                               {
@@ -1237,7 +1214,6 @@ def greetingButton():
           data = menu_object)
 
 
-
 def Category_quickreplies(sender_id):
     print "enetered category loop"
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
@@ -1443,8 +1419,9 @@ def Category_quickreplies(sender_id):
 
     return json.dumps(response_object)
 
+
 def yearQuickreply(fbid):
-    array = ['1930s','1950s','1970s','1990s','2000s','2011','2012','2013','2014','2015','2016']
+    array = ['1930s','1940s','1950s','1960s','1970s','1980s''1990s','2000s','2010s']
     card_data2 = []
     for item in array:
         quickreply_array = {
