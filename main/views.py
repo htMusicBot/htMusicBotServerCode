@@ -1421,7 +1421,7 @@ def Category_quickreplies(sender_id):
 
 
 def yearQuickreply(fbid):
-    array = ['1930s','1940s','1950s','1960s','1970s','1980s''1990s','2000s','2010s']
+    array = ['1930s','1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s']
     card_data2 = []
     for item in array:
         quickreply_array = {
