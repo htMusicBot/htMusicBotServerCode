@@ -594,26 +594,32 @@ def handle_quickreply(fbid,payload):
         p.save()
         singerName = Singer.objects.all()
         singerName = sorted(singerName, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter singer name' + singerName[0].Name + singerName[1].Name)
+        return post_facebook_message(sender_id,'Enter singer name like   ' +  singerName[0].Name + ' , ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'lyricist'
         p.save()
-        return post_facebook_message(sender_id,'Enter lyricist like sunil jha , raftaar')
+        lyricistName = Lyricist.objects.all()
+        lyricistName = sorted(lyricistName, key=lambda x: random.random())
+        return post_facebook_message(sender_id,'Enter lyricist like  ' + lyricistName[0].Name + ' , ' + lyricistName[1].Name)
                 
     elif payload == 'movieName':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'movieName'
         p.save()
-        return post_facebook_message(sender_id,'Enter movie name like my name is khan , bajirao mastani')
+        movieName = MovieName.objects.all()
+        movieName = sorted(movieName, key=lambda x: random.random())
+        return post_facebook_message(sender_id,'Enter movie name like  ' + movieName[0].Name + ' , ' + movieName[1].Name)
 
     elif payload == 'cast':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'cast'
         p.save()
-        return post_facebook_message(sender_id,'Enter actor/actress name like salman khan, shahid etc.')
+        Actor = Actor.objects.all()
+        Actor = sorted(Actor, key=lambda x: random.random())
+        return post_facebook_message(sender_id,'Enter actor/actress name like  ' + Actor[0].Name + ' , ' + Actor[1].Name)
 
     elif payload == 'category':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
