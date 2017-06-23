@@ -617,9 +617,9 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'cast'
         p.save()
-        Actor = Actor.objects.all()
-        Actor = sorted(Actor, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter actor/actress name like  ' + Actor[0].Name + ' , ' + Actor[1].Name)
+        actor = Actor.objects.all()
+        actor = sorted(actor, key=lambda x: random.random())
+        return post_facebook_message(sender_id,'Enter actor/actress name like  ' + actor[0].Name + ' , ' + actor[1].Name)
 
     elif payload == 'category':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
