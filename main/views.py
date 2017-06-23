@@ -592,7 +592,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'singer'
         p.save()
-        singerName = Singer.Name.all()
+        singerName = Singer.objects.all()
         singerName = sorted(singerName, key=lambda x: random.random())
         return post_facebook_message(sender_id,'Enter singer name' + singerName[0].Name + singerName[1].Name)
 
