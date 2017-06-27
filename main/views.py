@@ -24,35 +24,6 @@ sys.setdefaultencoding("utf-8")
 
 
 
-
-
-filterText = ['Click on any of the options below to start' , 'What kind of songs would you like to listen to? Select any category to explore' , 'What songs do you like? Select options from the categories to help me find a song of your choice' , 'I have music to suit every mood. Pick options from the categories below' , 'Help me decide what songs to play for you. Select from these options' ]
-
-songText = ['Tell me which song you have on your mind' , 'Enter some lyrics from the song' , 'Do you remember the words? Tell me!' ]
-
-singerText = ['Enter the name of any singer like' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
-
-lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
-
-movieText = ['Enter the name of any movie' , 'Is a song from a particular movie on your mind?'  , 'Which movie’s song would you like to hear now?' ]
-
-castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
-
-moodText = ['What kind of songs are you looking for?' , 'Tell me what kind of music you want right now. Choose from these options' , 'I’ll find music that suits your current mood. Tell me what you want to hear' ]
-
-yearText = ['In the mood for golden oldies or the latest hits? Choose from these options ', 'Are you looking for music from a particular era?' , 'I can find you music from a specific decade. Tell me what you want to hear']
-
-optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
-
-afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.']
-
-moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
-
-startOverText = ['Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
-
-
-
-
 #Some Global Variables goes here
 year_arr=['2016','2015','2014','2013','2012','2011','2010','2009','2008','2007','2000s','1990s','1980s','1970s','1960s','1950s','1940s','1930s']
 
@@ -623,7 +594,9 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'songName'
         p.save()
-        return post_facebook_message(fbid,'Enter song name')
+        songText = ['Tell me which song you have on your mind' , 'Enter some lyrics from the song' , 'Do you remember the words? Tell me!' ]
+        a = random.choice(songText)
+        return post_facebook_message(fbid , str(a))
 
     elif payload == 'singer':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -631,7 +604,9 @@ def handle_quickreply(fbid,payload):
         p.save()
         singerName = Singer.objects.all()
         singerName = sorted(singerName, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter singer name like   ' +  singerName[0].Name + ' , ' + singerName[1].Name)
+        singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
+        a = random.choice(singerText)
+        return post_facebook_message(sender_id,str(a) + ' like  ' +  singerName[0].Name + ' , ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -640,7 +615,9 @@ def handle_quickreply(fbid,payload):
         p.save()
         lyricistName = Lyricist.objects.all()
         lyricistName = sorted(lyricistName, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter lyricist like  ' + lyricistName[0].Name + ' , ' + lyricistName[1].Name)
+        lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
+        a = random.choice(lyricistText)
+        return post_facebook_message(sender_id,str(a) + ' like  ' + lyricistName[0].Name + ' , ' + lyricistName[1].Name)
                 
     elif payload == 'movieName':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -648,7 +625,9 @@ def handle_quickreply(fbid,payload):
         p.save()
         movieName = MovieName.objects.all()
         movieName = sorted(movieName, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter movie name like  ' + movieName[0].Name + ' , ' + movieName[1].Name)
+        movieText = ['Enter the name of any movie' , 'Is a song from a particular movie on your mind?'  , 'Which movie’s song would you like to hear now?' ]
+        a = random.choice(movieText)
+        return post_facebook_message(sender_id,str(a) +' like  ' + movieName[0].Name + ' , ' + movieName[1].Name)
 
     elif payload == 'cast':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -656,7 +635,9 @@ def handle_quickreply(fbid,payload):
         p.save()
         actor = Actor.objects.all()
         actor = sorted(actor, key=lambda x: random.random())
-        return post_facebook_message(sender_id,'Enter actor/actress name like  ' + actor[0].Name + ' , ' + actor[1].Name)
+        castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
+        a = random.choice(castText)
+        return post_facebook_message(sender_id,str(a) + ' like  ' + actor[0].Name + ' , ' + actor[1].Name)
 
     elif payload == 'category':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -674,6 +655,10 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
+        post_facebook_message(sender_id,'cards')
+        afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.']
+        a = random.choice(afterOptionText)
+        post_facebook_message(sender_id,str(a)) 
         post_facebook_message(sender_id,'moreSongs')
         # return post_facebook_message(sender_id,'ACards')
 
@@ -681,22 +666,32 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
+        moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+        a = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(a)) 
         return post_facebook_message(sender_id,'singerQuickreply') 
 
     elif payload == 'reset':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.delete()
+        startOverText = ['Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
+        a = random.choice(startOverText)
+        post_facebook_message(sender_id,str(a))
         return post_facebook_message(sender_id,'singerQuickreply')
 
 
 def singerQuickreply(fbid):
+
+    filterText = ['Click on any of the options below to start' , 'What kind of songs would you like to listen to? Select any category to explore' , 'What songs do you like? Select options from the categories to help me find a song of your choice' , 'I have music to suit every mood. Pick options from the categories below' , 'Help me decide what songs to play for you. Select from these options' ]
+    
+    a = random.choice(filterText)
     
     response_object =   {
                           "recipient":{
                             "id":fbid
                           },
                           "message":{
-                            "text":"How should i serve you with my delicious filters :",
+                            "text":str(a),
                             "quick_replies":[
                               {
                                 "content_type":"text",
@@ -994,7 +989,11 @@ def SongSearcher(sender_id):
     print json.dumps(response_object)
 
     # print response_object
-    post_facebook_message(sender_id,"Here you go with our closest matches ")  
+    optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
+
+    a = random.choice(optionText)
+
+    post_facebook_message(sender_id,str(a))   
 
     return json.dumps(response_object)
  
@@ -1169,7 +1168,10 @@ def songs_cards(sender_id , data , input_string):
     print json.dumps(response_object)
 
     # print response_object
-    post_facebook_message(sender_id,"Here you fo with our closest matches ")  
+    optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
+    a = random.choice(optionText)
+
+    post_facebook_message(sender_id,str(a))  
 
     return json.dumps(response_object)
         
@@ -1455,13 +1457,15 @@ def Category_quickreplies(sender_id):
         if number == 10:
             break       
 
-                    
+    
+    moodText = ['What kind of songs are you looking for?' , 'Tell me what kind of music you want right now. Choose from these options' , 'I’ll find music that suits your current mood. Tell me what you want to hear' ]
+    a = random.choice(moodText)
     response_object =  {
                             "recipient":{
                               "id":sender_id
                           },
                           "message":{
-                            "text":"you can choose any one of these Categories/Moods?",
+                            "text":str(a),
                             "quick_replies":card_data2
                           }
                         }
@@ -1477,6 +1481,8 @@ def Category_quickreplies(sender_id):
 
 def yearQuickreply(fbid):
     array = ['1930s','1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s']
+    yearText = ['In the mood for golden oldies or the latest hits? Choose from these options ', 'Are you looking for music from a particular era?' , 'I can find you music from a specific decade. Tell me what you want to hear']
+    a = random.choice(yearText)
     card_data2 = []
     for item in array:
         quickreply_array = {
@@ -1492,7 +1498,7 @@ def yearQuickreply(fbid):
                             "id":fbid
                           },
                           "message":{
-                            "text":"Select an Era",
+                            "text":str(a),
                             "quick_replies":card_data2
                           }
                         }
