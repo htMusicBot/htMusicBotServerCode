@@ -659,7 +659,7 @@ def handle_quickreply(fbid,payload):
 
 
         post_facebook_message(sender_id,'moreSongs')
-        # return post_facebook_message(sender_id,'ACards')
+        return post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
