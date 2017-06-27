@@ -18,6 +18,10 @@ import random
 from fuzzywuzzy import fuzz
 import random
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 
 
