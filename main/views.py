@@ -154,7 +154,7 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
                         #messages sent when any user sends the first message
-                        textTemplate = ['Welcome %s , Nice to see you here :)'%firstName , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%name , 'Hey %s ! Get ready for some Bollywood nostalgia.'%name , 'Hi %s , here is your one-stop destination for Bollywood music. '%name, 'Hello, %s . In the mood for some Bollywood tunes?'%name , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day. '%name ]
+                        textTemplate = ['Welcome %s , Nice to see you here :)'%firstName , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s ! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s , here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s . In the mood for some Bollywood tunes?'%firstName , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
                         # greetingTextTemplate = random.shuffle(greetingTextTemplate)
                         # text = greetingTextTemplate[0].decode('utf-8')
                         # print text
