@@ -83,6 +83,7 @@ def post_facebook_message(fbid,message_text):
                     headers={"Content-Type": "application/json"},
                     data=response_msg)
 
+
 def post_matching_quickreplies(fbid,message_text , data , input_string):
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
@@ -655,10 +656,8 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
-        # post_facebook_message(sender_id,'cards')
-        afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.']
-        a = random.choice(afterOptionText)
-        post_facebook_message(sender_id,str(a)) 
+
+
         post_facebook_message(sender_id,'moreSongs')
         # return post_facebook_message(sender_id,'ACards')
 
@@ -674,9 +673,6 @@ def handle_quickreply(fbid,payload):
     elif payload == 'reset':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.delete()
-        startOverText = ['Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
-        a = random.choice(startOverText)
-        post_facebook_message(sender_id,str(a))
         return post_facebook_message(sender_id,'singerQuickreply')
 
 
@@ -735,13 +731,15 @@ def singerQuickreply(fbid):
 
 
 def afterSongQuickreply(fbid):
-    
+    afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.','Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
+    a = random.choice(afterOptionText)
+     
     response_object =   {
                           "recipient":{
                             "id":fbid
                           },
                           "message":{
-                            "text":"What would you like to do ?:",
+                            "text":str(a),
                             "quick_replies":[
                               {
                                 "content_type":"text",
