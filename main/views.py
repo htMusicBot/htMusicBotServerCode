@@ -18,7 +18,7 @@ from requests import get
 from io import open
 import difflib
 import random
-from fuzzywuzzy import fuzz
+# from fuzzywuzzy import fuzz
 import random
 
 
@@ -49,6 +49,7 @@ def userdeatils(fbid):
 
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
+    
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 
     if message_text == 'singerQuickreply':
@@ -67,6 +68,9 @@ def post_facebook_message(fbid,message_text):
 
     elif message_text == 'yearQuickReply':
         response_msg = yearQuickreply(fbid)
+
+    elif message_text == 'moreSongs':
+        response_msg = moreSongs(fbid)    
 
         
 
@@ -453,8 +457,9 @@ def GetSongData(url,year):
         category = Category.objects.get_or_create(Name = item.strip())[0]
         song.Category.add(category)
 
+    print tableRow[4].text.strip().split('(')[0]
+    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text.strip().split('(')[0])[0]
 
-    movieName = MovieName.objects.get_or_create(Name = tableRow[4].text.strip())[0]
     song.MovieName = movieName
 
     year11 = Year.objects.get_or_create(Year = year.strip())[0]
@@ -637,7 +642,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
-        post_facebook_message(sender_id,'cards')
+        post_facebook_message(sender_id,'moreSongs')
         return post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
@@ -711,11 +716,11 @@ def afterSongQuickreply(fbid):
                           "message":{
                             "text":"What would you like to do ?:",
                             "quick_replies":[
-                              # {
-                              #   "content_type":"text",
-                              #   "title":"🎧 More Songs",
-                              #   "payload":"moreSongs"
-                              # },
+                              {
+                                "content_type":"text",
+                                "title":"🎧 More Songs",
+                                "payload":"moreSongs"
+                              },
                               {
                                 "content_type":"text",
                                 "title":"🎬 Filter More",
@@ -877,8 +882,17 @@ def SongSearcher(sender_id):
 
     # random.shuffle(c)
     number = 0
+    userdata = UserData.objects.get(Fbid = sender_id)
     for i in c:
+        # Song = Song.objects.get(SongName = i)
 
+        userdata.query.add(i)
+
+
+        
+
+        
+    for i in UserData.query.all():
         number = number + 1
         print number
         print "entered loop"
@@ -892,9 +906,9 @@ def SongSearcher(sender_id):
             singerNames = singerNames + str(item) + ' , '
 
 
-        
-        
+
         card_data = {
+
                   "title": i.SongName,
                   "subtitle": singerNames,
                   "image_url": song_img,
@@ -915,10 +929,16 @@ def SongSearcher(sender_id):
                    ]
                    }
 
-        card_data2.append(card_data) 
-        print "cards appended"   
-        if number == 5:
-            break       
+        card_data2.append(card_data)
+        userdata.query.remove(i) 
+
+        print "cards appended"
+        if number == 3:
+            break
+
+
+
+               
 
                     
     response_object = {
@@ -935,6 +955,7 @@ def SongSearcher(sender_id):
             }
         }
     }
+
 
     print "response dumped"
 
@@ -1446,7 +1467,82 @@ def yearQuickreply(fbid):
     return json.dumps(response_object)
 
 
+def moreSongs(sender_id):
+    number = 0
+    userdata = UserData.objects.get(Fbid = sender_id)
+    for i in UserData.query.all():
+        number = number + 1
+        print number
+        print "entered loop"
+        y = i.YoutubeLink
+        # arraySinger = []
+        x = y.split("/")
+        print "x = " + str(x)
+        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+        singerNames = ''
+        for item in i.Singer.all():
+            singerNames = singerNames + str(item) + ' , '
 
+
+
+        card_data = {
+
+                  "title": i.SongName,
+                  "subtitle": singerNames,
+                  "image_url": song_img,
+                  
+                  "buttons": [
+                  {
+                    "type":"web_url",
+                    "url":i.YoutubeLink,
+
+                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                    "title":"Play song",
+                    "webview_height_ratio": "compact"
+                  } ,
+                 
+                  {
+                    "type": "element_share"
+                   }
+                   ]
+                   }
+
+        card_data2.append(card_data)
+        userdata.query.remove(i) 
+
+        print "cards appended"
+        if number == 3:
+            break
+
+
+
+               
+
+                    
+    response_object = {
+      "recipient": {
+        "id": sender_id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    # print response_object
+    post_facebook_message(sender_id,"Here you go with our closest matches ")  
+
+    return json.dumps(response_object)
 
 
 
