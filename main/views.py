@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -10,8 +9,6 @@ import json
 import requests
 import csv
 from main.models import Singer , MusicDirector , Lyricist , MovieName , Actor , Category , Year ,Song ,UserData
-
-
 import urllib,urllib2,csv,requests,os,xlrd,string,re
 from bs4 import BeautifulSoup
 from requests import get
@@ -20,6 +17,34 @@ import difflib
 import random
 from fuzzywuzzy import fuzz
 import random
+
+
+
+greetingText = [ 'Welcome %s , Nice to see you here :)' , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)' , 'Hey %s ! Get ready for some Bollywood nostalgia.' , 'Hi %s , here is your one-stop destination for Bollywood music. ' , 'Hello, %s . In the mood for some Bollywood tunes?' , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day. ' ]
+
+filterText = ['Click on any of the options below to start' , 'What kind of songs would you like to listen to? Select any category to explore' , 'What songs do you like? Select options from the categories to help me find a song of your choice' , 'I have music to suit every mood. Pick options from the categories below' , 'Help me decide what songs to play for you. Select from these options' ]
+
+songText = ['Tell me which song you have on your mind' , 'Enter some lyrics from the song' , 'Do you remember the words? Tell me!' ]
+
+singerText = ['Enter the name of any singer like' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
+
+lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
+
+movieText = ['Enter the name of any movie' , 'Is a song from a particular movie on your mind?'  , 'Which movie’s song would you like to hear now?' ]
+
+castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
+
+moodText = ['What kind of songs are you looking for?' , 'Tell me what kind of music you want right now. Choose from these options' , 'I’ll find music that suits your current mood. Tell me what you want to hear' ]
+
+yearText = ['In the mood for golden oldies or the latest hits? Choose from these options ', 'Are you looking for music from a particular era?' , 'I can find you music from a specific decade. Tell me what you want to hear']
+
+optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
+
+afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.']
+
+moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+
+startOverText = ['Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
 
 
 
@@ -131,7 +156,8 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
                         #messages sent when any user sends the first message
-                        post_facebook_message(sender_id,'Hey! '+ name + "  this is your one stop solution for all your music cravings ")
+                        greetingText = random.shuffle(greetingText)
+                        post_facebook_message(sender_id,greetingText[0]% section)
                         userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
