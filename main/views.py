@@ -72,7 +72,7 @@ def post_facebook_message(fbid,message_text):
     elif message_text == 'moreSongs':
 
         response_msg = moreSongs(fbid)
-        post_facebook_message(sender_id,'ACards')    
+        # post_facebook_message(sender_id,'ACards')    
 
         
 
@@ -659,7 +659,7 @@ def handle_quickreply(fbid,payload):
 
 
         post_facebook_message(sender_id,'moreSongs')
-        
+
         post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
@@ -691,7 +691,7 @@ def handle_quickreply(fbid,payload):
         if not f :
             year = True
         print b
-
+        queryNull()
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         a = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(a)) 
@@ -935,92 +935,97 @@ def SongSearcher(sender_id):
     # random.shuffle(c)
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
-    for i in c:
-        # Song = Song.objects.get(SongName = i)
+    if c:
+        for i in c:
+            # Song = Song.objects.get(SongName = i)
 
-        userdata.query.add(i)
-
-
-        
-
-        
-    for i in userdata.query.all():
-        number = number + 1
-        print number
-        print "entered loop"
-        y = i.YoutubeLink
-        # arraySinger = []
-        x = y.split("/")
-        print "x = " + str(x)
-        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-        singerNames = ''
-        for item in i.Singer.all():
-            singerNames = singerNames + str(item) + ' , '
+            userdata.query.add(i)
 
 
+            
 
-        card_data = {
-
-                  "title": i.SongName,
-                  "subtitle": singerNames,
-                  "image_url": song_img,
-                  
-                  "buttons": [
-                  {
-                    "type":"web_url",
-                    "url":i.YoutubeLink,
-
-                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                    "title":"Play song",
-                    "webview_height_ratio": "compact"
-                  } ,
-                 
-                  {
-                    "type": "element_share"
-                   }
-                   ]
-                   }
-
-        card_data2.append(card_data)
-        userdata.query.remove(i) 
-
-        print "cards appended"
-        if number == 3:
-            break
+            
+        for i in userdata.query.all():
+            number = number + 1
+            print number
+            print "entered loop"
+            y = i.YoutubeLink
+            # arraySinger = []
+            x = y.split("/")
+            print "x = " + str(x)
+            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+            singerNames = ''
+            for item in i.Singer.all():
+                singerNames = singerNames + str(item) + ' , '
 
 
 
-               
+            card_data = {
 
-                    
-    response_object = {
-      "recipient": {
-        "id": sender_id
-      },
-      "message": {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": card_data2
+                      "title": i.SongName,
+                      "subtitle": singerNames,
+                      "image_url": song_img,
+                      
+                      "buttons": [
+                      {
+                        "type":"web_url",
+                        "url":i.YoutubeLink,
+
+                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                        "title":"Play song",
+                        "webview_height_ratio": "compact"
+                      } ,
+                     
+                      {
+                        "type": "element_share"
+                       }
+                       ]
+                       }
+
+            card_data2.append(card_data)
+            userdata.query.remove(i) 
+
+            print "cards appended"
+            if number == 3:
+                break
+
+
+
+                   
+
+                        
+        response_object = {
+          "recipient": {
+            "id": sender_id
+          },
+          "message": {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": card_data2
+                    }
                 }
             }
         }
-    }
 
 
-    print "response dumped"
+        print "response dumped"
 
-    print json.dumps(response_object)
+        print json.dumps(response_object)
 
-    # print response_object
-    optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
+        # print response_object
+        optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
-    a = random.choice(optionText)
+        a = random.choice(optionText)
 
-    post_facebook_message(sender_id,str(a))   
+        post_facebook_message(sender_id,str(a))   
 
-    return json.dumps(response_object)
+        return json.dumps(response_object)
+
+    else: 
+        post_facebook_message(sender_id,"sorry according to your filters couldint find an appropriate match") 
+            
  
 
 def matching_quickreplies(input_string , data , sender_id) :
@@ -1038,7 +1043,7 @@ def matching_quickreplies(input_string , data , sender_id) :
     matches = []
     quickreply_array = []
     w =0
-    for i in range(11):
+    for i in range(3):
 
         if max(a)>0.30:
             print "this is max ratio" + str(max(a))
@@ -1623,6 +1628,19 @@ def moreSongs(sender_id):
         userdata.save()
 
         # post_facebook_message(sender_id,'singerQuickreply')    
+
+def queryNull():
+    userdata = UserData.objects.get(Fbid = sender_id)
+
+    array = userdata.query.all()
+    if array:
+        for i in array:
+            userdata.query.remove(i)
+
+
+    else:
+        pass
+
 
 
 
