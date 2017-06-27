@@ -1583,6 +1583,8 @@ def moreSongs(sender_id):
 
     if not array:
         post_facebook_message(sender_id,"Sorry there are no more songs ")  
+        userdata.State='NULL'
+        userdata.save()
 
         post_facebook_message(sender_id,'singerQuickreply')    
 
