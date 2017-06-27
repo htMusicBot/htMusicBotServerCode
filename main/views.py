@@ -655,7 +655,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
-        post_facebook_message(sender_id,'cards')
+        # post_facebook_message(sender_id,'cards')
         afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.']
         a = random.choice(afterOptionText)
         post_facebook_message(sender_id,str(a)) 
