@@ -659,13 +659,14 @@ def handle_quickreply(fbid,payload):
 
 
         post_facebook_message(sender_id,'moreSongs')
-        
+
         post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
+        queryNull()
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         a = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(a)) 
@@ -1597,6 +1598,19 @@ def moreSongs(sender_id):
         userdata.save()
 
         # post_facebook_message(sender_id,'singerQuickreply')    
+
+def queryNull():
+    userdata = UserData.objects.get(Fbid = sender_id)
+
+    array = userdata.query.all()
+    if array:
+        for i in array:
+            userdata.query.remove(i)
+
+
+    else:
+        pass
+
 
 
 
