@@ -1500,77 +1500,85 @@ def yearQuickreply(fbid):
 def moreSongs(sender_id):
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
-    for i in userdata.query.all():
-        number = number + 1
-        print number
-        print "entered loop"
-        y = i.YoutubeLink
-        # arraySinger = []
-        x = y.split("/")
-        print "x = " + str(x)
-        song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-        singerNames = ''
-        for item in i.Singer.all():
-            singerNames = singerNames + str(item) + ' , '
+    array = userdata.query.all()
+    if array:
+        for i in array:
+            number = number + 1
+            print number
+            print "entered loop"
+            y = i.YoutubeLink
+            # arraySinger = []
+            x = y.split("/")
+            print "x = " + str(x)
+            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+            singerNames = ''
+            for item in i.Singer.all():
+                singerNames = singerNames + str(item) + ' , '
 
 
 
-        card_data = {
+            card_data = {
 
-                  "title": i.SongName,
-                  "subtitle": singerNames,
-                  "image_url": song_img,
-                  
-                  "buttons": [
-                  {
-                    "type":"web_url",
-                    "url":i.YoutubeLink,
+                      "title": i.SongName,
+                      "subtitle": singerNames,
+                      "image_url": song_img,
+                      
+                      "buttons": [
+                      {
+                        "type":"web_url",
+                        "url":i.YoutubeLink,
 
-                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                    "title":"Play song",
-                    "webview_height_ratio": "compact"
-                  } ,
-                 
-                  {
-                    "type": "element_share"
-                   }
-                   ]
-                   }
+                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                        "title":"Play song",
+                        "webview_height_ratio": "compact"
+                      } ,
+                     
+                      {
+                        "type": "element_share"
+                       }
+                       ]
+                       }
 
-        card_data2.append(card_data)
-        userdata.query.remove(i) 
-
-        print "cards appended"
-        if number == 3:
-            break
+            card_data2.append(card_data)
+            userdata.query.remove(i) 
 
 
 
-               
+            print "cards appended"
+            if number == 3:
+                break
 
-                    
-    response_object = {
-      "recipient": {
-        "id": sender_id
-      },
-      "message": {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": card_data2
+
+
+                   
+
+                        
+        response_object = {
+          "recipient": {
+            "id": sender_id
+          },
+          "message": {
+            "attachment": {
+              "type": "template",
+              "payload": {
+                "template_type": "generic",
+                "elements": card_data2
+                    }
                 }
             }
         }
-    }
+        post_facebook_message(sender_id,"Here you go with our closest matches ")  
 
+    if not array:
+        post_facebook_message(sender_id,"Sorry there are no more songs ")  
+
+        post_facebook_message(sender_id,'singerQuickreply')
 
     print "response dumped"
 
     print json.dumps(response_object)
 
     # print response_object
-    post_facebook_message(sender_id,"Here you go with our closest matches ")  
 
     return json.dumps(response_object)
 
