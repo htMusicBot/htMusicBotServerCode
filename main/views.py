@@ -156,7 +156,10 @@ class MyChatBotView(generic.View):
                         #messages sent when any user sends the first message
                         greetingTextTemplate = [ 'Welcome %s , Nice to see you here :)' , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)' , 'Hey %s ! Get ready for some Bollywood nostalgia.' , 'Hi %s , here is your one-stop destination for Bollywood music. ' , 'Hello, %s . In the mood for some Bollywood tunes?' , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day. ' ]
                         greetingTextTemplate = random.shuffle(greetingTextTemplate)
-                        post_facebook_message(sender_id , greetingTextTemplate[0])
+                        print greetingTextTemplate[0]
+                        text = greetingTextTemplate[0]%name
+                        print text
+                        post_facebook_message(sender_id , text )
                         userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
