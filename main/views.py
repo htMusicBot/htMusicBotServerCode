@@ -666,6 +666,32 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
+        y = UserData.objects.get(Fbid = fbid)
+        a = y.Cast.all()
+        if not a :
+            Cast = True
+
+        b = y.Singer.all()
+        if not b :
+            Singer = True
+
+        c = y.Lyricist.all()
+        if not c :
+            Lyricist = True
+
+        d = y.MovieName.all()
+        if not d :
+            MovieName = True
+
+        e = y.Category.all()
+        if not e :
+            Category = True
+
+        f = y.year.all()
+        if not f :
+            year = True
+        print b
+
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         a = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(a)) 
