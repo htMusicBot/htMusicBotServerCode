@@ -158,7 +158,7 @@ class MyChatBotView(generic.View):
                         # greetingTextTemplate = random.shuffle(greetingTextTemplate)
                         # text = greetingTextTemplate[0].decode('utf-8')
                         # print text
-                        post_facebook_message(sender_id , str(greetingTextTemplate[0].decode('utf-8')) )
+                        post_facebook_message(sender_id , str(greetingTextTemplate[0]) )
                         userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
