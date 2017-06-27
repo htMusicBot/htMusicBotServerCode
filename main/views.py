@@ -99,7 +99,9 @@ def post_facebook_message(fbid,message_text):
         response_msg = yearQuickreply(fbid)
 
     elif message_text == 'moreSongs':
-        response_msg = moreSongs(fbid)    
+
+        response_msg = moreSongs(fbid)
+        # post_facebook_message(sender_id,'ACards')    
 
         
 
@@ -673,7 +675,7 @@ def handle_quickreply(fbid,payload):
         p.State = 'NULL'
         p.save()
         post_facebook_message(sender_id,'moreSongs')
-        return post_facebook_message(sender_id,'ACards')
+        # return post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -1581,12 +1583,12 @@ def moreSongs(sender_id):
 
         return json.dumps(response_object)
 
-    if not array:
+    else:
         post_facebook_message(sender_id,"Sorry there are no more songs ")  
         userdata.State='NULL'
         userdata.save()
 
-        post_facebook_message(sender_id,'singerQuickreply')    
+        # post_facebook_message(sender_id,'singerQuickreply')    
 
 
 
