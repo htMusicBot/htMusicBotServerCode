@@ -161,7 +161,7 @@ class MyChatBotView(generic.View):
                         textTemplate = ['Welcome %s , Nice to see you here :)'%firstName , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s ! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s , here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s . In the mood for some Bollywood tunes?'%firstName , 'Hi %s , welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
                         a = random.choice(textTemplate)
                         print a
-                        post_facebook_message(sender_id , str(choice) )
+                        post_facebook_message(sender_id , str(a) )
                         userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
