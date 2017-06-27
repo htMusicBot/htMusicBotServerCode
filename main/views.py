@@ -154,11 +154,11 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
                         #messages sent when any user sends the first message
-                        # greetingTextTemplate = ['Welcome %s , Nice to see you here :)'%name , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%name , 'Hey %s ! Get ready for some Bollywood nostalgia.'%name , 'Hi %s , here is your one-stop destination for Bollywood music. '%name, 'Hello, %s . In the mood for some Bollywood tunes?'%name , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day. '%name ]
+                        greetingTextTemplate = ['Welcome %s , Nice to see you here :)'%name , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%name , 'Hey %s ! Get ready for some Bollywood nostalgia.'%name , 'Hi %s , here is your one-stop destination for Bollywood music. '%name, 'Hello, %s . In the mood for some Bollywood tunes?'%name , 'Hi %s , welcome to HT’s Music Bot. I have Bollywood tunes for you to brighten the day. '%name ]
                         # greetingTextTemplate = random.shuffle(greetingTextTemplate)
                         # text = greetingTextTemplate[0].decode('utf-8')
                         # print text
-                        post_facebook_message(sender_id , 'text' )
+                        post_facebook_message(sender_id , greetingTextTemplate[0] )
                         userInstance.delete()
                         # post_facebook_message(sender_id , 'send us your craving in the following format and we will serve you the best we can . ')
                         # post_facebook_message(sender_id,'#Songname *Singers $Actorsinsong !yourmood')
