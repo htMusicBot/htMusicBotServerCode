@@ -1571,18 +1571,20 @@ def moreSongs(sender_id):
         }
         post_facebook_message(sender_id,"Here you go with our closest matches ")  
 
+    
+
+        print "response dumped"
+
+        print json.dumps(response_object)
+
+        # print response_object
+
+        return json.dumps(response_object)
+
     if not array:
         post_facebook_message(sender_id,"Sorry there are no more songs ")  
 
-        post_facebook_message(sender_id,'singerQuickreply')
-
-    print "response dumped"
-
-    print json.dumps(response_object)
-
-    # print response_object
-
-    return json.dumps(response_object)
+        post_facebook_message(sender_id,'singerQuickreply')    
 
 
 
