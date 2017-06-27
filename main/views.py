@@ -1575,8 +1575,11 @@ def moreSongs(sender_id):
                 }
             }
         }
-        post_facebook_message(sender_id,"Here you go with our closest matches ")  
+        optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
+        a = random.choice(optionText)
+
+        post_facebook_message(sender_id,str(a)) 
     
 
         print "response dumped"
