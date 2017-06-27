@@ -1500,6 +1500,8 @@ def yearQuickreply(fbid):
 def moreSongs(sender_id):
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
+    card_data2 = []
+
     array = userdata.query.all()
     if array:
         for i in array:
