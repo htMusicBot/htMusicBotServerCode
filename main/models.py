@@ -94,6 +94,7 @@ class UserData(models.Model):
     Category = models.ManyToManyField(Category, null = True)
     # issue = models.CharField(max_length = 1000, default = 'NULL')
     year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
+    query  = models.ManyToManyField(Song, null = True) 
 
 
 
