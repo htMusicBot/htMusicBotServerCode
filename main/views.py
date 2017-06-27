@@ -1500,7 +1500,7 @@ def yearQuickreply(fbid):
 def moreSongs(sender_id):
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
-    for i in UserData.query.all():
+    for i in userdata.query.all():
         number = number + 1
         print number
         print "entered loop"
