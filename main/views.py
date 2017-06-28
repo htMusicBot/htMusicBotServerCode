@@ -1001,7 +1001,7 @@ def SongSearcher(sender_id):
         print cast
 
         b = y.Singer.all()
-        Singer = Trues
+        Singer = True
         if not b :
             Singer = False
 
