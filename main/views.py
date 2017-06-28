@@ -988,44 +988,59 @@ def SongSearcher(sender_id):
         optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
 
-        a = random.choice(optionText)
+        options = random.choice(optionText)
+
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
         a = y.Cast.all()
         print a
-        cast = False
+        cast = True
         if not a :
-            Cast = True
+            Cast = False
         print cast
 
-        # b = y.Singer.all()
-        # if not b :
-        #     Singer = True
+        b = y.Singer.all()
+        Singer = Trues
+        if not b :
+            Singer = False
 
-        # c = y.Lyricist.all()
-        # if not c :
-        #     Lyricist = True
+        c = y.Lyricist.all()
+        Lyricist = True
+        if not c :
+            Lyricist = False
 
-        # d = y.MovieName.all()
-        # if not d :
-        #     MovieName = True
+        d = y.MovieName.all()
+        MovieName = True
+        if not d :
+            MovieName = False
 
-        # e = y.Category.all()
-        # if not e :
-        #     Category = True
+        e = y.Category.all()
+        Category = True
+        if not e :
+            Category = False
 
-        # f = y.year.all()
-        # if not f :
-        #     year = True
-        # print b
+        f = y.year.all()
+        year = True
+        if not f :
+            year = False
+        print b
+
+        optionSelected = []
+        if cast:
+            optionSelected.append(a)
+        print optionSelected
+        if Singer:
+            optionSelected.append(b)
+        print optionSelected
+
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
-        b = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(b)) 
+        filerOptions = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(filerOptions)) 
 
 
-        post_facebook_message(sender_id,str(a))   
+        post_facebook_message(sender_id,str(options))   
 
         return json.dumps(response_object)
 
