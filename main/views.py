@@ -993,8 +993,8 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        # a = y.Cast.all()
-        a = Category.objects.filter(Name__in = y.Cast.all())
+        aa = y.Cast.all()
+        a = Category.objects.filter(Name__in = aa)
         print a
         cast = True
         if not a :
@@ -1002,8 +1002,8 @@ def SongSearcher(sender_id):
         print cast
         print 'hhiiii'
 
-        # b = y.Singer.all()
-        b = Category.objects.filter(Name__in = y.Singer.all())
+        bb = y.Singer.all()
+        b = Category.objects.filter(Name__in = bb)
         singer = True
         if not b :
             singer = False
@@ -1012,7 +1012,7 @@ def SongSearcher(sender_id):
 
 
         # c = y.Lyricist.all()
-        c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
+        cc = Lyricist.objects.filter(Name__in = cc)
         lyricist = True
         if not c :
             lyricist = False
@@ -1022,8 +1022,8 @@ def SongSearcher(sender_id):
         if not d :
             movieName = False
 
-        # e = y.Category.all()
-        e = Category.objects.filter(Name__in = y.Category.all())
+        ee = y.Category.all()
+        e = Category.objects.filter(Name__in = ee)
         category = True
         if not e :
             category = False
@@ -1244,8 +1244,8 @@ def songs_cards(sender_id , data , input_string):
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     y = UserData.objects.get(Fbid = sender_id)
     print y
-    # a = y.Cast.all()
-    a = Category.objects.filter(Name__in = y.Cast.all())
+    aa = y.Cast.all()
+    a = Category.objects.filter(Name__in = aa)
     print a
     cast = True
     if not a :
@@ -1253,8 +1253,8 @@ def songs_cards(sender_id , data , input_string):
     print cast
     print 'hhiiii'
 
-    # b = y.Singer.all()
-    b = Category.objects.filter(Name__in = y.Singer.all())
+    bb = y.Singer.all()
+    b = Category.objects.filter(Name__in = bb)
     singer = True
     if not b :
         singer = False
@@ -1263,7 +1263,7 @@ def songs_cards(sender_id , data , input_string):
 
 
     # c = y.Lyricist.all()
-    c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
+    cc = Lyricist.objects.filter(Name__in = cc)
     lyricist = True
     if not c :
         lyricist = False
@@ -1273,19 +1273,14 @@ def songs_cards(sender_id , data , input_string):
     if not d :
         movieName = False
 
-    # e = y.Category.all()
-    e = Category.objects.filter(Name__in = y.Category.all())
+    ee = y.Category.all()
+    e = Category.objects.filter(Name__in = ee)
     category = True
     if not e :
         category = False
 
 
     f = Year.objects.filter(Year__in = y.year)
-    year = True
-    if not f :
-        year = False
-
-    f = Year.objects.filter(Year = y.year)
     year = True
     if not f :
         year = False
@@ -1728,8 +1723,8 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        # a = y.Cast.all()
-        a = Category.objects.filter(Name__in = y.Cast.all())
+        aa = y.Cast.all()
+        a = Category.objects.filter(Name__in = aa)
         print a
         cast = True
         if not a :
@@ -1737,8 +1732,8 @@ def moreSongs(sender_id):
         print cast
         print 'hhiiii'
 
-        # b = y.Singer.all()
-        b = Category.objects.filter(Name__in = y.Singer.all())
+        bb = y.Singer.all()
+        b = Category.objects.filter(Name__in = bb)
         singer = True
         if not b :
             singer = False
@@ -1747,7 +1742,7 @@ def moreSongs(sender_id):
 
 
         # c = y.Lyricist.all()
-        c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
+        cc = Lyricist.objects.filter(Name__in = cc)
         lyricist = True
         if not c :
             lyricist = False
@@ -1757,8 +1752,8 @@ def moreSongs(sender_id):
         if not d :
             movieName = False
 
-        # e = y.Category.all()
-        e = Category.objects.filter(Name__in = y.Category.all())
+        ee = y.Category.all()
+        e = Category.objects.filter(Name__in = ee)
         category = True
         if not e :
             category = False
