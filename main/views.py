@@ -1140,8 +1140,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     elif len(quickreply_array) == 1:
         pass                  
                 
-    else:
-        response_object =   {
+    
+    response_object =   {
                                     "recipient":{
                                       "id":sender_id
                                   },
