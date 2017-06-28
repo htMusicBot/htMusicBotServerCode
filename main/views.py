@@ -1245,7 +1245,8 @@ def songs_cards(sender_id , data , input_string):
     if cc :
         optionSelected.append(cc[0].Name)
 
-    d = MovieName.objects.filter(Name__in = y.MovieName)
+    # d = MovieName.objects.filter(Name__in = y.MovieName)
+    d = y.MovieName
     if not d :
         optionSelected.append(d[0].Name)
 
@@ -1254,7 +1255,8 @@ def songs_cards(sender_id , data , input_string):
         optionSelected.append(ee[0].Name)
 
 
-    f = Year.objects.filter(Year__in = y.year)
+    # f = Year.objects.filter(Year__in = y.year)
+    f = y.year
     if f:
         optionSelected.append(f[0].Year)
 
