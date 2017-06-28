@@ -1005,13 +1005,13 @@ def SongSearcher(sender_id):
 
         bb = y.Singer.all()
         if bb :
-            optionSelected.append(bb[0].Name)
+            optionSelected.append(bb[0])
         print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            optionSelected.append(cc[0].Name)
+            optionSelected.append(cc[0])
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
@@ -1021,7 +1021,7 @@ def SongSearcher(sender_id):
 
         ee = y.Category.all()
         if ee:
-            optionSelected.append(ee[0].Name)
+            optionSelected.append(ee[0])
 
 
         # f = Year.objects.filter(Year__in = y.year)
@@ -1033,14 +1033,12 @@ def SongSearcher(sender_id):
         print 'array aagatye'
         print optionSelected
 
+        optionSelected = str(optionSelected)
+
         
-        moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
-
-
-
-        post_facebook_message(sender_id,str(optionSelected))
 
         post_facebook_message(sender_id,str(filerOptions))    
 
@@ -1240,13 +1238,13 @@ def songs_cards(sender_id , data , input_string):
 
     bb = y.Singer.all()
     if bb :
-        optionSelected.append(bb[0].Name)
+        optionSelected.append(bb[0])
     print 'hhhhhhhhhhhh'
 
 
     cc = y.Lyricist.all()
     if cc :
-        optionSelected.append(cc[0].Name)
+        optionSelected.append(cc[0])
 
     # d = MovieName.objects.filter(Name__in = y.MovieName)
     d = y.MovieName
@@ -1256,7 +1254,7 @@ def songs_cards(sender_id , data , input_string):
 
     ee = y.Category.all()
     if ee:
-        optionSelected.append(ee[0].Name)
+        optionSelected.append(ee[0])
 
 
     # f = Year.objects.filter(Year__in = y.year)
@@ -1269,13 +1267,12 @@ def songs_cards(sender_id , data , input_string):
     print optionSelected
 
     
-    moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+    optionSelected = str(optionSelected)
+
+        
+    moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
     filerOptions = random.choice(moreFiltersOptions)
     post_facebook_message(sender_id,str(options))
-
-
-
-    post_facebook_message(sender_id,str(optionSelected))
 
     post_facebook_message(sender_id,str(filerOptions)) 
 
@@ -1703,13 +1700,13 @@ def moreSongs(sender_id):
 
         bb = y.Singer.all()
         if bb :
-            optionSelected.append(bb[0].Name)
+            optionSelected.append(bb[0])
         print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            optionSelected.append(cc[0].Name)
+            optionSelected.append(cc[0])
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
@@ -1719,7 +1716,7 @@ def moreSongs(sender_id):
 
         ee = y.Category.all()
         if ee:
-            optionSelected.append(ee[0].Name)
+            optionSelected.append(ee[0])
 
 
         # f = Year.objects.filter(Year__in = y.year)
@@ -1728,17 +1725,14 @@ def moreSongs(sender_id):
             optionSelected.append(f)
 
         
-        print 'array aagatye'
+        print 'array aagaye'
         print optionSelected
+        optionSelected = str(optionSelected)
 
         
-        moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
-
-
-
-        post_facebook_message(sender_id,str(optionSelected))
 
         post_facebook_message(sender_id,str(filerOptions))     
     
