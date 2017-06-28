@@ -1028,7 +1028,6 @@ def SongSearcher(sender_id):
         print 'array aagaye'
         print optionSelected
         selectedOtions = ''
-        optionSelected = str(optionSelected)
         for i in optionSelected:
 
             selectedOtions = selectedOtions + str(i)
@@ -1309,7 +1308,6 @@ def songs_cards(sender_id , data , input_string):
     print 'array aagaye'
     print optionSelected
     selectedOtions = ''
-    optionSelected = str(optionSelected)
     for i in optionSelected:
 
         selectedOtions = selectedOtions + str(i)
@@ -1766,7 +1764,6 @@ def moreSongs(sender_id):
         print 'array aagaye'
         print optionSelected
         selectedOtions = ''
-        optionSelected = str(optionSelected)
         for i in optionSelected:
             selectedOtions = selectedOtions + str(i)
 
