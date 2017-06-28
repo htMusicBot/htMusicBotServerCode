@@ -991,15 +991,13 @@ def SongSearcher(sender_id):
         options = random.choice(optionText)
 
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()[0]
-        print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
-        cast = True
-        if not a:
-            cast = False
+        optionSelected.append(a)
         print cast
         print 'hhiiii'
 
@@ -1036,9 +1034,9 @@ def SongSearcher(sender_id):
         #     year = False
 
 
-        optionSelected = []
-        if cast:
-            optionSelected.append(aa)
+        # optionSelected = []
+        # if cast:
+        #     optionSelected.append(aa)
         # if singer:
         #     optionSelected.append(b[0])
         # if lyricist:
@@ -1243,15 +1241,13 @@ def songs_cards(sender_id , data , input_string):
     options = random.choice(optionText)
 
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+    optionSelected = []
     y = UserData.objects.get(Fbid = sender_id)
     print y
     aa = y.Cast.all()[0]
-    print str(aa) + 'hiiiiiiiiiiiiiiiiiii'
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
-    cast = True
-    if not a:
-        cast = False
+    optionSelected.append(a)
     print cast
     print 'hhiiii'
 
@@ -1287,9 +1283,9 @@ def songs_cards(sender_id , data , input_string):
     # if not f :
     #     year = False
 
-    optionSelected = []
-    if cast:
-        optionSelected.append(aa)
+    
+    # if cast:
+    #     optionSelected.append(a)
     # if singer:
     #     optionSelected.append(b[0])
     # if lyricist:
@@ -1723,18 +1719,17 @@ def moreSongs(sender_id):
         options = random.choice(optionText)
 
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()[0]
-        print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
-        cast = True
-        if not a :
-            cast = False
+        optionSelected.append(a)
         print cast
         print 'hhiiii'
 
+        
         # bb = y.Singer.all()
         # b = Singer.objects.filter(Name__in = bb)
         # singer = True
@@ -1769,9 +1764,9 @@ def moreSongs(sender_id):
 
         
 
-        optionSelected = []
-        if cast:
-            optionSelected.append(aa)
+        # optionSelected = []
+        # if cast:
+        #     optionSelected.append(aa)
         # if singer:
         #     optionSelected.append(b[0])
         # if lyricist:
