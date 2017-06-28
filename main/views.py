@@ -1005,74 +1005,101 @@ def SongSearcher(sender_id):
 
 def matching_quickreplies(input_string , data , sender_id) :
     a = []
-    for item in data:
-        print "i am data" + str(item.Name)
-
-        # s = fuzz.ratio(item.Name, input_string)
-        s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
-        a.append(s)
-        print s 
-
-    print a     
-
-    matches = []
-    quickreply_array = []
     w =0
-    for i in range(3):
+    quickreply_array = [] 
+    for item in data:
+        if input_string in item.Name:
 
-        if max(a)>0.30:
-            print "this is max ratio" + str(max(a))
 
-            match = data[a.index(max(a))].Name
             
 
-            matches.append(match)
-
-            a.remove(max(a))
-
-            print match
             quickreply_data = {
                                 "content_type":"text",
-                                "title":match,
-                                "payload":match
+                                "title":item.Name,
+                                "payload":item.Name
                               }
 
             quickreply_array.append(quickreply_data)
 
-    
 
-    
-            # post_facebook_message(sender_id,match)
+
             w = w+1
-            print "debugging  " + str(w)
 
 
-        elif w==0 :
-            print "no match found" 
-            post_facebook_message(sender_id,"No  matches found") 
-            post_facebook_message(sender_id,"singerQuickreply")   
-            print "this is array " + str(quickreply_array)
-            break
-            
-
-    response_object =   {
-                            "recipient":{
-                              "id":sender_id
-                          },
-                          "message":{
-                            "text":"Did you mean?",
-                            "quick_replies":quickreply_array
-                          }
-                        }
-
-    # print response_object
 
 
-    x = json.dumps(response_object)    
 
-    print x   
 
-    return x
+    if not quickreply_array:
+        print "i am data" + str(item.Name)
+
+         # s = fuzz.ratio(item.Name, input_string)
+        s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
+        a.append(s)
+        print s 
+
+        print a     
+
+        matches = []
+       
+        for i in range(3):
+
+            if max(a)>0.30:
+                print "this is max ratio" + str(max(a))
+
+                match = data[a.index(max(a))].Name
+                
+
+                matches.append(match)
+
+                a.remove(max(a))
+
+                print match
+                quickreply_data = {
+                                    "content_type":"text",
+                                    "title":match,
+                                    "payload":match
+                                  }
+
+                quickreply_array.append(quickreply_data)
+
+        
+
+        
+                # post_facebook_message(sender_id,match)
+                w = w+1
+                print "debugging  " + str(w)
+
+
+    elif w==0 :
+                print "no match found" 
+                post_facebook_message(sender_id,"No  matches found") 
+                post_facebook_message(sender_id,"singerQuickreply")   
+                print "this is array " + str(quickreply_array)
+                break  
+
+    elif len(quickreply_array) == 1:
+        pass                  
+                
+    else:
+        response_object =   {
+                                    "recipient":{
+                                      "id":sender_id
+                                  },
+                                  "message":{
+                                    "text":"Did you mean?",
+                                    "quick_replies":quickreply_array
+                                  }
+                                }
+
+        # print response_object
+
+
+        x = json.dumps(response_object)    
+
+        print x   
+
+        return x
 
 
 def songs_cards(sender_id , data , input_string):
