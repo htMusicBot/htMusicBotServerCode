@@ -1137,28 +1137,29 @@ def matching_quickreplies(input_string , data , sender_id) :
                 print "this is array " + str(quickreply_array)
                
 
+
     elif len(quickreply_array) == 1:
         pass                  
                 
-    
-    response_object =   {
-                                    "recipient":{
-                                      "id":sender_id
-                                  },
-                                  "message":{
-                                    "text":"Did you mean?",
-                                    "quick_replies":quickreply_array
-                                  }
-                                }
+    else:
+        response_object =   {
+                                        "recipient":{
+                                          "id":sender_id
+                                      },
+                                      "message":{
+                                        "text":"Did you mean?",
+                                        "quick_replies":quickreply_array
+                                      }
+                                    }
 
-        # print response_object
+            # print response_object
 
 
-    x = json.dumps(response_object)    
+        x = json.dumps(response_object)    
 
-    print x   
+        print x   
 
-    return x
+        return x
 
 
 def songs_cards(sender_id , data , input_string):
