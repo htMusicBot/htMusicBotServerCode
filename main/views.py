@@ -1002,64 +1002,44 @@ def SongSearcher(sender_id):
             optionSelected.append(aa[0].Name)
         print 'hhiiii'
 
-        # bb = y.Singer.all()
-        # b = Singer.objects.filter(Name__in = bb)
-        # singer = True
-        # if not b :
-        #     singer = False
-        # print 'hhhhhhhhhhhh'
+
+        bb = y.Singer.all()
+        if bb :
+            optionSelected.append(bb[0].Name)
+        print 'hhhhhhhhhhhh'
 
 
+        cc = y.Lyricist.all()
+        if cc :
+            optionSelected.append(cc[0].Name)
 
-        # cc = y.Lyricist.all()
-        # c = Lyricist.objects.filter(Name__in = cc)
-        # lyricist = True
-        # if not c :
-        #     lyricist = False
+        d = MovieName.objects.filter(Name__in = y.MovieName)
+        if not d :
+            optionSelected.append(d)
 
-        # d = MovieName.objects.filter(Name__in = y.MovieName)
-        # movieName = True
-        # if not d :
-        #     movieName = False
-
-        # ee = y.Category.all()
-        # e = Category.objects.filter(Name__in = ee)
-        # category = True
-        # if not e :
-        #     category = False
+        ee = y.Category.all()
+        if ee:
+            optionSelected.append(ee[0].Name)
 
 
-        # f = Year.objects.filter(Year__in = y.year)
-        # year = True
-        # if not f :
-        #     year = False
+        f = Year.objects.filter(Year__in = y.year)
+        if f:
+            optionSelected.append(f)
 
-
-        # optionSelected = []
-        # if cast:
-        #     optionSelected.append(aa)
-        # if singer:
-        #     optionSelected.append(b[0])
-        # if lyricist:
-        #     optionSelected.append(c[0])
-        # if movieName:
-        #     optionSelected.append(d[0])
-        # if category:
-        #     optionSelected.append(e[0])
-        # if year:
-        #     optionSelected.append(f[0])
-        print 'array aagaye'
+        
+        print 'array aagatye'
         print optionSelected
 
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
-    
-    
+
+
+
         post_facebook_message(sender_id,str(optionSelected))
 
-        post_facebook_message(sender_id,str(filerOptions))     
+        post_facebook_message(sender_id,str(filerOptions))    
 
         return json.dumps(response_object)
 
@@ -1254,65 +1234,44 @@ def songs_cards(sender_id , data , input_string):
         optionSelected.append(aa[0].Name)
     print 'hhiiii'
 
-    # bb = y.Singer.all()
-    # b = Singer.objects.filter(Name__in = bb)
-    # singer = True
-    # if not b :
-    #     singer = False
-    # print 'hhhhhhhhhhhh'
+
+    bb = y.Singer.all()
+    if bb :
+        optionSelected.append(bb[0].Name)
+    print 'hhhhhhhhhhhh'
 
 
+    cc = y.Lyricist.all()
+    if cc :
+        optionSelected.append(cc[0].Name)
 
-    # cc = y.Lyricist.all()
-    # c = Lyricist.objects.filter(Name__in = cc)
-    # lyricist = True
-    # if not c :
-    #     lyricist = False
+    d = MovieName.objects.filter(Name__in = y.MovieName)
+    if not d :
+        optionSelected.append(d)
 
-    # d = MovieName.objects.filter(Name__in = y.MovieName)
-    # movieName = True
-    # if not d :
-    #     movieName = False
-
-    # ee = y.Category.all()
-    # e = Category.objects.filter(Name__in = ee)
-    # category = True
-    # if not e :
-    #     category = False
+    ee = y.Category.all()
+    if ee:
+        optionSelected.append(ee[0].Name)
 
 
-    # f = Year.objects.filter(Year__in = y.year)
-    # year = True
-    # if not f :
-    #     year = False
+    f = Year.objects.filter(Year__in = y.year)
+    if f:
+        optionSelected.append(f)
 
     
-    # if cast:
-    #     optionSelected.append(a)
-    # if singer:
-    #     optionSelected.append(b[0])
-    # if lyricist:
-    #     optionSelected.append(c[0])
-    # if movieName:
-    #     optionSelected.append(d[0])
-    # if category:
-    #     optionSelected.append(e[0])
-    # if year:
-    #     optionSelected.append(f[0])
-
-    print 'array aagaye'
+    print 'array aagatye'
     print optionSelected
 
     
     moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
     filerOptions = random.choice(moreFiltersOptions)
     post_facebook_message(sender_id,str(options))
-    
-    
-    post_facebook_message(sender_id,str(optionSelected))
-    
 
-    post_facebook_message(sender_id,str(filerOptions))   
+
+
+    post_facebook_message(sender_id,str(optionSelected))
+
+    post_facebook_message(sender_id,str(filerOptions)) 
 
     return json.dumps(response_object)
         
@@ -1736,53 +1695,30 @@ def moreSongs(sender_id):
         print 'hhiiii'
 
 
-        # bb = y.Singer.all()
-        # b = Singer.objects.filter(Name__in = bb)
-        # singer = True
-        # if not b :
-        #     singer = False
-        # print 'hhhhhhhhhhhh'
+        bb = y.Singer.all()
+        if bb :
+            optionSelected.append(bb[0].Name)
+        print 'hhhhhhhhhhhh'
 
 
+        cc = y.Lyricist.all()
+        if cc :
+            optionSelected.append(cc[0].Name)
 
-        # cc = y.Lyricist.all()
-        # c = Lyricist.objects.filter(Name__in = cc)
-        # lyricist = True
-        # if not c :
-        #     lyricist = False
+        d = MovieName.objects.filter(Name__in = y.MovieName)
+        if not d :
+            optionSelected.append(d)
 
-        # d = MovieName.objects.filter(Name__in = y.MovieName)
-        # movieName = True
-        # if not d :
-        #     movieName = False
-
-        # ee = y.Category.all()
-        # e = Category.objects.filter(Name__in = ee)
-        # category = True
-        # if not e :
-        #     category = False
+        ee = y.Category.all()
+        if ee:
+            optionSelected.append(ee[0].Name)
 
 
-        # f = Year.objects.filter(Year__in = y.year)
-        # year = True
-        # if not f :
-        #     year = False
+        f = Year.objects.filter(Year__in = y.year)
+        if f:
+            optionSelected.append(f)
 
         
-
-        # optionSelected = []
-        # if cast:
-        #     optionSelected.append(aa)
-        # if singer:
-        #     optionSelected.append(b[0])
-        # if lyricist:
-        #     optionSelected.append(c[0])
-        # if movieName:
-        #     optionSelected.append(d[0])
-        # if category:
-        #     optionSelected.append(e[0])
-        # if year:
-        #     optionSelected.append(f[0])
         print 'array aagatye'
         print optionSelected
 
@@ -1790,6 +1726,8 @@ def moreSongs(sender_id):
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
+
+
 
         post_facebook_message(sender_id,str(optionSelected))
 
