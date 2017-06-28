@@ -1033,18 +1033,22 @@ def SongSearcher(sender_id):
 
         optionSelected = []
         if cast:
-            optionSelected.append(a)
+            optionSelected.append(a[0])
+        print optionSelected
         if singer:
-            optionSelected.append(b)
+            optionSelected.append(b[0])
+        print optionSelected
         if lyricist:
-            optionSelected.append(c)
+            optionSelected.append(c[0])
+        print optionSelected
         if movieName:
-            optionSelected.append(d)
+            optionSelected.append(d[0])
+        print optionSelected
         if category:
-            optionSelected.append(e)
+            optionSelected.append(e[0])
+        print optionSelected
         if year:
-            optionSelected.append(f)
-        optionSelected = json.dumps(optionSelected)
+            optionSelected.append(f[0])
         print optionSelected
 
         
@@ -1281,23 +1285,22 @@ def songs_cards(sender_id , data , input_string):
 
     optionSelected = []
     if cast:
-        optionSelected.append(a)
+        optionSelected.append(a[0])
     print optionSelected
     if singer:
-        optionSelected.append(b)
+        optionSelected.append(b[0])
     print optionSelected
     if lyricist:
-        optionSelected.append(c)
+        optionSelected.append(c[0])
     print optionSelected
     if movieName:
-        optionSelected.append(d)
+        optionSelected.append(d[0])
     print optionSelected
     if category:
-        optionSelected.append(e)
+        optionSelected.append(e[0])
     print optionSelected
     if year:
-        optionSelected.append(f)
-    optionSelected = json.dumps(optionSelected)
+        optionSelected.append(f[0])
     print optionSelected
 
     
@@ -1763,23 +1766,22 @@ def moreSongs(sender_id):
 
         optionSelected = []
         if cast:
-            optionSelected.append(a)
+            optionSelected.append(a[0])
         print optionSelected
         if singer:
-            optionSelected.append(b)
+            optionSelected.append(b[0])
         print optionSelected
         if lyricist:
-            optionSelected.append(c)
+            optionSelected.append(c[0])
         print optionSelected
         if movieName:
-            optionSelected.append(d)
+            optionSelected.append(d[0])
         print optionSelected
         if category:
-            optionSelected.append(e)
+            optionSelected.append(e[0])
         print optionSelected
         if year:
-            optionSelected.append(f)
-        optionSelected = json.dumps(optionSelected)
+            optionSelected.append(f[0])
         print optionSelected
 
         
