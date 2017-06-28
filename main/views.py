@@ -1054,10 +1054,12 @@ def SongSearcher(sender_id):
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(filerOptions)) 
-
+        post_facebook_message(sender_id,str(options))
+    
+    
         post_facebook_message(sender_id,optionSelected)
-        post_facebook_message(sender_id,str(options))   
+
+        post_facebook_message(sender_id,str(filerOptions))     
 
         return json.dumps(response_object)
 
@@ -1303,11 +1305,12 @@ def songs_cards(sender_id , data , input_string):
     
     moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
     filerOptions = random.choice(moreFiltersOptions)
-    post_facebook_message(sender_id,str(filerOptions)) 
+    post_facebook_message(sender_id,str(options))
+    
     
     post_facebook_message(sender_id,optionSelected)
 
-    post_facebook_message(sender_id,str(options))  
+    post_facebook_message(sender_id,str(filerOptions))   
 
     return json.dumps(response_object)
         
@@ -1782,10 +1785,12 @@ def moreSongs(sender_id):
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(filerOptions)) 
-
-        post_facebook_message(sender_id,optionSelected)
         post_facebook_message(sender_id,str(options))
+    
+    
+        post_facebook_message(sender_id,optionSelected)
+
+        post_facebook_message(sender_id,str(filerOptions))   
     
 
         print "response dumped"
