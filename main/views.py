@@ -666,10 +666,14 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
-        # y = UserData.objects.get(Fbid = fbid)
-        # a = y.Cast.all()
-        # if not a :
-        #     Cast = True
+        y = UserData.objects.get(Fbid = fbid)
+        print y
+        a = y.Cast.all()
+        print a
+        cast = False
+        if not a :
+            Cast = True
+        print cast
 
         # b = y.Singer.all()
         # if not b :
@@ -1028,7 +1032,6 @@ def SongSearcher(sender_id):
         post_facebook_message(sender_id,"sorry according to your filters couldint find an appropriate match") 
             
  
-
 def matching_quickreplies(input_string , data , sender_id) :
     a = []
     for item in data:
@@ -1629,6 +1632,7 @@ def moreSongs(sender_id):
         userdata.save()
 
         # post_facebook_message(sender_id,'singerQuickreply')    
+
 
 def queryNull():
     userdata = UserData.objects.get(Fbid = sender_id)
