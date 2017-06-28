@@ -1033,10 +1033,10 @@ def SongSearcher(sender_id):
         print 'array aagatye'
         print optionSelected
 
-        optionSelected = str(optionSelected)
+        selectedOtions = str(optionSelected)
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
@@ -1267,10 +1267,10 @@ def songs_cards(sender_id , data , input_string):
     print optionSelected
 
     
-    optionSelected = str(optionSelected)
+    selectedOtions = str(optionSelected)
 
         
-    moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
+    moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
     filerOptions = random.choice(moreFiltersOptions)
     post_facebook_message(sender_id,str(options))
 
@@ -1727,10 +1727,10 @@ def moreSongs(sender_id):
         
         print 'array aagaye'
         print optionSelected
-        optionSelected = str(optionSelected)
+        selectedOtions = str(optionSelected)
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%optionSelected , 'You chose %s. If you’re looking for a particular song, select more options'%optionSelected , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
