@@ -1014,10 +1014,10 @@ def SongSearcher(sender_id):
         if not c :
             lyricist = False
 
-        d = y.MovieName.all()
-        movieName = True
-        if not d :
-            movieName = False
+        # d = y.MovieName.all()
+        # movieName = True
+        # if not d :
+        #     movieName = False
 
         e = y.Category.all()
         category = True
