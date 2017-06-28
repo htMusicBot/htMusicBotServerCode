@@ -993,7 +993,7 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        aa = y.Cast.all()
+        aa = y.Cast.all()[0]
         print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
@@ -1245,7 +1245,7 @@ def songs_cards(sender_id , data , input_string):
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     y = UserData.objects.get(Fbid = sender_id)
     print y
-    aa = y.Cast.all()
+    aa = y.Cast.all()[0]
     print aa
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
@@ -1725,7 +1725,7 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        aa = y.Cast.all()
+        aa = y.Cast.all()[0]
         print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
