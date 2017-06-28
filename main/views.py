@@ -996,10 +996,10 @@ def SongSearcher(sender_id):
         # print y
         aa = y.Cast.all()
         print str(aa) + 'iiii'
-        a = Actor.objects.filter(Name = aa[0].Name)
-        print a
-        if a:
-            optionSelected.append(a[0].Name)
+        # a = Actor.objects.filter(Name = aa[0].Name)
+        # print a
+        if aa:
+            optionSelected.append(aa[0].Name)
         print 'hhiiii'
 
         # bb = y.Singer.all()
@@ -1048,6 +1048,7 @@ def SongSearcher(sender_id):
         #     optionSelected.append(e[0])
         # if year:
         #     optionSelected.append(f[0])
+        print 'array aagaye'
         print optionSelected
 
         
@@ -1056,7 +1057,7 @@ def SongSearcher(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        post_facebook_message(sender_id,optionSelected)
+        post_facebook_message(sender_id,str(optionSelected))
 
         post_facebook_message(sender_id,str(filerOptions))     
 
@@ -1247,10 +1248,10 @@ def songs_cards(sender_id , data , input_string):
     # print y
     aa = y.Cast.all()
     print str(aa) + 'iiii'
-    a = Actor.objects.filter(Name = aa[0].Name)
-    print a
-    if a:
-        optionSelected.append(a[0].Name)
+    # a = Actor.objects.filter(Name = aa[0].Name)
+    # print a
+    if aa:
+        optionSelected.append(aa[0].Name)
     print 'hhiiii'
 
     # bb = y.Singer.all()
@@ -1298,6 +1299,8 @@ def songs_cards(sender_id , data , input_string):
     #     optionSelected.append(e[0])
     # if year:
     #     optionSelected.append(f[0])
+
+    print 'array aagaye'
     print optionSelected
 
     
@@ -1306,7 +1309,7 @@ def songs_cards(sender_id , data , input_string):
     post_facebook_message(sender_id,str(options))
     
     
-    post_facebook_message(sender_id,optionSelected)
+    post_facebook_message(sender_id,str(optionSelected))
     
 
     post_facebook_message(sender_id,str(filerOptions))   
@@ -1726,10 +1729,10 @@ def moreSongs(sender_id):
         # print y
         aa = y.Cast.all()
         print str(aa) + 'iiii'
-        a = Actor.objects.filter(Name = aa[0].Name)
-        print a
-        if a:
-            optionSelected.append(a[0].Name)
+        # a = Actor.objects.filter(Name = aa[0].Name)
+        # print a
+        if aa:
+            optionSelected.append(aa[0].Name)
         print 'hhiiii'
 
 
@@ -1780,6 +1783,7 @@ def moreSongs(sender_id):
         #     optionSelected.append(e[0])
         # if year:
         #     optionSelected.append(f[0])
+        print 'array aagatye'
         print optionSelected
 
         
@@ -1788,7 +1792,7 @@ def moreSongs(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        post_facebook_message(sender_id,optionSelected)
+        post_facebook_message(sender_id,str(optionSelected)
 
 
         post_facebook_message(sender_id,str(filerOptions))   
