@@ -1006,6 +1006,8 @@ def SongSearcher(sender_id):
         if not b :
             singer = False
 
+
+
         c = y.Lyricist.all()
         lyricist = True
         if not c :
@@ -1021,11 +1023,11 @@ def SongSearcher(sender_id):
         if not e :
             category = False
 
-        f = y.year.all()
-        year = True
-        if not f :
-            year = False
-        print b
+        # f = y.year.all()
+        # year = True
+        # if not f :
+        #     year = False
+        
 
         optionSelected = []
         if cast:
