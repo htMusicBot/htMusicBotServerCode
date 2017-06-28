@@ -1005,6 +1005,7 @@ def SongSearcher(sender_id):
         singer = True
         if not b :
             singer = False
+        print 'hhhhhhhhhhhh'
 
 
 
