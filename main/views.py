@@ -1081,6 +1081,9 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             w = w+1
 
+            if w==10:
+                break;
+
 
 
 
@@ -1127,8 +1130,15 @@ def matching_quickreplies(input_string , data , sender_id) :
                 w = w+1
                 print "debugging  " + str(w)
                 print "this is matched quickreply array" + str(quickreply_array)
+                if w==3:
+                break;
     else :
-        pass            
+        message_text = message['message']['quick_reply']['payload']
+                        a = Singer.objects.filter(Name__contains = message_text)
+                        print "singer name searched"
+                        for item in a:
+                            userInstance.Singer.add(item)
+                        userInstance.save()          
 
 
 
@@ -1140,8 +1150,8 @@ def matching_quickreplies(input_string , data , sender_id) :
                
 
 
-    elif len(quickreply_array) == 1:
-        pass                  
+    # elif len(quickreply_array) == 1:
+                       
                 
     else:
         response_object =   {
