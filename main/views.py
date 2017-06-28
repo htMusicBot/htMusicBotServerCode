@@ -1063,6 +1063,7 @@ def matching_quickreplies(input_string , data , sender_id) :
     quickreply_array = [] 
     for item in data:
         if input_string in item.Name:
+            print item.Name
 
 
             
@@ -1074,6 +1075,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                               }
 
             quickreply_array.append(quickreply_data)
+            print "this is input string quickreply array" + str(quickreply_array)
 
 
 
@@ -1085,44 +1087,47 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
     if not quickreply_array:
-        print "i am data" + str(item.Name)
+        for item in data:
+            print "i am data" + str(item.Name)
 
-         # s = fuzz.ratio(item.Name, input_string)
-        s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
-        a.append(s)
-        print s 
+             # s = fuzz.ratio(item.Name, input_string)
+            s = difflib.SequenceMatcher(lambda x: x==" ", item.Name, input_string).ratio()
+            a.append(s)
+            print s 
 
-        print a     
+            print a     
 
-        matches = []
-       
-        for i in range(3):
+            matches = []
+           
+            for i in range(3):
 
-            if max(a)>0.30:
-                print "this is max ratio" + str(max(a))
+                if max(a)>0.30:
+                    print "this is max ratio" + str(max(a))
 
-                match = data[a.index(max(a))].Name
-                
+                    match = data[a.index(max(a))].Name
+                    
 
-                matches.append(match)
+                    matches.append(match)
 
-                a.remove(max(a))
+                    a.remove(max(a))
 
-                print match
-                quickreply_data = {
-                                    "content_type":"text",
-                                    "title":match,
-                                    "payload":match
-                                  }
+                    print match
+                    quickreply_data = {
+                                        "content_type":"text",
+                                        "title":match,
+                                        "payload":match
+                                      }
 
-                quickreply_array.append(quickreply_data)
+                    quickreply_array.append(quickreply_data)
 
-        
+            
 
-        
-                # post_facebook_message(sender_id,match)
-                w = w+1
-                print "debugging  " + str(w)
+            
+                    # post_facebook_message(sender_id,match)
+                    w = w+1
+                    print "debugging  " + str(w)
+                    print "this is matched quickreply array" + str(quickreply_array)
+
 
 
     elif w==0 :
