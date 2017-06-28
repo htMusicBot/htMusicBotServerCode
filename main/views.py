@@ -1252,7 +1252,7 @@ def songs_cards(sender_id , data , input_string):
     d = y.MovieName
     print d
     if not d :
-        optionSelected.append(d[0])
+        optionSelected.append(d)
 
     ee = y.Category.all()
     if ee:
