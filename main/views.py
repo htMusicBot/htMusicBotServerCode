@@ -993,12 +993,12 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        aa = y.Cast.all()[0]
+        aa = y.Cast.all()
         print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
-        if not aa :
+        if not a:
             cast = False
         print cast
         print 'hhiiii'
@@ -1038,7 +1038,7 @@ def SongSearcher(sender_id):
 
         optionSelected = []
         if cast:
-            optionSelected.append(a)
+            optionSelected.append(aa)
         # if singer:
         #     optionSelected.append(b[0])
         # if lyricist:
@@ -1245,12 +1245,12 @@ def songs_cards(sender_id , data , input_string):
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     y = UserData.objects.get(Fbid = sender_id)
     print y
-    aa = y.Cast.all()[0]
+    aa = y.Cast.all()
     print aa
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
     cast = True
-    if not aa :
+    if not a:
         cast = False
     print cast
     print 'hhiiii'
@@ -1289,7 +1289,7 @@ def songs_cards(sender_id , data , input_string):
 
     optionSelected = []
     if cast:
-        optionSelected.append(a)
+        optionSelected.append(aa)
     # if singer:
     #     optionSelected.append(b[0])
     # if lyricist:
@@ -1725,12 +1725,12 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        aa = y.Cast.all()[0]
+        aa = y.Cast.all()
         print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
-        if not aa :
+        if not a :
             cast = False
         print cast
         print 'hhiiii'
@@ -1771,7 +1771,7 @@ def moreSongs(sender_id):
 
         optionSelected = []
         if cast:
-            optionSelected.append(a)
+            optionSelected.append(aa)
         # if singer:
         #     optionSelected.append(b[0])
         # if lyricist:
