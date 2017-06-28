@@ -993,11 +993,12 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
-        print y
+        # print y
         aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name__in = aa.Name)
+        a = Actor.objects.filter(Name = aa.Name)
         print a
-        optionSelected.append(a)
+        if a:
+            optionSelected.append(a)
         print 'hhiiii'
 
         # bb = y.Singer.all()
@@ -1242,11 +1243,12 @@ def songs_cards(sender_id , data , input_string):
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     optionSelected = []
     y = UserData.objects.get(Fbid = sender_id)
-    print y
+    # print y
     aa = y.Cast.all()[0]
-    a = Actor.objects.filter(Name__in = aa.Name)
+    a = Actor.objects.filter(Name = aa.Name)
     print a
-    optionSelected.append(a)
+    if a:
+        optionSelected.append(a)
     print 'hhiiii'
 
     # bb = y.Singer.all()
@@ -1719,11 +1721,12 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
-        print y
+        # print y
         aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name__in = aa.Name)
+        a = Actor.objects.filter(Name = aa.Name)
         print a
-        optionSelected.append(a)
+        if a:
+            optionSelected.append(a)
         print 'hhiiii'
 
 
