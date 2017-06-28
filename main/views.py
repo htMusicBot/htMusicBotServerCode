@@ -990,7 +990,7 @@ def SongSearcher(sender_id):
 
         a = random.choice(optionText)
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
-        y = UserData.objects.get(Fbid = fbid)
+        y = UserData.objects.get(Fbid = sender_id)
         print y
         a = y.Cast.all()
         print a
