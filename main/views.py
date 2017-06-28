@@ -1016,7 +1016,7 @@ def SongSearcher(sender_id):
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
         print d
-        if not d :
+        if d :
             optionSelected.append(d)
 
         ee = y.Category.all()
@@ -1251,7 +1251,7 @@ def songs_cards(sender_id , data , input_string):
     # d = MovieName.objects.filter(Name__in = y.MovieName)
     d = y.MovieName
     print d
-    if not d :
+    if d :
         optionSelected.append(d)
 
     ee = y.Category.all()
@@ -1714,7 +1714,7 @@ def moreSongs(sender_id):
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
         print d
-        if not d :
+        if d :
             optionSelected.append(d)
 
         ee = y.Category.all()
