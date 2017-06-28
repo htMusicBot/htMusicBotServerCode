@@ -1237,76 +1237,76 @@ def songs_cards(sender_id , data , input_string):
     optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
 
-        options = random.choice(optionText)
+    options = random.choice(optionText)
 
-        print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
-        y = UserData.objects.get(Fbid = sender_id)
-        print y
-        a = y.Cast.all()
-        print a
-        cast = True
-        if not a :
-            cast = False
-        print cast
-        print 'hhiiii'
+    print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+    y = UserData.objects.get(Fbid = sender_id)
+    print y
+    a = y.Cast.all()
+    print a
+    cast = True
+    if not a :
+        cast = False
+    print cast
+    print 'hhiiii'
 
-        b = y.Singer.all()
-        singer = True
-        if not b :
-            singer = False
-        print 'hhhhhhhhhhhh'
+    b = y.Singer.all()
+    singer = True
+    if not b :
+        singer = False
+    print 'hhhhhhhhhhhh'
 
 
 
-        c = y.Lyricist.all()
-        lyricist = True
-        if not c :
-            lyricist = False
+    c = y.Lyricist.all()
+    lyricist = True
+    if not c :
+        lyricist = False
 
-        d = y.MovieName
-        movieName = True
-        if not d :
-            movieName = False
+    d = y.MovieName
+    movieName = True
+    if not d :
+        movieName = False
 
-        e = y.Category.all()
-        category = True
-        if not e :
-            category = False
+    e = y.Category.all()
+    category = True
+    if not e :
+        category = False
 
-        f = y.year
-        year = True
-        if not f :
-            year = False
-        
+    f = y.year
+    year = True
+    if not f :
+        year = False
+    
 
-        optionSelected = []
-        if cast:
-            optionSelected.append(a)
-        print optionSelected
-        if singer:
-            optionSelected.append(b)
-        print optionSelected
-        if lyricist:
-            optionSelected.append(c)
-        print optionSelected
-        if movieName:
-            optionSelected.append(d)
-        print optionSelected
-        if category:
-            optionSelected.append(e)
-        print optionSelected
-        if year:
-            optionSelected.append(f)
-        print optionSelected
+    optionSelected = []
+    if cast:
+        optionSelected.append(a)
+    print optionSelected
+    if singer:
+        optionSelected.append(b)
+    print optionSelected
+    if lyricist:
+        optionSelected.append(c)
+    print optionSelected
+    if movieName:
+        optionSelected.append(d)
+    print optionSelected
+    if category:
+        optionSelected.append(e)
+    print optionSelected
+    if year:
+        optionSelected.append(f)
+    print optionSelected
 
-        
-        moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
-        filerOptions = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(filerOptions)) 
-        
-        post_facebook_message(sender_id,optionSelected)
+    
+    moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
+    filerOptions = random.choice(moreFiltersOptions)
+    post_facebook_message(sender_id,str(filerOptions)) 
+    
+    post_facebook_message(sender_id,optionSelected)
 
-        post_facebook_message(sender_id,str(options))  
+    post_facebook_message(sender_id,str(options))  
 
     return json.dumps(response_object)
         
