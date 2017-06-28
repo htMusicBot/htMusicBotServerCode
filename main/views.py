@@ -1247,7 +1247,7 @@ def songs_cards(sender_id , data , input_string):
 
     d = MovieName.objects.filter(Name__in = y.MovieName)
     if not d :
-        optionSelected.append(d)
+        optionSelected.append(d[0].Name)
 
     ee = y.Category.all()
     if ee:
@@ -1256,7 +1256,7 @@ def songs_cards(sender_id , data , input_string):
 
     f = Year.objects.filter(Year__in = y.year)
     if f:
-        optionSelected.append(f)
+        optionSelected.append(f[0].Year)
 
     
     print 'array aagatye'
