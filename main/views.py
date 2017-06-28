@@ -1034,19 +1034,14 @@ def SongSearcher(sender_id):
         optionSelected = []
         if cast:
             optionSelected.append(a)
-        print optionSelected
         if singer:
             optionSelected.append(b)
-        print optionSelected
         if lyricist:
             optionSelected.append(c)
-        print optionSelected
         if movieName:
             optionSelected.append(d)
-        print optionSelected
         if category:
             optionSelected.append(e)
-        print optionSelected
         if year:
             optionSelected.append(f)
         print optionSelected
@@ -1057,7 +1052,7 @@ def SongSearcher(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        post_facebook_message(sender_id,optionSelected[0])
+        # post_facebook_message(sender_id,optionSelected[0])
 
         post_facebook_message(sender_id,str(filerOptions))     
 
@@ -1308,7 +1303,7 @@ def songs_cards(sender_id , data , input_string):
     post_facebook_message(sender_id,str(options))
     
     
-    post_facebook_message(sender_id,optionSelected[0])
+    # post_facebook_message(sender_id,optionSelected[0])
     
 
     post_facebook_message(sender_id,str(filerOptions))   
@@ -1789,9 +1784,9 @@ def moreSongs(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        post_facebook_message(sender_id,optionSelected[0])
+        # post_facebook_message(sender_id,optionSelected[0])
 
-        
+
         post_facebook_message(sender_id,str(filerOptions))   
     
 
