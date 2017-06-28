@@ -1127,10 +1127,12 @@ def matching_quickreplies(input_string , data , sender_id) :
                 w = w+1
                 print "debugging  " + str(w)
                 print "this is matched quickreply array" + str(quickreply_array)
+    else :
+        pass            
 
 
 
-    elif w==0 :
+    if w==0 :
                 print "no match found" 
                 post_facebook_message(sender_id,"No  matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")   
