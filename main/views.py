@@ -994,7 +994,8 @@ def SongSearcher(sender_id):
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name__in = aa.Singer)
+        print aa
+        a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
         if not a :
@@ -1002,53 +1003,53 @@ def SongSearcher(sender_id):
         print cast
         print 'hhiiii'
 
-        bb = y.Singer.all()
-        b = Singer.objects.filter(Name__in = bb)
-        singer = True
-        if not b :
-            singer = False
-        print 'hhhhhhhhhhhh'
+        # bb = y.Singer.all()
+        # b = Singer.objects.filter(Name__in = bb)
+        # singer = True
+        # if not b :
+        #     singer = False
+        # print 'hhhhhhhhhhhh'
 
 
 
-        cc = y.Lyricist.all()
-        c = Lyricist.objects.filter(Name__in = cc)
-        lyricist = True
-        if not c :
-            lyricist = False
+        # cc = y.Lyricist.all()
+        # c = Lyricist.objects.filter(Name__in = cc)
+        # lyricist = True
+        # if not c :
+        #     lyricist = False
 
-        d = MovieName.objects.filter(Name__in = y.MovieName)
-        movieName = True
-        if not d :
-            movieName = False
+        # d = MovieName.objects.filter(Name__in = y.MovieName)
+        # movieName = True
+        # if not d :
+        #     movieName = False
 
-        ee = y.Category.all()
-        e = Category.objects.filter(Name__in = ee)
-        category = True
-        if not e :
-            category = False
+        # ee = y.Category.all()
+        # e = Category.objects.filter(Name__in = ee)
+        # category = True
+        # if not e :
+        #     category = False
 
 
-        f = Year.objects.filter(Year__in = y.year)
-        year = True
-        if not f :
-            year = False
+        # f = Year.objects.filter(Year__in = y.year)
+        # year = True
+        # if not f :
+        #     year = False
 
 
         optionSelected = []
         if cast:
-            optionSelected.append(a[0])
-        if singer:
-            optionSelected.append(b[0])
-        if lyricist:
-            optionSelected.append(c[0])
-        if movieName:
-            optionSelected.append(d[0])
-        if category:
-            optionSelected.append(e[0])
-        if year:
-            optionSelected.append(f[0])
-        print optionSelected
+            optionSelected.append(a)
+        # if singer:
+        #     optionSelected.append(b[0])
+        # if lyricist:
+        #     optionSelected.append(c[0])
+        # if movieName:
+        #     optionSelected.append(d[0])
+        # if category:
+        #     optionSelected.append(e[0])
+        # if year:
+        #     optionSelected.append(f[0])
+        # print optionSelected
 
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
@@ -1245,6 +1246,7 @@ def songs_cards(sender_id , data , input_string):
     y = UserData.objects.get(Fbid = sender_id)
     print y
     aa = y.Cast.all()[0]
+    print aa
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
     cast = True
@@ -1253,52 +1255,52 @@ def songs_cards(sender_id , data , input_string):
     print cast
     print 'hhiiii'
 
-    bb = y.Singer.all()
-    b = Singer.objects.filter(Name__in = bb)
-    singer = True
-    if not b :
-        singer = False
-    print 'hhhhhhhhhhhh'
+    # bb = y.Singer.all()
+    # b = Singer.objects.filter(Name__in = bb)
+    # singer = True
+    # if not b :
+    #     singer = False
+    # print 'hhhhhhhhhhhh'
 
 
 
-    cc = y.Lyricist.all()
-    c = Lyricist.objects.filter(Name__in = cc)
-    lyricist = True
-    if not c :
-        lyricist = False
+    # cc = y.Lyricist.all()
+    # c = Lyricist.objects.filter(Name__in = cc)
+    # lyricist = True
+    # if not c :
+    #     lyricist = False
 
-    d = MovieName.objects.filter(Name__in = y.MovieName)
-    movieName = True
-    if not d :
-        movieName = False
+    # d = MovieName.objects.filter(Name__in = y.MovieName)
+    # movieName = True
+    # if not d :
+    #     movieName = False
 
-    ee = y.Category.all()
-    e = Category.objects.filter(Name__in = ee)
-    category = True
-    if not e :
-        category = False
+    # ee = y.Category.all()
+    # e = Category.objects.filter(Name__in = ee)
+    # category = True
+    # if not e :
+    #     category = False
 
 
-    f = Year.objects.filter(Year__in = y.year)
-    year = True
-    if not f :
-        year = False
+    # f = Year.objects.filter(Year__in = y.year)
+    # year = True
+    # if not f :
+    #     year = False
 
     optionSelected = []
     if cast:
         optionSelected.append(a[0])
-    if singer:
-        optionSelected.append(b[0])
-    if lyricist:
-        optionSelected.append(c[0])
-    if movieName:
-        optionSelected.append(d[0])
-    if category:
-        optionSelected.append(e[0])
-    if year:
-        optionSelected.append(f[0])
-    print optionSelected
+    # if singer:
+    #     optionSelected.append(b[0])
+    # if lyricist:
+    #     optionSelected.append(c[0])
+    # if movieName:
+    #     optionSelected.append(d[0])
+    # if category:
+    #     optionSelected.append(e[0])
+    # if year:
+    #     optionSelected.append(f[0])
+    # print optionSelected
 
     
     moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
@@ -1724,6 +1726,7 @@ def moreSongs(sender_id):
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()[0]
+        print aa
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
@@ -1732,54 +1735,54 @@ def moreSongs(sender_id):
         print cast
         print 'hhiiii'
 
-        bb = y.Singer.all()
-        b = Singer.objects.filter(Name__in = bb)
-        singer = True
-        if not b :
-            singer = False
-        print 'hhhhhhhhhhhh'
+        # bb = y.Singer.all()
+        # b = Singer.objects.filter(Name__in = bb)
+        # singer = True
+        # if not b :
+        #     singer = False
+        # print 'hhhhhhhhhhhh'
 
 
 
-        cc = y.Lyricist.all()
-        c = Lyricist.objects.filter(Name__in = cc)
-        lyricist = True
-        if not c :
-            lyricist = False
+        # cc = y.Lyricist.all()
+        # c = Lyricist.objects.filter(Name__in = cc)
+        # lyricist = True
+        # if not c :
+        #     lyricist = False
 
-        d = MovieName.objects.filter(Name__in = y.MovieName)
-        movieName = True
-        if not d :
-            movieName = False
+        # d = MovieName.objects.filter(Name__in = y.MovieName)
+        # movieName = True
+        # if not d :
+        #     movieName = False
 
-        ee = y.Category.all()
-        e = Category.objects.filter(Name__in = ee)
-        category = True
-        if not e :
-            category = False
+        # ee = y.Category.all()
+        # e = Category.objects.filter(Name__in = ee)
+        # category = True
+        # if not e :
+        #     category = False
 
 
-        f = Year.objects.filter(Year__in = y.year)
-        year = True
-        if not f :
-            year = False
+        # f = Year.objects.filter(Year__in = y.year)
+        # year = True
+        # if not f :
+        #     year = False
 
         
 
         optionSelected = []
         if cast:
             optionSelected.append(a[0])
-        if singer:
-            optionSelected.append(b[0])
-        if lyricist:
-            optionSelected.append(c[0])
-        if movieName:
-            optionSelected.append(d[0])
-        if category:
-            optionSelected.append(e[0])
-        if year:
-            optionSelected.append(f[0])
-        print optionSelected
+        # if singer:
+        #     optionSelected.append(b[0])
+        # if lyricist:
+        #     optionSelected.append(c[0])
+        # if movieName:
+        #     optionSelected.append(d[0])
+        # if category:
+        #     optionSelected.append(e[0])
+        # if year:
+        #     optionSelected.append(f[0])
+        # print optionSelected
 
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
