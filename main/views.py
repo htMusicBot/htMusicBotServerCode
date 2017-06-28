@@ -993,7 +993,8 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        a = y.Cast.all()
+        # a = y.Cast.all()
+        a = Category.objects.filter(Name__in = y.Cast.all())
         print a
         cast = True
         if not a :
@@ -1001,7 +1002,8 @@ def SongSearcher(sender_id):
         print cast
         print 'hhiiii'
 
-        b = y.Singer.all()
+        # b = y.Singer.all()
+        b = Category.objects.filter(Name__in = y.Singer.all())
         singer = True
         if not b :
             singer = False
@@ -1009,23 +1011,25 @@ def SongSearcher(sender_id):
 
 
 
-        c = y.Lyricist.all()
+        # c = y.Lyricist.all()
+        c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
         lyricist = True
         if not c :
             lyricist = False
 
-        d = MovieName.objects.filter(Name = y.MovieName)
+        d = MovieName.objects.filter(Name__in = y.MovieName)
         movieName = True
         if not d :
             movieName = False
 
-        e = y.Category.all()
+        # e = y.Category.all()
+        e = Category.objects.filter(Name__in = y.Category.all())
         category = True
         if not e :
             category = False
 
 
-        f = Year.objects.filter(Year = y.year)
+        f = Year.objects.filter(Year__in = y.year)
         year = True
         if not f :
             year = False
@@ -1034,19 +1038,14 @@ def SongSearcher(sender_id):
         optionSelected = []
         if cast:
             optionSelected.append(a[0])
-        print optionSelected
         if singer:
             optionSelected.append(b[0])
-        print optionSelected
         if lyricist:
             optionSelected.append(c[0])
-        print optionSelected
         if movieName:
             optionSelected.append(d[0])
-        print optionSelected
         if category:
             optionSelected.append(e[0])
-        print optionSelected
         if year:
             optionSelected.append(f[0])
         print optionSelected
@@ -1245,7 +1244,8 @@ def songs_cards(sender_id , data , input_string):
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
     y = UserData.objects.get(Fbid = sender_id)
     print y
-    a = y.Cast.all()
+    # a = y.Cast.all()
+    a = Category.objects.filter(Name__in = y.Cast.all())
     print a
     cast = True
     if not a :
@@ -1253,7 +1253,8 @@ def songs_cards(sender_id , data , input_string):
     print cast
     print 'hhiiii'
 
-    b = y.Singer.all()
+    # b = y.Singer.all()
+    b = Category.objects.filter(Name__in = y.Singer.all())
     singer = True
     if not b :
         singer = False
@@ -1261,21 +1262,28 @@ def songs_cards(sender_id , data , input_string):
 
 
 
-    c = y.Lyricist.all()
+    # c = y.Lyricist.all()
+    c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
     lyricist = True
     if not c :
         lyricist = False
 
-    d = MovieName.objects.filter(Name = y.MovieName)
+    d = MovieName.objects.filter(Name__in = y.MovieName)
     movieName = True
     if not d :
         movieName = False
 
-    e = y.Category.all()
+    # e = y.Category.all()
+    e = Category.objects.filter(Name__in = y.Category.all())
     category = True
     if not e :
         category = False
 
+
+    f = Year.objects.filter(Year__in = y.year)
+    year = True
+    if not f :
+        year = False
 
     f = Year.objects.filter(Year = y.year)
     year = True
@@ -1285,19 +1293,14 @@ def songs_cards(sender_id , data , input_string):
     optionSelected = []
     if cast:
         optionSelected.append(a[0])
-    print optionSelected
     if singer:
         optionSelected.append(b[0])
-    print optionSelected
     if lyricist:
         optionSelected.append(c[0])
-    print optionSelected
     if movieName:
         optionSelected.append(d[0])
-    print optionSelected
     if category:
         optionSelected.append(e[0])
-    print optionSelected
     if year:
         optionSelected.append(f[0])
     print optionSelected
@@ -1725,7 +1728,8 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        a = y.Cast.all()
+        # a = y.Cast.all()
+        a = Category.objects.filter(Name__in = y.Cast.all())
         print a
         cast = True
         if not a :
@@ -1733,7 +1737,8 @@ def moreSongs(sender_id):
         print cast
         print 'hhiiii'
 
-        b = y.Singer.all()
+        # b = y.Singer.all()
+        b = Category.objects.filter(Name__in = y.Singer.all())
         singer = True
         if not b :
             singer = False
@@ -1741,23 +1746,25 @@ def moreSongs(sender_id):
 
 
 
-        c = y.Lyricist.all()
+        # c = y.Lyricist.all()
+        c = Lyricist.objects.filter(Name__in = y.Lyricist.all())
         lyricist = True
         if not c :
             lyricist = False
 
-        d = MovieName.objects.filter(Name = y.MovieName)
+        d = MovieName.objects.filter(Name__in = y.MovieName)
         movieName = True
         if not d :
             movieName = False
 
-        e = y.Category.all()
+        # e = y.Category.all()
+        e = Category.objects.filter(Name__in = y.Category.all())
         category = True
         if not e :
             category = False
 
 
-        f = Year.objects.filter(Year = y.year)
+        f = Year.objects.filter(Year__in = y.year)
         year = True
         if not f :
             year = False
@@ -1766,19 +1773,14 @@ def moreSongs(sender_id):
         optionSelected = []
         if cast:
             optionSelected.append(a[0])
-        print optionSelected
         if singer:
             optionSelected.append(b[0])
-        print optionSelected
         if lyricist:
             optionSelected.append(c[0])
-        print optionSelected
         if movieName:
             optionSelected.append(d[0])
-        print optionSelected
         if category:
             optionSelected.append(e[0])
-        print optionSelected
         if year:
             optionSelected.append(f[0])
         print optionSelected
