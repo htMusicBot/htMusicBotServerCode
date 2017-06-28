@@ -1014,7 +1014,7 @@ def SongSearcher(sender_id):
         if not c :
             lyricist = False
 
-        d = y.MovieName
+        d = MovieName.objects.filter(Name = y.MovieName)
         movieName = True
         if not d :
             movieName = False
@@ -1024,7 +1024,8 @@ def SongSearcher(sender_id):
         if not e :
             category = False
 
-        f = y.year
+
+        f = Year.objects.filter(Year = y.year)
         year = True
         if not f :
             year = False
@@ -1263,7 +1264,7 @@ def songs_cards(sender_id , data , input_string):
     if not c :
         lyricist = False
 
-    d = y.MovieName
+    d = MovieName.objects.filter(Name = y.MovieName)
     movieName = True
     if not d :
         movieName = False
@@ -1273,11 +1274,11 @@ def songs_cards(sender_id , data , input_string):
     if not e :
         category = False
 
-    f = y.year
+
+    f = Year.objects.filter(Year = y.year)
     year = True
     if not f :
         year = False
-    
 
     optionSelected = []
     if cast:
@@ -1741,7 +1742,7 @@ def moreSongs(sender_id):
         if not c :
             lyricist = False
 
-        d = y.MovieName
+        d = MovieName.objects.filter(Name = y.MovieName)
         movieName = True
         if not d :
             movieName = False
@@ -1751,7 +1752,8 @@ def moreSongs(sender_id):
         if not e :
             category = False
 
-        f = y.year
+
+        f = Year.objects.filter(Year = y.year)
         year = True
         if not f :
             year = False
