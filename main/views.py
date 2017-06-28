@@ -999,19 +999,22 @@ def SongSearcher(sender_id):
         # a = Actor.objects.filter(Name = aa[0].Name)
         # print a
         if aa:
-            optionSelected.append(aa[0])
+            a = 'Cast: ' + str(aa[0].Name)
+            optionSelected.append(a)
         print 'hhiiii'
 
 
         bb = y.Singer.all()
         if bb :
-            optionSelected.append(bb[0])
+            b = 'Singer: ' + str(bb[0].Name)
+            optionSelected.append(b)
         print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            optionSelected.append(cc[0])
+            c = 'Category:' + str(cc[0].Name)
+            optionSelected.append(c)
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
@@ -1021,7 +1024,8 @@ def SongSearcher(sender_id):
 
         ee = y.Category.all()
         if ee:
-            optionSelected.append(ee[0])
+            e = 'Category:' + str(ee[0].Name)
+            optionSelected.append(e)
 
 
         # f = Year.objects.filter(Year__in = y.year)
@@ -1030,10 +1034,13 @@ def SongSearcher(sender_id):
             optionSelected.append(f)
 
         
-        print 'array aagatye'
+        print 'array aagaye'
         print optionSelected
-
         selectedOtions = str(optionSelected)
+
+
+        
+
 
         
         moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
@@ -1232,19 +1239,22 @@ def songs_cards(sender_id , data , input_string):
     # a = Actor.objects.filter(Name = aa[0].Name)
     # print a
     if aa:
-        optionSelected.append(aa[0])
+        a = 'Cast: ' + str(aa[0].Name)
+        optionSelected.append(a)
     print 'hhiiii'
 
 
     bb = y.Singer.all()
     if bb :
-        optionSelected.append(bb[0])
+        b = 'Singer: ' + str(bb[0].Name)
+        optionSelected.append(b)
     print 'hhhhhhhhhhhh'
 
 
     cc = y.Lyricist.all()
     if cc :
-        optionSelected.append(cc[0])
+        c = 'Category:' + str(cc[0].Name)
+        optionSelected.append(c)
 
     # d = MovieName.objects.filter(Name__in = y.MovieName)
     d = y.MovieName
@@ -1254,7 +1264,8 @@ def songs_cards(sender_id , data , input_string):
 
     ee = y.Category.all()
     if ee:
-        optionSelected.append(ee[0])
+        e = 'Category:' + str(ee[0].Name)
+        optionSelected.append(e)
 
 
     # f = Year.objects.filter(Year__in = y.year)
@@ -1263,10 +1274,8 @@ def songs_cards(sender_id , data , input_string):
         optionSelected.append(f)
 
     
-    print 'array aagatye'
+    print 'array aagaye'
     print optionSelected
-
-    
     selectedOtions = str(optionSelected)
 
         
@@ -1694,21 +1703,21 @@ def moreSongs(sender_id):
         # a = Actor.objects.filter(Name = aa[0].Name)
         # print a
         if aa:
-            a = 'Cast: ' str(aa[0].Name)
+            a = 'Cast: ' + str(aa[0].Name)
             optionSelected.append(a)
         print 'hhiiii'
 
 
         bb = y.Singer.all()
         if bb :
-            b = 'Singer: ' str(bb[0].Name)
+            b = 'Singer: ' + str(bb[0].Name)
             optionSelected.append(b)
         print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            c = 'Category:' str(cc[0].Name)
+            c = 'Category:' + str(cc[0].Name)
             optionSelected.append(c)
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
@@ -1719,7 +1728,7 @@ def moreSongs(sender_id):
 
         ee = y.Category.all()
         if ee:
-            e = 'Category:' str(ee[0].Name)
+            e = 'Category:' + str(ee[0].Name)
             optionSelected.append(e)
 
 
