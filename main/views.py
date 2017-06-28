@@ -1130,9 +1130,10 @@ def matching_quickreplies(input_string , data , sender_id) :
                 w = w+1
                 print "debugging  " + str(w)
                 print "this is matched quickreply array" + str(quickreply_array)
-                if w==3:
-                break
                 
+                if w==3:
+                    break
+
     else :
         pass         
 
