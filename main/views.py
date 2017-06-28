@@ -1057,8 +1057,7 @@ def SongSearcher(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        post_facebook_message(sender_id,optionSelected
-            )
+        post_facebook_message(sender_id,optionSelected)
 
         post_facebook_message(sender_id,str(filerOptions))     
 
@@ -1790,7 +1789,7 @@ def moreSongs(sender_id):
         post_facebook_message(sender_id,str(options))
     
     
-        # post_facebook_message(sender_id,optionSelected)
+        post_facebook_message(sender_id,optionSelected)
 
 
         post_facebook_message(sender_id,str(filerOptions))   
