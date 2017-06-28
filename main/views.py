@@ -1723,8 +1723,8 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         y = UserData.objects.get(Fbid = sender_id)
         print y
-        aa = y.Cast.all()
-        a = Actor.objects.filter(Name__in = aa)
+        aa = y.Cast.all()[0]
+        a = Actor.objects.filter(Name = aa)
         print a
         cast = True
         if not a :
