@@ -88,7 +88,6 @@ class UserData(models.Model):
     State = models.CharField(max_length = 250 , default = 'NULL')
     Cast  = models.ManyToManyField(Actor, null = True)
     Singer = models.ManyToManyField(Singer, null = True)
-
     Lyricist = models.ManyToManyField(Lyricist, null = True)
     MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE, null = True)
     Category = models.ManyToManyField(Category, null = True)

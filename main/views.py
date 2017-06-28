@@ -136,7 +136,7 @@ class MyChatBotView(generic.View):
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
                         #messages sent when any user sends the first message
-                        textTemplate = ['Welcome %s , Nice to see you here :)'%firstName , 'Hey %s , Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s ! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s , here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s . In the mood for some Bollywood tunes?'%firstName , 'Hi %s , welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
+                        textTemplate = ['Welcome %s , Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
                         a = random.choice(textTemplate)
                         print a
                         post_facebook_message(sender_id , str(a) )
@@ -607,7 +607,7 @@ def handle_quickreply(fbid,payload):
         singerName = sorted(singerName, key=lambda x: random.random())
         singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
         a = random.choice(singerText)
-        return post_facebook_message(sender_id,str(a) + ' like  ' +  singerName[0].Name + ' , ' + singerName[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like  ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -618,7 +618,7 @@ def handle_quickreply(fbid,payload):
         lyricistName = sorted(lyricistName, key=lambda x: random.random())
         lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
         a = random.choice(lyricistText)
-        return post_facebook_message(sender_id,str(a) + ' like  ' + lyricistName[0].Name + ' , ' + lyricistName[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like  ' + lyricistName[0].Name + ', ' + lyricistName[1].Name)
                 
     elif payload == 'movieName':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -628,7 +628,7 @@ def handle_quickreply(fbid,payload):
         movieName = sorted(movieName, key=lambda x: random.random())
         movieText = ['Enter the name of any movie' , 'Is a song from a particular movie on your mind?'  , 'Which movie’s song would you like to hear now?' ]
         a = random.choice(movieText)
-        return post_facebook_message(sender_id,str(a) +' like  ' + movieName[0].Name + ' , ' + movieName[1].Name)
+        return post_facebook_message(sender_id,str(a) +' like  ' + movieName[0].Name + ', ' + movieName[1].Name)
 
     elif payload == 'cast':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -638,7 +638,7 @@ def handle_quickreply(fbid,payload):
         actor = sorted(actor, key=lambda x: random.random())
         castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
         a = random.choice(castText)
-        return post_facebook_message(sender_id,str(a) + ' like  ' + actor[0].Name + ' , ' + actor[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like  ' + actor[0].Name + ', ' + actor[1].Name)
 
     elif payload == 'category':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -656,10 +656,7 @@ def handle_quickreply(fbid,payload):
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.State = 'NULL'
         p.save()
-
-
         post_facebook_message(sender_id,'moreSongs')
-
         post_facebook_message(sender_id,'ACards')
 
     elif payload == 'filter':
@@ -667,9 +664,6 @@ def handle_quickreply(fbid,payload):
         p.State = 'NULL'
         p.save()
         queryNull()
-        moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
-        a = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(a)) 
         return post_facebook_message(sender_id,'singerQuickreply') 
 
     elif payload == 'reset':
@@ -990,11 +984,72 @@ def SongSearcher(sender_id):
         print json.dumps(response_object)
 
         # print response_object
+
         optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
-        a = random.choice(optionText)
 
-        post_facebook_message(sender_id,str(a))   
+        options = random.choice(optionText)
+
+        print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        optionSelected = []
+        y = UserData.objects.get(Fbid = sender_id)
+        # print y
+        aa = y.Cast.all()
+        print str(aa) + 'iiii'
+        # a = Actor.objects.filter(Name = aa[0].Name)
+        # print a
+        if aa:
+            a = 'Cast: ' + str(aa[0].Name)
+            optionSelected.append(a)
+        print 'hhiiii'
+
+
+        bb = y.Singer.all()
+        if bb :
+            b = 'Singer: ' + str(bb[0].Name)
+            optionSelected.append(b)
+        print 'hhhhhhhhhhhh'
+
+
+        cc = y.Lyricist.all()
+        if cc :
+            c = 'Category:' + str(cc[0].Name)
+            optionSelected.append(c)
+
+        # d = MovieName.objects.filter(Name__in = y.MovieName)
+        d = y.MovieName
+        print d
+        if d :
+            dd = 'Movie Name:' + str(d)
+            optionSelected.append(dd)
+
+        ee = y.Category.all()
+        if ee:
+            e = 'Category:' + str(ee[0].Name)
+            optionSelected.append(e)
+
+
+        # f = Year.objects.filter(Year__in = y.year)
+        f = y.year
+        if f:
+            ff = 'Year:' + str(f)
+            optionSelected.append(ff)
+
+        
+        print 'array aagaye'
+        print optionSelected
+        selectedOtions = str(optionSelected)
+
+
+
+
+
+        
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        filerOptions = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(options))
+
+        post_facebook_message(sender_id,str(filerOptions))    
 
         return json.dumps(response_object)
 
@@ -1002,7 +1057,6 @@ def SongSearcher(sender_id):
         post_facebook_message(sender_id,"sorry according to your filters couldint find an appropriate match") 
             
  
-
 def matching_quickreplies(input_string , data , sender_id) :
     a = []
     w =0
@@ -1201,9 +1255,66 @@ def songs_cards(sender_id , data , input_string):
 
     # print response_object
     optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
-    a = random.choice(optionText)
 
-    post_facebook_message(sender_id,str(a))  
+
+    options = random.choice(optionText)
+
+    print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+    optionSelected = []
+    y = UserData.objects.get(Fbid = sender_id)
+    # print y
+    aa = y.Cast.all()
+    print str(aa) + 'iiii'
+    # a = Actor.objects.filter(Name = aa[0].Name)
+    # print a
+    if aa:
+        a = 'Cast: ' + str(aa[0].Name)
+        optionSelected.append(a)
+    print 'hhiiii'
+
+
+    bb = y.Singer.all()
+    if bb :
+        b = 'Singer: ' + str(bb[0].Name)
+        optionSelected.append(b)
+    print 'hhhhhhhhhhhh'
+
+
+    cc = y.Lyricist.all()
+    if cc :
+        c = 'Category:' + str(cc[0].Name)
+        optionSelected.append(c)
+
+    # d = MovieName.objects.filter(Name__in = y.MovieName)
+    d = y.MovieName
+    print d
+    if d :
+        dd = 'Movie Name:' + str(d)
+        optionSelected.append(dd)
+
+    ee = y.Category.all()
+    if ee:
+        e = 'Category:' + str(ee[0].Name)
+        optionSelected.append(e)
+
+
+    # f = Year.objects.filter(Year__in = y.year)
+    f = y.year
+    if f:
+        ff = 'Year:' + str(f)
+        optionSelected.append(ff)
+
+    
+    print 'array aagaye'
+    print optionSelected
+    selectedOtions = str(optionSelected)
+
+        
+    moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+    filerOptions = random.choice(moreFiltersOptions)
+    post_facebook_message(sender_id,str(options))
+
+    post_facebook_message(sender_id,str(filerOptions)) 
 
     return json.dumps(response_object)
         
@@ -1611,9 +1722,65 @@ def moreSongs(sender_id):
         }
         optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
-        a = random.choice(optionText)
 
-        post_facebook_message(sender_id,str(a)) 
+        options = random.choice(optionText)
+
+        print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        optionSelected = []
+        y = UserData.objects.get(Fbid = sender_id)
+        # print y
+        aa = y.Cast.all()
+        print str(aa) + 'iiii'
+        # a = Actor.objects.filter(Name = aa[0].Name)
+        # print a
+        if aa:
+            a = 'Cast: ' + str(aa[0].Name)
+            optionSelected.append(a)
+        print 'hhiiii'
+
+
+        bb = y.Singer.all()
+        if bb :
+            b = 'Singer: ' + str(bb[0].Name)
+            optionSelected.append(b)
+        print 'hhhhhhhhhhhh'
+
+
+        cc = y.Lyricist.all()
+        if cc :
+            c = 'Category:' + str(cc[0].Name)
+            optionSelected.append(c)
+
+        # d = MovieName.objects.filter(Name__in = y.MovieName)
+        d = y.MovieName
+        print d
+        if d :
+            dd = 'Movie Name:' + str(d)
+            optionSelected.append(dd)
+
+        ee = y.Category.all()
+        if ee:
+            e = 'Category:' + str(ee[0].Name)
+            optionSelected.append(e)
+
+
+        # f = Year.objects.filter(Year__in = y.year)
+        f = y.year
+        if f:
+            ff = 'Year:' + str(f)
+            optionSelected.append(ff)
+
+        
+        print 'array aagaye'
+        print optionSelected
+        selectedOtions = str(optionSelected)
+
+        
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        filerOptions = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(options))
+
+        post_facebook_message(sender_id,str(filerOptions))     
     
 
         print "response dumped"
@@ -1630,6 +1797,7 @@ def moreSongs(sender_id):
         userdata.save()
 
         # post_facebook_message(sender_id,'singerQuickreply')    
+
 
 def queryNull():
     userdata = UserData.objects.get(Fbid = sender_id)
