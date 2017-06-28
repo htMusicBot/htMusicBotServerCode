@@ -998,7 +998,7 @@ def SongSearcher(sender_id):
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
-        if not a :
+        if not aa :
             cast = False
         print cast
         print 'hhiiii'
@@ -1250,7 +1250,7 @@ def songs_cards(sender_id , data , input_string):
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
     cast = True
-    if not a :
+    if not aa :
         cast = False
     print cast
     print 'hhiiii'
@@ -1730,7 +1730,7 @@ def moreSongs(sender_id):
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         cast = True
-        if not a :
+        if not aa :
             cast = False
         print cast
         print 'hhiiii'
