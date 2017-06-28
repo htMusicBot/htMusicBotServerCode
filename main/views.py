@@ -997,28 +997,28 @@ def SongSearcher(sender_id):
         print a
         cast = True
         if not a :
-            Cast = False
+            cast = False
         print cast
 
         b = y.Singer.all()
-        Singer = True
+        singer = True
         if not b :
-            Singer = False
+            singer = False
 
         c = y.Lyricist.all()
-        Lyricist = True
+        lyricist = True
         if not c :
-            Lyricist = False
+            lyricist = False
 
         d = y.MovieName.all()
-        MovieName = True
+        movieName = True
         if not d :
-            MovieName = False
+            movieName = False
 
         e = y.Category.all()
-        Category = True
+        category = True
         if not e :
-            Category = False
+            category = False
 
         f = y.year.all()
         year = True
@@ -1030,7 +1030,7 @@ def SongSearcher(sender_id):
         if cast:
             optionSelected.append(a)
         print optionSelected
-        if Singer:
+        if singer:
             optionSelected.append(b)
         print optionSelected
 
