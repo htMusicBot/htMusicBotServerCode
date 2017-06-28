@@ -993,32 +993,23 @@ def SongSearcher(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
-        # print y
         aa = y.Cast.all()
-        print str(aa) + 'iiii'
-        # a = Actor.objects.filter(Name = aa[0].Name)
-        # print a
         if aa:
             a = 'Cast: ' + str(aa[0].Name)
             optionSelected.append(a)
-        print 'hhiiii'
 
 
         bb = y.Singer.all()
         if bb :
             b = 'Singer: ' + str(bb[0].Name)
             optionSelected.append(b)
-        print 'hhhhhhhhhhhh'
-
 
         cc = y.Lyricist.all()
         if cc :
             c = 'Category:' + str(cc[0].Name)
             optionSelected.append(c)
 
-        # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
-        print d
         if d :
             dd = 'Movie Name:' + str(d)
             optionSelected.append(dd)
@@ -1028,8 +1019,6 @@ def SongSearcher(sender_id):
             e = 'Category:' + str(ee[0].Name)
             optionSelected.append(e)
 
-
-        # f = Year.objects.filter(Year__in = y.year)
         f = y.year
         if f:
             ff = 'Year:' + str(f)
@@ -1038,7 +1027,11 @@ def SongSearcher(sender_id):
         
         print 'array aagaye'
         print optionSelected
-        selectedOtions = str(optionSelected)
+        selectedOtions = ''
+        optionSelected = str(optionSelected)
+        for i in optionSelected:
+
+            selectedOtions = selectedOtions + i
 
 
 
@@ -1280,7 +1273,11 @@ def songs_cards(sender_id , data , input_string):
     
     print 'array aagaye'
     print optionSelected
-    selectedOtions = str(optionSelected)
+    selectedOtions = ''
+    optionSelected = str(optionSelected)
+    for i in optionSelected:
+
+        selectedOtions = selectedOtions + i
 
         
     moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
@@ -1701,32 +1698,22 @@ def moreSongs(sender_id):
         print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
-        # print y
         aa = y.Cast.all()
-        print str(aa) + 'iiii'
-        # a = Actor.objects.filter(Name = aa[0].Name)
-        # print a
         if aa:
             a = 'Cast: ' + str(aa[0].Name)
             optionSelected.append(a)
-        print 'hhiiii'
-
-
+        
         bb = y.Singer.all()
         if bb :
             b = 'Singer: ' + str(bb[0].Name)
             optionSelected.append(b)
-        print 'hhhhhhhhhhhh'
-
 
         cc = y.Lyricist.all()
         if cc :
             c = 'Category:' + str(cc[0].Name)
             optionSelected.append(c)
 
-        # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
-        print d
         if d :
             dd = 'Movie Name:' + str(d)
             optionSelected.append(dd)
@@ -1736,32 +1723,24 @@ def moreSongs(sender_id):
             e = 'Category:' + str(ee[0].Name)
             optionSelected.append(e)
 
-
-        # f = Year.objects.filter(Year__in = y.year)
         f = y.year
         if f:
             ff = 'Year:' + str(f)
             optionSelected.append(ff)
 
-        
         print 'array aagaye'
         print optionSelected
-        selectedOtions = str(optionSelected)
+        selectedOtions = ''
+        optionSelected = str(optionSelected)
+        for i in optionSelected:
+            selectedOtions = selectedOtions + i
 
-        
         moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
-
-        post_facebook_message(sender_id,str(filerOptions))     
-    
-
+        post_facebook_message(sender_id,str(filerOptions))    
         print "response dumped"
-
         print json.dumps(response_object)
-
-        # print response_object
-
         return json.dumps(response_object)
 
     else:
