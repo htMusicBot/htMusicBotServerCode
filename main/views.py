@@ -999,6 +999,7 @@ def SongSearcher(sender_id):
         if not a :
             cast = False
         print cast
+        print 'hhiiii'
 
         b = y.Singer.all()
         singer = True
