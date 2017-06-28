@@ -994,7 +994,7 @@ def SongSearcher(sender_id):
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name__in = aa.Name)
+        a = Actor.objects.filter(Name__in = aa.Singer)
         print a
         cast = True
         if not a :
