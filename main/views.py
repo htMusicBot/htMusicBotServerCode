@@ -1020,7 +1020,8 @@ def SongSearcher(sender_id):
         d = y.MovieName
         print d
         if d :
-            optionSelected.append(d)
+            dd = 'Movie Name:' + str(d[0].Name)
+            optionSelected.append(dd)
 
         ee = y.Category.all()
         if ee:
@@ -1031,7 +1032,8 @@ def SongSearcher(sender_id):
         # f = Year.objects.filter(Year__in = y.year)
         f = y.year
         if f:
-            optionSelected.append(f)
+            ff = 'Movie Name:' + str(f[0].Name)
+            optionSelected.append(ff)
 
         
         print 'array aagaye'
@@ -1039,7 +1041,7 @@ def SongSearcher(sender_id):
         selectedOtions = str(optionSelected)
 
 
-        
+
 
 
         
@@ -1260,7 +1262,8 @@ def songs_cards(sender_id , data , input_string):
     d = y.MovieName
     print d
     if d :
-        optionSelected.append(d)
+        dd = 'Movie Name:' + str(d[0].Name)
+        optionSelected.append(dd)
 
     ee = y.Category.all()
     if ee:
@@ -1271,7 +1274,8 @@ def songs_cards(sender_id , data , input_string):
     # f = Year.objects.filter(Year__in = y.year)
     f = y.year
     if f:
-        optionSelected.append(f)
+        ff = 'Movie Name:' + str(f[0].Name)
+        optionSelected.append(ff)
 
     
     print 'array aagaye'
@@ -1724,7 +1728,8 @@ def moreSongs(sender_id):
         d = y.MovieName
         print d
         if d :
-            optionSelected.append(d)
+            dd = 'Movie Name:' + str(d[0].Name)
+            optionSelected.append(dd)
 
         ee = y.Category.all()
         if ee:
@@ -1735,7 +1740,8 @@ def moreSongs(sender_id):
         # f = Year.objects.filter(Year__in = y.year)
         f = y.year
         if f:
-            optionSelected.append(f)
+            ff = 'Movie Name:' + str(f[0].Name)
+            optionSelected.append(ff)
 
         
         print 'array aagaye'
