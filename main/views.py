@@ -1776,6 +1776,7 @@ def moreSongs(sender_id):
         print optionSelected
         if year:
             optionSelected.append(f)
+        optionSelected = json.dump(optionSelected)
         print optionSelected
 
         
