@@ -998,7 +998,6 @@ def SongSearcher(sender_id):
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         optionSelected.append(a)
-        print cast
         print 'hhiiii'
 
         # bb = y.Singer.all()
@@ -1248,7 +1247,6 @@ def songs_cards(sender_id , data , input_string):
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
     optionSelected.append(a)
-    print cast
     print 'hhiiii'
 
     # bb = y.Singer.all()
@@ -1726,10 +1724,9 @@ def moreSongs(sender_id):
         a = Actor.objects.filter(Name__in = aa.Name)
         print a
         optionSelected.append(a)
-        print cast
         print 'hhiiii'
 
-        
+
         # bb = y.Singer.all()
         # b = Singer.objects.filter(Name__in = bb)
         # singer = True
