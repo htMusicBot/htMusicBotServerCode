@@ -1021,8 +1021,8 @@ def SongSearcher(sender_id):
         # print b
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
-        a = random.choice(moreFiltersOptions)
-        post_facebook_message(sender_id,str(a)) 
+        b = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(b)) 
 
 
         post_facebook_message(sender_id,str(a))   
