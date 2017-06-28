@@ -1031,7 +1031,7 @@ def SongSearcher(sender_id):
         optionSelected = str(optionSelected)
         for i in optionSelected:
 
-            selectedOtions = selectedOtions + i
+            selectedOtions = selectedOtions + str(i)
 
 
 
@@ -1312,7 +1312,7 @@ def songs_cards(sender_id , data , input_string):
     optionSelected = str(optionSelected)
     for i in optionSelected:
 
-        selectedOtions = selectedOtions + i
+        selectedOtions = selectedOtions + str(i)
 
         
     moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
@@ -1768,7 +1768,7 @@ def moreSongs(sender_id):
         selectedOtions = ''
         optionSelected = str(optionSelected)
         for i in optionSelected:
-            selectedOtions = selectedOtions + i
+            selectedOtions = selectedOtions + str(i)
 
         moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
         filerOptions = random.choice(moreFiltersOptions)
