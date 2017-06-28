@@ -994,7 +994,7 @@ def SongSearcher(sender_id):
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()
-        a = Category.objects.filter(Name__in = aa)
+        a = Cast.objects.filter(Name__in = aa)
         print a
         cast = True
         if not a :
@@ -1003,7 +1003,7 @@ def SongSearcher(sender_id):
         print 'hhiiii'
 
         bb = y.Singer.all()
-        b = Category.objects.filter(Name__in = bb)
+        b = Singer.objects.filter(Name__in = bb)
         singer = True
         if not b :
             singer = False
@@ -1011,8 +1011,8 @@ def SongSearcher(sender_id):
 
 
 
-        # c = y.Lyricist.all()
-        cc = Lyricist.objects.filter(Name__in = cc)
+        cc = y.Lyricist.all()
+        c = Lyricist.objects.filter(Name__in = cc)
         lyricist = True
         if not c :
             lyricist = False
@@ -1033,7 +1033,7 @@ def SongSearcher(sender_id):
         year = True
         if not f :
             year = False
-        
+
 
         optionSelected = []
         if cast:
@@ -1724,7 +1724,7 @@ def moreSongs(sender_id):
         y = UserData.objects.get(Fbid = sender_id)
         print y
         aa = y.Cast.all()
-        a = Category.objects.filter(Name__in = aa)
+        a = Cast.objects.filter(Name__in = aa)
         print a
         cast = True
         if not a :
@@ -1733,7 +1733,7 @@ def moreSongs(sender_id):
         print 'hhiiii'
 
         bb = y.Singer.all()
-        b = Category.objects.filter(Name__in = bb)
+        b = Singer.objects.filter(Name__in = bb)
         singer = True
         if not b :
             singer = False
@@ -1741,8 +1741,8 @@ def moreSongs(sender_id):
 
 
 
-        # c = y.Lyricist.all()
-        cc = Lyricist.objects.filter(Name__in = cc)
+        cc = y.Lyricist.all()
+        c = Lyricist.objects.filter(Name__in = cc)
         lyricist = True
         if not c :
             lyricist = False
@@ -1763,6 +1763,7 @@ def moreSongs(sender_id):
         year = True
         if not f :
             year = False
+
         
 
         optionSelected = []
