@@ -1246,7 +1246,7 @@ def songs_cards(sender_id , data , input_string):
     y = UserData.objects.get(Fbid = sender_id)
     print y
     aa = y.Cast.all()[0]
-    print aa
+    print str(aa) + 'hiiiiiiiiiiiiiiiiiii'
     a = Actor.objects.filter(Name__in = aa.Name)
     print a
     cast = True
