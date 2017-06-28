@@ -1099,34 +1099,34 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             matches = []
            
-            for i in range(3):
+        for i in range(3):
 
-                if max(a)>0.30:
-                    print "this is max ratio" + str(max(a))
+            if max(a)>0.30:
+                print "this is max ratio" + str(max(a))
 
-                    match = data[a.index(max(a))].Name
-                    
+                match = data[a.index(max(a))].Name
+                
 
-                    matches.append(match)
+                matches.append(match)
 
-                    a.remove(max(a))
+                a.remove(max(a))
 
-                    print match
-                    quickreply_data = {
-                                        "content_type":"text",
-                                        "title":match,
-                                        "payload":match
-                                      }
+                print match
+                quickreply_data = {
+                                    "content_type":"text",
+                                    "title":match,
+                                    "payload":match
+                                  }
 
-                    quickreply_array.append(quickreply_data)
+                quickreply_array.append(quickreply_data)
 
-            
+        
 
-            
-                    # post_facebook_message(sender_id,match)
-                    w = w+1
-                    print "debugging  " + str(w)
-                    print "this is matched quickreply array" + str(quickreply_array)
+        
+                # post_facebook_message(sender_id,match)
+                w = w+1
+                print "debugging  " + str(w)
+                print "this is matched quickreply array" + str(quickreply_array)
 
 
 
