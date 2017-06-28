@@ -1154,11 +1154,11 @@ def matching_quickreplies(input_string , data , sender_id) :
         # print response_object
 
 
-        x = json.dumps(response_object)    
+    x = json.dumps(response_object)    
 
-        print x   
+    print x   
 
-        return x
+    return x
 
 
 def songs_cards(sender_id , data , input_string):
