@@ -1049,7 +1049,7 @@ def SongSearcher(sender_id):
         #     optionSelected.append(e[0])
         # if year:
         #     optionSelected.append(f[0])
-        # print optionSelected
+        print optionSelected
 
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
@@ -1289,7 +1289,7 @@ def songs_cards(sender_id , data , input_string):
 
     optionSelected = []
     if cast:
-        optionSelected.append(a[0])
+        optionSelected.append(a)
     # if singer:
     #     optionSelected.append(b[0])
     # if lyricist:
@@ -1300,7 +1300,7 @@ def songs_cards(sender_id , data , input_string):
     #     optionSelected.append(e[0])
     # if year:
     #     optionSelected.append(f[0])
-    # print optionSelected
+    print optionSelected
 
     
     moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
@@ -1771,7 +1771,7 @@ def moreSongs(sender_id):
 
         optionSelected = []
         if cast:
-            optionSelected.append(a[0])
+            optionSelected.append(a)
         # if singer:
         #     optionSelected.append(b[0])
         # if lyricist:
@@ -1782,7 +1782,7 @@ def moreSongs(sender_id):
         #     optionSelected.append(e[0])
         # if year:
         #     optionSelected.append(f[0])
-        # print optionSelected
+        print optionSelected
 
         
         moreFiltersOptions = ['You had selected [OPTION]. Select more filters to narrow down your search' , 'You chose [OPTION]. If you’re looking for a particular song, select more options' , 'Not the song you were looking for? Select from these options ']
