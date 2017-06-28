@@ -994,11 +994,12 @@ def SongSearcher(sender_id):
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
         # print y
-        aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name = aa.Name)
+        aa = y.Cast.all()
+        print str(aa) + 'iiii'
+        a = Actor.objects.filter(Name = aa[0].Name)
         print a
         if a:
-            optionSelected.append(a[0].name)
+            optionSelected.append(a[0].Name)
         print 'hhiiii'
 
         # bb = y.Singer.all()
@@ -1244,11 +1245,12 @@ def songs_cards(sender_id , data , input_string):
     optionSelected = []
     y = UserData.objects.get(Fbid = sender_id)
     # print y
-    aa = y.Cast.all()[0]
-    a = Actor.objects.filter(Name = aa.Name)
+    aa = y.Cast.all()
+    print str(aa) + 'iiii'
+    a = Actor.objects.filter(Name = aa[0].Name)
     print a
     if a:
-        optionSelected.append(a[0].name)
+        optionSelected.append(a[0].Name)
     print 'hhiiii'
 
     # bb = y.Singer.all()
@@ -1722,11 +1724,12 @@ def moreSongs(sender_id):
         optionSelected = []
         y = UserData.objects.get(Fbid = sender_id)
         # print y
-        aa = y.Cast.all()[0]
-        a = Actor.objects.filter(Name = aa.Name)
+        aa = y.Cast.all()
+        print str(aa) + 'iiii'
+        a = Actor.objects.filter(Name = aa[0].Name)
         print a
         if a:
-            optionSelected.append(a[0].name)
+            optionSelected.append(a[0].Name)
         print 'hhiiii'
 
 
