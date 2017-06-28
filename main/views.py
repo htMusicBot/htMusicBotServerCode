@@ -1020,7 +1020,7 @@ def SongSearcher(sender_id):
         d = y.MovieName
         print d
         if d :
-            dd = 'Movie Name:' + str(d[0].Name)
+            dd = 'Movie Name:' + str(d)
             optionSelected.append(dd)
 
         ee = y.Category.all()
@@ -1262,7 +1262,7 @@ def songs_cards(sender_id , data , input_string):
     d = y.MovieName
     print d
     if d :
-        dd = 'Movie Name:' + str(d[0].Name)
+        dd = 'Movie Name:' + str(d)
         optionSelected.append(dd)
 
     ee = y.Category.all()
@@ -1728,7 +1728,7 @@ def moreSongs(sender_id):
         d = y.MovieName
         print d
         if d :
-            dd = 'Movie Name:' + str(d[0].Name)
+            dd = 'Movie Name:' + str(d)
             optionSelected.append(dd)
 
         ee = y.Category.all()
