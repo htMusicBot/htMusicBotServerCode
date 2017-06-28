@@ -1130,7 +1130,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 post_facebook_message(sender_id,"No  matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")   
                 print "this is array " + str(quickreply_array)
-                break  
+               
 
     elif len(quickreply_array) == 1:
         pass                  
