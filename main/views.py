@@ -1044,7 +1044,7 @@ def SongSearcher(sender_id):
             optionSelected.append(e)
         if year:
             optionSelected.append(f)
-        optionSelected = jsom.dumps(optionSelected)
+        optionSelected = json.dumps(optionSelected)
         print optionSelected
 
         
@@ -1297,7 +1297,7 @@ def songs_cards(sender_id , data , input_string):
     print optionSelected
     if year:
         optionSelected.append(f)
-    optionSelected = jsom.dumps(optionSelected)
+    optionSelected = json.dumps(optionSelected)
     print optionSelected
 
     
