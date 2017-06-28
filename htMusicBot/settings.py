@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     'django_extensions',
+    # 'elasticsearchapp',
 )
 
 MIDDLEWARE_CLASSES = (
