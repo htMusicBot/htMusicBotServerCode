@@ -1347,8 +1347,10 @@ def songs_cards(sender_id , data , input_string):
     ff = y.year.all()
     print ff 
     if ff:
+        print 'entered if'
         yearA = '' 
         for i in ff:
+            print 'entered loop'
             print i
             print ff[i].Year
             yearA = yearA + str(ff[i].Year)
