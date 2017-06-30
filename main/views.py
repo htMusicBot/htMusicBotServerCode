@@ -1349,13 +1349,13 @@ def songs_cards(sender_id , data , input_string):
     if ff:
         print 'entered if'
         yearA = '' 
-        for i in ff:
+        for item in ff:
             print 'entered loop'
-            print i
-            print ff[i].Year
+            print item
+            print ff[item].Year
             yearA = yearA + str(ff[i].Year)
             print yearA
-        f = 'Year: ' + yearA
+        f = 'Year: ' + str(yearA)
         optionSelected.append(f)
     print optionSelected
 
