@@ -1052,7 +1052,7 @@ def SongSearcher(sender_id):
         if ff:
             print 'entered if'
             yearA = '' 
-            for item in len(ff):
+            for item in range(len(ff)):
                 print 'entered loop'
                 print item
                 print ff[item].Year
@@ -1354,7 +1354,7 @@ def songs_cards(sender_id , data , input_string):
     if ff:
         print 'entered if'
         yearA = '' 
-        for item in len(ff):
+        for item in range(len(ff)):
             print 'entered loop'
             print item
             print ff[item].Year
@@ -1841,7 +1841,7 @@ def moreSongs(sender_id):
         if ff:
             print 'entered if'
             yearA = '' 
-            for item in len(ff):
+            for item in range(len(ff)):
                 print 'entered loop'
                 print item
                 print ff[item].Year
