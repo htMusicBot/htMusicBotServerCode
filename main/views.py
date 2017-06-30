@@ -1011,33 +1011,48 @@ def SongSearcher(sender_id):
         # a = Actor.objects.filter(Name = aa[0].Name)
         # print a
         if aa:
-            a = 'Cast: ' + str(aa[0].Name)
+            cast = ''
+            for item in range(len(aa)):
+                a = aa[item].Name
+                cast = cast + str(a) + ', '
+            a = 'Cast: ' + str(cast)
             optionSelected.append(a)
         print 'hhiiii'
 
 
         bb = y.Singer.all()
         if bb :
-            b = 'Singer: ' + str(bb[0].Name)
+            singer = ''
+            for item in range(len(bb)):
+                a = bb[item].Name
+                singer = singer + str(a) + ', '
+            b = 'Singer: ' + str(singer)
             optionSelected.append(b)
-        print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            c = 'Category: ' + str(cc[0].Name)
+            lyricist = ''
+            for item in range(len(cc)):
+                a = cc[item].Name
+                lyricist = lyricist + str(a) + ', '
+            c = 'Lyricist: ' + str(lyricist)
             optionSelected.append(c)
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
         print d
         if d :
-            dd = 'Movie Name: ' + str(d)
+            dd = 'Movie Name:' + str(d)
             optionSelected.append(dd)
 
         ee = y.Category.all()
         if ee:
-            e = 'Category: ' + str(ee[0].Name)
+            category = ''
+            for item in range(len(ee)):
+                a = ee[item].Name
+                category = category + str(a) + ', '
+            e = 'Category: ' + str(category)
             optionSelected.append(e)
 
 
@@ -1047,11 +1062,13 @@ def SongSearcher(sender_id):
         #     ff = 'Year:' + str(f)
         #     optionSelected.append(ff)
         ff = y.year.all()
-        print ff 
         if ff:
-            f = 'Year: ' + str(ff[0].Year)
+            year = '' 
+            for item in range(len(ff)):
+                a = ff[item].Year
+                year = year + str(a) + ', '
+            f = 'Year: ' + str(year)
             optionSelected.append(f)
-            print optionSelected
 
 
         
@@ -1303,21 +1320,32 @@ def songs_cards(sender_id , data , input_string):
     # a = Actor.objects.filter(Name = aa[0].Name)
     # print a
     if aa:
-        a = 'Cast: ' + str(aa[0].Name)
+        cast = ''
+        for item in range(len(aa)):
+            a = aa[item].Name
+            cast = cast + str(a) + ', '
+        a = 'Cast: ' + str(cast)
         optionSelected.append(a)
     print 'hhiiii'
 
 
     bb = y.Singer.all()
     if bb :
-        b = 'Singer: ' + str(bb[0].Name)
+        singer = ''
+        for item in range(len(bb)):
+            a = bb[item].Name
+            singer = singer + str(a) + ', '
+        b = 'Singer: ' + str(singer)
         optionSelected.append(b)
-    print 'hhhhhhhhhhhh'
 
 
     cc = y.Lyricist.all()
     if cc :
-        c = 'Category:' + str(cc[0].Name)
+        lyricist = ''
+        for item in range(len(cc)):
+            a = cc[item].Name
+            lyricist = lyricist + str(a) + ', '
+        c = 'Lyricist: ' + str(lyricist)
         optionSelected.append(c)
 
     # d = MovieName.objects.filter(Name__in = y.MovieName)
@@ -1329,7 +1357,11 @@ def songs_cards(sender_id , data , input_string):
 
     ee = y.Category.all()
     if ee:
-        e = 'Category:' + str(ee[0].Name)
+        category = ''
+        for item in range(len(ee)):
+            a = ee[item].Name
+            category = category + str(a) + ', '
+        e = 'Category: ' + str(category)
         optionSelected.append(e)
 
 
@@ -1339,13 +1371,15 @@ def songs_cards(sender_id , data , input_string):
     #     ff = 'Year:' + str(f)
     #     optionSelected.append(ff)
     ff = y.year.all()
-    print ff 
     if ff:
-        f = 'Year: ' + str(ff[0].Year)
+        year = '' 
+        for item in range(len(ff)):
+            a = ff[item].Year
+            year = year + str(a) + ', '
+        f = 'Year: ' + str(year)
         optionSelected.append(f)
-        print optionSelected
 
-    
+
     print 'array aagaye'
     print optionSelected
     selectedOtions = ''
@@ -1780,21 +1814,32 @@ def moreSongs(sender_id):
         # a = Actor.objects.filter(Name = aa[0].Name)
         # print a
         if aa:
-            a = 'Cast: ' + str(aa[0].Name)
+            cast = ''
+            for item in range(len(aa)):
+                a = aa[item].Name
+                cast = cast + str(a) + ', '
+            a = 'Cast: ' + str(cast)
             optionSelected.append(a)
         print 'hhiiii'
 
 
         bb = y.Singer.all()
         if bb :
-            b = 'Singer: ' + str(bb[0].Name)
+            singer = ''
+            for item in range(len(bb)):
+                a = bb[item].Name
+                singer = singer + str(a) + ', '
+            b = 'Singer: ' + str(singer)
             optionSelected.append(b)
-        print 'hhhhhhhhhhhh'
 
 
         cc = y.Lyricist.all()
         if cc :
-            c = 'Category:' + str(cc[0].Name)
+            lyricist = ''
+            for item in range(len(cc)):
+                a = cc[item].Name
+                lyricist = lyricist + str(a) + ', '
+            c = 'Lyricist: ' + str(lyricist)
             optionSelected.append(c)
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
@@ -1806,7 +1851,11 @@ def moreSongs(sender_id):
 
         ee = y.Category.all()
         if ee:
-            e = 'Category:' + str(ee[0].Name)
+            category = ''
+            for item in range(len(ee)):
+                a = ee[item].Name
+                category = category + str(a) + ', '
+            e = 'Category: ' + str(category)
             optionSelected.append(e)
 
 
@@ -1816,11 +1865,13 @@ def moreSongs(sender_id):
         #     ff = 'Year:' + str(f)
         #     optionSelected.append(ff)
         ff = y.year.all()
-        print ff 
         if ff:
-            f = 'Year: ' + str(ff[0].Year)
+            year = '' 
+            for item in range(len(ff)):
+                a = ff[item].Year
+                year = year + str(a) + ', '
+            f = 'Year: ' + str(year)
             optionSelected.append(f)
-            print optionSelected
 
         
         print 'array aagaye'
