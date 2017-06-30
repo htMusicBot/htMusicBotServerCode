@@ -845,12 +845,12 @@ def SongSearcher(sender_id):
         print "yes in array year"
         print w 
 
-        # z = b.filter(year__in=w) 
+        z = b.filter(year__in=arrayYear) 
 
         z = b
     else :
-        # z =  b.exclude(year=w)
-        z  = b
+        z =  b.exclude(year=arrayYear)
+        # z  = b
         print "in except"
 
     print "After sorting years"     
