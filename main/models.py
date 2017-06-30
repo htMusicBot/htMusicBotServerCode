@@ -78,7 +78,7 @@ class Song(models.Model):
     Category = models.ManyToManyField(Category, null = True)
     # Category  = models.ForeignKey(Category, on_delete=models.CASCADE, null = True)
     # lyrics  = models.CharField(max_length = 250 , default = 'NULL')
-    year  = models.ManyToManyField(Year, null = True)
+    year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
 
     def __str__(self):
         return self.SongName
@@ -92,7 +92,7 @@ class UserData(models.Model):
     MovieName = models.ForeignKey(MovieName, on_delete=models.CASCADE, null = True)
     Category = models.ManyToManyField(Category, null = True)
     # issue = models.CharField(max_length = 1000, default = 'NULL')
-    year  = models.ForeignKey(Year, on_delete=models.CASCADE, null = True)
+    year  = models.ManyToManyField(Year, null = True)
     query  = models.ManyToManyField(Song, null = True) 
 
 
