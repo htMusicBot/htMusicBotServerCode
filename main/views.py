@@ -836,19 +836,20 @@ def SongSearcher(sender_id):
 
 
     else :
-        b =  Song.objects.exclude(Singer__in=q)
+        b =  Song.objects.exclude(Singer=q)
 
     print "After sorting singers" 
     print b  
 
     if arrayYear:
         print "yes in array year"
+        print w 
 
-        z = b.filter(year__in=arrayYear) 
+        z = b.filter(year=w) 
 
 
     else :
-        z =  b.exclude(year__in=w)
+        z =  b.exclude(year=w)
 
     print "After sorting years"     
     print z    
