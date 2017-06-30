@@ -788,7 +788,9 @@ def SongSearcher(sender_id):
         arrayLyricist.append(item.Name) 
 
     for item in userInstance.year.all():
-        arrayYear.append(item.Year)                 
+        print "this is year"  + str(item.Year)
+        arrayYear.append(item.Year) 
+        print "this is years array " + str(arrayYear)                
 
     # if userInstance.year:
     #     arrayYear.append(userInstance.year)
@@ -830,7 +832,7 @@ def SongSearcher(sender_id):
 
     if arraySinger:
 
-        b = Song.objects.filter(Singer=q) 
+        b = Song.objects.filter(Singer__in=q) 
 
 
     else :
@@ -841,12 +843,15 @@ def SongSearcher(sender_id):
 
     if arrayYear:
         print "yes in array year"
+        print w 
 
-        z = b.filter(year=w) 
+        z = b.filter(year__in=arrayYear) 
 
-
+        z = b
     else :
-        z =  b.exclude(year=w)
+        z =  b.exclude(year__in=arrayYear)
+        # z  = b
+        print "in except"
 
     print "After sorting years"     
     print z    
