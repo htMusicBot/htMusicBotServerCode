@@ -471,6 +471,7 @@ def GetSongData(url,year):
     song.MovieName = movieName
 
     year11 = Year.objects.get_or_create(Year = year.strip())[0]
+
     song.year = year11
     
     #This one helps us in getting the embed url
@@ -514,6 +515,7 @@ def GetSongData(url,year):
 
 
 
+    year11.save()
     song.save()
     singer.save()
     musicDirector.save()    
