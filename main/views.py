@@ -1465,12 +1465,15 @@ def Category_quickreplies(sender_id):
         arrayActor.append(item.Name)
         
     for item in userInstance.Lyricist.all():
-        arrayLyricist.append(item.Name)                  
+        arrayLyricist.append(item.Name)  
 
-    if userInstance.year:
-        arrayYear.append(userInstance.year)
-    else:
-        pass    
+    for item in userInstance.year.all():
+        arrayYear.append(item.Year)                
+
+    # if userInstance.year:
+    #     arrayYear.append(userInstance.year)
+    # else:
+    #     pass    
 
     if userInstance.MovieName:
         arrayMovie.append(userInstance.MovieName)
@@ -1800,7 +1803,7 @@ def moreSongs(sender_id):
         if ff:
             f = 'Year: ' + str(ff[0].Name)
             optionSelected.append(f)
-            
+
         
         print 'array aagaye'
         print optionSelected
