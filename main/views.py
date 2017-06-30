@@ -841,15 +841,15 @@ def SongSearcher(sender_id):
     print "After sorting singers" 
     print b  
 
-    if arrayYear:
-        print "yes in array year"
-        print w 
+    # if arrayYear:
+    #     print "yes in array year"
+    #     print w 
 
-        z = b.filter(year__in=w) 
+    #     z = b.filter(year__in=w) 
 
 
-    else :
-        z =  b.exclude(year=w)
+    # else :
+    #     z =  b.exclude(year=w)
 
     print "After sorting years"     
     print z    
