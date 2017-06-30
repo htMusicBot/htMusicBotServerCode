@@ -1816,6 +1816,7 @@ def moreSongs(sender_id):
         
         print 'array aagaye'
         print optionSelected
+        selectedOtions = ''
         for i in optionSelected:
             selectedOtions = selectedOtions + str(i) + ' '
 
