@@ -849,7 +849,7 @@ def SongSearcher(sender_id):
 
         z = b
     else :
-        z =  b.exclude(year=arrayYear)
+        z =  b.exclude(year__in=arrayYear)
         # z  = b
         print "in except"
 
