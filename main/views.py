@@ -1524,6 +1524,7 @@ def Category_quickreplies(sender_id):
     #     arrayYear.append(userInstance.year)
     # else:
     #     pass    
+    print "this is array year " + str(arrayYear)
 
     if userInstance.MovieName:
         arrayMovie.append(userInstance.MovieName)
@@ -1571,6 +1572,7 @@ def Category_quickreplies(sender_id):
 
     if arrayYear:
         print "yes in array year"
+        print arrayYear
 
         z = b.filter(year__in=arrayYear) 
 
