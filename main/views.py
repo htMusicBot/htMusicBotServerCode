@@ -1049,18 +1049,17 @@ def SongSearcher(sender_id):
         ff = y.year.all()
         print ff 
         if ff:
-            for i in range(4):
-                print i
-            # print 'entered if'
-            # yearA = '' 
-            # for item in ff:
-            #     print 'entered loop'
-            #     print item
-            #     print ff[item].Year
-            #     yearA = yearA + str(ff[item].Year)
-            #     print yearA
-            # f = 'Year: ' + str(yearA)
-            optionSelected.append(ff[1].Year)
+            print 'entered if'
+            yearA = '' 
+            for item in ff:
+                print 'entered loop'
+                print item
+                print ff[item].Year
+                a = ff[item].Year
+                yearA = yearA + str(a) + ', '
+                print yearA
+            f = 'Year: ' + str(yearA)
+            optionSelected.append(f)
         print optionSelected
 
 
@@ -1351,16 +1350,17 @@ def songs_cards(sender_id , data , input_string):
     ff = y.year.all()
     print ff 
     if ff:
-        # print 'entered if'
-        # yearA = '' 
-        # for item in ff:
-        #     print 'entered loop'
-        #     print item
-        #     print ff[item].Year
-        #     yearA = yearA + str(ff[item].Year)
-        #     print yearA
-        # f = 'Year: ' + str(yearA)
-        optionSelected.append(ff[1].Year)
+        print 'entered if'
+        yearA = '' 
+        for item in ff:
+            print 'entered loop'
+            print item
+            print ff[item].Year
+            a = ff[item].Year
+            yearA = yearA + str(a) + ', '
+            print yearA
+        f = 'Year: ' + str(yearA)
+        optionSelected.append(f)
     print optionSelected
 
 
@@ -1836,16 +1836,17 @@ def moreSongs(sender_id):
         ff = y.year.all()
         print ff 
         if ff:
-            # print 'entered if'
-            # yearA = '' 
-            # for item in ff:
-            #     print 'entered loop'
-            #     print item
-            #     print ff[item].Year
-            #     yearA = yearA + str(ff[item].Year)
-            #     print yearA
-            # f = 'Year: ' + str(yearA)
-            optionSelected.append(ff[1].Year)
+            print 'entered if'
+            yearA = '' 
+            for item in ff:
+                print 'entered loop'
+                print item
+                print ff[item].Year
+                a = ff[item].Year
+                yearA = yearA + str(a) + ', '
+                print yearA
+            f = 'Year: ' + str(yearA)
+            optionSelected.append(f)
         print optionSelected
 
         
