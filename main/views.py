@@ -849,10 +849,10 @@ def SongSearcher(sender_id):
         print "yes in array year"
         print w 
 
-        z = b.filter(year="2015") 
+        z = b.filter(year=w) 
 
     else :
-        z =  b.exclude(year__in=w)
+        z =  b.exclude(year=w)
         # z  = b
         print "in except"
 
@@ -1579,7 +1579,7 @@ def Category_quickreplies(sender_id):
 
         z = b.filter(year=w) 
 
-        z = b
+        # z = b
     else :
         z =  b.exclude(year=w)
         # z  = b
