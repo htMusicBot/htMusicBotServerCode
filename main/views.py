@@ -1049,13 +1049,15 @@ def SongSearcher(sender_id):
         ff = y.year.all()
         print ff 
         if ff:
+            print 'entered if'
             yearA = '' 
-            for i in ff:
-                print i
-                print ff[i].Year
+            for item in ff:
+                print 'entered loop'
+                print item
+                print ff[item].Year
                 yearA = yearA + str(ff[i].Year)
                 print yearA
-            f = 'Year: ' + yearA
+            f = 'Year: ' + str(yearA)
             optionSelected.append(f)
         print optionSelected
 
@@ -1832,13 +1834,15 @@ def moreSongs(sender_id):
         ff = y.year.all()
         print ff 
         if ff:
+            print 'entered if'
             yearA = '' 
-            for i in ff:
-                print i
-                print ff[i].Year
+            for item in ff:
+                print 'entered loop'
+                print item
+                print ff[item].Year
                 yearA = yearA + str(ff[i].Year)
                 print yearA
-            f = 'Year: ' + yearA
+            f = 'Year: ' + str(yearA)
             optionSelected.append(f)
         print optionSelected
 
