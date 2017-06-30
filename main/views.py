@@ -1538,11 +1538,11 @@ def Category_quickreplies(sender_id):
     if arrayYear:
         print "yes in array year"
 
-        z = b.filter(year=w) 
+        z = b.filter(year__in=arrayYear) 
 
 
     else :
-        z =  b.exclude(year=w)
+        z =  b.exclude(year__in=arrayYear)
 
     print "After sorting years"     
     print z    
