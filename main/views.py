@@ -304,7 +304,7 @@ class MyChatBotView(generic.View):
                        
                         # print b
                         for item in a: 
-                            userInstance.year = item
+                            userInstance.year.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
@@ -1013,27 +1013,32 @@ def SongSearcher(sender_id):
 
         cc = y.Lyricist.all()
         if cc :
-            c = 'Category:' + str(cc[0].Name)
+            c = 'Category: ' + str(cc[0].Name)
             optionSelected.append(c)
 
         # d = MovieName.objects.filter(Name__in = y.MovieName)
         d = y.MovieName
         print d
         if d :
-            dd = 'Movie Name:' + str(d)
+            dd = 'Movie Name: ' + str(d)
             optionSelected.append(dd)
 
         ee = y.Category.all()
         if ee:
-            e = 'Category:' + str(ee[0].Name)
+            e = 'Category: ' + str(ee[0].Name)
             optionSelected.append(e)
 
 
         # f = Year.objects.filter(Year__in = y.year)
-        f = y.year
-        if f:
-            ff = 'Year:' + str(f)
-            optionSelected.append(ff)
+        # f = y.year
+        # if f:
+        #     ff = 'Year:' + str(f)
+        #     optionSelected.append(ff)
+        ff = y.year.all()
+        if ff:
+            f = 'Year: ' + str(ff[0].Name)
+            optionSelected.append(f)
+
 
         
         print 'array aagaye'
@@ -1315,10 +1320,14 @@ def songs_cards(sender_id , data , input_string):
 
 
     # f = Year.objects.filter(Year__in = y.year)
-    f = y.year
-    if f:
-        ff = 'Year:' + str(f)
-        optionSelected.append(ff)
+    # f = y.year
+    # if f:
+    #     ff = 'Year:' + str(f)
+    #     optionSelected.append(ff)
+    ff = y.year.all()
+    if ff:
+        f = 'Year: ' + str(ff[0].Name)
+        optionSelected.append(f)
 
     
     print 'array aagaye'
@@ -1783,11 +1792,15 @@ def moreSongs(sender_id):
 
 
         # f = Year.objects.filter(Year__in = y.year)
-        f = y.year
-        if f:
-            ff = 'Year:' + str(f)
-            optionSelected.append(ff)
-
+        # f = y.year
+        # if f:
+        #     ff = 'Year:' + str(f)
+        #     optionSelected.append(ff)
+        ff = y.year.all()
+        if ff:
+            f = 'Year: ' + str(ff[0].Name)
+            optionSelected.append(f)
+            
         
         print 'array aagaye'
         print optionSelected
