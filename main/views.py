@@ -809,7 +809,7 @@ def SongSearcher(sender_id):
 
 
 
-    q = Singer.objects.filter(Name__in = arraySinger)
+    q = Singer.objects.exclude(Name__in = arraySinger)
 
     print "entered singer "
     print "haha" + str(q)
@@ -832,7 +832,7 @@ def SongSearcher(sender_id):
 
     if arraySinger:
 
-        b = Song.objects.filter(Singer__in=q) 
+        b = Song.objects.exclude(Singer__in=q) 
 
 
     else :
@@ -845,7 +845,7 @@ def SongSearcher(sender_id):
         print "yes in array year"
         print w 
 
-        z = b.filter(year=w) 
+        z = b.filter(year__in=arrayYear) 
 
 
     else :
