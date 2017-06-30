@@ -303,7 +303,7 @@ class MyChatBotView(generic.View):
                         print a 
                        
                         # print b
-                        for item in message_text: 
+                        for item in a: 
                             userInstance.year.add(item)
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
