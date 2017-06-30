@@ -1029,7 +1029,6 @@ def SongSearcher(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-
             selectedOtions = selectedOtions + str(i)
 
 
@@ -1256,7 +1255,6 @@ def songs_cards(sender_id , data , input_string):
     # print response_object
     optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
-
     options = random.choice(optionText)
 
     print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
@@ -1309,7 +1307,6 @@ def songs_cards(sender_id , data , input_string):
     print optionSelected
     selectedOtions = ''
     for i in optionSelected:
-
         selectedOtions = selectedOtions + str(i)
 
         
