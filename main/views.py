@@ -789,7 +789,8 @@ def SongSearcher(sender_id):
 
     for item in userInstance.year.all():
         print "this is year"  + str(item.Year)
-        arrayYear.append(item.Year)                 
+        arrayYear.append(item.Year) 
+        print "this is years array " + str(arrayYear)                
 
     # if userInstance.year:
     #     arrayYear.append(userInstance.year)
