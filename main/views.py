@@ -299,12 +299,16 @@ class MyChatBotView(generic.View):
                             message_text = ['2000','2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
                         elif payload=='2010':
                             message_text = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+                        print message_text
+                        print 'lalalalala'
                         a = Year.objects.filter(Year__in = message_text)
                         print a 
                        
                         # print b
                         for item in a: 
+                            print 'la'
                             userInstance.year.add(item)
+
                         # userInstance.Singer.add(a[0])
                         userInstance.save()
                         # post_facebook_message(sender_id,b[0].SongName)
