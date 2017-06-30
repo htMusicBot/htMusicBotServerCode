@@ -850,6 +850,8 @@ def SongSearcher(sender_id):
         z = b
     else :
         # z =  b.exclude(year=w)
+        z  = b
+        print "in except"
 
     print "After sorting years"     
     print z    
