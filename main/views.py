@@ -1049,6 +1049,8 @@ def SongSearcher(sender_id):
         ff = y.year.all()
         print ff 
         if ff:
+            for i in range(4):
+                print i
             # print 'entered if'
             # yearA = '' 
             # for item in ff:
