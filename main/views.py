@@ -1018,8 +1018,9 @@ def SongSearcher(sender_id):
 
         bb = y.Singer.all()
         if bb :
-            b = 'Singer: ' + str(bb[0].Name)
-            optionSelected.append(b)
+            for item in bb:
+                b = 'Singer: ' + str(bb[item].Name)
+                optionSelected.append(b)
         print 'hhhhhhhhhhhh'
 
 
@@ -1319,8 +1320,9 @@ def songs_cards(sender_id , data , input_string):
 
     bb = y.Singer.all()
     if bb :
-        b = 'Singer: ' + str(bb[0].Name)
-        optionSelected.append(b)
+        for item in bb:
+            b = 'Singer: ' + str(bb[item].Name)
+            optionSelected.append(b)
     print 'hhhhhhhhhhhh'
 
 
@@ -1805,8 +1807,9 @@ def moreSongs(sender_id):
 
         bb = y.Singer.all()
         if bb :
-            b = 'Singer: ' + str(bb[0].Name)
-            optionSelected.append(b)
+            for item in bb:
+                b = 'Singer: ' + str(bb[item].Name)
+                optionSelected.append(b)
         print 'hhhhhhhhhhhh'
 
 
