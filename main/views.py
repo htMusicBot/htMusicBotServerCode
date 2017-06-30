@@ -1055,7 +1055,7 @@ def SongSearcher(sender_id):
                 print 'entered loop'
                 print item
                 print ff[item].Year
-                yearA = yearA + str(ff[i].Year)
+                yearA = yearA + str(ff[item].Year)
                 print yearA
             f = 'Year: ' + str(yearA)
             optionSelected.append(f)
@@ -1355,7 +1355,7 @@ def songs_cards(sender_id , data , input_string):
             print 'entered loop'
             print item
             print ff[item].Year
-            yearA = yearA + str(ff[i].Year)
+            yearA = yearA + str(ff[item].Year)
             print yearA
         f = 'Year: ' + str(yearA)
         optionSelected.append(f)
@@ -1840,7 +1840,7 @@ def moreSongs(sender_id):
                 print 'entered loop'
                 print item
                 print ff[item].Year
-                yearA = yearA + str(ff[i].Year)
+                yearA = yearA + str(ff[item].Year)
                 print yearA
             f = 'Year: ' + str(yearA)
             optionSelected.append(f)
