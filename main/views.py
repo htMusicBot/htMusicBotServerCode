@@ -1577,11 +1577,11 @@ def Category_quickreplies(sender_id):
         print "yes in array year"
         print w 
 
-        z = b.filter(year__in=arrayYear) 
+        z = b.filter(year=w) 
 
         z = b
     else :
-        z =  b.exclude(year__in=arrayYear)
+        z =  b.exclude(year=w)
         # z  = b
         print "in except"
 
