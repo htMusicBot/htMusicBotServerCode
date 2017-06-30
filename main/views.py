@@ -1038,9 +1038,11 @@ def SongSearcher(sender_id):
         #     ff = 'Year:' + str(f)
         #     optionSelected.append(ff)
         ff = y.year.all()
+        print ff 
         if ff:
             f = 'Year: ' + str(ff[0].Year)
             optionSelected.append(f)
+            print optionSelected
 
 
         
@@ -1328,9 +1330,11 @@ def songs_cards(sender_id , data , input_string):
     #     ff = 'Year:' + str(f)
     #     optionSelected.append(ff)
     ff = y.year.all()
+    print ff 
     if ff:
         f = 'Year: ' + str(ff[0].Year)
         optionSelected.append(f)
+        print optionSelected
 
     
     print 'array aagaye'
@@ -1803,9 +1807,11 @@ def moreSongs(sender_id):
         #     ff = 'Year:' + str(f)
         #     optionSelected.append(ff)
         ff = y.year.all()
+        print ff 
         if ff:
             f = 'Year: ' + str(ff[0].Year)
             optionSelected.append(f)
+            print optionSelected
 
         
         print 'array aagaye'
