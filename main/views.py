@@ -804,7 +804,7 @@ def SongSearcher(sender_id):
 
     print "entered singer "
     print "haha" + str(q)
-    w = Year.objects.filter(Year__in = userInstance.year)
+    w = Year.objects.filter(Year__in = arrayYear)
     print w
     print "entered year "
     y = MovieName.objects.filter(Name = userInstance.MovieName)
@@ -1491,7 +1491,7 @@ def Category_quickreplies(sender_id):
 
     print "entered singer "
     print "haha" + str(q)
-    w = Year.objects.filter(Year__in = userInstance.year)
+    w = Year.objects.filter(Year__in = arrayYear)
     print w
     print "entered year "
     y = MovieName.objects.filter(Name = userInstance.MovieName)
