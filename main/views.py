@@ -1132,7 +1132,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
     if not quickreply_array:
-        for item in data:
+        for item in data.exclude(Name  = ''):
             print "i am data" + str(item.Name)
 
              # s = fuzz.ratio(item.Name, input_string)
