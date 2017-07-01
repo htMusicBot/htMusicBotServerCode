@@ -1332,6 +1332,8 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
 def songs_cards(sender_id , data , input_string):
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
     a = []
     card_data2 = []
     w = 0
