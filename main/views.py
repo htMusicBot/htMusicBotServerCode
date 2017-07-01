@@ -1186,7 +1186,8 @@ def matching_quickreplies(input_string , data , sender_id) :
                  # s = fuzz.ratio(item.Name, input_string)
                 realName  =item.Name
                 # print realName.split()
-                if len(realName.split())>1
+                nameArray = realName.split()
+                if len(nameArray)>1
                     s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
                     a.append(s)
             # print s 
