@@ -165,7 +165,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message['message']['quick_reply']['payload']
-                        a = Singer.objects.filter(Name__contains = message_text)
+                        a = Singer.objects.filter(Name = message_text)
                         print "singer name searched"
                         for item in a:
                             userInstance.Singer.add(item)
