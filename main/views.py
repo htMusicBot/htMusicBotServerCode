@@ -1067,11 +1067,14 @@ def SongSearcher(sender_id):
         #     optionSelected.append(ff)
         ff = y.year.all()
         if ff:
-            year = '' 
+            year = [] 
             for item in range(len(ff)):
                 a = ff[item].Year
-                year = year + str(a) + ', '
-            f = 'Year: ' + str(year)
+                a = int(a)
+                year.append(a)
+            maxYear = max(year)
+            minYear = min(year)
+            f = 'Year: ' + maxYear + '-' + minYear
             optionSelected.append(f)
 
 
@@ -1559,11 +1562,14 @@ def songs_cards(sender_id , data , input_string):
     #     optionSelected.append(ff)
     ff = y.year.all()
     if ff:
-        year = '' 
+        year = [] 
         for item in range(len(ff)):
             a = ff[item].Year
-            year = year + str(a) + ', '
-        f = 'Year: ' + str(year)
+            a = int(a)
+            year.append(a)
+        maxYear = max(year)
+        minYear = min(year)
+        f = 'Year: ' + maxYear + '-' + minYear
         optionSelected.append(f)
 
 
@@ -2052,13 +2058,26 @@ def moreSongs(sender_id):
         # if f:
         #     ff = 'Year:' + str(f)
         #     optionSelected.append(ff)
+        # ff = y.year.all()
+        # if ff:
+        #     year = '' 
+        #     for item in range(len(ff)):
+        #         a = ff[item].Year
+        #         year = year + str(a) + ', '
+        #     f = 'Year: ' + str(year)
+        #     optionSelected.append(f)
+
+
         ff = y.year.all()
         if ff:
-            year = '' 
+            year = [] 
             for item in range(len(ff)):
                 a = ff[item].Year
-                year = year + str(a) + ', '
-            f = 'Year: ' + str(year)
+                a = int(a)
+                year.append(a)
+            maxYear = max(year)
+            minYear = min(year)
+            f = 'Year: ' + maxYear + '-' + minYear
             optionSelected.append(f)
 
         
