@@ -1190,8 +1190,9 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
     elif len(quickreply_array) == 1:
+        
 
-        elif userInstance.State=='matchSinger':
+        if userInstance.State=='matchSinger':
             userInstance.State='NULL'
             userInstance.save()
             message_text = quickreply_array[0]['payload']
