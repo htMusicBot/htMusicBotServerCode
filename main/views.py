@@ -1060,11 +1060,6 @@ def SongSearcher(sender_id):
             optionSelected.append(e)
 
 
-        # f = Year.objects.filter(Year__in = y.year)
-        # f = y.year
-        # if f:
-        #     ff = 'Year:' + str(f)
-        #     optionSelected.append(ff)
         ff = y.year.all()
         if ff:
             year = [] 
@@ -1074,7 +1069,7 @@ def SongSearcher(sender_id):
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
-            f = 'Year: ' + str(maxYear) + '-' + str(minYear)
+            f = 'Year: ' + str(minYear) + '-' + str(maxYear)
             optionSelected.append(f)
 
 
@@ -1555,11 +1550,6 @@ def songs_cards(sender_id , data , input_string):
         optionSelected.append(e)
 
 
-    # f = Year.objects.filter(Year__in = y.year)
-    # f = y.year
-    # if f:
-    #     ff = 'Year:' + str(f)
-    #     optionSelected.append(ff)
     ff = y.year.all()
     if ff:
         year = [] 
@@ -1569,7 +1559,7 @@ def songs_cards(sender_id , data , input_string):
             year.append(a)
         maxYear = max(year)
         minYear = min(year)
-        f = 'Year: ' + str(maxYear) + '-' + str(minYear)
+        f = 'Year: ' + str(minYear) + '-' + str(maxYear)
         optionSelected.append(f)
 
 
@@ -2053,21 +2043,6 @@ def moreSongs(sender_id):
             optionSelected.append(e)
 
 
-        # f = Year.objects.filter(Year__in = y.year)
-        # f = y.year
-        # if f:
-        #     ff = 'Year:' + str(f)
-        #     optionSelected.append(ff)
-        # ff = y.year.all()
-        # if ff:
-        #     year = '' 
-        #     for item in range(len(ff)):
-        #         a = ff[item].Year
-        #         year = year + str(a) + ', '
-        #     f = 'Year: ' + str(year)
-        #     optionSelected.append(f)
-
-
         ff = y.year.all()
         if ff:
             year = [] 
@@ -2077,7 +2052,7 @@ def moreSongs(sender_id):
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
-            f = 'Year: ' + str(maxYear) + '-' + str(minYear)
+            f = 'Year: ' + str(minYear) + '-' + str(maxYear)
             optionSelected.append(f)
 
         
