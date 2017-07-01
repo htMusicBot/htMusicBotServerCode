@@ -1100,6 +1100,7 @@ def SongSearcher(sender_id):
  
 def matching_quickreplies(input_string , data , sender_id) :
     a = []
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
     w =0
     quickreply_array = [] 
     for item in data:
