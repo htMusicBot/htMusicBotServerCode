@@ -1074,7 +1074,7 @@ def SongSearcher(sender_id):
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
-            f = 'Year: ' + maxYear + '-' + minYear
+            f = str('Year: ' + maxYear + '-' + minYear)
             optionSelected.append(f)
 
 
@@ -1569,7 +1569,7 @@ def songs_cards(sender_id , data , input_string):
             year.append(a)
         maxYear = max(year)
         minYear = min(year)
-        f = 'Year: ' + maxYear + '-' + minYear
+        f = str('Year: ' + maxYear + '-' + minYear)
         optionSelected.append(f)
 
 
@@ -2077,7 +2077,7 @@ def moreSongs(sender_id):
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
-            f = 'Year: ' + maxYear + '-' + minYear
+            f = str('Year: ' + maxYear + '-' + minYear)
             optionSelected.append(f)
 
         
