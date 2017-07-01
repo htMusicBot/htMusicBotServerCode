@@ -1193,7 +1193,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
                 else:  
 
-                    a.append("null")  
+                    a.append(0)  
             # print s 
 
             # print a     
