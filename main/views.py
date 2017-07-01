@@ -1397,7 +1397,7 @@ def songs_cards(sender_id , data , input_string):
             # print "this is max ratio" + str(a.index(max(a)))
 
         for item in range(3):
-            if max(a)>0.3:
+            if max(a)>0.5:
                 print "this is max ratio" + str(a.index(max(a)))
 
                 i = data[a.index(max(a))]
