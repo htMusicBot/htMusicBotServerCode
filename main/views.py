@@ -1137,14 +1137,16 @@ def matching_quickreplies(input_string , data , sender_id) :
 
              # s = fuzz.ratio(item.Name, input_string)
             realName  =item.Name
-            s = difflib.SequenceMatcher(lambda x: x==" ", realName.split()[0], input_string.split()[0]).ratio()
+            print realName
+            s = difflib.SequenceMatcher(None, realName.lower().split()[0], input_string.lower().split()[0]).ratio()
             a.append(s)
-            print s 
+            # print s 
 
-            print a     
+            # print a     
 
-            matches = []
-           
+            # matches = []
+        
+        print a    
         for i in range(3):
 
             if max(a)>0.60:
