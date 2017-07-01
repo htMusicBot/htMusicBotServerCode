@@ -1144,7 +1144,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
             # print a     
 
-            # matches = []
+        # matches = []
         
         print a    
         for i in range(3):
@@ -1155,7 +1155,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 match = data[a.index(max(a))].Name
                 
 
-                matches.append(match)
+                # matches.append(match)
 
                 a.remove(max(a))
 
