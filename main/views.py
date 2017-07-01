@@ -1104,7 +1104,8 @@ def matching_quickreplies(input_string , data , sender_id) :
     w =0
     quickreply_array = [] 
     for item in data:
-        if input_string in item.Name:
+        realName  =item.Name
+        if input_string.lower() in realName.lower():
             print item.Name
 
 
@@ -1133,7 +1134,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     if not quickreply_array:
         for item in data.exclude(Name  = ''):
-            print "i am data" + str(item.Name)
+            print "i am first name data" + str(item.Name)
 
              # s = fuzz.ratio(item.Name, input_string)
             realName  =item.Name
@@ -1149,7 +1150,7 @@ def matching_quickreplies(input_string , data , sender_id) :
         print a    
         for i in range(3):
 
-            if max(a)>0.75:
+            if max(a)>0.7:
                 print "this is max ratio" + str(max(a))
 
                 match = data[a.index(max(a))].Name
@@ -1176,8 +1177,54 @@ def matching_quickreplies(input_string , data , sender_id) :
                 print "debugging  " + str(w)
                 print "this is matched quickreply array" + str(quickreply_array)
                 
-                if w==3:
-                    break
+                # if w==3:
+                #     break
+                if not quickreply_array:
+                    for item in data.exclude(Name  = ''):
+                    print "i am first name data" + str(item.Name)
+
+                     # s = fuzz.ratio(item.Name, input_string)
+                    realName  =item.Name
+                    print realName
+                    s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
+                    a.append(s)
+                    # print s 
+
+                    # print a     
+
+                # matches = []
+                
+                    print a    
+                    for i in range(3):
+
+                        if max(a)>0.6:
+                            print "this is max ratio" + str(max(a))
+
+                            match = data[a.index(max(a))].Name
+                            
+
+                            # matches.append(match)
+
+                            a.remove(max(a))
+
+                            print match
+                            quickreply_data = {
+                                                "content_type":"text",
+                                                "title":match,
+                                                "payload":match
+                                              }
+
+                            quickreply_array.append(quickreply_data)
+
+                    
+
+                    
+                            # post_facebook_message(sender_id,match)
+                            w = w+1
+                            print "debugging  " + str(w)
+                            print "this is matched quickreply array" + str(quickreply_array)
+
+
 
     else :
         pass         
