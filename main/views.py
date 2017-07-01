@@ -1470,7 +1470,7 @@ def songs_cards(sender_id , data , input_string):
                 userInstance.State='NULL'
                 userInstance.save()
                 post_facebook_message(sender_id,"No  matches found") 
-                post_facebook_message(sender_id,"singerQuickreplies")                   
+                post_facebook_message(sender_id,"singerQuickreply")                   
 
     
     else:                    
