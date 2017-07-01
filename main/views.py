@@ -1138,7 +1138,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
              # s = fuzz.ratio(item.Name, input_string)
             realName  =item.Name
-            print realName
+            print realName.split()[0]
             s = difflib.SequenceMatcher(None, realName.lower().split()[0], input_string.lower().split()[0]).ratio()
             a.append(s)
             # print s 
@@ -1181,11 +1181,11 @@ def matching_quickreplies(input_string , data , sender_id) :
                 #     break
                 if not quickreply_array:
                     for item in data.exclude(Name  = ''):
-                        print "i am first name data" + str(item.Name)
+                        print "i am last name data" + str(item.Name)
 
                          # s = fuzz.ratio(item.Name, input_string)
                         realName  =item.Name
-                        print realName
+                        print realName.split()[1]
                         s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
                         a.append(s)
                     # print s 
