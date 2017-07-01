@@ -1185,9 +1185,10 @@ def matching_quickreplies(input_string , data , sender_id) :
 
                  # s = fuzz.ratio(item.Name, input_string)
                 realName  =item.Name
-                print realName.split()[1]
-                s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
-                a.append(s)
+                print realName.split()
+                if len(realName.split())>1
+                    s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
+                    a.append(s)
             # print s 
 
             # print a     
@@ -1233,6 +1234,8 @@ def matching_quickreplies(input_string , data , sender_id) :
 
     if w==0 :
                 print "no match found" 
+                userInstance.State='NULL'
+                userInstance.save()
                 post_facebook_message(sender_id,"No  matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")   
                 print "this is array " + str(quickreply_array)
