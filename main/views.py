@@ -1069,8 +1069,8 @@ def SongSearcher(sender_id):
         if ff:
             year = [] 
             for item in range(len(ff)):
-                a = ff[item].Year
-                a = int(a)
+                a = int(ff[item].Year)
+                print a
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
@@ -1564,8 +1564,8 @@ def songs_cards(sender_id , data , input_string):
     if ff:
         year = [] 
         for item in range(len(ff)):
-            a = ff[item].Year
-            a = int(a)
+            a = int(ff[item].Year)
+            print a
             year.append(a)
         maxYear = max(year)
         minYear = min(year)
@@ -2072,8 +2072,8 @@ def moreSongs(sender_id):
         if ff:
             year = [] 
             for item in range(len(ff)):
-                a = ff[item].Year
-                a = int(a)
+                a = int(ff[item].Year)
+                print a
                 year.append(a)
             maxYear = max(year)
             minYear = min(year)
