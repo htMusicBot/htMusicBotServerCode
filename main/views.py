@@ -200,10 +200,11 @@ class MyChatBotView(generic.View):
                     
                     elif userInstance.State=='movieName':
                         userInstance.State='matchMovie'
+                        userInstance.save()
                         message_text = message_text.title()
                         print "entered movies"
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , MovieName.objects.all() , message_text)
-                        userInstance.save()
+                        # userInstance.save()
 
                     elif userInstance.State=='matchMovie':
                         userInstance.State='NULL'
@@ -1281,7 +1282,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             post_facebook_message(sender_id,'cards')
             post_facebook_message(sender_id,'ACards')
 
-        elif userInstance.State=='matchMovie':
+        elif userInstance.State =='matchMovie':
             print "entered match movie loop "
             userInstance.State='NULL'
             print "entered matched movies"
