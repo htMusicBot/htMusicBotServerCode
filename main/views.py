@@ -1331,7 +1331,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 def songs_cards(sender_id , data , input_string):
     a = []
     for i in Song.objects.all():
-        # realName  =i.SongName
+        realName  =i.SongName
         if input_string.lower() in realName.lower():
             print i.SongName
 
