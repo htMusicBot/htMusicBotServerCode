@@ -1285,7 +1285,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             print "entered matched movies"
             print message_text
             message_text = quickreply_array[0]['payload']
-            a = MovieName.objects.filter(Name_= message_text)
+            a = MovieName.objects.filter(Name= message_text)
             print a
             for item in a:
                 print "in movie loop "
