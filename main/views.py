@@ -1179,50 +1179,50 @@ def matching_quickreplies(input_string , data , sender_id) :
                 
                 # if w==3:
                 #     break
-                if not quickreply_array:
-                    for item in data.exclude(Name  = ''):
-                        print "i am last name data" + str(item.Name)
+        if not quickreply_array:
+            for item in data.exclude(Name  = ''):
+                print "i am last name data" + str(item.Name)
 
-                         # s = fuzz.ratio(item.Name, input_string)
-                        realName  =item.Name
-                        print realName.split()[1]
-                        s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
-                        a.append(s)
-                    # print s 
+                 # s = fuzz.ratio(item.Name, input_string)
+                realName  =item.Name
+                print realName.split()[1]
+                s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
+                a.append(s)
+            # print s 
 
-                    # print a     
+            # print a     
 
-                # matches = []
-                
-                    print a    
-                    for i in range(3):
+        # matches = []
+        
+            print a    
+            for i in range(3):
 
-                        if max(a)>0.6:
-                            print "this is max ratio" + str(max(a))
+                if max(a)>0.6:
+                    print "this is max ratio" + str(max(a))
 
-                            match = data[a.index(max(a))].Name
-                            
-
-                            # matches.append(match)
-
-                            a.remove(max(a))
-
-                            print match
-                            quickreply_data = {
-                                                "content_type":"text",
-                                                "title":match,
-                                                "payload":match
-                                              }
-
-                            quickreply_array.append(quickreply_data)
-
+                    match = data[a.index(max(a))].Name
                     
 
-                    
-                            # post_facebook_message(sender_id,match)
-                            w = w+1
-                            print "debugging  " + str(w)
-                            print "this is matched quickreply array" + str(quickreply_array)
+                    # matches.append(match)
+
+                    a.remove(max(a))
+
+                    print match
+                    quickreply_data = {
+                                        "content_type":"text",
+                                        "title":match,
+                                        "payload":match
+                                      }
+
+                    quickreply_array.append(quickreply_data)
+
+            
+
+            
+                    # post_facebook_message(sender_id,match)
+                    w = w+1
+                    print "debugging  " + str(w)
+                    print "this is matched quickreply array" + str(quickreply_array)
 
 
 
