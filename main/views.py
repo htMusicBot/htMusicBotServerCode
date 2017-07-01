@@ -1187,7 +1187,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 realName  =item.Name
                 # print realName.split()
                 nameArray = realName.split()
-                if len(nameArray)>1
+                if len(nameArray)>1:
                     s = difflib.SequenceMatcher(None, realName.lower().split()[1], input_string.lower().split()[0]).ratio()
                     a.append(s)
             # print s 
