@@ -1099,7 +1099,7 @@ def SongSearcher(sender_id):
             
  
 def matching_quickreplies(input_string , data , sender_id) :
-    a = []
+    
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
     w =0
     quickreply_array = [] 
@@ -1133,6 +1133,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
     if not quickreply_array:
+        a = []
         for item in data.exclude(Name  = ''):
             print "i am first name data" + str(item.Name)
 
@@ -1180,6 +1181,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 # if w==3:
                 #     break
         if not quickreply_array:
+            a = []
             for item in data.exclude(Name  = ''):
                 print "i am last name data" + str(item.Name)
 
@@ -1202,7 +1204,7 @@ def matching_quickreplies(input_string , data , sender_id) :
         
             print a    
             for i in range(3):
-                
+
 
                 if max(a)>0.7:
                     print "this is max ratio" + str(max(a))
