@@ -1252,6 +1252,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 
     elif len(quickreply_array) == 1:
+        print "entered len array loop"
 
 
         if userInstance.State=='matchSinger':
@@ -1281,6 +1282,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             post_facebook_message(sender_id,'ACards')
 
         elif userInstance.State=='matchMovie':
+            print "entered match movie loop "
             userInstance.State='NULL'
             print "entered matched movies"
             print message_text
