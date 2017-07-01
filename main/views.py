@@ -1188,8 +1188,15 @@ def matching_quickreplies(input_string , data , sender_id) :
                
 
 
-    # elif len(quickreply_array) == 1:
-    #     pass                  
+    elif len(quickreply_array) == 1:
+
+        a = Actor.objects.filter(Name__contains = quickreply_array[0][payload])
+        for item in a:
+            userInstance.Cast.add(item)
+        userInstance.save()
+        # post_facebook_message(sender_id,b[0].SongName)
+        post_facebook_message(sender_id,'cards')
+        post_facebook_message(sender_id,'ACards')                          
                 
     else:
         response_object =   {
