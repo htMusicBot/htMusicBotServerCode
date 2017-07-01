@@ -1330,6 +1330,7 @@ def matching_quickreplies(input_string , data , sender_id) :
 
 def songs_cards(sender_id , data , input_string):
     a = []
+    card_data2 = []
     for i in Song.objects.all():
         realName  =i.SongName
         if input_string.lower() in realName.lower():
@@ -1391,7 +1392,7 @@ def songs_cards(sender_id , data , input_string):
 
           
             w = 0
-            card_data2 = []
+            
             # print "this is max ratio" + str(a.index(max(a)))
 
         for item in range(3):
