@@ -188,7 +188,7 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message['message']['quick_reply']['payload']
-                        a = Lyricist.objects.filter(Name__contains = message_text)
+                        a = Lyricist.objects.filter(Name = message_text)
                         for item in a:
                             userInstance.Lyricist.add(item)
                         # userInstance.Singer.add(a[0])
@@ -210,7 +210,7 @@ class MyChatBotView(generic.View):
                         print "entered matched movies"
                         print message_text
                         message_text = message['message']['quick_reply']['payload']
-                        a = MovieName.objects.filter(Name__contains = message_text)
+                        a = MovieName.objects.filter(Name = message_text)
                         print a
                         for item in a:
                             print "in movie loop "
@@ -230,7 +230,7 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='matchCast':
                         userInstance.State='NULL'
                         message_text = message['message']['quick_reply']['payload']
-                        a = Actor.objects.filter(Name__contains = message_text)
+                        a = Actor.objects.filter(Name = message_text)
                         for item in a:
                             userInstance.Cast.add(item)
                         userInstance.save()
@@ -1258,7 +1258,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             userInstance.State='NULL'
             userInstance.save()
             message_text = quickreply_array[0]['payload']
-            a = Singer.objects.filter(Name__contains = message_text)
+            a = Singer.objects.filter(Name= message_text)
             print "singer name searched"
             for item in a:
                 userInstance.Singer.add(item)
@@ -1271,7 +1271,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             userInstance.State='NULL'
             userInstance.save()
             message_text = quickreply_array[0]['payload']
-            a = Lyricist.objects.filter(Name__contains = message_text)
+            a = Lyricist.objects.filter(Name= message_text)
             for item in a:
                 userInstance.Lyricist.add(item)
             # userInstance.Singer.add(a[0])
@@ -1285,7 +1285,7 @@ def matching_quickreplies(input_string , data , sender_id) :
             print "entered matched movies"
             print message_text
             message_text = quickreply_array[0]['payload']
-            a = MovieName.objects.filter(Name__contains = message_text)
+            a = MovieName.objects.filter(Name_= message_text)
             print a
             for item in a:
                 print "in movie loop "
@@ -1299,7 +1299,7 @@ def matching_quickreplies(input_string , data , sender_id) :
         elif userInstance.State=='matchCast':
             userInstance.State='NULL'
             message_text = quickreply_array[0]['payload']
-            a = Actor.objects.filter(Name__contains = message_text)
+            a = Actor.objects.filter(Name= message_text)
             for item in a:
                 userInstance.Cast.add(item)
             userInstance.save()
