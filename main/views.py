@@ -401,7 +401,7 @@ class MyChatBotView(generic.View):
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
-    url_start="http://www.hindigeetmala.net//movie/2000.php?page=1"
+    url_start="http://www.hindigeetmala.net//movie/2016.php?page=2"
     url_next=""
     url_curr=url_start
     while(url_start!=url_next):
@@ -475,7 +475,7 @@ def GetSongData(url,year):
 
     song.year = year11
     song.save()
-    print year11
+    #print year11
     
     #This one helps us in getting the embed url
     if(soup.find("iframe")):

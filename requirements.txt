@@ -3,7 +3,7 @@ gunicorn==19.6.0
 requests
 xlrd
 bs4
-dj-database-url
-psycopg2==2.6.1
+#dj-database-url
+#psycopg2==2.6.1
 django_extensions
 fuzzywuzzy
