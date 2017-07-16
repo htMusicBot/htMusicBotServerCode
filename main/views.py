@@ -866,7 +866,7 @@ def SongSearcher(sender_id):
             number = number + 1
             print number
             print "entered loop"
-            if i['YoutubeLink'] != 'NULL':
+            if i.YoutubeLink != 'NULL':
                 y = i.YoutubeLink
                 # arraySinger = []
                 x = y.split("/")
@@ -1775,22 +1775,22 @@ def moreSongs(sender_id):
             number = number + 1
             print number
             print "entered loop"
-            if i['YoutubeLink'] != 'NULL':
+            if i.YoutubeLink != 'NULL':
                 y = i.YoutubeLink
                 # arraySinger = []
                 x = y.split("/")
                 print "x = " + str(x)
                 song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-                singerNames = ''
-                for item in i.Singer.all():
-                    singerNames = singerNames + str(item) + ' , '
+                # singerNames = ''
+                # for item in i.Singer.all():
+                #     singerNames = singerNames + str(item) + ' , '
 
 
 
                 card_data = {
 
                           "title": i.SongName,
-                          "subtitle": singerNames,
+                          # "subtitle": singerNames,
                           "image_url": song_img,
                           
                           "buttons": [
