@@ -1821,11 +1821,12 @@ def Category_quickreplies(sender_id):
     print c 
     number = 0
     categoryArray = []
-    for i in c:
+
+    for i in range(5):
 
         
         
-        for item in i.Category.all():
+        for item in c[i].Category.all():
             categoryArray.append(item.Name)
 
         # print categoryArray
@@ -1883,6 +1884,7 @@ def Category_quickreplies(sender_id):
     # print response_object
 
     return json.dumps(response_object)
+
 
 
 def yearQuickreply(fbid):
