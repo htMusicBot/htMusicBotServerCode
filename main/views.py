@@ -149,7 +149,9 @@ class MyChatBotView(generic.View):
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message_text.title()
-                        b = Song.objects.all() 
+                        # b = Song.objects.all().values()
+                        b = Song.objects.select_related('SongName','YoutubeLink','Singer').all().values()
+                        print b
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
                         post_facebook_message(sender_id,'ACards')
 
