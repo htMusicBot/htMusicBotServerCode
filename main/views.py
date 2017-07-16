@@ -1615,6 +1615,7 @@ def moreSongs(sender_id):
             print number
             print "entered loop"
             if i.YoutubeLink != 'NULL':
+                number = number + 1
                 y = i.YoutubeLink
                 # arraySinger = []
                 x = y.split("/")
@@ -1623,9 +1624,6 @@ def moreSongs(sender_id):
                 # singerNames = ''
                 # for item in i.Singer.all():
                 #     singerNames = singerNames + str(item) + ' , '
-
-
-
                 card_data = {
 
                           "title": i.SongName,
@@ -1654,7 +1652,7 @@ def moreSongs(sender_id):
 
 
                 print "cards appended"
-            if number == 3:
+            if number == 10:
                 break
 
 
