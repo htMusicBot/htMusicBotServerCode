@@ -1611,7 +1611,6 @@ def moreSongs(sender_id):
     array = userdata.query.all()
     if array:
         for i in array:
-            number = number + 1
             print number
             print "entered loop"
             if i.YoutubeLink != 'NULL':
@@ -1648,6 +1647,8 @@ def moreSongs(sender_id):
 
                 card_data2.append(card_data)
                 userdata.query.remove(i) 
+                if number == 10:
+                    break
 
 
 
