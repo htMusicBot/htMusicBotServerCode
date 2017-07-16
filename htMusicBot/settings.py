@@ -5,7 +5,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.de.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -38,9 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'django_extensions',
-    'debug_toolbar',
-    'debug_panel',
+    # 'django_extensions',
+    # 'debug_toolbar',
+    # 'debug_panel',
     # 'elasticsearchapp',
 )
 
@@ -52,17 +52,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_panel.middleware.DebugPanelMiddleware',
+    # 'debug_panel.middleware.DebugPanelMiddleware',
 )
 
 ROOT_URLCONF = 'htMusicBot.urls'
 
 WSGI_APPLICATION = 'htMusicBot.wsgi.application'
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
+# GRAPH_MODELS = {
+#   'all_applications': True,
+#   'group_models': True,
+# }
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
