@@ -482,7 +482,7 @@ def handle_quickreply(fbid,payload):
         actorMale = ['Salman Khan', 'Shah Rukh Khan','Aamir Khan','Amitabh Bachchan','Dilip Kumar','Akshay Kumar','Ranbir Kapoor','Hrithik Roshan','Imran Khan','Ajay Devgn']
         male = random.choice(actorMale)
         actorFemale = ['Kangana Ranaut','Katrina Kaif','Deepika Padukone','Alia Bhatt','Priyanka Chopra','Sunny Leone','Kareena Kapoor Khan','Kriti Sanon','Shraddha Kapoor','Nargis Fakhri','Bipasha Basu','Sonakshi Sinha','Jacqueline Fernandez','Sonam Kapoor','Dia Mirza']
-        female = random.choice(castText)
+        female = random.choice(actorFemale)
         castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
         a = random.choice(castText)
         # return post_facebook_message(sender_id,str(a) + ' like  ' + actor[0].Name + ', ' + actor[1].Name)
