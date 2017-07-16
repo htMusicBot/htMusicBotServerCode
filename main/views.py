@@ -770,127 +770,58 @@ def afterSongQuickreply(fbid):
 def SongSearcher(sender_id):
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
-    arraySinger =[]
-    arrayYear =[]
-    arrayCategory =[]
-    arrayActor =[]
-    arrayLyricist =[]
-    arrayMovie =[]
+    arrayMovie = []
 
-    for item in userInstance.Singer.all():
-        arraySinger.append(item.Name)
-
-    # for item in userInstance.year.all():
-    #     arrayYear.append(item.Name)
-        
-    for item in userInstance.Category.all():
-        arrayCategory.append(item.Name)
-        
-    for item in userInstance.Cast.all():
-        arrayActor.append(item.Name)
-        
-    for item in userInstance.Lyricist.all():
-        arrayLyricist.append(item.Name) 
-
-    for item in userInstance.year.all():
-        print "this is year"  + str(item.Year)
-        arrayYear.append(item.Year) 
-        print "this is years array " + str(arrayYear)                
-
-    # if userInstance.year:
-    #     arrayYear.append(userInstance.year)
-    # else:
-    #     pass    
-
-    if userInstance.MovieName:
-        arrayMovie.append(userInstance.MovieName)
-        print  "Im if loop  = " + str(arrayMovie)
-
-
-    else:
-        pass          
-
-    print "arrays of all parameters made"
+    allSinger = userInstance.Singer.all()
+    allCategory = userInstance.Category.all()
+    allcast = userInstance.Cast.all()    
+    allLyricist = userInstance.Lyricist.all()  
+    allyear = userInstance.year.all()     
+    arrayMovie  = arrayMovie.append(userInstance.MovieName)
+    
 
 
 
-    q = Singer.objects.filter(Name__in = arraySinger)
+    if allSinger:
 
-    print "entered singer "
-    print "haha" + str(q)
-    w = Year.objects.filter(Year__in = arrayYear)
-    print w
-    print "entered year "
-    y = MovieName.objects.filter(Name = userInstance.MovieName)
-    print y
-    print "entered movie "
-    e = Category.objects.filter(Name__in = arrayCategory)
-    print e
-    print "entered category "
-
-    r = Actor.objects.filter(Name__in = arrayActor)
-    print r
-    print "entered actor "
-    t = Lyricist.objects.filter(Name__in = arrayLyricist)
-    print t
-    print "entered lyricist "
-
-    if arraySinger:
-
-        b = Song.objects.filter(Singer=q) 
+        b = Song.objects.filter(Singer__in=allSinger) 
 
 
     else :
-        b =  Song.objects.exclude(Singer=q)
+        b =  Song.objects.exclude(Singer__in=allSinger)
 
     print "After sorting singers" 
-    print b  
 
-    if arrayYear:
+    if allyear:
         print "yes in array year"
-        print w 
 
-        z = b.filter(year=w) 
+        z = b.filter(year__in=allyear) 
 
+        # z = b
     else :
-        z =  b.exclude(year=w)
-        # z  = b
-        print "in except"
+        z =  b.exclude(year__in=allyear)
 
-    print "After sorting years"     
-    print z    
 
-    if arrayCategory:
 
-        h = z.filter(Category=e) 
+    if allcast :
+
+        i = z.filter(Cast__in=allcast) 
 
 
     else :
-        h =  z.exclude(Category=e)
-
-    print "After sorting category" 
-    print h     
-
-    if arrayActor :
-
-        i = h.filter(Cast=r) 
-
-
-    else :
-        i =  h.exclude(Cast=r)
+        i =  z.exclude(Cast__in=allcast)
 
 
     print "After sorting actor"    
+    
 
-    print i     
+    if allLyricist :
 
-    if arrayLyricist :
-
-        a = i.filter(Lyricist=t) 
+        a = i.filter(Lyricist__in=allLyricist) 
 
 
     else :
-        a =  i.exclude(Lyricist=t) 
+        a =  i.exclude(Lyricist__in=allLyricist) 
 
     print "After sorting Lyricist"     
 
@@ -898,15 +829,15 @@ def SongSearcher(sender_id):
 
     if arrayMovie :
 
-        c = a.filter(MovieName=y) 
+        c = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
-        c =  a.exclude(MovieName=y)  
+        c =  a.exclude(MovieName=userInstance.MovieName)  
 
     print "After sorting Movie"      
 
-    print c         
+ 
 
 
 
