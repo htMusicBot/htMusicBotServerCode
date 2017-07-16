@@ -17,7 +17,7 @@ import difflib
 import random
 # from fuzzywuzzy import fuzz
 import random
-import songScraper.py
+import songScraper
 
 import sys
 reload(sys)
