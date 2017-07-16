@@ -739,7 +739,7 @@ def SongSearcher(sender_id):
                            }
 
                 card_data2.append(card_data)
-                userdata.query.remove(i) 
+                userdata.query.add(i) 
 
                 print "cards appended"
             if number == 10:
@@ -1608,7 +1608,77 @@ def moreSongs(sender_id):
     userdata = UserData.objects.get(Fbid = sender_id)
     card_data2 = []
 
+    arrayMovie = []
+
+    allSinger = userInstance.Singer.all()
+    allCategory = userInstance.Category.all()
+    allcast = userInstance.Cast.all()    
+    allLyricist = userInstance.Lyricist.all()  
+    allyear = userInstance.year.all()     
+    arrayMovie  = arrayMovie.append(userInstance.MovieName)
+    
+
+
+
+    if allSinger:
+
+        b = Song.objects.filter(Singer__in=allSinger) 
+
+
+    else :
+        b =  Song.objects.exclude(Singer__in=allSinger)
+
+    print "After sorting singers" 
+
+    if allyear:
+        print "yes in array year"
+
+        z = b.filter(year__in=allyear) 
+
+        # z = b
+    else :
+        z =  b.exclude(year__in=allyear)
+
+
+
+    if allcast :
+
+        i = z.filter(Cast__in=allcast) 
+
+
+    else :
+        i =  z.exclude(Cast__in=allcast)
+
+
+    print "After sorting actor"    
+    
+
+    if allLyricist :
+
+        a = i.filter(Lyricist__in=allLyricist) 
+
+
+    else :
+        a =  i.exclude(Lyricist__in=allLyricist) 
+
+    print "After sorting Lyricist"     
+
+    print a    
+
+    if arrayMovie :
+
+        c = a.filter(MovieName=userInstance.MovieName) 
+
+
+    else :
+        c =  a.exclude(MovieName=userInstance.MovieName)  
+
+    print "After sorting Movie"      
+
     array = userdata.query.all()
+    array = c.exclude(songName = array.songName)
+
+    
     if array:
         for i in array:
             print number
