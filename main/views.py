@@ -852,16 +852,16 @@ def SongSearcher(sender_id):
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
     if c:
+        # for i in c:
+        #     # Song = Song.objects.get(SongName = i)
+
+        #     userdata.query.add(i)
+
+
+            
+
+            
         for i in c:
-            # Song = Song.objects.get(SongName = i)
-
-            userdata.query.add(i)
-
-
-            
-
-            
-        for i in userdata.query.all():
             number = number + 1
             print number
             print "entered loop"
