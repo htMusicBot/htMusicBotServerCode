@@ -46,7 +46,6 @@ def userdeatils(fbid):
     data =json.loads(resp.text)
     return data
 
-
 #the message is sent from the page to the fbid associated to that message
 def post_facebook_message(fbid,message_text):
     
@@ -865,43 +864,44 @@ def SongSearcher(sender_id):
             number = number + 1
             print number
             print "entered loop"
-            y = i.YoutubeLink
-            # arraySinger = []
-            x = y.split("/")
-            print "x = " + str(x)
-            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-            singerNames = ''
-            for item in i.Singer.all():
-                singerNames = singerNames + str(item) + ' , '
+            if i['YoutubeLink'] != 'NULL':
+                y = i.YoutubeLink
+                # arraySinger = []
+                x = y.split("/")
+                print "x = " + str(x)
+                song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+                singerNames = ''
+                for item in i.Singer.all():
+                    singerNames = singerNames + str(item) + ' , '
 
 
 
-            card_data = {
+                card_data = {
 
-                      "title": i.SongName,
-                      "subtitle": singerNames,
-                      "image_url": song_img,
-                      
-                      "buttons": [
-                      {
-                        "type":"web_url",
-                        "url":i.YoutubeLink,
+                          "title": i.SongName,
+                          "subtitle": singerNames,
+                          "image_url": song_img,
+                          
+                          "buttons": [
+                          {
+                            "type":"web_url",
+                            "url":i.YoutubeLink,
 
-                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                        "title":"Play song",
-                        "webview_height_ratio": "compact"
-                      } ,
-                     
-                      {
-                        "type": "element_share"
-                       }
-                       ]
-                       }
+                            # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                            "title":"Play song",
+                            "webview_height_ratio": "compact"
+                          } ,
+                         
+                          {
+                            "type": "element_share"
+                           }
+                           ]
+                           }
 
-            card_data2.append(card_data)
-            userdata.query.remove(i) 
+                card_data2.append(card_data)
+                userdata.query.remove(i) 
 
-            print "cards appended"
+                print "cards appended"
             if number == 3:
                 break
 
@@ -1266,101 +1266,28 @@ def songs_cards(sender_id , data , input_string):
     a = []
     card_data2 = []
     w = 0
-    for i in Song.objects.all():
-        realName  =i.SongName
-        if input_string.lower() in realName.lower():
-            print i.SongName
+    for i in data:
+        if input_string.lower() in i['SongName'].lower():
+            print i['SongName']
 
 
-            
-
-            y = i.YoutubeLink
-        # arraySinger = []
-            x = y.split("/")
-            print "x = " + str(x)
-            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-            singerNames = ''
-            for item in i.Singer.all():
-                singerNames = singerNames + str(item) + ' , '
-
-            card_data = {
-                  "title": i.SongName,
-                  "subtitle": singerNames,
-                  "image_url": song_img,
-                  
-                  "buttons": [
-                  {
-                    "type":"web_url",
-                    "url":i.YoutubeLink,
-
-                    # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                    "title":"Play song",
-                    "webview_height_ratio": "compact"
-                  } ,
-                 
-                  {
-                    "type": "element_share"
-                   }
-                   ]
-                   }
-
-            card_data2.append(card_data)
-
-
-
-            w = w+1
-
-            if w==3:
-                break;
-
-    if not card_data2:            
-        for i in Song.objects.all():
-            print Song.objects.all()
-
-            print "i am data" + str(i.SongName)
-            songName = i.SongName
-            s = difflib.SequenceMatcher(None, i.SongName, input_string).ratio()
-            a.append(s)
-            print s 
-
-            print a  
-
-          
-            
-            
-            # print "this is max ratio" + str(a.index(max(a)))
-
-        for item in range(3):
-            if max(a)>0.5:
-                print "this is max ratio" + str(a.index(max(a)))
-
-                i = data[a.index(max(a))]
-                
-
-
-                a.remove(max(a))
-
-                # print match
-                
-
-                y = i.YoutubeLink
-            # arraySinger = []
+            if i['YoutubeLink'] != 'NULL':
+                y = i['YoutubeLink']
                 x = y.split("/")
                 print "x = " + str(x)
                 song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-                singerNames = ''
-                for item in i.Singer.all():
-                    singerNames = singerNames + str(item) + ' , '
-
+                # singerNames = ''
+                # for item in i['Singer']:
+                #     singerNames = singerNames + str(item) + ' , '
                 card_data = {
-                      "title": i.SongName,
-                      "subtitle": singerNames,
+                      "title": i['SongName'],
+                      # "subtitle": i['Singer'],
                       "image_url": song_img,
                       
                       "buttons": [
                       {
                         "type":"web_url",
-                        "url":i.YoutubeLink,
+                        "url":i['YoutubeLink'],
 
                         # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
                         "title":"Play song",
@@ -1373,20 +1300,64 @@ def songs_cards(sender_id , data , input_string):
                        ]
                        }
 
-                card_data2.append(card_data) 
-
+                card_data2.append(card_data)
 
                 w = w+1
 
+            if w==10:
+                break;
+
+    if not card_data2:   
+        for i in data.iterator():
+            s = difflib.SequenceMatcher(None, i['SongName'], input_string).ratio()
+            a.append(s)
+
+        for item in range(100):
+            if max(a)>0.5:
+
+                print "this is max ratio" + str(a.index(max(a)))
+
+                i = data[a.index(max(a))]
+                
+                a.remove(max(a))
 
 
+                if i['YoutubeLink'] != 'NULL':
+                    y = i['YoutubeLink']
+                    x = y.split("/")
+                    print "x = " + str(x)
+                    song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+                    # singerNames = ''
+                    # for item in i['Singer']:
+                    #     singerNames = singerNames + str(item) + ' , '
+                    card_data = {
+                          "title": i['SongName'],
+                          # "subtitle": i['Singer'],
+                          "image_url": song_img,
+                          
+                          "buttons": [
+                          {
+                            "type":"web_url",
+                            "url":i['YoutubeLink'],
+
+                            # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                            "title":"Play song",
+                            "webview_height_ratio": "compact"
+                          } ,
+                         
+                          {
+                            "type": "element_share"
+                           }
+                           ]
+                           }
+
+                    card_data2.append(card_data)
+
+                    w = w+1
 
 
-
-
-
-                print "cards appended"   
-            elif w == 3:
+                    print "cards appended"   
+            elif w == 10:
                 break
 
     else :
@@ -1404,110 +1375,109 @@ def songs_cards(sender_id , data , input_string):
     
     else:                    
         response_object = {
-          "recipient": {
-            "id": sender_id
-          },
-          "message": {
-            "attachment": {
-              "type": "template",
-              "payload": {
-                "template_type": "generic",
-                "elements": card_data2
-                    }
-                }
-            }
-        }
+                          "recipient": {
+                            "id": sender_id
+                          },
+                          "message": {
+                            "attachment": {
+                              "type": "template",
+                              "payload": {
+                                "template_type": "generic",
+                                "elements": card_data2
+                                    }
+                                }
+                            }
+                        }
 
-    print "response dumped"
+        print "response dumped"
 
-    print json.dumps(response_object)
+        print json.dumps(response_object)
 
-    # print response_object
-    optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
+        optionText = ['Here are the closest matches. Hope you like these songs' , 'Hope this is what you were looking for. Enjoy!' , 'Based on what you told me, this is what I have found. Enjoy the music.' , 'Here’s what I found. Sing along to the songs of your choice!']
 
-    options = random.choice(optionText)
+        options = random.choice(optionText)
 
-    print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
-    optionSelected = []
-    y = UserData.objects.get(Fbid = sender_id)
-    # print y
-    aa = y.Cast.all()
-    print str(aa) + 'iiii'
-    # a = Actor.objects.filter(Name = aa[0].Name)
-    # print a
-    if aa:
-        cast = ''
-        for item in range(len(aa)):
-            a = aa[item].Name
-            cast = cast + str(a) + ', '
-        a = 'Cast: ' + str(cast)
-        optionSelected.append(a)
-    print 'hhiiii'
-
-
-    bb = y.Singer.all()
-    if bb :
-        singer = ''
-        for item in range(len(bb)):
-            a = bb[item].Name
-            singer = singer + str(a) + ', '
-        b = 'Singer: ' + str(singer)
-        optionSelected.append(b)
+        print 'hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'
+        optionSelected = []
+        y = UserData.objects.get(Fbid = sender_id)
+        # print y
+        aa = y.Cast.all()
+        print str(aa) + 'iiii'
+        # a = Actor.objects.filter(Name = aa[0].Name)
+        # print a
+        if aa:
+            cast = ''
+            for item in range(len(aa)):
+                a = aa[item].Name
+                cast = cast + str(a) + ', '
+            a = 'Cast: ' + str(cast)
+            optionSelected.append(a)
+        print 'hhiiii'
 
 
-    cc = y.Lyricist.all()
-    if cc :
-        lyricist = ''
-        for item in range(len(cc)):
-            a = cc[item].Name
-            lyricist = lyricist + str(a) + ', '
-        c = 'Lyricist: ' + str(lyricist)
-        optionSelected.append(c)
-
-    # d = MovieName.objects.filter(Name__in = y.MovieName)
-    d = y.MovieName
-    print d
-    if d :
-        dd = 'Movie Name:' + str(d)
-        optionSelected.append(dd)
-
-    ee = y.Category.all()
-    if ee:
-        category = ''
-        for item in range(len(ee)):
-            a = ee[item].Name
-            category = category + str(a) + ', '
-        e = 'Category: ' + str(category)
-        optionSelected.append(e)
+        bb = y.Singer.all()
+        if bb :
+            singer = ''
+            for item in range(len(bb)):
+                a = bb[item].Name
+                singer = singer + str(a) + ', '
+            b = 'Singer: ' + str(singer)
+            optionSelected.append(b)
 
 
-    ff = y.year.all()
-    if ff:
-        year = [] 
-        for item in range(len(ff)):
-            a = int(ff[item].Year)
-            print a
-            year.append(a)
-        maxYear = max(year)
-        minYear = min(year)
-        f = 'Year: ' + str(minYear) + '-' + str(maxYear)
-        optionSelected.append(f)
+        cc = y.Lyricist.all()
+        if cc :
+            lyricist = ''
+            for item in range(len(cc)):
+                a = cc[item].Name
+                lyricist = lyricist + str(a) + ', '
+            c = 'Lyricist: ' + str(lyricist)
+            optionSelected.append(c)
+
+        # d = MovieName.objects.filter(Name__in = y.MovieName)
+        d = y.MovieName
+        print d
+        if d :
+            dd = 'Movie Name:' + str(d)
+            optionSelected.append(dd)
+
+        ee = y.Category.all()
+        if ee:
+            category = ''
+            for item in range(len(ee)):
+                a = ee[item].Name
+                category = category + str(a) + ', '
+            e = 'Category: ' + str(category)
+            optionSelected.append(e)
 
 
-    print 'array aagaye'
-    print optionSelected
-    selectedOtions = ''
-    for i in optionSelected:
-        selectedOtions = selectedOtions + str(i) + ' '
+        ff = y.year.all()
+        if ff:
+            year = [] 
+            for item in range(len(ff)):
+                a = int(ff[item].Year)
+                print a
+                year.append(a)
+            maxYear = max(year)
+            minYear = min(year)
+            f = 'Year: ' + str(minYear) + '-' + str(maxYear)
+            optionSelected.append(f)
 
-        
-    moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
-    filerOptions = random.choice(moreFiltersOptions)
-    post_facebook_message(sender_id,str(options))
 
-    post_facebook_message(sender_id,str(filerOptions)) 
+        print 'array aagaye'
+        print optionSelected
+        selectedOtions = ''
+        for i in optionSelected:
+            selectedOtions = selectedOtions + str(i) + ' '
 
-    return json.dumps(response_object)
+            
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        filerOptions = random.choice(moreFiltersOptions)
+        post_facebook_message(sender_id,str(options))
+
+        post_facebook_message(sender_id,str(filerOptions)) 
+
+        return json.dumps(response_object)
         
 
 def setMenu():
@@ -1803,45 +1773,46 @@ def moreSongs(sender_id):
             number = number + 1
             print number
             print "entered loop"
-            y = i.YoutubeLink
-            # arraySinger = []
-            x = y.split("/")
-            print "x = " + str(x)
-            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
-            singerNames = ''
-            for item in i.Singer.all():
-                singerNames = singerNames + str(item) + ' , '
+            if i['YoutubeLink'] != 'NULL':
+                y = i.YoutubeLink
+                # arraySinger = []
+                x = y.split("/")
+                print "x = " + str(x)
+                song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+                singerNames = ''
+                for item in i.Singer.all():
+                    singerNames = singerNames + str(item) + ' , '
 
 
 
-            card_data = {
+                card_data = {
 
-                      "title": i.SongName,
-                      "subtitle": singerNames,
-                      "image_url": song_img,
-                      
-                      "buttons": [
-                      {
-                        "type":"web_url",
-                        "url":i.YoutubeLink,
+                          "title": i.SongName,
+                          "subtitle": singerNames,
+                          "image_url": song_img,
+                          
+                          "buttons": [
+                          {
+                            "type":"web_url",
+                            "url":i.YoutubeLink,
 
-                        # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
-                        "title":"Play song",
-                        "webview_height_ratio": "compact"
-                      } ,
-                     
-                      {
-                        "type": "element_share"
-                       }
-                       ]
-                       }
+                            # "url":"https://scontent.fdel8-1.fna.fbcdn.net/v/t34.0-12/19264885_1537111976319038_153011396_n.png?oh=754c80143d667a42a58350b5162f83ba&oe=59473531",
+                            "title":"Play song",
+                            "webview_height_ratio": "compact"
+                          } ,
+                         
+                          {
+                            "type": "element_share"
+                           }
+                           ]
+                           }
 
-            card_data2.append(card_data)
-            userdata.query.remove(i) 
+                card_data2.append(card_data)
+                userdata.query.remove(i) 
 
 
 
-            print "cards appended"
+                print "cards appended"
             if number == 3:
                 break
 
