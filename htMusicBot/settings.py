@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     'django_extensions',
+    'debug_toolbar',
+    'debug_panel',
     # 'elasticsearchapp',
 )
 
@@ -50,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_panel.middleware.DebugPanelMiddleware',
 )
 
 ROOT_URLCONF = 'htMusicBot.urls'
@@ -82,9 +85,9 @@ DATABASES = {
     }
 }
 
-#import dj_database_url
-#db_from_env = dj_database_url.config(conn_max_age=500)
-#DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

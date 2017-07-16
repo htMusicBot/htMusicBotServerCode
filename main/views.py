@@ -783,8 +783,7 @@ def SongSearcher(sender_id):
     # for item in userInstance.year.all():
     #     arrayYear.append(item.Name)
         
-    for item in userInstance.Category.all():
-        arrayCategory.append(item.Name)
+    arrayCategory = userInstance.Singer.all().values
         
     for item in userInstance.Cast.all():
         arrayActor.append(item.Name)
