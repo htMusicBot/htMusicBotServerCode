@@ -1356,8 +1356,6 @@ def songs_cards(sender_id , data , input_string):
                     card_data2.append(card_data)
 
                     w = w+1
-
-                elif w == 10:
                     break
 
                     print "cards appended"   
