@@ -1755,7 +1755,7 @@ def Category_quickreplies(sender_id):
     print c 
     number = 0
     categoryArray = []
-    counter = 0
+    # counter = 0
     c  = c[::-1]
 
     for i in c:
@@ -1763,15 +1763,18 @@ def Category_quickreplies(sender_id):
         # print c[]
 
         
-        
-        for item in i.Category.all():
-            print item 
-            categoryArray.append(item.Name)
-            counter = counter + 1 
-            print "this is counter"  + str(counter)
+        category = i.Category.all()
+        for item in category:
+            # print item 
+            if item:
+                print "entered"
+                categoryArray.append(item.Name)
+                print item 
+            # counter = counter + 1 
+            # print "this is counter"  + str(counter)
 
 
-        if counter == 10:
+        if len(categoryArray) == 10:
             break
 
 
