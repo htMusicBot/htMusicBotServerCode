@@ -1755,15 +1755,22 @@ def Category_quickreplies(sender_id):
     print c 
     number = 0
     categoryArray = []
-    for i in range(10):
-        print "this is i = " + str(i)
-        print c[i]
+    counter = 0
+    c  = c[::-1]
+    for i in c:
+        # print "this is i = " + str(i)
+        # print c[]
 
         
         
-        for item in c[i].Category.all():
-            print item
+        for item in i.Category.all():
             categoryArray.append(item.Name)
+            counter = counter + 1 
+
+
+        if counter == 10:
+            break
+
 
         # print categoryArray
 
