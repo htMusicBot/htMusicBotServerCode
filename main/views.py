@@ -1765,6 +1765,7 @@ def Category_quickreplies(sender_id):
         
         
         for item in i.Category.all():
+            print item 
             categoryArray.append(item.Name)
             counter = counter + 1 
             print "this is counter"  + str(counter)
@@ -1774,7 +1775,7 @@ def Category_quickreplies(sender_id):
             break
 
 
-        # print categoryArray
+        print "this is categoryArray"  + str(categoryArray)
 
         # print list(set(categoryArray))
 
