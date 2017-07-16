@@ -1314,7 +1314,7 @@ def songs_cards(sender_id , data , input_string):
             s = difflib.SequenceMatcher(None, i['SongName'], input_string).ratio()
             a.append(s)
 
-        for item in range(100):
+        for item in range(50):
             if max(a)>0.5:
 
                 print "this is max ratio" + str(a.index(max(a)))
