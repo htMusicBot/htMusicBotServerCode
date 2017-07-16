@@ -783,7 +783,8 @@ def SongSearcher(sender_id):
     # for item in userInstance.year.all():
     #     arrayYear.append(item.Name)
         
-    arrayCategory = userInstance.Singer.all().values
+    for item in userInstance.Category.all():
+        arrayCategory.append(item.Name)
         
     for item in userInstance.Cast.all():
         arrayActor.append(item.Name)
@@ -820,7 +821,7 @@ def SongSearcher(sender_id):
     w = Year.objects.filter(Year__in = arrayYear)
     print w
     print "entered year "
-    y = MovieName.objects.filter(Name = arrayMovie)
+    y = MovieName.objects.filter(Name = userInstance.MovieName)
     print y
     print "entered movie "
     e = Category.objects.filter(Name__in = arrayCategory)
@@ -1727,7 +1728,7 @@ def Category_quickreplies(sender_id):
     w = Year.objects.filter(Year__in = arrayYear)
     print w
     print "entered year "
-    y = MovieName.objects.filter(Name = arrayMovie)
+    y = MovieName.objects.filter(Name = userInstance.MovieName)
     print y
     print "entered movie "
     e = Category.objects.filter(Name__in = arrayCategory)
@@ -1821,12 +1822,11 @@ def Category_quickreplies(sender_id):
     print c 
     number = 0
     categoryArray = []
-
-    for i in range(5):
+    for i in c:
 
         
         
-        for item in c[i].Category.all():
+        for item in i.Category.all():
             categoryArray.append(item.Name)
 
         # print categoryArray
@@ -1884,7 +1884,6 @@ def Category_quickreplies(sender_id):
     # print response_object
 
     return json.dumps(response_object)
-
 
 
 def yearQuickreply(fbid):
@@ -2099,7 +2098,6 @@ def queryNull():
 
     else:
         pass
-
 
 
 
