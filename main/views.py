@@ -1766,7 +1766,7 @@ def Category_quickreplies(sender_id):
         category = i.Category.all()
         for item in category:
             # print item 
-            if item:
+            if item.Name != '':
                 print "entered"
                 categoryArray.append(item.Name)
                 print item 
