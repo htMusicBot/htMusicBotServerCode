@@ -1757,6 +1757,7 @@ def Category_quickreplies(sender_id):
     categoryArray = []
     for i in range(10):
         print "this is i = " + str(i)
+        print c[i]
 
         
         
