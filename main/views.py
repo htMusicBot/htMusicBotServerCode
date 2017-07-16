@@ -1605,7 +1605,7 @@ def yearQuickreply(fbid):
 
 def moreSongs(sender_id):
     number = 0
-    userdata = UserData.objects.get(Fbid = sender_id)
+    userInstance = UserData.objects.get(Fbid = sender_id)
     card_data2 = []
 
     arrayMovie = []
@@ -1675,7 +1675,7 @@ def moreSongs(sender_id):
 
     print "After sorting Movie"      
 
-    array = userdata.query.all()
+    array = userInstance.query.all()
     array = c.exclude(songName = array.songName)
 
     
