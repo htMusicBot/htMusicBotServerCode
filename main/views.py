@@ -1762,6 +1762,7 @@ def Category_quickreplies(sender_id):
         
         
         for item in c[i].Category.all():
+            print item
             categoryArray.append(item.Name)
 
         # print categoryArray
