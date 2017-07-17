@@ -612,6 +612,7 @@ def SongSearcher(sender_id):
     arrayMovie = []
 
     allSinger = userInstance.Singer.all()
+    print allSinger
     allCategory = userInstance.Category.all()
     allcast = userInstance.Cast.all()    
     allLyricist = userInstance.Lyricist.all()  
@@ -624,13 +625,14 @@ def SongSearcher(sender_id):
 
         print e
         pass   
-        
+
     print "this is arraymovie" + str(arrayMovie)
     
 
 
 
     if allSinger:
+        print "in singer "
 
         b = Song.objects.filter(Singer__in=allSinger) 
 
