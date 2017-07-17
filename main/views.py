@@ -1872,7 +1872,7 @@ def moreSongs(sender_id):
         userdata.State='NULL'
         userdata.save()
 
-        # post_facebook_message(sender_id,'singerQuickreply')    
+        post_facebook_message(sender_id,'singerQuickreply')    
 
 
 def queryNull():
