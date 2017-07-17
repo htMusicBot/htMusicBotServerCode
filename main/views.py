@@ -849,11 +849,15 @@ def SongSearcher(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.replace(',', ' ')
-            selectedOtions = selectedOtions + str(a) + ';'
+            if optionSelected.index(i) == len(optionSelected) - 1:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a)
+            else:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a) + ';'
 
         selectedOtions = " ".join(selectedOtions.split())
-        
+
 
 
 
@@ -1313,8 +1317,14 @@ def songs_cards(sender_id , data , input_string):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.replace(',', ' ')
-            selectedOtions = selectedOtions + str(a) + ';'
+            if optionSelected.index(i) == len(optionSelected) - 1:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a)
+            else:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a) + ';'
+
+        selectedOtions = " ".join(selectedOtions.split())
 
             
         moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
@@ -1826,8 +1836,14 @@ def moreSongs(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.replace(',', ' ')
-            selectedOtions = selectedOtions + str(a) + ';'
+            if optionSelected.index(i) == len(optionSelected) - 1:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a)
+            else:
+                a = i.replace(',', ' ')
+                selectedOtions = selectedOtions + str(a) + ';'
+
+        selectedOtions = " ".join(selectedOtions.split())
 
 
         
