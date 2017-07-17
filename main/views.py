@@ -649,7 +649,8 @@ def SongSearcher(sender_id):
 
         # z = b
     else :
-        z =  b.exclude(year__in=allyear)
+        # z =  b.exclude(year__in=allyear)
+        z = b
 
 
 
@@ -659,7 +660,8 @@ def SongSearcher(sender_id):
 
 
     else :
-        i =  z.exclude(Cast__in=allcast)
+        # i =  z.exclude(Cast__in=allcast)
+        i = z 
 
 
     print "After sorting actor"    
@@ -671,8 +673,8 @@ def SongSearcher(sender_id):
 
 
     else :
-        a =  i.exclude(Lyricist__in=allLyricist) 
-
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        a = i 
     print "After sorting Lyricist"     
 
     # print a    
