@@ -617,6 +617,7 @@ def SongSearcher(sender_id):
     allLyricist = userInstance.Lyricist.all()  
     allyear = userInstance.year.all()     
     arrayMovie  = arrayMovie.append(userInstance.MovieName)
+    print "this is arraymovie" + str(arrayMovie)
     
 
 
@@ -664,9 +665,10 @@ def SongSearcher(sender_id):
 
     print "After sorting Lyricist"     
 
-    print a    
+    # print a    
 
     if arrayMovie :
+        print "entered array movie"
 
         c = a.filter(MovieName=userInstance.MovieName) 
 
@@ -675,7 +677,7 @@ def SongSearcher(sender_id):
         c =  a.exclude(MovieName=userInstance.MovieName)  
 
     print "After sorting Movie"      
-
+    print c 
  
 
 
@@ -1442,6 +1444,7 @@ def Category_quickreplies(sender_id):
     allLyricist = userInstance.Lyricist.all()  
     allyear = userInstance.year.all()     
     arrayMovie  = arrayMovie.append(userInstance.MovieName)
+    print "this is arraymovie" + str(arrayMovie)
     
 
 
