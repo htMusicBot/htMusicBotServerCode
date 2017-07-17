@@ -1449,20 +1449,32 @@ def greetingButton():
 def Category_quickreplies(sender_id):
     print "enetered category loop"
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
     arrayMovie = []
 
     allSinger = userInstance.Singer.all()
+    print allSinger
     allCategory = userInstance.Category.all()
     allcast = userInstance.Cast.all()    
     allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()     
-    arrayMovie.append(userInstance.MovieName)
+    allyear = userInstance.year.all()
+
+    try:     
+        arrayMovie.append(userInstance.MovieName)
+
+    except Exception as e:
+
+        print e
+        pass   
+
     print "this is arraymovie" + str(arrayMovie)
     
 
 
 
     if allSinger:
+        print "in singer "
 
         b = Song.objects.filter(Singer__in=allSinger) 
 
@@ -1479,7 +1491,8 @@ def Category_quickreplies(sender_id):
 
         # z = b
     else :
-        z =  b.exclude(year__in=allyear)
+        # z =  b.exclude(year__in=allyear)
+        z = b
 
 
 
@@ -1489,7 +1502,8 @@ def Category_quickreplies(sender_id):
 
 
     else :
-        i =  z.exclude(Cast__in=allcast)
+        # i =  z.exclude(Cast__in=allcast)
+        i = z 
 
 
     print "After sorting actor"    
@@ -1501,21 +1515,21 @@ def Category_quickreplies(sender_id):
 
 
     else :
-        a =  i.exclude(Lyricist__in=allLyricist) 
-
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        a = i 
     print "After sorting Lyricist"     
 
-      
+    # print a    
 
-    if arrayMovie :
-        print "entered if array movie " 
+    if userInstance.MovieName != None :
+        print "entered array movie"
 
         c = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
-        c =  a.exclude(MovieName=userInstance.MovieName) 
-
+        # c =  a.exclude(MovieName__in =) 
+        c = a  
 
     print "After sorting Movie"      
     print c 
@@ -1641,19 +1655,32 @@ def moreSongs(sender_id):
     userInstance = UserData.objects.get(Fbid = sender_id)
     card_data2 = []
 
+    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+
     arrayMovie = []
 
     allSinger = userInstance.Singer.all()
+    print allSinger
     allCategory = userInstance.Category.all()
     allcast = userInstance.Cast.all()    
     allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()     
-    arrayMovie.append(userInstance.MovieName)
+    allyear = userInstance.year.all()
+
+    try:     
+        arrayMovie.append(userInstance.MovieName)
+
+    except Exception as e:
+
+        print e
+        pass   
+
+    print "this is arraymovie" + str(arrayMovie)
     
 
 
 
     if allSinger:
+        print "in singer "
 
         b = Song.objects.filter(Singer__in=allSinger) 
 
@@ -1670,7 +1697,8 @@ def moreSongs(sender_id):
 
         # z = b
     else :
-        z =  b.exclude(year__in=allyear)
+        # z =  b.exclude(year__in=allyear)
+        z = b
 
 
 
@@ -1680,7 +1708,8 @@ def moreSongs(sender_id):
 
 
     else :
-        i =  z.exclude(Cast__in=allcast)
+        # i =  z.exclude(Cast__in=allcast)
+        i = z 
 
 
     print "After sorting actor"    
@@ -1692,21 +1721,30 @@ def moreSongs(sender_id):
 
 
     else :
-        a =  i.exclude(Lyricist__in=allLyricist) 
-
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        a = i 
     print "After sorting Lyricist"     
 
-    print a    
+    # print a    
 
-    if arrayMovie :
+    if userInstance.MovieName != None :
+        print "entered array movie"
 
         c = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
-        c =  a.exclude(MovieName=userInstance.MovieName)  
+        # c =  a.exclude(MovieName__in =) 
+        c = a  
 
     print "After sorting Movie"      
+    print c 
+ 
+
+
+
+
+    print "best best " + str(c)     
 
     array = userInstance.query.all().values_list('SongName')
     array = c.exclude(SongName__in = array)
