@@ -616,7 +616,7 @@ def SongSearcher(sender_id):
     allcast = userInstance.Cast.all()    
     allLyricist = userInstance.Lyricist.all()  
     allyear = userInstance.year.all()     
-    arrayMovie  = arrayMovie.append(userInstance.MovieName)
+    arrayMovie.append(userInstance.MovieName)
     print "this is arraymovie" + str(arrayMovie)
     
 
