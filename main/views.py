@@ -615,8 +615,16 @@ def SongSearcher(sender_id):
     allCategory = userInstance.Category.all()
     allcast = userInstance.Cast.all()    
     allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()     
-    arrayMovie.append(userInstance.MovieName)
+    allyear = userInstance.year.all()
+
+    try:     
+        arrayMovie.append(userInstance.MovieName)
+
+    except Exception as e:
+
+        print e
+        pass   
+        
     print "this is arraymovie" + str(arrayMovie)
     
 
