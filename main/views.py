@@ -1869,10 +1869,10 @@ def moreSongs(sender_id):
 
     else:
         post_facebook_message(sender_id,"Sorry there are no more songs ")  
-        userdata.State='NULL'
-        userdata.save()
+        userInstance.State='NULL'
+        userInstance.save()
 
-        post_facebook_message(sender_id,'singerQuickreply')    
+        # post_facebook_message(sender_id,'singerQuickreply')    
 
 
 def queryNull():
