@@ -1716,7 +1716,7 @@ def moreSongs(sender_id):
                            }
 
                 card_data2.append(card_data)
-                userdata.query.remove(i) 
+                userInstance.query.add(i) 
                 if number == 10:
                     break
 
