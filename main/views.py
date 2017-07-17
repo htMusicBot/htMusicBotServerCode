@@ -1474,18 +1474,20 @@ def Category_quickreplies(sender_id):
 
     print "After sorting Lyricist"     
 
-    print a    
+      
 
     if arrayMovie :
+        print "entered if array movie " 
 
         c = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
-        c =  a.exclude(MovieName=userInstance.MovieName)  
+        c =  a.exclude(MovieName=userInstance.MovieName) 
+
 
     print "After sorting Movie"      
-
+    print c 
  
 
 
