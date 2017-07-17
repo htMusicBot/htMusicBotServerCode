@@ -445,7 +445,7 @@ def handle_quickreply(fbid,payload):
         singerName = sorted(singerName, key=lambda x: random.random())
         singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
         a = random.choice(singerText)
-        return post_facebook_message(sender_id,str(a) + ' like  ' +  singerName[0].Name + ', ' + singerName[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -456,7 +456,7 @@ def handle_quickreply(fbid,payload):
         lyricistName = sorted(lyricistName, key=lambda x: random.random())
         lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
         a = random.choice(lyricistText)
-        return post_facebook_message(sender_id,str(a) + ' like  ' + lyricistName[0].Name + ', ' + lyricistName[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like ' + lyricistName[0].Name + ', ' + lyricistName[1].Name)
                 
     elif payload == 'movieName':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -470,7 +470,7 @@ def handle_quickreply(fbid,payload):
         movieArray = ['3 Idiots','Gangs of Wasseypur','Rang De Basanti','Udaan','Lagaan','Taare Zameen Pe','Zindagi Na Milegi Dobara','Special 26','Bhaag Milkha Bhaag','Haider','Paan Singh Tomar','Queen','Barfi!','Baby','Chak de! India','My Name Is Khan','PK','Bajrangi Bhaijaan','Munna Bhai M.B.B.S.']
         name1 = random.choice(movieArray)
         name2 = random.choice(movieArray) 
-        return post_facebook_message(sender_id,str(a) +' like  ' + name1 + ', ' + name2)
+        return post_facebook_message(sender_id,str(a) +' like ' + name1 + ', ' + name2)
 
 
     elif payload == 'cast':
@@ -486,7 +486,7 @@ def handle_quickreply(fbid,payload):
         castText = [ 'Enter the name of any Bollywood actor or actress' , 'Are you looking for the songs of an actor or actress?' , 'Would you like to hear a song featuring your favourite actor' ]
         a = random.choice(castText)
         # return post_facebook_message(sender_id,str(a) + ' like  ' + actor[0].Name + ', ' + actor[1].Name)
-        return post_facebook_message(sender_id,str(a) + ' like  ' + male + ', ' + female)
+        return post_facebook_message(sender_id,str(a) + ' like ' + male + ', ' + female)
 
     elif payload == 'category':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
@@ -849,14 +849,15 @@ def SongSearcher(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            selectedOtions = selectedOtions + str(i) + ' '
+            a = i.rstrip(',')
+            selectedOtions = selectedOtions + str(a) + ' '
 
 
 
 
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
@@ -1309,10 +1310,11 @@ def songs_cards(sender_id , data , input_string):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            selectedOtions = selectedOtions + str(i) + ' '
+            a = i.rstrip(',')
+            selectedOtions = selectedOtions + str(a) + ' '
 
             
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
@@ -1821,11 +1823,12 @@ def moreSongs(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            selectedOtions = selectedOtions + str(i) + ' '
+            a = i.rstrip(',')
+            selectedOtions = selectedOtions + str(a) + ' '
 
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions , 'Not the song you were looking for? Select from these options ']
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
