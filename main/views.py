@@ -1675,8 +1675,8 @@ def moreSongs(sender_id):
 
     print "After sorting Movie"      
 
-    array = userInstance.query.all()
-    array = c.exclude(songName = array.songName)
+    array = userInstance.query.all().values_list('SongName')
+    array = c.exclude(SongName__in = array)
 
     
     if array:
