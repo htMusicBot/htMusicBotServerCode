@@ -677,14 +677,14 @@ def SongSearcher(sender_id):
 
     # print a    
 
-    if arrayMovie :
+    if userInstance.MovieName != None :
         print "entered array movie"
 
         c = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
-        # c =  a.exclude(MovieName=userInstance.MovieName) 
+        # c =  a.exclude(MovieName__in =) 
         c = a  
 
     print "After sorting Movie"      
