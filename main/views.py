@@ -684,7 +684,8 @@ def SongSearcher(sender_id):
 
 
     else :
-        c =  a.exclude(MovieName=userInstance.MovieName)  
+        # c =  a.exclude(MovieName=userInstance.MovieName) 
+        c = a  
 
     print "After sorting Movie"      
     print c 
