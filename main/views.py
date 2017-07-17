@@ -694,7 +694,7 @@ def SongSearcher(sender_id):
 
     if allCategory :
 
-        c = j.filter(Category__in=allLyricist) 
+        c = j.filter(Category__in=allCategory) 
 
 
     else :
@@ -1547,7 +1547,7 @@ def Category_quickreplies(sender_id):
 
     if allCategory :
 
-        c = j.filter(Category__in=allLyricist) 
+        c = j.filter(Category__in=allCategory) 
 
 
     else :
@@ -1764,7 +1764,7 @@ def moreSongs(sender_id):
 
     if allCategory :
 
-        c = j.filter(Category__in=allLyricist) 
+        c = j.filter(Category__in=allCategory) 
 
 
     else :
