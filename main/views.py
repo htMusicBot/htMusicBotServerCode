@@ -849,8 +849,8 @@ def SongSearcher(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.rstrip(',')
-            selectedOtions = selectedOtions + str(a) + ' '
+            a = i.replace(',', ' ')
+            selectedOtions = selectedOtions + str(a) + ';'
 
 
 
@@ -1310,8 +1310,8 @@ def songs_cards(sender_id , data , input_string):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.rstrip(',')
-            selectedOtions = selectedOtions + str(a) + ' '
+            a = i.replace(',', ' ')
+            selectedOtions = selectedOtions + str(a) + ';'
 
             
         moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
@@ -1823,8 +1823,8 @@ def moreSongs(sender_id):
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
-            a = i.rstrip(',')
-            selectedOtions = selectedOtions + str(a) + ' '
+            a = i.replace(',', ' ')
+            selectedOtions = selectedOtions + str(a) + ';'
 
 
         
