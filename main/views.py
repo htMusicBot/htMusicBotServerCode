@@ -852,6 +852,9 @@ def SongSearcher(sender_id):
             a = i.replace(',', ' ')
             selectedOtions = selectedOtions + str(a) + ';'
 
+        selectedOtions = " ".join(selectedOtions.split())
+        
+
 
 
 
