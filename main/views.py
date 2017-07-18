@@ -682,15 +682,26 @@ def SongSearcher(sender_id):
     if userInstance.MovieName != None :
         print "entered array movie"
 
-        c = a.filter(MovieName=userInstance.MovieName) 
+        j = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
         # c =  a.exclude(MovieName__in =) 
-        c = a  
+        j = a  
 
     print "After sorting Movie"      
-    print c 
+    
+
+    if allCategory :
+
+        c = j.filter(Category__in=allCategory) 
+
+
+    else :
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        c = j
+    print "After sorting category" 
+
  
 
 
@@ -1524,15 +1535,26 @@ def Category_quickreplies(sender_id):
     if userInstance.MovieName != None :
         print "entered array movie"
 
-        c = a.filter(MovieName=userInstance.MovieName) 
+        j = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
         # c =  a.exclude(MovieName__in =) 
-        c = a  
+        j = a  
 
     print "After sorting Movie"      
-    print c 
+    
+
+    if allCategory :
+
+        c = j.filter(Category__in=allCategory) 
+
+
+    else :
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        c = j
+    print "After sorting category" 
+
  
 
 
@@ -1730,15 +1752,26 @@ def moreSongs(sender_id):
     if userInstance.MovieName != None :
         print "entered array movie"
 
-        c = a.filter(MovieName=userInstance.MovieName) 
+        j = a.filter(MovieName=userInstance.MovieName) 
 
 
     else :
         # c =  a.exclude(MovieName__in =) 
-        c = a  
+        j = a  
 
     print "After sorting Movie"      
-    print c 
+    
+
+    if allCategory :
+
+        c = j.filter(Category__in=allCategory) 
+
+
+    else :
+        # a =  i.exclude(Lyricist__in=allLyricist) 
+        c = j
+    print "After sorting category" 
+
  
 
 
