@@ -320,7 +320,7 @@ class MyChatBotView(generic.View):
 
                     
                     else:
-                        post_facebook_message(sender_id,'Looks like i lost you  please say hi and start a new conversation')
+                        post_facebook_message(sender_id,'Looks like i lost you please say hi and start a new conversation')
                         # print "entered in else"
                         # item = message_text.split(' ')
                         # for x in item :
@@ -445,7 +445,7 @@ def handle_quickreply(fbid,payload):
         singerName = sorted(singerName, key=lambda x: random.random())
         singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
         a = random.choice(singerText)
-        return post_facebook_message(sender_id,str(a) + ' like ' +  singerName[0].Name + ', ' + singerName[1].Name)
+        return post_facebook_message(sender_id,str(a) + 'like ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -1038,7 +1038,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 print "no match found" 
                 userInstance.State='NULL'
                 userInstance.save()
-                post_facebook_message(sender_id,"No  matches found") 
+                post_facebook_message(sender_id,"No matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")   
                 print "this is array " + str(quickreply_array)
                
@@ -1233,7 +1233,7 @@ def songs_cards(sender_id , data , input_string):
                 print "no match found" 
                 userInstance.State='NULL'
                 userInstance.save()
-                post_facebook_message(sender_id,"No  matches found") 
+                post_facebook_message(sender_id,"No matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")                   
 
     
