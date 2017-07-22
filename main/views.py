@@ -320,15 +320,6 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'ACards')
 
-                    elif message['postback']['payload'] == 'STARTING':
-                        textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
-                        a = random.choice(textTemplate)
-                        print a
-                        p = UserData.objects.get_or_create(Fbid =fbid)[0]
-                        post_facebook_message(sender_id , str(a) )
-                        userInstance.delete()
-                        post_facebook_message(sender_id,'singerQuickreply')
-
                     
                     else :
                         post_facebook_message(sender_id,'Looks like i lost you please say hi and start a new conversation')
@@ -383,6 +374,20 @@ class MyChatBotView(generic.View):
                     print e
                     pass
 
+
+
+                try:
+                    if 'postback' in message:
+                        if message['postback']['payload'] == 'STARTING123':
+                            textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
+                            a = random.choice(textTemplate)
+                            print a
+                            p = UserData.objects.get_or_create(Fbid =sender_id)[0]
+                            post_facebook_message(sender_id , str(a) )
+                            userInstance.delete()
+                            post_facebook_message(sender_id,'singerQuickreply')
+                    else:
+                        pass
 
 
                 try:
@@ -1454,7 +1459,7 @@ def greetingButton():
         "thread_state":"new_thread",
         "call_to_actions":[
         {
-            "payload":"STARTING"
+            "payload":"STARTING123"
             }
         ]
         }
