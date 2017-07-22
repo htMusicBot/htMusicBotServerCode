@@ -386,10 +386,11 @@ class MyChatBotView(generic.View):
                             post_facebook_message(sender_id , str(a) )
                             userInstance.delete()
                             post_facebook_message(sender_id,'singerQuickreply')
-                        else:
-                            pass
                     else:
                         pass
+                except Exception as e:
+                    print e
+                    pass 
 
 
                 try:
