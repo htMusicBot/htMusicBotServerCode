@@ -386,8 +386,8 @@ class MyChatBotView(generic.View):
                             print a
                             p = UserData.objects.get_or_create(Fbid =sender_id)[0]
                             post_facebook_message(sender_id , str(a) )
-                            userInstance.delete()
                             post_facebook_message(sender_id,'singerQuickreply')
+                            userInstance.delete()
                     else:
                         pass
                 except Exception as e:
