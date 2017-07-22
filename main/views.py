@@ -320,18 +320,17 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'cards')
                         post_facebook_message(sender_id,'ACards')
 
-                    if 'payload' in message['message']:
-                        if payload == 'STARTING':
-                            textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
-                            a = random.choice(textTemplate)
-                            print a
-                            p = UserData.objects.get_or_create(Fbid =fbid)[0]
-                            post_facebook_message(sender_id , str(a) )
-                            userInstance.delete()
-                            post_facebook_message(sender_id,'singerQuickreply')
+                    elif message['message']['postback']['payload'] == 'STARTING':
+                        textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
+                        a = random.choice(textTemplate)
+                        print a
+                        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+                        post_facebook_message(sender_id , str(a) )
+                        userInstance.delete()
+                        post_facebook_message(sender_id,'singerQuickreply')
 
                     
-                    else:
+                    else :
                         post_facebook_message(sender_id,'Looks like i lost you please say hi and start a new conversation')
                         # print "entered in else"
                         # item = message_text.split(' ')
