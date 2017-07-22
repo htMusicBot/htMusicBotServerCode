@@ -421,6 +421,8 @@ class MyChatBotView(generic.View):
         return HttpResponse()  
 
 
+
+
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
