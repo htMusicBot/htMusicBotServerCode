@@ -402,9 +402,9 @@ def handle_quickreply(fbid,payload):
         p.save()
         singerName = Singer.objects.all()
         singerName = sorted(singerName, key=lambda x: random.random())
-        singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
+        singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear' ]
         a = random.choice(singerText)
-        return post_facebook_message(sender_id,str(a) + 'like ' +  singerName[0].Name + ', ' + singerName[1].Name)
+        return post_facebook_message(sender_id,str(a) + ' like ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -413,7 +413,7 @@ def handle_quickreply(fbid,payload):
         p.save()
         lyricistName = Lyricist.objects.all()
         lyricistName = sorted(lyricistName, key=lambda x: random.random())
-        lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name ' , 'Which lyricist’s words would you like to hear']
+        lyricistText = ['Enter the name of any lyricist' , 'Who’s your favourite lyricist? Tell me a name' , 'Which lyricist’s words would you like to hear']
         a = random.choice(lyricistText)
         return post_facebook_message(sender_id,str(a) + ' like ' + lyricistName[0].Name + ', ' + lyricistName[1].Name)
                 
@@ -1918,7 +1918,7 @@ def moreSongs(sender_id):
 
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
+        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s '%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
