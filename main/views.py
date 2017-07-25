@@ -262,6 +262,28 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='NULL':
                         pass
 
+<<<<<<< HEAD
+=======
+
+
+                    # elif userInstance.State=='year':
+                    #     userInstance.State='searchYear'
+                    #     userInstance.save()
+                    #     # message_text = message_text.title()
+                    #     # a = Year.objects.filter(Year__contains = message_text)
+                    #     # # print a 
+                       
+                    #     # # print b
+                    #     # for item in a: 
+                    #     #     userInstance.year = item
+                    #     # # userInstance.Singer.add(a[0])
+                    #     # userInstance.save()
+                    #     # # post_facebook_message(sender_id,b[0].SongName)
+                    #     post_facebook_message(sender_id,'yearQuickReply')
+                    #     # post_facebook_message(sender_id,'cards')
+                    #     # post_facebook_message(sender_id,'ACards')
+
+>>>>>>> b7fbef3195379eef5fd9a53125240552a907626a
                     elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
@@ -302,14 +324,35 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'ACards')
 
                     
+
                     else:
                         post_facebook_message(sender_id,'Looks like i lost you  please say hi and start a new conversation')
                         
+
                     
                 except Exception as e:
                     print e
                     pass
 
+
+
+                try:
+                    if 'postback' in message:
+                        if message['postback']['payload'] == 'STARTING123':
+                            DataInstance = userdeatils(sender_id)
+                            firstName = '%s'%(DataInstance['first_name'])
+                            textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
+                            a = random.choice(textTemplate)
+                            print a
+                            p = UserData.objects.get_or_create(Fbid =sender_id)[0]
+                            post_facebook_message(sender_id , str(a) )
+                            post_facebook_message(sender_id,'singerQuickreply')
+                            p.delete()
+                    else:
+                        pass
+                except Exception as e:
+                    print e
+                    pass 
 
 
                 try:
@@ -338,6 +381,8 @@ class MyChatBotView(generic.View):
         return HttpResponse()  
 
 
+
+
 #normal basic function to check the working of bot and to update the menu and get started text
 def index(request):
     # CSVtoSQL()
@@ -355,11 +400,8 @@ def index(request):
 
 
 def doubleParameterQuery(requests):
-    # a = Song.objects.get(YoutubeLink = 'http://www.youtube.com/embed/b8t9TinNumE')
-    singer = Singer.objects.exclude(Name = 'Krishna')
-    category = Category.objects.exclude(Name = 'Rock Songs')
-    a = Song.objects.exclude(Singer__in=singer).exclude(Category__in=category)
-    print a
+    greetingText()
+    greetingButton()
     return HttpResponse("hi")
 
 
@@ -383,7 +425,7 @@ def handle_quickreply(fbid,payload):
         singerName = sorted(singerName, key=lambda x: random.random())
         singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear ' ]
         a = random.choice(singerText)
-        return post_facebook_message(sender_id,str(a) + ' like ' +  singerName[0].Name + ', ' + singerName[1].Name)
+        return post_facebook_message(sender_id,str(a) + 'like ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
         
     elif payload == 'lyricist':
@@ -996,7 +1038,7 @@ def matching_quickreplies(input_string , data , sender_id) :
                 print "no match found" 
                 userInstance.State='NULL'
                 userInstance.save()
-                post_facebook_message(sender_id,"No  matches found") 
+                post_facebook_message(sender_id,"No matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")   
                 print "this is array " + str(quickreply_array)
                
@@ -1191,7 +1233,7 @@ def songs_cards(sender_id , data , input_string):
                 print "no match found" 
                 userInstance.State='NULL'
                 userInstance.save()
-                post_facebook_message(sender_id,"No  matches found") 
+                post_facebook_message(sender_id,"No matches found") 
                 post_facebook_message(sender_id,"singerQuickreply")                   
 
     
@@ -1375,7 +1417,7 @@ def greetingText():
     response_object =   {
          "setting_type":"greeting",
              "greeting":{
-             "text":"Hey Welcome to music bot "
+             "text":"Hi {{user_first_name}} Welcome to music bot "
                 }
             }
 
@@ -1393,7 +1435,7 @@ def greetingButton():
         "thread_state":"new_thread",
         "call_to_actions":[
         {
-            "payload":"STARTING"
+            "payload":"STARTING123"
             }
         ]
         }
