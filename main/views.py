@@ -262,28 +262,7 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='NULL':
                         pass
 
-<<<<<<< HEAD
-=======
 
-
-                    # elif userInstance.State=='year':
-                    #     userInstance.State='searchYear'
-                    #     userInstance.save()
-                    #     # message_text = message_text.title()
-                    #     # a = Year.objects.filter(Year__contains = message_text)
-                    #     # # print a 
-                       
-                    #     # # print b
-                    #     # for item in a: 
-                    #     #     userInstance.year = item
-                    #     # # userInstance.Singer.add(a[0])
-                    #     # userInstance.save()
-                    #     # # post_facebook_message(sender_id,b[0].SongName)
-                    #     post_facebook_message(sender_id,'yearQuickReply')
-                    #     # post_facebook_message(sender_id,'cards')
-                    #     # post_facebook_message(sender_id,'ACards')
-
->>>>>>> b7fbef3195379eef5fd9a53125240552a907626a
                     elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
