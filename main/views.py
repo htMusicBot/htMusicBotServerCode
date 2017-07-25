@@ -685,11 +685,7 @@ def SongSearcher(sender_id):
     number = 0
     userdata = UserData.objects.get(Fbid = sender_id)
     if c:
-        # for i in c:
-        #     # Song = Song.objects.get(SongName = i)
-
-        #     userdata.query.add(i)
-
+        
 
             
 
@@ -1454,8 +1450,10 @@ def Category_quickreplies(sender_id):
 
     if allSinger:
         print "in singer "
+        b = Song.objects.all()
+        for item in allSinger:
 
-        b = Song.objects.filter(Singer__in=allSinger) 
+            b = b.objects.filter(Singer=item) 
 
 
     else :
@@ -1465,6 +1463,7 @@ def Category_quickreplies(sender_id):
 
     if allyear:
         print "yes in array year"
+
 
         z = b.filter(year__in=allyear) 
 
@@ -1476,12 +1475,14 @@ def Category_quickreplies(sender_id):
 
 
     if allcast :
+        i=z
+        for item in allcast:
 
-        i = z.filter(Cast__in=allcast) 
+
+            i =i.filter(Cast=item) 
 
 
     else :
-        # i =  z.exclude(Cast__in=allcast)
         i = z 
 
 
@@ -1489,8 +1490,10 @@ def Category_quickreplies(sender_id):
     
 
     if allLyricist :
+        a=i
+        for item in allcast:
 
-        a = i.filter(Lyricist__in=allLyricist) 
+            a = a.filter(Lyricist=item) 
 
 
     else :
@@ -1514,8 +1517,10 @@ def Category_quickreplies(sender_id):
     
 
     if allCategory :
+        c=j
+        for item in allCategory:
 
-        c = j.filter(Category__in=allCategory) 
+            c = c.filter(Category=item) 
 
 
     else :
@@ -1671,8 +1676,10 @@ def moreSongs(sender_id):
 
     if allSinger:
         print "in singer "
+        b = Song.objects.all()
+        for item in allSinger:
 
-        b = Song.objects.filter(Singer__in=allSinger) 
+            b = b.objects.filter(Singer=item) 
 
 
     else :
@@ -1682,6 +1689,7 @@ def moreSongs(sender_id):
 
     if allyear:
         print "yes in array year"
+
 
         z = b.filter(year__in=allyear) 
 
@@ -1693,12 +1701,14 @@ def moreSongs(sender_id):
 
 
     if allcast :
+        i=z
+        for item in allcast:
 
-        i = z.filter(Cast__in=allcast) 
+
+            i =i.filter(Cast=item) 
 
 
     else :
-        # i =  z.exclude(Cast__in=allcast)
         i = z 
 
 
@@ -1706,8 +1716,10 @@ def moreSongs(sender_id):
     
 
     if allLyricist :
+        a=i
+        for item in allcast:
 
-        a = i.filter(Lyricist__in=allLyricist) 
+            a = a.filter(Lyricist=item) 
 
 
     else :
@@ -1731,8 +1743,10 @@ def moreSongs(sender_id):
     
 
     if allCategory :
+        c=j
+        for item in allCategory:
 
-        c = j.filter(Category__in=allCategory) 
+            c = c.filter(Category=item) 
 
 
     else :
