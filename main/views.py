@@ -262,23 +262,6 @@ class MyChatBotView(generic.View):
                     elif userInstance.State=='NULL':
                         pass
 
-                    # elif userInstance.State=='year':
-                    #     userInstance.State='searchYear'
-                    #     userInstance.save()
-                    #     # message_text = message_text.title()
-                    #     # a = Year.objects.filter(Year__contains = message_text)
-                    #     # # print a 
-                       
-                    #     # # print b
-                    #     # for item in a: 
-                    #     #     userInstance.year = item
-                    #     # # userInstance.Singer.add(a[0])
-                    #     # userInstance.save()
-                    #     # # post_facebook_message(sender_id,b[0].SongName)
-                    #     post_facebook_message(sender_id,'yearQuickReply')
-                    #     # post_facebook_message(sender_id,'cards')
-                    #     # post_facebook_message(sender_id,'ACards')
-
                     elif userInstance.State=='year':
                         userInstance.State='NULL'
                         userInstance.save()
@@ -321,52 +304,7 @@ class MyChatBotView(generic.View):
                     
                     else:
                         post_facebook_message(sender_id,'Looks like i lost you  please say hi and start a new conversation')
-                        # print "entered in else"
-                        # item = message_text.split(' ')
-                        # for x in item :
-                        #     print "entered in for loop"
-
-                        #     if '#' in x :
-                        #         print "entered #"
-
-                        #         SongName = x.split('#')[1]
-                        #         # singer = Singer.objects.exclude(Name = SongName)
-                        #         print Songname
-                        #         a = Song.objects.filter(SongName__contains =Songname)
-
-                        #         print a[0].SongName
-
-                        #         post_facebook_message(sender_id,a[0].SongName)
-                        #         # matches  = matching_algo(SongName , SongNameData)
-
-                        #     elif '*' in x :
-                        #         SongCast = x.split('*')[1]
-                        #         a = Singer.objects.filter(Name_contains=SongCast)
-
-                        #         b = Song.objects.filter(Singer=a)
-                        #         print b[0].SongName
-
-                        #         post_facebook_message(sender_id,b[0].SongName)
-                        #         # matches  = matching_algo(SongCast , CastData)
-                                
-                        #     elif '$' in x :
-                        #         Actors = x.split('$')[1]
-                        #         a = Actor.objects.filter(Name_contains=Actors)
-
-                        #         b = Song.objects.filter(Cast=a)                             
-                        #         post_facebook_message(sender_id,b[0].SongName)
-                        #         # matches  = matching_algo(Actors , ActorsData)
-                                
-                        #     elif '!' in x :
-                        #         category = x.split('!')[1]
-                        #         a = Category.objects.filter(Name_contains=category)
-
-                        #         b = Song.objects.filter(Category=a) 
-                        #         post_facebook_message(sender_id,b[0].SongName)
-                                # matches  = matching_algo(Mood , MoodData)    
-
-                    
-                    #message text is sent to the user
+                        
                     
                 except Exception as e:
                     print e
@@ -633,8 +571,10 @@ def SongSearcher(sender_id):
 
     if allSinger:
         print "in singer "
+        b = Song.objects.all()
+        for item in allSinger:
 
-        b = Song.objects.filter(Singer__in=allSinger) 
+            b = b.objects.filter(Singer=item) 
 
 
     else :
@@ -644,6 +584,7 @@ def SongSearcher(sender_id):
 
     if allyear:
         print "yes in array year"
+
 
         z = b.filter(year__in=allyear) 
 
@@ -655,12 +596,14 @@ def SongSearcher(sender_id):
 
 
     if allcast :
+        i=z
+        for item in allcast:
 
-        i = z.filter(Cast__in=allcast) 
+
+            i =i.filter(Cast=item) 
 
 
     else :
-        # i =  z.exclude(Cast__in=allcast)
         i = z 
 
 
@@ -668,8 +611,10 @@ def SongSearcher(sender_id):
     
 
     if allLyricist :
+        a=i
+        for item in allcast:
 
-        a = i.filter(Lyricist__in=allLyricist) 
+            a = a.filter(Lyricist=item) 
 
 
     else :
@@ -693,8 +638,10 @@ def SongSearcher(sender_id):
     
 
     if allCategory :
+        c=j
+        for item in allCategory:
 
-        c = j.filter(Category__in=allCategory) 
+            c = c.filter(Category=item) 
 
 
     else :
