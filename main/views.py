@@ -1453,7 +1453,7 @@ def Category_quickreplies(sender_id):
         b = Song.objects.all()
         for item in allSinger:
 
-            b = b.objects.filter(Singer=item) 
+            b = b.filter(Singer=item) 
 
 
     else :
@@ -1679,7 +1679,7 @@ def moreSongs(sender_id):
         b = Song.objects.all()
         for item in allSinger:
 
-            b = b.objects.filter(Singer=item) 
+            b = b.filter(Singer=item) 
 
 
     else :
