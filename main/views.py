@@ -22,7 +22,7 @@ import songScraper
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-
+from itertools import chain
 
 
 #Some Global Variables goes here
@@ -419,8 +419,6 @@ class MyChatBotView(generic.View):
                     pass      
 
         return HttpResponse()  
-
-
 
 
 #normal basic function to check the working of bot and to update the menu and get started text
@@ -896,10 +894,10 @@ def SongSearcher(sender_id):
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
-                a = i.replace(',', ' ')
+                a = i.replace(',', '')
                 selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', ' ')
+                a = i.replace(',', '')
                 selectedOtions = selectedOtions + str(a) + ';'
 
         selectedOtions = " ".join(selectedOtions.split())
@@ -1992,7 +1990,25 @@ def queryNull():
         pass
 
 
+def check(requests):
+    actor = Actor.objects.order_by('Name')
 
+    for i in range(len(actor)):
+        s = difflib.SequenceMatcher(None,actor[i].Name,actor[i+1].Name).ratio()
+        if s >= 0.9:
+            # b = Actor.objects.filter(Name=actor[i].Name)[0]
+            # print b.Name = 
+            # b.add(actor[i+1])
+            # Actor.objects.filter(Name=actor[i+1].Name).delete()
+            # a1 = actor[i].Name
+            # a2 = actor[i+1].Name
+            # aa = chain(a1,a2)
+            # print aa
+            # b.Name = aa
+            # c = Actor.objects.filter(Name=actor[i].Name)[0]
+            # c.delete()
+            print s
+            print actor[i].Name + '  '  + actor[i+1].Name
 
 
 
