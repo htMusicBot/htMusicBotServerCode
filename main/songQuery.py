@@ -6,10 +6,11 @@ from main.models import Singer , MusicDirector , Lyricist , MovieName , Actor , 
 
 
 
+
 def songQuery(sender_id):
 
-	number = 0
-	userInstance = UserData.objects.get(Fbid = sender_id)
+    number = 0
+    userInstance = UserData.objects.get(Fbid = sender_id)
     card_data2 = []
 
     userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
@@ -124,5 +125,5 @@ def songQuery(sender_id):
     print "best best " + str(c)
 
     return c 
-	
+    
 
