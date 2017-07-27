@@ -18,6 +18,7 @@ import random
 # from fuzzywuzzy import fuzz
 import random
 import songScraper
+from songQuery import songQuery
 
 import sys
 reload(sys)
@@ -564,119 +565,122 @@ def afterSongQuickreply(fbid):
 
 
 def SongSearcher(sender_id):
-    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
-    arrayMovie = []
+    # arrayMovie = []
 
-    allSinger = userInstance.Singer.all()
-    print allSinger
-    allCategory = userInstance.Category.all()
-    allcast = userInstance.Cast.all()    
-    allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()
+    # allSinger = userInstance.Singer.all()
+    # print allSinger
+    # allCategory = userInstance.Category.all()
+    # allcast = userInstance.Cast.all()    
+    # allLyricist = userInstance.Lyricist.all()  
+    # allyear = userInstance.year.all()
 
-    try:     
-        arrayMovie.append(userInstance.MovieName)
+    # try:     
+    #     arrayMovie.append(userInstance.MovieName)
 
-    except Exception as e:
+    # except Exception as e:
 
-        print e
-        pass   
+    #     print e
+    #     pass   
 
-    print "this is arraymovie" + str(arrayMovie)
+    # print "this is arraymovie" + str(arrayMovie)
     
 
 
 
-    if allSinger:
-        print "in singer "
-        b = Song.objects.all()
-        for item in allSinger:
+    # if allSinger:
+    #     print "in singer "
+    #     b = Song.objects.all()
+    #     for item in allSinger:
 
-            b = b.filter(Singer=item) 
-
-
-    else :
-        b =  Song.objects.exclude(Singer__in=allSinger)
-
-    print "After sorting singers" 
-
-    if allyear:
-        print "yes in array year"
+    #         b = b.filter(Singer=item) 
 
 
-        z = b.filter(year__in=allyear) 
+    # else :
+    #     b =  Song.objects.exclude(Singer__in=allSinger)
 
-        # z = b
-    else :
-        # z =  b.exclude(year__in=allyear)
-        z = b
+    # print "After sorting singers" 
 
-
-
-    if allcast :
-        i=z
-        for item in allcast:
+    # if allyear:
+    #     print "yes in array year"
 
 
-            i =i.filter(Cast=item) 
+    #     z = b.filter(year__in=allyear) 
+
+    #     # z = b
+    # else :
+    #     # z =  b.exclude(year__in=allyear)
+    #     z = b
 
 
-    else :
-        i = z 
+
+    # if allcast :
+    #     i=z
+    #     for item in allcast:
 
 
-    print "After sorting actor"    
+    #         i =i.filter(Cast=item) 
+
+
+    # else :
+    #     i = z 
+
+
+    # print "After sorting actor"    
     
 
-    if allLyricist :
-        a=i
-        for item in allcast:
+    # if allLyricist :
+    #     a=i
+    #     for item in allcast:
 
-            a = a.filter(Lyricist=item) 
-
-
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        a = i 
-    print "After sorting Lyricist"     
-
-    # print a    
-
-    if userInstance.MovieName != None :
-        print "entered array movie"
-
-        j = a.filter(MovieName=userInstance.MovieName) 
+    #         a = a.filter(Lyricist=item) 
 
 
-    else :
-        # c =  a.exclude(MovieName__in =) 
-        j = a  
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     a = i 
+    # print "After sorting Lyricist"     
 
-    print "After sorting Movie"      
+    # # print a    
+
+    # if userInstance.MovieName != None :
+    #     print "entered array movie"
+
+    #     j = a.filter(MovieName=userInstance.MovieName) 
+
+
+    # else :
+    #     # c =  a.exclude(MovieName__in =) 
+    #     j = a  
+
+    # print "After sorting Movie"      
     
 
-    if allCategory :
-        c=j
-        for item in allCategory:
+    # if allCategory :
+    #     c=j
+    #     for item in allCategory:
 
-            c = c.filter(Category=item) 
+    #         c = c.filter(Category=item) 
 
 
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        c = j
-    print "After sorting category" 
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     c = j
+    # print "After sorting category" 
 
  
 
 
 
 
-    print "best best " + str(c)
+    # print "best best " + str(c)
 
     card_data2 = []
+    c = songQuery(sender_id)
+
     print c 
+
     c = sorted(c, key=lambda x: random.random())
 
     # random.shuffle(c)
@@ -1424,121 +1428,123 @@ def greetingButton():
 
 
 def Category_quickreplies(sender_id):
-    print "enetered category loop"
-    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+    # print "enetered category loop"
+    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
-    arrayMovie = []
+    # arrayMovie = []
 
-    allSinger = userInstance.Singer.all()
-    print allSinger
-    allCategory = userInstance.Category.all()
-    allcast = userInstance.Cast.all()    
-    allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()
+    # allSinger = userInstance.Singer.all()
+    # print allSinger
+    # allCategory = userInstance.Category.all()
+    # allcast = userInstance.Cast.all()    
+    # allLyricist = userInstance.Lyricist.all()  
+    # allyear = userInstance.year.all()
 
-    try:     
-        arrayMovie.append(userInstance.MovieName)
+    # try:     
+    #     arrayMovie.append(userInstance.MovieName)
 
-    except Exception as e:
+    # except Exception as e:
 
-        print e
-        pass   
+    #     print e
+    #     pass   
 
-    print "this is arraymovie" + str(arrayMovie)
+    # print "this is arraymovie" + str(arrayMovie)
     
 
 
 
-    if allSinger:
-        print "in singer "
-        b = Song.objects.all()
-        for item in allSinger:
+    # if allSinger:
+    #     print "in singer "
+    #     b = Song.objects.all()
+    #     for item in allSinger:
 
-            b = b.filter(Singer=item) 
-
-
-    else :
-        b =  Song.objects.exclude(Singer__in=allSinger)
-
-    print "After sorting singers" 
-
-    if allyear:
-        print "yes in array year"
+    #         b = b.filter(Singer=item) 
 
 
-        z = b.filter(year__in=allyear) 
+    # else :
+    #     b =  Song.objects.exclude(Singer__in=allSinger)
 
-        # z = b
-    else :
-        # z =  b.exclude(year__in=allyear)
-        z = b
+    # print "After sorting singers" 
 
-
-
-    if allcast :
-        i=z
-        for item in allcast:
+    # if allyear:
+    #     print "yes in array year"
 
 
-            i =i.filter(Cast=item) 
+    #     z = b.filter(year__in=allyear) 
+
+    #     # z = b
+    # else :
+    #     # z =  b.exclude(year__in=allyear)
+    #     z = b
 
 
-    else :
-        i = z 
+
+    # if allcast :
+    #     i=z
+    #     for item in allcast:
 
 
-    print "After sorting actor"    
+    #         i =i.filter(Cast=item) 
+
+
+    # else :
+    #     i = z 
+
+
+    # print "After sorting actor"    
     
 
-    if allLyricist :
-        a=i
-        for item in allcast:
+    # if allLyricist :
+    #     a=i
+    #     for item in allcast:
 
-            a = a.filter(Lyricist=item) 
-
-
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        a = i 
-    print "After sorting Lyricist"     
-
-    # print a    
-
-    if userInstance.MovieName != None :
-        print "entered array movie"
-
-        j = a.filter(MovieName=userInstance.MovieName) 
+    #         a = a.filter(Lyricist=item) 
 
 
-    else :
-        # c =  a.exclude(MovieName__in =) 
-        j = a  
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     a = i 
+    # print "After sorting Lyricist"     
 
-    print "After sorting Movie"      
+    # # print a    
+
+    # if userInstance.MovieName != None :
+    #     print "entered array movie"
+
+    #     j = a.filter(MovieName=userInstance.MovieName) 
+
+
+    # else :
+    #     # c =  a.exclude(MovieName__in =) 
+    #     j = a  
+
+    # print "After sorting Movie"      
     
 
-    if allCategory :
-        c=j
-        for item in allCategory:
+    # if allCategory :
+    #     c=j
+    #     for item in allCategory:
 
-            c = c.filter(Category=item) 
+    #         c = c.filter(Category=item) 
 
 
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        c = j
-    print "After sorting category" 
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     c = j
+    # print "After sorting category" 
 
  
 
 
 
 
-    print "best best " + str(c)
+    # print "best best " + str(c)
 
     card_data2 = []
     print c 
+    c = songQuery(sender_id)
+
     number = 0
     categoryArray = []
     # counter = 0
@@ -1648,120 +1654,121 @@ def yearQuickreply(fbid):
 
 
 def moreSongs(sender_id):
-    number = 0
-    userInstance = UserData.objects.get(Fbid = sender_id)
-    card_data2 = []
+    # number = 0
+    # userInstance = UserData.objects.get(Fbid = sender_id)
+    # card_data2 = []
 
-    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
 
-    arrayMovie = []
+    # arrayMovie = []
 
-    allSinger = userInstance.Singer.all()
-    print allSinger
-    allCategory = userInstance.Category.all()
-    allcast = userInstance.Cast.all()    
-    allLyricist = userInstance.Lyricist.all()  
-    allyear = userInstance.year.all()
+    # allSinger = userInstance.Singer.all()
+    # print allSinger
+    # allCategory = userInstance.Category.all()
+    # allcast = userInstance.Cast.all()    
+    # allLyricist = userInstance.Lyricist.all()  
+    # allyear = userInstance.year.all()
 
-    try:     
-        arrayMovie.append(userInstance.MovieName)
+    # try:     
+    #     arrayMovie.append(userInstance.MovieName)
 
-    except Exception as e:
+    # except Exception as e:
 
-        print e
-        pass   
+    #     print e
+    #     pass   
 
-    print "this is arraymovie" + str(arrayMovie)
+    # print "this is arraymovie" + str(arrayMovie)
     
 
 
 
-    if allSinger:
-        print "in singer "
-        b = Song.objects.all()
-        for item in allSinger:
+    # if allSinger:
+    #     print "in singer "
+    #     b = Song.objects.all()
+    #     for item in allSinger:
 
-            b = b.filter(Singer=item) 
-
-
-    else :
-        b =  Song.objects.exclude(Singer__in=allSinger)
-
-    print "After sorting singers" 
-
-    if allyear:
-        print "yes in array year"
+    #         b = b.filter(Singer=item) 
 
 
-        z = b.filter(year__in=allyear) 
+    # else :
+    #     b =  Song.objects.exclude(Singer__in=allSinger)
 
-        # z = b
-    else :
-        # z =  b.exclude(year__in=allyear)
-        z = b
+    # print "After sorting singers" 
 
-
-
-    if allcast :
-        i=z
-        for item in allcast:
+    # if allyear:
+    #     print "yes in array year"
 
 
-            i =i.filter(Cast=item) 
+    #     z = b.filter(year__in=allyear) 
+
+    #     # z = b
+    # else :
+    #     # z =  b.exclude(year__in=allyear)
+    #     z = b
 
 
-    else :
-        i = z 
+
+    # if allcast :
+    #     i=z
+    #     for item in allcast:
 
 
-    print "After sorting actor"    
+    #         i =i.filter(Cast=item) 
+
+
+    # else :
+    #     i = z 
+
+
+    # print "After sorting actor"    
     
 
-    if allLyricist :
-        a=i
-        for item in allcast:
+    # if allLyricist :
+    #     a=i
+    #     for item in allcast:
 
-            a = a.filter(Lyricist=item) 
-
-
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        a = i 
-    print "After sorting Lyricist"     
-
-    # print a    
-
-    if userInstance.MovieName != None :
-        print "entered array movie"
-
-        j = a.filter(MovieName=userInstance.MovieName) 
+    #         a = a.filter(Lyricist=item) 
 
 
-    else :
-        # c =  a.exclude(MovieName__in =) 
-        j = a  
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     a = i 
+    # print "After sorting Lyricist"     
 
-    print "After sorting Movie"      
+    # # print a    
+
+    # if userInstance.MovieName != None :
+    #     print "entered array movie"
+
+    #     j = a.filter(MovieName=userInstance.MovieName) 
+
+
+    # else :
+    #     # c =  a.exclude(MovieName__in =) 
+    #     j = a  
+
+    # print "After sorting Movie"      
     
 
-    if allCategory :
-        c=j
-        for item in allCategory:
+    # if allCategory :
+    #     c=j
+    #     for item in allCategory:
 
-            c = c.filter(Category=item) 
+    #         c = c.filter(Category=item) 
 
 
-    else :
-        # a =  i.exclude(Lyricist__in=allLyricist) 
-        c = j
-    print "After sorting category" 
+    # else :
+    #     # a =  i.exclude(Lyricist__in=allLyricist) 
+    #     c = j
+    # print "After sorting category" 
 
  
 
 
 
 
-    print "best best " + str(c)     
+    # print "best best " + str(c)
+    c = songQuery(sender_id)     
 
     array = userInstance.query.all().values_list('SongName')
     array = c.exclude(SongName__in = array)
