@@ -788,7 +788,7 @@ def SongSearcher(sender_id):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ', '
+                singer = singer + str(a) + ','
             b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
@@ -798,7 +798,7 @@ def SongSearcher(sender_id):
             lyricist = ''
             for item in range(len(cc)):
                 a = cc[item].Name
-                lyricist = lyricist + str(a) + ', '
+                lyricist = lyricist + str(a) + ','
             c = 'Lyricist: ' + str(lyricist)
             optionSelected.append(c)
 
@@ -814,7 +814,7 @@ def SongSearcher(sender_id):
             category = ''
             for item in range(len(ee)):
                 a = ee[item].Name
-                category = category + str(a) + ', '
+                category = category + str(a) + ','
             e = 'Category: ' + str(category)
             optionSelected.append(e)
 
@@ -854,7 +854,7 @@ def SongSearcher(sender_id):
 
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
+        moreFiltersOptions = ['You had selected %s.'%selectedOtions , 'You chose %s.'%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
@@ -1248,7 +1248,7 @@ def songs_cards(sender_id , data , input_string):
             cast = ''
             for item in range(len(aa)):
                 a = aa[item].Name
-                cast = cast + str(a) + ', '
+                cast = cast + str(a) + ','
             a = 'Cast: ' + str(cast)
             optionSelected.append(a)
         print 'hhiiii'
@@ -1259,7 +1259,7 @@ def songs_cards(sender_id , data , input_string):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ', '
+                singer = singer + str(a) + ','
             b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
@@ -1269,7 +1269,7 @@ def songs_cards(sender_id , data , input_string):
             lyricist = ''
             for item in range(len(cc)):
                 a = cc[item].Name
-                lyricist = lyricist + str(a) + ', '
+                lyricist = lyricist + str(a) + ','
             c = 'Lyricist: ' + str(lyricist)
             optionSelected.append(c)
 
@@ -1285,7 +1285,7 @@ def songs_cards(sender_id , data , input_string):
             category = ''
             for item in range(len(ee)):
                 a = ee[item].Name
-                category = category + str(a) + ', '
+                category = category + str(a) + ','
             e = 'Category: ' + str(category)
             optionSelected.append(e)
 
@@ -1319,7 +1319,7 @@ def songs_cards(sender_id , data , input_string):
         selectedOtions = " ".join(selectedOtions.split())
 
             
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s. If you’re looking for a particular song, select more options'%selectedOtions]
+        moreFiltersOptions = ['You had selected %s.'%selectedOtions , 'You chose %s.'%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
@@ -1850,7 +1850,7 @@ def moreSongs(sender_id):
             cast = ''
             for item in range(len(aa)):
                 a = aa[item].Name
-                cast = cast + str(a) + ', '
+                cast = cast + str(a) + ','
             a = 'Cast: ' + str(cast)
             optionSelected.append(a)
         print 'hhiiii'
@@ -1861,7 +1861,7 @@ def moreSongs(sender_id):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ', '
+                singer = singer + str(a) + ','
             b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
@@ -1871,7 +1871,7 @@ def moreSongs(sender_id):
             lyricist = ''
             for item in range(len(cc)):
                 a = cc[item].Name
-                lyricist = lyricist + str(a) + ', '
+                lyricist = lyricist + str(a) + ','
             c = 'Lyricist: ' + str(lyricist)
             optionSelected.append(c)
 
@@ -1887,7 +1887,7 @@ def moreSongs(sender_id):
             category = ''
             for item in range(len(ee)):
                 a = ee[item].Name
-                category = category + str(a) + ', '
+                category = category + str(a) + ','
             e = 'Category: ' + str(category)
             optionSelected.append(e)
 
@@ -1914,7 +1914,7 @@ def moreSongs(sender_id):
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', '')
+                a = i.replace(',', ' ')
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
@@ -1922,7 +1922,7 @@ def moreSongs(sender_id):
 
 
         
-        moreFiltersOptions = ['You had selected %s. Select more filters to narrow down your search'%selectedOtions , 'You chose %s '%selectedOtions]
+        moreFiltersOptions = ['You had selected %s.'%selectedOtions , 'You chose %s '%selectedOtions]
         filerOptions = random.choice(moreFiltersOptions)
         post_facebook_message(sender_id,str(options))
 
