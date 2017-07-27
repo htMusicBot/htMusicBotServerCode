@@ -842,7 +842,7 @@ def SongSearcher(sender_id):
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', ' ')
+                a = i.replace(',', '')
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
@@ -1312,7 +1312,7 @@ def songs_cards(sender_id , data , input_string):
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', ' ')
+                a = i.replace(',', '')
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
@@ -1914,7 +1914,7 @@ def moreSongs(sender_id):
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', ' ')
+                a = i.replace(',', '')
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
