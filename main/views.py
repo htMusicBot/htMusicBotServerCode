@@ -839,11 +839,11 @@ def SongSearcher(sender_id):
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
                 a = i.replace(',', '')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
                 a = i.replace(',', '')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
         selectedOtions = " ".join(selectedOtions.split())
@@ -1309,11 +1309,11 @@ def songs_cards(sender_id , data , input_string):
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
                 a = i.replace(',', '')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
                 a = i.replace(',', '')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
         selectedOtions = " ".join(selectedOtions.split())
@@ -1911,11 +1911,11 @@ def moreSongs(sender_id):
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
                 a = i.replace(',', ' ')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a)
             else:
                 a = i.replace(',', '')
-                selectedOtions = str(selectedOtions).strip()
+                # selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
         selectedOtions = " ".join(selectedOtions.split())
