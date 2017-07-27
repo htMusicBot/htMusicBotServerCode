@@ -838,9 +838,9 @@ def SongSearcher(sender_id):
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
-                # a = i.replace(',', '')
+                a = i.replace(',', '                    ')
                 selectedOtions = str(selectedOtions).strip()
-                selectedOtions = selectedOtions 
+                selectedOtions = selectedOtions + str(a)
             else:
                 a = i.replace(',', '')
                 selectedOtions = str(selectedOtions).strip()
@@ -1308,9 +1308,9 @@ def songs_cards(sender_id , data , input_string):
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
-                # a = i.replace(',', '')
+                a = i.replace(',', '                          ')
                 selectedOtions = str(selectedOtions).strip()
-                selectedOtions = selectedOtions 
+                selectedOtions = selectedOtions + str(a)
             else:
                 a = i.replace(',', '')
                 selectedOtions = str(selectedOtions).strip()
@@ -1910,11 +1910,11 @@ def moreSongs(sender_id):
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
-                # a = i.replace(',', '')
+                a = i.replace(',', '               ')
                 selectedOtions = str(selectedOtions).strip()
-                selectedOtions = selectedOtions
+                selectedOtions = selectedOtions + str(a)
             else:
-                a = i.replace(',', '')
+                a = i.replace(',', ' ')
                 selectedOtions = str(selectedOtions).strip()
                 selectedOtions = selectedOtions + str(a) + '; '
 
