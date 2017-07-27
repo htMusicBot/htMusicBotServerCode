@@ -1542,8 +1542,8 @@ def Category_quickreplies(sender_id):
     # print "best best " + str(c)
 
     card_data2 = []
-    print c 
     c = songQuery(sender_id)
+    print c 
 
     number = 0
     categoryArray = []
