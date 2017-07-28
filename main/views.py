@@ -586,6 +586,7 @@ def SongSearcher(sender_id):
         for i in c:
             print number
             print "entered loop"
+            userdata.query.add(i) 
             if i.YoutubeLink != 'NULL':
                 number = number + 1
                 y = i.YoutubeLink
@@ -622,7 +623,7 @@ def SongSearcher(sender_id):
                            }
 
                 card_data2.append(card_data)
-                userdata.query.add(i) 
+                
 
                 print "cards appended"
             if number == 10:
@@ -1350,6 +1351,7 @@ def moreSongs(sender_id):
         for i in array:
             print number
             print "entered loop"
+            userInstance.query.add(i)
             if i.YoutubeLink != 'NULL':
                 number = number + 1
                 y = i.YoutubeLink
@@ -1383,7 +1385,7 @@ def moreSongs(sender_id):
                            }
 
                 card_data2.append(card_data)
-                userInstance.query.add(i) 
+                 
                 if number == 10:
                     break
 
