@@ -19,11 +19,11 @@ import random
 import random
 import songScraper
 from songQuery import songQuery
+from templates import setMenu , greetingText , greetingButton
 
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
-from itertools import chain
 
 
 #Some Global Variables goes here
@@ -565,116 +565,7 @@ def afterSongQuickreply(fbid):
 
 
 def SongSearcher(sender_id):
-    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-
-    # arrayMovie = []
-
-    # allSinger = userInstance.Singer.all()
-    # print allSinger
-    # allCategory = userInstance.Category.all()
-    # allcast = userInstance.Cast.all()    
-    # allLyricist = userInstance.Lyricist.all()  
-    # allyear = userInstance.year.all()
-
-    # try:     
-    #     arrayMovie.append(userInstance.MovieName)
-
-    # except Exception as e:
-
-    #     print e
-    #     pass   
-
-    # print "this is arraymovie" + str(arrayMovie)
     
-
-
-
-    # if allSinger:
-    #     print "in singer "
-    #     b = Song.objects.all()
-    #     for item in allSinger:
-
-    #         b = b.filter(Singer=item) 
-
-
-    # else :
-    #     b =  Song.objects.exclude(Singer__in=allSinger)
-
-    # print "After sorting singers" 
-
-    # if allyear:
-    #     print "yes in array year"
-
-
-    #     z = b.filter(year__in=allyear) 
-
-    #     # z = b
-    # else :
-    #     # z =  b.exclude(year__in=allyear)
-    #     z = b
-
-
-
-    # if allcast :
-    #     i=z
-    #     for item in allcast:
-
-
-    #         i =i.filter(Cast=item) 
-
-
-    # else :
-    #     i = z 
-
-
-    # print "After sorting actor"    
-    
-
-    # if allLyricist :
-    #     a=i
-    #     for item in allcast:
-
-    #         a = a.filter(Lyricist=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     a = i 
-    # print "After sorting Lyricist"     
-
-    # # print a    
-
-    # if userInstance.MovieName != None :
-    #     print "entered array movie"
-
-    #     j = a.filter(MovieName=userInstance.MovieName) 
-
-
-    # else :
-    #     # c =  a.exclude(MovieName__in =) 
-    #     j = a  
-
-    # print "After sorting Movie"      
-    
-
-    # if allCategory :
-    #     c=j
-    #     for item in allCategory:
-
-    #         c = c.filter(Category=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     c = j
-    # print "After sorting category" 
-
- 
-
-
-
-
-    # print "best best " + str(c)
 
     card_data2 = []
     c = songQuery(sender_id)
@@ -1332,214 +1223,10 @@ def songs_cards(sender_id , data , input_string):
         return json.dumps(response_object)
         
 
-def setMenu():
-    response_object = {
-                        "persistent_menu":[
-                        {
-                          "locale":"default",
-                          # "composer_input_disabled":False,
-                          "call_to_actions":[
-                            {
-                              "title":"EZYCV",
-                              "type":"nested",
-                              "call_to_actions":[
-                                                {
-                                                  "type":"postback",
-                                                  "title":"Reset everything",
-                                                  "payload":"RESET"
-                                                },
-                                                
-                                                
-                                                {
-                                                  "type":"postback",
-                                                  "title":"Personal Details ",
-                                                  "payload":"DETAILS"
-                                                },
-                                                {
-                                                  "type":"postback",
-                                                  "title":"Work",
-                                                  "payload":"WORK"
-                                                },
-                                                {
-                                                  "type":"postback",
-                                                  "title": "See Templates",
-                                                  "payload":"TEMPLATES"
-                                                },
-                                                {
-                                                  "type":"postback",
-                                                  "title":"Feedback",
-                                                  "payload":"FEEDBACK"
-                                                },
-                              ]
-                            },
-                            {
-                              "type":"web_url",
-                              "title":"Our Website",
-                              "url":"http://ezycv.github.io",
-                              "webview_height_ratio":"full"
-                            }
-                          ]
-                        },
-                        
-                      ]
-                    }                    
-
-    
-
-    menu_object = json.dumps(response_object)
-    status = requests.post(post_message_url,
-          headers = {"Content-Type": "application/json"},
-          data = menu_object)
-
-
-def greetingText():
-    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=%s'%PAGE_ACCESS_TOKEN
-   
-    response_object =   {
-         "setting_type":"greeting",
-             "greeting":{
-             "text":"Hi {{user_first_name}} Welcome to music bot "
-                }
-            }
-
-    menu_object = json.dumps(response_object)
-    status = requests.post(post_message_url,
-          headers = {"Content-Type": "application/json"},
-          data = menu_object)
-
-
-def greetingButton():
-    post_message_url = 'https://graph.facebook.com/v2.6/me/thread_settings?access_token=%s'%PAGE_ACCESS_TOKEN
-    
-    response_object =   {
-        "setting_type":"call_to_actions",
-        "thread_state":"new_thread",
-        "call_to_actions":[
-        {
-            "payload":"STARTING123"
-            }
-        ]
-        }
-
-    menu_object = json.dumps(response_object)
-    status = requests.post(post_message_url,
-          headers = {"Content-Type": "application/json"},
-          data = menu_object)
 
 
 def Category_quickreplies(sender_id):
-    # print "enetered category loop"
-    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-
-    # arrayMovie = []
-
-    # allSinger = userInstance.Singer.all()
-    # print allSinger
-    # allCategory = userInstance.Category.all()
-    # allcast = userInstance.Cast.all()    
-    # allLyricist = userInstance.Lyricist.all()  
-    # allyear = userInstance.year.all()
-
-    # try:     
-    #     arrayMovie.append(userInstance.MovieName)
-
-    # except Exception as e:
-
-    #     print e
-    #     pass   
-
-    # print "this is arraymovie" + str(arrayMovie)
     
-
-
-
-    # if allSinger:
-    #     print "in singer "
-    #     b = Song.objects.all()
-    #     for item in allSinger:
-
-    #         b = b.filter(Singer=item) 
-
-
-    # else :
-    #     b =  Song.objects.exclude(Singer__in=allSinger)
-
-    # print "After sorting singers" 
-
-    # if allyear:
-    #     print "yes in array year"
-
-
-    #     z = b.filter(year__in=allyear) 
-
-    #     # z = b
-    # else :
-    #     # z =  b.exclude(year__in=allyear)
-    #     z = b
-
-
-
-    # if allcast :
-    #     i=z
-    #     for item in allcast:
-
-
-    #         i =i.filter(Cast=item) 
-
-
-    # else :
-    #     i = z 
-
-
-    # print "After sorting actor"    
-    
-
-    # if allLyricist :
-    #     a=i
-    #     for item in allcast:
-
-    #         a = a.filter(Lyricist=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     a = i 
-    # print "After sorting Lyricist"     
-
-    # # print a    
-
-    # if userInstance.MovieName != None :
-    #     print "entered array movie"
-
-    #     j = a.filter(MovieName=userInstance.MovieName) 
-
-
-    # else :
-    #     # c =  a.exclude(MovieName__in =) 
-    #     j = a  
-
-    # print "After sorting Movie"      
-    
-
-    # if allCategory :
-    #     c=j
-    #     for item in allCategory:
-
-    #         c = c.filter(Category=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     c = j
-    # print "After sorting category" 
-
- 
-
-
-
-
-    # print "best best " + str(c)
 
     card_data2 = []
     c = songQuery(sender_id)
@@ -1562,8 +1249,6 @@ def Category_quickreplies(sender_id):
                 print "entered"
                 categoryArray.append(item.Name)
                 print item 
-            # counter = counter + 1 
-            # print "this is counter"  + str(counter)
 
 
         if len(categoryArray) == 10:
@@ -1571,8 +1256,6 @@ def Category_quickreplies(sender_id):
 
 
         print "this is categoryArray"  + str(categoryArray)
-
-        # print list(set(categoryArray))
 
 
     x = list(set(categoryArray))
@@ -1622,8 +1305,6 @@ def Category_quickreplies(sender_id):
 
     print json.dumps(response_object)
 
-    # print response_object
-
     return json.dumps(response_object)
 
 
@@ -1654,124 +1335,14 @@ def yearQuickreply(fbid):
 
 
 def moreSongs(sender_id):
-    # number = 0
     userInstance = UserData.objects.get(Fbid = sender_id)
-    # card_data2 = []
-
-    # userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-
-    # arrayMovie = []
-
-    # allSinger = userInstance.Singer.all()
-    # print allSinger
-    # allCategory = userInstance.Category.all()
-    # allcast = userInstance.Cast.all()    
-    # allLyricist = userInstance.Lyricist.all()  
-    # allyear = userInstance.year.all()
-
-    # try:     
-    #     arrayMovie.append(userInstance.MovieName)
-
-    # except Exception as e:
-
-    #     print e
-    #     pass   
-
-    # print "this is arraymovie" + str(arrayMovie)
     
-
-
-
-    # if allSinger:
-    #     print "in singer "
-    #     b = Song.objects.all()
-    #     for item in allSinger:
-
-    #         b = b.filter(Singer=item) 
-
-
-    # else :
-    #     b =  Song.objects.exclude(Singer__in=allSinger)
-
-    # print "After sorting singers" 
-
-    # if allyear:
-    #     print "yes in array year"
-
-
-    #     z = b.filter(year__in=allyear) 
-
-    #     # z = b
-    # else :
-    #     # z =  b.exclude(year__in=allyear)
-    #     z = b
-
-
-
-    # if allcast :
-    #     i=z
-    #     for item in allcast:
-
-
-    #         i =i.filter(Cast=item) 
-
-
-    # else :
-    #     i = z 
-
-
-    # print "After sorting actor"    
-    
-
-    # if allLyricist :
-    #     a=i
-    #     for item in allcast:
-
-    #         a = a.filter(Lyricist=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     a = i 
-    # print "After sorting Lyricist"     
-
-    # # print a    
-
-    # if userInstance.MovieName != None :
-    #     print "entered array movie"
-
-    #     j = a.filter(MovieName=userInstance.MovieName) 
-
-
-    # else :
-    #     # c =  a.exclude(MovieName__in =) 
-    #     j = a  
-
-    # print "After sorting Movie"      
-    
-
-    # if allCategory :
-    #     c=j
-    #     for item in allCategory:
-
-    #         c = c.filter(Category=item) 
-
-
-    # else :
-    #     # a =  i.exclude(Lyricist__in=allLyricist) 
-    #     c = j
-    # print "After sorting category" 
-
- 
-
-
-
-
-    # print "best best " + str(c)
-    c = songQuery(sender_id)     
+    c = songQuery(sender_id)
+    number = 0     
 
     array = userInstance.query.all().values_list('SongName')
     array = c.exclude(SongName__in = array)
+
 
     
     if array:
@@ -1912,7 +1483,6 @@ def moreSongs(sender_id):
             optionSelected.append(f)
 
         
-        print 'array aagaye'
         print optionSelected
         selectedOtions = ''
         for i in optionSelected:
