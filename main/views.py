@@ -1959,7 +1959,7 @@ def queryNull():
 
 
 def check(requests):
-    actor = Actor.objects.order_by('Name')
+    actor = Lyricist.objects.order_by('Name')
 
     for i in range(len(actor)):
         s = difflib.SequenceMatcher(None,actor[i].Name,actor[i+1].Name).ratio()
@@ -1975,8 +1975,12 @@ def check(requests):
             # b.Name = aa
             # c = Actor.objects.filter(Name=actor[i].Name)[0]
             # c.delete()
-            print s
-            print actor[i].Name + '  '  + actor[i+1].Name
+            # print str(s)
+            # with open(filename, 'wb') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerow((actor[i].Name , actor[i+1].Name , str(s)))
+            print actor[i].Name + ',' + actor[i+1].Name + ',' + str(s)
+            # + ',' + str(s)
 
 
 
