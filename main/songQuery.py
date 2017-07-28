@@ -123,9 +123,7 @@ def songQuery(sender_id):
 
 
     print "best best " + str(c)
-    a = []
-    a.append(c)
-    a.append(number)
+    
 
     return c 
     

@@ -1342,6 +1342,7 @@ def moreSongs(sender_id):
 
     array = userInstance.query.all().values_list('SongName')
     array = c.exclude(SongName__in = array)
+    card_data2 = []
 
 
     
