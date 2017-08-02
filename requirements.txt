@@ -7,3 +7,5 @@ bs4
 #psycopg2==2.6.1
 django_extensions
 fuzzywuzzy
+whitenoise
+

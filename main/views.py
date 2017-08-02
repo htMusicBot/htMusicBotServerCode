@@ -130,8 +130,7 @@ def userCsv(request):
 def userIneraction(sender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
-    # extraData = DataInstance.values()
-    extraData = []
+    extraData = DataInstance.values()
     sender_id = str(sender_id)
     extraData.append(sender_id)
     data = extraData + csvData
@@ -139,6 +138,7 @@ def userIneraction(sender_id , csvData):
     timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
     data.append(timestamp)
     print data
+    data = map(unicode,data)
 
     print "i am in user databse function check 2"
     
@@ -149,11 +149,14 @@ def userIneraction(sender_id , csvData):
     #     print "i am in user databse function check 4"
     #     wr.writerow(data)
     #     print "writing in csv done"
-    with open('a.csv', 'a+') as myfile:
+    with open('specificUsers/' + sender_id + '.csv', 'ab') as myfile:
     # response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="a.csv"'
-        writer = csv.writer(myfile)
+        writer = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        
+
         writer.writerow(data)
+
         print "data saved to csv"
 
 
@@ -378,14 +381,23 @@ class MyChatBotView(generic.View):
                     if 'postback' in message:
                         if message['postback']['payload'] == 'STARTING123':
                             DataInstance = userdeatils(sender_id)
-                            firstName = '%s'%(DataInstance['first_name'])
-                            csvData = DataInstance.values()
-                            csvData.append(sender_id)
-                            print csvData
-                            userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
-                            with open('userdeatils', 'a') as myfile:
-                                wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-                                wr.writerow(csvData)
+                            extraData = DataInstance.values()
+                            sender_id = str(sender_id)
+                            extraData.append(sender_id)
+                            
+
+                            timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
+                            extraData.append(timestamp)
+                            data = map(unicode,extraData)
+                            with open( 'usersRecord.csv', 'ab') as myfile:
+                            # response = HttpResponse(content_type='text/csv')
+                            # response['Content-Disposition'] = 'attachment; filename="a.csv"'
+                            writer = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        
+
+                             writer.writerow(extraData)
+
+                            print "data saved to csv"
                             textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
                             a = random.choice(textTemplate)
                             print a
@@ -466,7 +478,7 @@ def handle_quickreply(fbid,payload):
         p.save()
         singerName = Singer.objects.all()
         singerName = sorted(singerName, key=lambda x: random.random())
-        singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to?  ', 'Tell me which singer you would like to hear' ]
+        singerText = ['Enter the name of any singer' , 'Who’s voice do you want to listen to  ', 'Tell me which singer you would like to hear' ]
         a = random.choice(singerText)
         return post_facebook_message(sender_id,str(a) + ' like ' +  singerName[0].Name + ', ' + singerName[1].Name)
 
@@ -758,8 +770,8 @@ def SongSearcher(sender_id):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ''
-            b = 'Singer ' + str(singer)
+                singer = singer + str(a) + ','
+            b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
 
@@ -1229,8 +1241,8 @@ def songs_cards(sender_id , data , input_string):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ''
-            b = 'Singer ' + str(singer)
+                singer = singer + str(a) + ','
+            b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
 
@@ -1515,8 +1527,8 @@ def moreSongs(sender_id):
             singer = ''
             for item in range(len(bb)):
                 a = bb[item].Name
-                singer = singer + str(a) + ''
-            b = 'Singer ' + str(singer)
+                singer = singer + str(a) + ','
+            b = 'Singer: ' + str(singer)
             optionSelected.append(b)
 
 
