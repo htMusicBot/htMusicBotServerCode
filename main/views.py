@@ -477,6 +477,13 @@ def handle_quickreply(fbid,payload):
         p.delete()
         return post_facebook_message(sender_id,'singerQuickreply')
 
+    elif payload == 'rondomSong':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.delete()
+        SongSearcher(fbid)
+        return post_facebook_message(sender_id,'singerQuickreply')
+
+
 
 def singerQuickreply(fbid):
 
@@ -491,6 +498,11 @@ def singerQuickreply(fbid):
                           "message":{
                             "text":str(a),
                             "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"🎞 =Random Songs",
+                                "payload":"rondomSong"
+                              },
                               {
                                 "content_type":"text",
                                 "title":"📽 Song Name",
@@ -1054,7 +1066,6 @@ def songs_cards(sender_id , data , input_string):
                 
                 a.remove(max(a))
 
-
                 if i['YoutubeLink'] != 'NULL':
                     y = i['YoutubeLink']
                     x = y.split("/")
@@ -1222,8 +1233,6 @@ def songs_cards(sender_id , data , input_string):
 
         return json.dumps(response_object)
         
-
-
 
 def Category_quickreplies(sender_id):
     
@@ -1559,7 +1568,6 @@ def check(requests):
             #     writer.writerow((actor[i].Name , actor[i+1].Name , str(s)))
             print actor[i].Name + ',' + actor[i+1].Name + ',' + str(s)
             # + ',' + str(s)
-
 
 
 
