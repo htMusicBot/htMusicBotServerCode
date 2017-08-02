@@ -21,6 +21,7 @@ import songScraper
 from songQuery import songQuery
 from templates import setMenu , greetingText , greetingButton
 import datetime
+import a.csv
 # from dateutil import tz
 
 
@@ -149,7 +150,7 @@ def userIneraction(sender_id , csvData):
     #     print "i am in user databse function check 4"
     #     wr.writerow(data)
     #     print "writing in csv done"
-    with open('a.csv', 'wb') as myfile:
+    with open('a.csv', 'a+') as myfile:
     # response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="a.csv"'
         writer = csv.writer(myfile)
