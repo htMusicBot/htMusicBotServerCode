@@ -392,10 +392,10 @@ class MyChatBotView(generic.View):
                             with open( 'usersRecord.csv', 'ab') as myfile:
                             # response = HttpResponse(content_type='text/csv')
                             # response['Content-Disposition'] = 'attachment; filename="a.csv"'
-                            writer = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+                                writer = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         
 
-                             writer.writerow(extraData)
+                                writer.writerow(extraData)
 
                             print "data saved to csv"
                             textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
