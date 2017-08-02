@@ -126,7 +126,7 @@ def userIneraction(sender_id , csvData):
     data = extraData + csvData
     timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
     data.append(timestamp)
-    with open('sender_id.csv', 'a') as myfile:
+    with open(sender_id, 'a') as myfile:
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         wr.writerow(data)
         print "writing in csv done"
