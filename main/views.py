@@ -149,11 +149,12 @@ def userIneraction(sender_id , csvData):
     #     print "i am in user databse function check 4"
     #     wr.writerow(data)
     #     print "writing in csv done"
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="a.csv"'
-    writer = csv.writer(response)
-    writer.writerow(data)
-    print "data saved to csv"
+    with open('a.csv', 'wb') as myfile:
+    # response = HttpResponse(content_type='text/csv')
+    # response['Content-Disposition'] = 'attachment; filename="a.csv"'
+        writer = csv.writer(myfile)
+        writer.writerow(data)
+        print "data saved to csv"
 
 
 class MyChatBotView(generic.View):
