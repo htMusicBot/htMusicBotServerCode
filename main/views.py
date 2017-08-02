@@ -71,9 +71,11 @@ def post_facebook_message(fbid,message_text):
         response_msg = yearQuickreply(fbid)
 
     elif message_text == 'moreSongs':
-
         response_msg = moreSongs(fbid)
-        # post_facebook_message(sender_id,'ACards')    
+        # post_facebook_message(sender_id,'ACards') 
+
+    elif message_text == 'randdom':
+        response_msg = randomSongs(fbid)   
 
         
 
@@ -480,7 +482,7 @@ def handle_quickreply(fbid,payload):
     elif payload == 'rondomSong':
         p = UserData.objects.get_or_create(Fbid =fbid)[0]
         p.delete()
-        SongSearcher(fbid)
+        post_facebook_message(sender_id,'randdom')
         return post_facebook_message(sender_id,'singerQuickreply')
 
 
@@ -577,8 +579,6 @@ def afterSongQuickreply(fbid):
 
 
 def SongSearcher(sender_id):
-    
-
     card_data2 = []
     c = songQuery(sender_id)
 
@@ -1571,6 +1571,68 @@ def check(requests):
             print actor[i].Name + ',' + actor[i+1].Name + ',' + str(s)
             # + ',' + str(s)
 
+
+def randomSongs(sender_id):
+    randomSongs = Song.objects.all()
+    number = 0
+           
+    if number <= 10:
+        i = random.choice(randomSongs)
+        print "entered loop"
+        if i.YoutubeLink != 'NULL':
+            number = number +1
+            y = i.YoutubeLink
+            x = y.split("/")
+            print "x = " + str(x)
+            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+
+            card_data = {
+
+                      "title": i.SongName,
+                      "image_url": song_img,
+                      
+                      "buttons": [
+                      {
+                        "type":"web_url",
+                        "url":i.YoutubeLink,
+                        "title":"Play song",
+                        "webview_height_ratio": "compact"
+                      } ,
+                     
+                      {
+                        "type": "element_share"
+                       }
+                       ]
+                       }
+
+            card_data2.append(card_data)
+            
+
+            print "cards appended"
+                    
+    response_object = {
+      "recipient": {
+        "id": sender_id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    return json.dumps(response_object)
+
+        
 
 
 
