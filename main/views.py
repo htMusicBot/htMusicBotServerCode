@@ -118,6 +118,15 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 #     csvData.append(data)
 #     return csvData
 
+def userCsv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="a.csv"'
+    writer = csv.writer(response)
+    # writer.writerow(data)
+    print "data rendered to csv"
+    return response
+
+
 def userIneraction(sender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
@@ -132,20 +141,19 @@ def userIneraction(sender_id , csvData):
     print data
 
     print "i am in user databse function check 2"
-    # response = HttpResponse(content_type='text/csv')
-    # response['Content-Disposition'] = 'attachment; filename="sender_id.csv"'
-    # writer = csv.writer(response)
-    # writer.writerow(data)
-    # print "data saved to csv"
-    # return response
+    
 
-    with open('a.csv', 'a') as myfile:
-        print "i am in user databse function check 3"
-        wr = csv.writer(myfile)
-        print "i am in user databse function check 4"
-        wr.writerow(data)
-        print "writing in csv done"
-
+    # with open('a.csv', 'a') as myfile:
+    #     print "i am in user databse function check 3"
+    #     wr = csv.writer(myfile)
+    #     print "i am in user databse function check 4"
+    #     wr.writerow(data)
+    #     print "writing in csv done"
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="a.csv"'
+    writer = csv.writer(response)
+    writer.writerow(data)
+    print "data saved to csv"
 
 
 class MyChatBotView(generic.View):
