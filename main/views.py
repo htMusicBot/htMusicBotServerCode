@@ -123,6 +123,7 @@ def userIneraction(sender_id , csvData):
     DataInstance = userdeatils(sender_id)
     # extraData = DataInstance.values()
     extraData = []
+    sender_id = str(sender_id)
     extraData.append(sender_id)
     data = extraData + csvData
 
