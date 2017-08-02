@@ -118,7 +118,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 #     csvData.append(data)
 #     return csvData
 
-def userIneraction(sender_id , csvData):
+def userIneraction(request,sender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
     # extraData = DataInstance.values()
@@ -136,6 +136,7 @@ def userIneraction(sender_id , csvData):
     response['Content-Disposition'] = 'attachment; filename="sender_id.csv"'
     writer = csv.writer(response)
     writer.writerow(data)
+    print "data saved to csv"
     return response
 
     # with open(sender_id, 'a') as myfile:
