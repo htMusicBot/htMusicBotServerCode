@@ -9,7 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index$',v.index),
-    # url(r'^usercsv$',v.userIneraction),
+    url(r'^usercsv$',v.userCsv),
     url(r'^check$',v.check),
     url(r'^facebook_auth/?$',v.MyChatBotView.as_view()),
 )
