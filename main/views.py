@@ -149,7 +149,7 @@ def userIneraction(sender_id , csvData):
     #     print "i am in user databse function check 4"
     #     wr.writerow(data)
     #     print "writing in csv done"
-    with open('specificUsers/' + sender_id + '.csv', 'ab') as myfile:
+    with open(sender_id + '.csv', 'ab') as myfile:
     # response = HttpResponse(content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="a.csv"'
         writer = csv.writer(myfile, quoting=csv.QUOTE_ALL)
