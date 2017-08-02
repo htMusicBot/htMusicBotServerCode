@@ -121,7 +121,8 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 def userIneraction(sender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
-    extraData = DataInstance.values()
+    # extraData = DataInstance.values()
+    extraData = []
     extraData.append(sender_id)
     data = extraData + csvData
 
