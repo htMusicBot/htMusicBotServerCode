@@ -139,7 +139,7 @@ def userIneraction(sender_id , csvData):
     # print "data saved to csv"
     # return response
 
-    with open(sender_id, 'wb') as myfile:
+    with open('a.csv', 'w') as myfile:
         print "i am in user databse function check 3"
         wr = csv.writer(myfile)
         print "i am in user databse function check 4"
