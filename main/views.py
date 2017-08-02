@@ -486,7 +486,6 @@ def handle_quickreply(fbid,payload):
         return post_facebook_message(sender_id,'singerQuickreply')
 
 
-
 def singerQuickreply(fbid):
 
     filterText = ['Click on any of the options below to start' , 'What kind of songs would you like to listen to? Select any category to explore' , 'What songs do you like? Select options from the categories to help me find a song of your choice' , 'I have music to suit every mood. Pick options from the categories below' , 'Help me decide what songs to play for you. Select from these options' ]
@@ -502,7 +501,7 @@ def singerQuickreply(fbid):
                             "quick_replies":[
                               {
                                 "content_type":"text",
-                                "title":"🎞 =Random Songs",
+                                "title":"🎞 Random Songs",
                                 "payload":"rondomSong"
                               },
                               {
