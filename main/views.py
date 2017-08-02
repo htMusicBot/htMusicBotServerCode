@@ -118,7 +118,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 #     csvData.append(data)
 #     return csvData
 
-def userIneraction(sender_id , csvData):
+def userIneraction(gitsender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
     # extraData = DataInstance.values()
@@ -139,11 +139,11 @@ def userIneraction(sender_id , csvData):
     # print "data saved to csv"
     # return response
 
-    with open(sender_id, 'a') as myfile:
+    with open(sender_id, 'wb') as myfile:
         print "i am in user databse function check 3"
         wr = csv.writer(myfile)
         print "i am in user databse function check 4"
-        wr.writerow(["data"])
+        wr.writerow(data)
         print "writing in csv done"
 
 
