@@ -740,7 +740,7 @@ def SongSearcher(sender_id):
             for item in range(len(bb)):
                 a = bb[item].Name
                 singer = singer + str(a) + ','
-            b = 'Singer: ' + str(singer)
+            b = 'Singer ' + str(singer)
             optionSelected.append(b)
 
 
@@ -1211,7 +1211,7 @@ def songs_cards(sender_id , data , input_string):
             for item in range(len(bb)):
                 a = bb[item].Name
                 singer = singer + str(a) + ','
-            b = 'Singer: ' + str(singer)
+            b = 'Singer ' + str(singer)
             optionSelected.append(b)
 
 
@@ -1497,7 +1497,7 @@ def moreSongs(sender_id):
             for item in range(len(bb)):
                 a = bb[item].Name
                 singer = singer + str(a) + ','
-            b = 'Singer: ' + str(singer)
+            b = 'Singer ' + str(singer)
             optionSelected.append(b)
 
 
