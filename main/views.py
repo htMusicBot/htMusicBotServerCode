@@ -365,6 +365,7 @@ class MyChatBotView(generic.View):
                         post_facebook_message(sender_id,'ACards')
 
                     
+                    
 
                     else:
                         post_facebook_message(sender_id,'Looks like i lost you  please say hi and start a new conversation')
