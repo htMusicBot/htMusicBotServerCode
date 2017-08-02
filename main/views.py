@@ -119,6 +119,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 #     return csvData
 
 def userIneraction(sender_id , csvData):
+    print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
     extraData = DataInstance.values()
     extraData.append(sender_id)
@@ -781,6 +782,7 @@ def SongSearcher(sender_id):
         
         print 'array aagaye'
         print optionSelected
+        userIneraction(sender_id,optionSelected)
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
