@@ -1576,40 +1576,43 @@ def randomSongs(sender_id):
     randomSongs = Song.objects.all()
     number = 0
     card_data2 = []
-           
-    if number <= 10:
-        i = random.choice(randomSongs)
-        print "entered loop"
-        if i.YoutubeLink != 'NULL':
-            number = number +1
-            y = i.YoutubeLink
-            x = y.split("/")
-            print "x = " + str(x)
-            song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
+    for item in range(100):
+        if number <= 10:
+            i = random.choice(randomSongs)
+            print "entered loop"
+            if i.YoutubeLink != 'NULL':
+                number = number +1
+                y = i.YoutubeLink
+                x = y.split("/")
+                print "x = " + str(x)
+                song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
 
-            card_data = {
+                card_data = {
 
-                      "title": i.SongName,
-                      "image_url": song_img,
-                      
-                      "buttons": [
-                      {
-                        "type":"web_url",
-                        "url":i.YoutubeLink,
-                        "title":"Play song",
-                        "webview_height_ratio": "compact"
-                      } ,
-                     
-                      {
-                        "type": "element_share"
-                       }
-                       ]
-                       }
+                          "title": i.SongName,
+                          "image_url": song_img,
+                          
+                          "buttons": [
+                          {
+                            "type":"web_url",
+                            "url":i.YoutubeLink,
+                            "title":"Play song",
+                            "webview_height_ratio": "compact"
+                          } ,
+                         
+                          {
+                            "type": "element_share"
+                           }
+                           ]
+                           }
 
-            card_data2.append(card_data)
-            
+                card_data2.append(card_data)
+                
 
-            print "cards appended"
+                print "cards appended"
+
+        if number == 10:
+            break
                     
     response_object = {
       "recipient": {
