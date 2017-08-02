@@ -124,8 +124,10 @@ def userIneraction(sender_id , csvData):
     extraData = DataInstance.values()
     extraData.append(sender_id)
     data = extraData + csvData
+
     timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
     data.append(timestamp)
+    print data
     print "i am in user databse function check 2"
     with open(sender_id, 'a') as myfile:
         print "i am in user databse function check 3"
