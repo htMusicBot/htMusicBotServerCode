@@ -21,7 +21,6 @@ import songScraper
 from songQuery import songQuery
 from templates import setMenu , greetingText , greetingButton
 import datetime
-import a.csv
 # from dateutil import tz
 
 
