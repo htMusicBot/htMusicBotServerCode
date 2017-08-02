@@ -75,8 +75,10 @@ def post_facebook_message(fbid,message_text):
         # post_facebook_message(sender_id,'ACards') 
 
     elif message_text == 'randdom':
-        response_msg = randomSongs(fbid)   
+        response_msg = randomSongs(fbid) 
 
+    elif message_text == 'afterSongSearcherQuickReply':
+        response_msg = afterSongSearcherQuickReply(fbid)   
         
 
     else:
@@ -157,7 +159,7 @@ class MyChatBotView(generic.View):
                         b = Song.objects.select_related('SongName','YoutubeLink','Singer').all().values()
                         print b
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
-                        post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'afterSongSearcherQuickReply')
 
 
                     elif userInstance.State=='singer':
@@ -1636,7 +1638,31 @@ def randomSongs(sender_id):
     return json.dumps(response_object)
 
         
-
+def afterSongSearcherQuickReply(fbid):
+    afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.','Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
+    a = random.choice(afterOptionText)
+     
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":str(a),
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"🎬 Filter More",
+                                "payload":"filter"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🔰 Start Over",
+                                "payload":"reset"
+                              }
+                            ]
+                          }
+                        }
+    return json.dumps(response_object)
 
 
 
