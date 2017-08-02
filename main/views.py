@@ -20,6 +20,11 @@ import random
 import songScraper
 from songQuery import songQuery
 from templates import setMenu , greetingText , greetingButton
+import datetime
+from dateutil import tz
+
+
+
 
 import sys
 reload(sys)
@@ -104,6 +109,23 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
                     headers={"Content-Type": "application/json"},
                     data=response_msg)         
 
+# csvData = []
+# def userArray(data):
+#     csvData.append(data)
+#     return csvData
+
+def userIneraction(sender_id , csvData):
+    DataInstance = userdeatils(sender_id)
+    extraData = DataInstance.values()
+    extraData.append(sender_id)
+    data = extraData + csvData
+    timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
+    data.append(timestamp)
+    with open(sender_id, 'wb') as myfile:
+        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+        wr.writerow(data)
+
+
 
 class MyChatBotView(generic.View):
 
@@ -129,15 +151,15 @@ class MyChatBotView(generic.View):
                 try:
                     sender_id = message['sender']['id']
                     message_text = message['message']['text']
-                    DataInstance = userdeatils(sender_id)
-                    firstName = '%s'%(DataInstance['first_name'])
-                    userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+                    
+                        
 
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
                         #messages sent when any user sends the first message
                         textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
+
                         a = random.choice(textTemplate)
                         print a
                         post_facebook_message(sender_id , str(a) )
@@ -153,6 +175,7 @@ class MyChatBotView(generic.View):
                         message_text = message_text.title()
                         # b = Song.objects.all().values()
                         b = Song.objects.select_related('SongName','YoutubeLink','Singer').all().values()
+                      
                         print b
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
                         post_facebook_message(sender_id,'ACards')
@@ -162,12 +185,15 @@ class MyChatBotView(generic.View):
                         userInstance.State='matchSinger'
                         userInstance.save()
                         message_text = message_text.title()
+
                         post_matching_quickreplies(sender_id , "matching_quickreplies" , Singer.objects.all() , message_text)
 
                     elif userInstance.State=='matchSinger':
                         userInstance.State='NULL'
                         userInstance.save()
                         message_text = message['message']['quick_reply']['payload']
+                        csvData.append(message_text)
+                        wr.writerow(csvData)
                         a = Singer.objects.filter(Name = message_text)
                         print "singer name searched"
                         for item in a:
@@ -321,6 +347,13 @@ class MyChatBotView(generic.View):
                         if message['postback']['payload'] == 'STARTING123':
                             DataInstance = userdeatils(sender_id)
                             firstName = '%s'%(DataInstance['first_name'])
+                            csvData = DataInstance.values()
+                            csvData.append(sender_id)
+                            print csvData
+                            userInstance = UserData.objects.get_or_create(Fbid =sender_id)[0]
+                            with open('userdeatils', 'a') as myfile:
+                                wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+                                wr.writerow(csvData)
                             textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
                             a = random.choice(textTemplate)
                             print a
@@ -1201,6 +1234,7 @@ def songs_cards(sender_id , data , input_string):
 
         print 'array aagaye'
         print optionSelected
+        userIneraction(sender_id,optionSelected)
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
