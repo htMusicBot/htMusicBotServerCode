@@ -1575,6 +1575,7 @@ def check(requests):
 def randomSongs(sender_id):
     randomSongs = Song.objects.all()
     number = 0
+    card_data2 = []
            
     if number <= 10:
         i = random.choice(randomSongs)
