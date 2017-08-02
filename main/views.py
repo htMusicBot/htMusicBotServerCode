@@ -76,10 +76,14 @@ def post_facebook_message(fbid,message_text):
         response_msg = yearQuickreply(fbid)
 
     elif message_text == 'moreSongs':
-
         response_msg = moreSongs(fbid)
-        # post_facebook_message(sender_id,'ACards')    
+        # post_facebook_message(sender_id,'ACards') 
 
+    elif message_text == 'randdom':
+        response_msg = randomSongs(fbid) 
+
+    elif message_text == 'afterSongSearcherQuickReply':
+        response_msg = afterSongSearcherQuickReply(fbid)   
         
 
     else:
@@ -178,7 +182,7 @@ class MyChatBotView(generic.View):
                       
                         print b
                         post_matching_quickreplies(sender_id, "songs_cards" ,b , message_text)
-                        post_facebook_message(sender_id,'ACards')
+                        post_facebook_message(sender_id,'afterSongSearcherQuickReply')
 
 
                     elif userInstance.State=='singer':
@@ -510,6 +514,12 @@ def handle_quickreply(fbid,payload):
         p.delete()
         return post_facebook_message(sender_id,'singerQuickreply')
 
+    elif payload == 'rondomSong':
+        p = UserData.objects.get_or_create(Fbid =fbid)[0]
+        p.delete()
+        post_facebook_message(sender_id,'randdom')
+        return post_facebook_message(sender_id,'singerQuickreply')
+
 
 def singerQuickreply(fbid):
 
@@ -524,6 +534,11 @@ def singerQuickreply(fbid):
                           "message":{
                             "text":str(a),
                             "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"🎞 Random Songs",
+                                "payload":"rondomSong"
+                              },
                               {
                                 "content_type":"text",
                                 "title":"📽 Song Name",
@@ -598,8 +613,6 @@ def afterSongQuickreply(fbid):
 
 
 def SongSearcher(sender_id):
-    
-
     card_data2 = []
     c = songQuery(sender_id)
 
@@ -1088,7 +1101,6 @@ def songs_cards(sender_id , data , input_string):
                 
                 a.remove(max(a))
 
-
                 if i['YoutubeLink'] != 'NULL':
                     y = i['YoutubeLink']
                     x = y.split("/")
@@ -1257,8 +1269,6 @@ def songs_cards(sender_id , data , input_string):
 
         return json.dumps(response_object)
         
-
-
 
 def Category_quickreplies(sender_id):
     
@@ -1573,7 +1583,7 @@ def queryNull():
 
 
 def check(requests):
-    actor = Actor.objects.order_by('Name')
+    actor = Lyricist.objects.order_by('Name')
 
     for i in range(len(actor)):
         s = difflib.SequenceMatcher(None,actor[i].Name,actor[i+1].Name).ratio()
@@ -1589,11 +1599,104 @@ def check(requests):
             # b.Name = aa
             # c = Actor.objects.filter(Name=actor[i].Name)[0]
             # c.delete()
-            print s
-            print actor[i].Name + '  '  + actor[i+1].Name
+            # print str(s)
+            # with open(filename, 'wb') as f:
+            #     writer = csv.writer(f)
+            #     writer.writerow((actor[i].Name , actor[i+1].Name , str(s)))
+            print actor[i].Name + ',' + actor[i+1].Name + ',' + str(s)
+            # + ',' + str(s)
 
 
+def randomSongs(sender_id):
+    randomSongs = Song.objects.all()
+    number = 0
+    card_data2 = []
+    for item in range(100):
+        if number <= 10:
+            i = random.choice(randomSongs)
+            print "entered loop"
+            if i.YoutubeLink != 'NULL':
+                number = number +1
+                y = i.YoutubeLink
+                x = y.split("/")
+                print "x = " + str(x)
+                song_img = "https://img.youtube.com/vi/" + x[-1] + "/hqdefault.jpg"
 
+                card_data = {
+
+                          "title": i.SongName,
+                          "image_url": song_img,
+                          
+                          "buttons": [
+                          {
+                            "type":"web_url",
+                            "url":i.YoutubeLink,
+                            "title":"Play song",
+                            "webview_height_ratio": "compact"
+                          } ,
+                         
+                          {
+                            "type": "element_share"
+                           }
+                           ]
+                           }
+
+                card_data2.append(card_data)
+                
+
+                print "cards appended"
+
+        if number == 10:
+            break
+                    
+    response_object = {
+      "recipient": {
+        "id": sender_id
+      },
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": card_data2
+                }
+            }
+        }
+    }
+
+
+    print "response dumped"
+
+    print json.dumps(response_object)
+
+    return json.dumps(response_object)
+
+        
+def afterSongSearcherQuickReply(fbid):
+    afterOptionText = ['Do you want to hear more songs like this? Choose from these options' , 'What more can I play for you? Select options' , 'Add more filters to narrow down your search or start over.','Want to listen to something different? Choose from the options below' , 'Tell me what you want to hear now' , 'I can play something different for you. Help me by choosing from the options below']
+    a = random.choice(afterOptionText)
+     
+    response_object =   {
+                          "recipient":{
+                            "id":fbid
+                          },
+                          "message":{
+                            "text":str(a),
+                            "quick_replies":[
+                              {
+                                "content_type":"text",
+                                "title":"🎬 Filter More",
+                                "payload":"filter"
+                              },
+                              {
+                                "content_type":"text",
+                                "title":"🔰 Start Over",
+                                "payload":"reset"
+                              }
+                            ]
+                          }
+                        }
+    return json.dumps(response_object)
 
 
 
