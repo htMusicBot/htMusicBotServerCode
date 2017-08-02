@@ -1535,6 +1535,7 @@ def moreSongs(sender_id):
 
         
         print optionSelected
+        userIneraction(sender_id,optionSelected)
         selectedOtions = ''
         for i in optionSelected:
             if optionSelected.index(i) == len(optionSelected) - 1:
