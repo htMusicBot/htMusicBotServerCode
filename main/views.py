@@ -118,7 +118,7 @@ def post_matching_quickreplies(fbid,message_text , data , input_string):
 #     csvData.append(data)
 #     return csvData
 
-def userIneraction(gitsender_id , csvData):
+def userIneraction(sender_id , csvData):
     print "i am in user databse function"
     DataInstance = userdeatils(sender_id)
     # extraData = DataInstance.values()
