@@ -135,7 +135,7 @@ def userIneraction(sender_id , csvData):
         print "i am in user databse function check 3"
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         print "i am in user databse function check 4"
-        wr.writerow(data)
+        wr.writerow(["data"])
         print "writing in csv done"
 
 
