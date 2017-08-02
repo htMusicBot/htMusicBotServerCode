@@ -161,6 +161,8 @@ class MyChatBotView(generic.View):
 
                     if message_text.lower() in "hey,hi,supp,hello".split(','):
                         print "entered in hi "
+                        DataInstance = userdeatils(sender_id)
+                        firstName = DataInstance['first_name']
                         #messages sent when any user sends the first message
                         textTemplate = ['Welcome %s, Nice to see you here :)'%firstName , 'Hey %s, Welcome to the Music Bot by Hindustan Times :)'%firstName , 'Hey %s! Get ready for some Bollywood nostalgia.'%firstName , 'Hi %s, here is your one-stop destination for Bollywood music. '%firstName, 'Hello, %s. In the mood for some Bollywood tunes?'%firstName , 'Hi %s, welcome to HT Music Bot. I have Bollywood tunes for you to brighten the day.'%firstName ]
 
