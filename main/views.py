@@ -130,13 +130,20 @@ def userIneraction(sender_id , csvData):
     timestamp  = datetime.datetime.now().strftime('%l:%M%p %Z on %b %d %Y')
     data.append(timestamp)
     print data
+
     print "i am in user databse function check 2"
-    with open(sender_id, 'a') as myfile:
-        print "i am in user databse function check 3"
-        wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-        print "i am in user databse function check 4"
-        wr.writerow(["data"])
-        print "writing in csv done"
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="sender_id.csv"'
+    writer = csv.writer(response)
+    writer.writerow(data)
+    return response
+
+    # with open(sender_id, 'a') as myfile:
+    #     print "i am in user databse function check 3"
+    #     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+    #     print "i am in user databse function check 4"
+    #     wr.writerow(["data"])
+    #     print "writing in csv done"
 
 
 
